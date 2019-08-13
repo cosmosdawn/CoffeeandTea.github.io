@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta name="description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存">
-<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/2019/07/21/缓存/index.html">
+<meta property="og:title" content="关于跨域">
+<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/2019/08/03/跨域/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta property="og:description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-21T04:46:29.000Z">
+<meta property="og:updated_time" content="2019-08-03T12:04:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存">
-<meta name="twitter:description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta name="twitter:title" content="关于跨域">
+<meta name="twitter:description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/2019/07/21/缓存/">
+  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/2019/08/03/跨域/">
 
 
 
 
 
-  <title>缓存 | Hexo</title>
+  <title>关于跨域 | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/21/缓存/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/08/03/跨域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存</h1>
+          <h1 class="post-title" itemprop="name headline">关于跨域</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:46:29+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T20:04:48+08:00">
+                2019-08-03
               </time>
             
 
@@ -299,23 +299,34 @@
       
 
       
-        <h3 id="服务器的缓存控制"><a href="#服务器的缓存控制" class="headerlink" title="服务器的缓存控制"></a>服务器的缓存控制</h3><ul>
-<li>浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源</li>
-<li>服务器响应请求，返回资源，同时标记资源的有效期</li>
-<li>浏览器缓存资源，等待下次重用</li>
+        <h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p><strong>同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身</strong></p>
+<p>正因如此，我们可以通过<link>标签，<img>标签以及<script>标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。</p>
+<p>文章链接： <a href="https://juejin.im/post/5a274ae9f265da430a5071eb">https://juejin.im/post/5a274ae9f265da430a5071eb</a></p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>官方推荐的跨域资源共享方案</p>
+<p>CORS是W3C颁布的一个浏览器技术规范，其全称为“跨域资源共享”（Cross-origin resource sharing），它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。它的意义在于，它是由W3C官方推广的允许通过AJAX技术跨域获取资源的规范，因此相较于JSONP而言，功能更加强大，使用起来也没有了hack的味道。</p>
+<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request），浏览器对这两种请求的处理，是不一样的。</p>
+<p>只要同时满足以下两大条件，就属于简单请求。</p>
+<ul>
+<li>请求方法是以下三种之一：head、get、post</li>
+<li>http的头信息不超出以下几种子段：Accept、 Accept-language、 Content-Language、 Last-Event-ID、Content-Type只限于三个值： application/x-www-form-urlencoded、multipart/form-data、text/plain。</li>
 </ul>
-<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。</p>
-<p>注意： max-age是<strong>生存时间</strong>，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是数据离开服务器的时刻，而不是客户端收到报文的时刻，所以如果数据在传输的过程中耗费了大量的时间，到达客户端的时候存活时间就没有30秒了。</p>
-<h3 id="其他几个缓存控制属性"><a href="#其他几个缓存控制属性" class="headerlink" title="其他几个缓存控制属性"></a>其他几个缓存控制属性</h3><ul>
-<li>no_store: 买来的西瓜不允许放冰箱，要么立刻吃掉，要么立刻扔掉</li>
-<li>no_cache: 可以放进冰箱，但吃之前必须向超市询问有没有更新鲜的，有就吃超市里的。</li>
-<li>must-revalidate: 可以放进冰箱，保鲜期内可以吃，过期了就要问超市还让不让吃。</li>
+<p>凡是不满足上面两个条件，就属于非简单请求。</p>
+<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。</p>
+<pre><code>GET /cors HTTP/1.1
+Origin: http://api.bob.com
+Host: api.alice.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0...</code></pre><p>上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。<br>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。<br>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
+<pre><code>Access-Control-Allow-Origin: http://api.bob.com
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: FooBar
+Content-Type: text/html; charset=utf-8</code></pre><ul>
+<li>Access-Control-Allow-Origin： 该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
 </ul>
-<h3 id="关于Cache-Control"><a href="#关于Cache-Control" class="headerlink" title="关于Cache-Control"></a>关于Cache-Control</h3><p>不止服务器可以发送”Cache-Control”头,浏览器也可以发送”Cache-Control”头，</p>
-<p>就是说请求-应答的双方都可以用这个字段进行缓存控制，互相协商缓存的使用策略。</p>
-<p>当你点击浏览器的“刷新”按钮的时候，浏览器会在请求头里面加一个<br><em>Cache-Control:max-age=0</em>因为max-age是生存时间，max-age=0的意思就是<br>“我要一个最最新鲜的西瓜”，而本地缓存里的数据至少保存了几秒钟了，所以<br>浏览器就不会使用缓存，而是向服务器发送请求。服务器看到max-age=0也就会用一个<br>最新生成的报文回应浏览器。</p>
-<p>而Ctrl+F5的“强制刷新” 其实是发送了一个Cache-Control:no-cache<br>含义和max-age=0基本一样。</p>
-
+<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><h5 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h5><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。</p>
+<p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+</script></p>
       
     </div>
     
@@ -339,8 +350,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/07/21/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/blog/2019/08/03/关于同源策略/" rel="next" title="同源策略再理解">
+                <i class="fa fa-chevron-left"></i> 同源策略再理解
               </a>
             
           </div>
@@ -349,8 +360,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2019/07/21/代理t/" rel="prev" title="代理">
-                代理 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2019/08/11/tcp:ip/" rel="prev" title="tcp/ip工作">
+                tcp/ip工作 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -465,7 +476,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器的缓存控制"><span class="nav-number">1.</span> <span class="nav-text">服务器的缓存控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control"><span class="nav-number">2.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他几个缓存控制属性"><span class="nav-number">3.</span> <span class="nav-text">其他几个缓存控制属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Cache-Control"><span class="nav-number">4.</span> <span class="nav-text">关于Cache-Control</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-number">1.</span> <span class="nav-text">JSONP</span></a></li></ol></div>
             
 
           </div>

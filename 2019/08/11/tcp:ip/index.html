@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta name="description" content="如何保证页面文件能被完整的送达浏览器互联网是一套理念和协议组成的体系结构 IP： 把数据包送达目的主机 如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之 udp 很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存">
-<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/2019/07/21/缓存/index.html">
+<meta property="og:title" content="tcp&#x2F;ip工作">
+<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/2019/08/11/tcp:ip/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta property="og:description" content="如何保证页面文件能被完整的送达浏览器互联网是一套理念和协议组成的体系结构 IP： 把数据包送达目的主机 如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之 udp 很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-21T04:46:29.000Z">
+<meta property="og:updated_time" content="2019-08-11T14:38:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存">
-<meta name="twitter:description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta name="twitter:title" content="tcp&#x2F;ip工作">
+<meta name="twitter:description" content="如何保证页面文件能被完整的送达浏览器互联网是一套理念和协议组成的体系结构 IP： 把数据包送达目的主机 如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之 udp 很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/2019/07/21/缓存/">
+  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/2019/08/11/tcp:ip/">
 
 
 
 
 
-  <title>缓存 | Hexo</title>
+  <title>tcp/ip工作 | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/21/缓存/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/08/11/tcp:ip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存</h1>
+          <h1 class="post-title" itemprop="name headline">tcp/ip工作</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:46:29+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T22:38:45+08:00">
+                2019-08-11
               </time>
             
 
@@ -299,22 +299,11 @@
       
 
       
-        <h3 id="服务器的缓存控制"><a href="#服务器的缓存控制" class="headerlink" title="服务器的缓存控制"></a>服务器的缓存控制</h3><ul>
-<li>浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源</li>
-<li>服务器响应请求，返回资源，同时标记资源的有效期</li>
-<li>浏览器缓存资源，等待下次重用</li>
-</ul>
-<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。</p>
-<p>注意： max-age是<strong>生存时间</strong>，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是数据离开服务器的时刻，而不是客户端收到报文的时刻，所以如果数据在传输的过程中耗费了大量的时间，到达客户端的时候存活时间就没有30秒了。</p>
-<h3 id="其他几个缓存控制属性"><a href="#其他几个缓存控制属性" class="headerlink" title="其他几个缓存控制属性"></a>其他几个缓存控制属性</h3><ul>
-<li>no_store: 买来的西瓜不允许放冰箱，要么立刻吃掉，要么立刻扔掉</li>
-<li>no_cache: 可以放进冰箱，但吃之前必须向超市询问有没有更新鲜的，有就吃超市里的。</li>
-<li>must-revalidate: 可以放进冰箱，保鲜期内可以吃，过期了就要问超市还让不让吃。</li>
-</ul>
-<h3 id="关于Cache-Control"><a href="#关于Cache-Control" class="headerlink" title="关于Cache-Control"></a>关于Cache-Control</h3><p>不止服务器可以发送”Cache-Control”头,浏览器也可以发送”Cache-Control”头，</p>
-<p>就是说请求-应答的双方都可以用这个字段进行缓存控制，互相协商缓存的使用策略。</p>
-<p>当你点击浏览器的“刷新”按钮的时候，浏览器会在请求头里面加一个<br><em>Cache-Control:max-age=0</em>因为max-age是生存时间，max-age=0的意思就是<br>“我要一个最最新鲜的西瓜”，而本地缓存里的数据至少保存了几秒钟了，所以<br>浏览器就不会使用缓存，而是向服务器发送请求。服务器看到max-age=0也就会用一个<br>最新生成的报文回应浏览器。</p>
-<p>而Ctrl+F5的“强制刷新” 其实是发送了一个Cache-Control:no-cache<br>含义和max-age=0基本一样。</p>
+        <h3 id="如何保证页面文件能被完整的送达浏览器"><a href="#如何保证页面文件能被完整的送达浏览器" class="headerlink" title="如何保证页面文件能被完整的送达浏览器"></a>如何保证页面文件能被完整的送达浏览器</h3><p>互联网是一套理念和协议组成的体系结构</p>
+<p>IP： 把数据包送达目的主机</p>
+<p>如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之</p>
+<p>udp</p>
+<p>很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。</p>
 
       
     </div>
@@ -339,8 +328,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/07/21/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/blog/2019/08/03/跨域/" rel="next" title="关于跨域">
+                <i class="fa fa-chevron-left"></i> 关于跨域
               </a>
             
           </div>
@@ -348,10 +337,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2019/07/21/代理t/" rel="prev" title="代理">
-                代理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,7 +450,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器的缓存控制"><span class="nav-number">1.</span> <span class="nav-text">服务器的缓存控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control"><span class="nav-number">2.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他几个缓存控制属性"><span class="nav-number">3.</span> <span class="nav-text">其他几个缓存控制属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Cache-Control"><span class="nav-number">4.</span> <span class="nav-text">关于Cache-Control</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何保证页面文件能被完整的送达浏览器"><span class="nav-number">1.</span> <span class="nav-text">如何保证页面文件能被完整的送达浏览器</span></a></li></ol></div>
             
 
           </div>

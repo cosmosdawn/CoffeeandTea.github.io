@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta name="description" content="关于同源策略同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。 以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？ 先来看如果没有了同源策略会是什么样子。 假设没有同源限制，A网站的API可以被任何来源的AJAX请求访">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存">
-<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/2019/07/21/缓存/index.html">
+<meta property="og:title" content="同源策略再理解">
+<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/2019/08/03/关于同源策略/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta property="og:description" content="关于同源策略同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。 以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？ 先来看如果没有了同源策略会是什么样子。 假设没有同源限制，A网站的API可以被任何来源的AJAX请求访">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-21T04:46:29.000Z">
+<meta property="og:updated_time" content="2019-08-03T10:46:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存">
-<meta name="twitter:description" content="服务器的缓存控制 浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源 服务器响应请求，返回资源，同时标记资源的有效期 浏览器缓存资源，等待下次重用  Cache-Control里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。 注意： max-age是生存时间，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是">
+<meta name="twitter:title" content="同源策略再理解">
+<meta name="twitter:description" content="关于同源策略同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。 以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？ 先来看如果没有了同源策略会是什么样子。 假设没有同源限制，A网站的API可以被任何来源的AJAX请求访">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/2019/07/21/缓存/">
+  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/2019/08/03/关于同源策略/">
 
 
 
 
 
-  <title>缓存 | Hexo</title>
+  <title>同源策略再理解 | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/21/缓存/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/08/03/关于同源策略/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存</h1>
+          <h1 class="post-title" itemprop="name headline">同源策略再理解</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:46:29+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T18:33:56+08:00">
+                2019-08-03
               </time>
             
 
@@ -299,22 +299,14 @@
       
 
       
-        <h3 id="服务器的缓存控制"><a href="#服务器的缓存控制" class="headerlink" title="服务器的缓存控制"></a>服务器的缓存控制</h3><ul>
-<li>浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源</li>
-<li>服务器响应请求，返回资源，同时标记资源的有效期</li>
-<li>浏览器缓存资源，等待下次重用</li>
-</ul>
-<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。</p>
-<p>注意： max-age是<strong>生存时间</strong>，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是数据离开服务器的时刻，而不是客户端收到报文的时刻，所以如果数据在传输的过程中耗费了大量的时间，到达客户端的时候存活时间就没有30秒了。</p>
-<h3 id="其他几个缓存控制属性"><a href="#其他几个缓存控制属性" class="headerlink" title="其他几个缓存控制属性"></a>其他几个缓存控制属性</h3><ul>
-<li>no_store: 买来的西瓜不允许放冰箱，要么立刻吃掉，要么立刻扔掉</li>
-<li>no_cache: 可以放进冰箱，但吃之前必须向超市询问有没有更新鲜的，有就吃超市里的。</li>
-<li>must-revalidate: 可以放进冰箱，保鲜期内可以吃，过期了就要问超市还让不让吃。</li>
-</ul>
-<h3 id="关于Cache-Control"><a href="#关于Cache-Control" class="headerlink" title="关于Cache-Control"></a>关于Cache-Control</h3><p>不止服务器可以发送”Cache-Control”头,浏览器也可以发送”Cache-Control”头，</p>
-<p>就是说请求-应答的双方都可以用这个字段进行缓存控制，互相协商缓存的使用策略。</p>
-<p>当你点击浏览器的“刷新”按钮的时候，浏览器会在请求头里面加一个<br><em>Cache-Control:max-age=0</em>因为max-age是生存时间，max-age=0的意思就是<br>“我要一个最最新鲜的西瓜”，而本地缓存里的数据至少保存了几秒钟了，所以<br>浏览器就不会使用缓存，而是向服务器发送请求。服务器看到max-age=0也就会用一个<br>最新生成的报文回应浏览器。</p>
-<p>而Ctrl+F5的“强制刷新” 其实是发送了一个Cache-Control:no-cache<br>含义和max-age=0基本一样。</p>
+        <h3 id="关于同源策略"><a href="#关于同源策略" class="headerlink" title="关于同源策略"></a>关于同源策略</h3><p>同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。</p>
+<p>以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？</p>
+<p>先来看如果没有了同源策略会是什么样子。</p>
+<p>假设没有同源限制，A网站的API可以被任何来源的AJAX请求访问，包括获取用户的隐私信息，只看用户有没有登录，现在有个坏人做了一个网站B，坏人在B网页中用AJAX访问A网站的API，如果一个用户访问B之前已经登录了A，那这个请求包含A网站的cookie信息，也就会被A网站认为用户已经登录，这样用户在A网站的隐私信息就泄露给了控制B网站的坏人。</p>
+<p>其实同源策略就是说一个网站的api接口定义，只允许自己网站的网页来请求访问。比如说淘宝网的一个接口比如长这个样子：<a href="http://taobao.com/api/shoppingCart/list" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list</a><br>请求这个接口就可以获得你的购物车中的商品，按照正常的操作流程，你自己登陆你自己的淘宝账号，点击右上角购物车的图标，网页发送这个接口请求到淘宝的后台然后网站在新的页面返回你的购物车中的商品，于是你看到了你自己的购物车中都有些什么。此时你想：这个接口是开放的，任何人都知道淘宝查看购物车商品的接口是<a href="http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？</a><br>假如我是一个黑客，我做了一个网页运行在xiaoyu.com上，在这个网站上我写好了请求脚本去请求<a href="http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。</a></p>
+<p>所以其实是同源策略也是基于：1、浏览器向一个域发送请求的时候会带上这个域的cookies（而不管当前页面是否运行在哪个域）。2服务器端受到请求校验cookies通过后就理所当然的认为这是自家的程序员开发的网页发出的合法请求于是就乖乖返回了结果或者执行了操作。这两点‘简单’的设计让浏览器发送请求更加方便也让服务器处理请求更加方便但是却有着巨大的安全漏洞，那就是我们无法保证发送请求的脚本是运行在该运行的网站上，我在家写一个attack.html的页面在里面请求淘宝接口，只要我拿到了你淘宝的cookies我把网页用浏览器本地打开执行，攻击就完成了，这太简答了！所以浏览器才会有同源策略，不是运行在taobao.com的页面请求taobao的接口是跨域的，不能给你通过。</p>
+<p>另外，同源策略只是阻止你读取ajax返回的内容，实际上请求依然发送到了服务器。</p>
+<p>有疑问？下篇讲一讲跨域就懂了</p>
 
       
     </div>
@@ -339,8 +331,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/07/21/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/blog/2019/07/22/缓存代理/" rel="next" title="缓存代理">
+                <i class="fa fa-chevron-left"></i> 缓存代理
               </a>
             
           </div>
@@ -349,8 +341,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2019/07/21/代理t/" rel="prev" title="代理">
-                代理 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2019/08/03/跨域/" rel="prev" title="关于跨域">
+                关于跨域 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -465,7 +457,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器的缓存控制"><span class="nav-number">1.</span> <span class="nav-text">服务器的缓存控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control"><span class="nav-number">2.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他几个缓存控制属性"><span class="nav-number">3.</span> <span class="nav-text">其他几个缓存控制属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Cache-Control"><span class="nav-number">4.</span> <span class="nav-text">关于Cache-Control</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于同源策略"><span class="nav-number">1.</span> <span class="nav-text">关于同源策略</span></a></li></ol></div>
             
 
           </div>

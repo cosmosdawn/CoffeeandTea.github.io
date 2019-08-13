@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,21 +48,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -82,7 +82,7 @@
 <meta name="description" content="世界上的事哪有什么对与错，我只想守护我想守护的人而已">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://xiaoyu.work/index.html">
+<meta property="og:url" content="https://xiaoyu_wang.gitlab.io/blog/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="世界上的事哪有什么对与错，我只想守护我想守护的人而已">
 <meta property="og:locale" content="zh-Hans">
@@ -95,7 +95,7 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/',
+    root: '/blog/',
     scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://xiaoyu.work/">
+  <link rel="canonical" href="https://xiaoyu_wang.gitlab.io/blog/">
 
 
 
@@ -153,7 +153,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/blog/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Hexo</span>
         <span class="logo-line-after"><i></i></span>
@@ -181,7 +181,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/blog/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -191,7 +191,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/blog/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
@@ -232,12 +232,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xiaoyu.work/2019/07/21/代理t/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/08/11/tcp:ip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -251,7 +251,537 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/21/代理t/" itemprop="url">代理</a></h1>
+                <a class="post-title-link" href="/blog/2019/08/11/tcp:ip/" itemprop="url">tcp/ip工作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T22:38:45+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="如何保证页面文件能被完整的送达浏览器"><a href="#如何保证页面文件能被完整的送达浏览器" class="headerlink" title="如何保证页面文件能被完整的送达浏览器"></a>如何保证页面文件能被完整的送达浏览器</h3><p>互联网是一套理念和协议组成的体系结构</p>
+<p>IP： 把数据包送达目的主机</p>
+<p>如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之</p>
+<p>udp</p>
+<p>很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/08/03/跨域/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/08/03/跨域/" itemprop="url">关于跨域</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T20:04:48+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p><strong>同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身</strong></p>
+<p>正因如此，我们可以通过<link>标签，<img>标签以及<script>标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。</p>
+<p>文章链接： <a href="https://juejin.im/post/5a274ae9f265da430a5071eb">https://juejin.im/post/5a274ae9f265da430a5071eb</a></p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>官方推荐的跨域资源共享方案</p>
+<p>CORS是W3C颁布的一个浏览器技术规范，其全称为“跨域资源共享”（Cross-origin resource sharing），它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。它的意义在于，它是由W3C官方推广的允许通过AJAX技术跨域获取资源的规范，因此相较于JSONP而言，功能更加强大，使用起来也没有了hack的味道。</p>
+<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request），浏览器对这两种请求的处理，是不一样的。</p>
+<p>只要同时满足以下两大条件，就属于简单请求。</p>
+<ul>
+<li>请求方法是以下三种之一：head、get、post</li>
+<li>http的头信息不超出以下几种子段：Accept、 Accept-language、 Content-Language、 Last-Event-ID、Content-Type只限于三个值： application/x-www-form-urlencoded、multipart/form-data、text/plain。</li>
+</ul>
+<p>凡是不满足上面两个条件，就属于非简单请求。</p>
+<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。</p>
+<pre><code>GET /cors HTTP/1.1
+Origin: http://api.bob.com
+Host: api.alice.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0...</code></pre><p>上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。<br>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。<br>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
+<pre><code>Access-Control-Allow-Origin: http://api.bob.com
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: FooBar
+Content-Type: text/html; charset=utf-8</code></pre><ul>
+<li>Access-Control-Allow-Origin： 该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
+</ul>
+<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><h5 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h5><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。</p>
+<p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+</script></p>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/08/03/关于同源策略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/08/03/关于同源策略/" itemprop="url">同源策略再理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T18:33:56+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="关于同源策略"><a href="#关于同源策略" class="headerlink" title="关于同源策略"></a>关于同源策略</h3><p>同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。</p>
+<p>以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？</p>
+<p>先来看如果没有了同源策略会是什么样子。</p>
+<p>假设没有同源限制，A网站的API可以被任何来源的AJAX请求访问，包括获取用户的隐私信息，只看用户有没有登录，现在有个坏人做了一个网站B，坏人在B网页中用AJAX访问A网站的API，如果一个用户访问B之前已经登录了A，那这个请求包含A网站的cookie信息，也就会被A网站认为用户已经登录，这样用户在A网站的隐私信息就泄露给了控制B网站的坏人。</p>
+<p>其实同源策略就是说一个网站的api接口定义，只允许自己网站的网页来请求访问。比如说淘宝网的一个接口比如长这个样子：<a href="http://taobao.com/api/shoppingCart/list" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list</a><br>请求这个接口就可以获得你的购物车中的商品，按照正常的操作流程，你自己登陆你自己的淘宝账号，点击右上角购物车的图标，网页发送这个接口请求到淘宝的后台然后网站在新的页面返回你的购物车中的商品，于是你看到了你自己的购物车中都有些什么。此时你想：这个接口是开放的，任何人都知道淘宝查看购物车商品的接口是<a href="http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？</a><br>假如我是一个黑客，我做了一个网页运行在xiaoyu.com上，在这个网站上我写好了请求脚本去请求<a href="http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。</a></p>
+<p>所以其实是同源策略也是基于：1、浏览器向一个域发送请求的时候会带上这个域的cookies（而不管当前页面是否运行在哪个域）。2服务器端受到请求校验cookies通过后就理所当然的认为这是自家的程序员开发的网页发出的合法请求于是就乖乖返回了结果或者执行了操作。这两点‘简单’的设计让浏览器发送请求更加方便也让服务器处理请求更加方便但是却有着巨大的安全漏洞，那就是我们无法保证发送请求的脚本是运行在该运行的网站上，我在家写一个attack.html的页面在里面请求淘宝接口，只要我拿到了你淘宝的cookies我把网页用浏览器本地打开执行，攻击就完成了，这太简答了！所以浏览器才会有同源策略，不是运行在taobao.com的页面请求taobao的接口是跨域的，不能给你通过。</p>
+<p>另外，同源策略只是阻止你读取ajax返回的内容，实际上请求依然发送到了服务器。</p>
+<p>有疑问？下篇讲一讲跨域就懂了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/22/缓存代理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/07/22/缓存代理/" itemprop="url">缓存代理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
+<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
+<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
+<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
+<ul>
+<li>第一个当然是把报文转发给客户</li>
+<li>第二就是把报文存入自己的Cache里</li>
+</ul>
+<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
+<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
+<ul>
+<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
+<li>public: 表示缓存完全是</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/21/代理t/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2019/07/21/代理t/" itemprop="url">代理</a></h1>
         
 
         <div class="post-meta">
@@ -366,12 +896,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xiaoyu.work/2019/07/21/缓存/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/21/缓存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -385,7 +915,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/21/缓存/" itemprop="url">缓存</a></h1>
+                <a class="post-title-link" href="/blog/2019/07/21/缓存/" itemprop="url">缓存</a></h1>
         
 
         <div class="post-meta">
@@ -501,12 +1031,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xiaoyu.work/2019/07/21/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoyu_wang.gitlab.io/blog/blog/2019/07/21/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -520,7 +1050,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/21/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/blog/2019/07/21/hello-world/" itemprop="url">Hello World</a></h1>
         
 
         <div class="post-meta">
@@ -664,9 +1194,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -784,53 +1314,53 @@
 
   
   
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
-  
-
   
 
   
 
+  
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
