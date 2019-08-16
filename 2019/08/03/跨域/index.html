@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
+<meta name="description" content="JSONP文章链接： https://juejin.im/post/5a274ae9f265da430a5071eb 同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过&amp;lt;link&amp;gt;标签，&amp;lt;img&amp;gt;标签以及&amp;lt;script&amp;gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于跨域">
 <meta property="og:url" content="https://coffeeandtea.github.io/2019/08/03/跨域/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
+<meta property="og:description" content="JSONP文章链接： https://juejin.im/post/5a274ae9f265da430a5071eb 同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过&amp;lt;link&amp;gt;标签，&amp;lt;img&amp;gt;标签以及&amp;lt;script&amp;gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T12:04:48.000Z">
+<meta property="og:updated_time" content="2019-08-16T08:17:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于跨域">
-<meta name="twitter:description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
+<meta name="twitter:description" content="JSONP文章链接： https://juejin.im/post/5a274ae9f265da430a5071eb 同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过&amp;lt;link&amp;gt;标签，&amp;lt;img&amp;gt;标签以及&amp;lt;script&amp;gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能">
 
 
 
@@ -299,10 +299,9 @@
       
 
       
-        <h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p><strong>同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身</strong></p>
-<p>正因如此，我们可以通过<link>标签，<img>标签以及<script>标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。</p>
-<p>文章链接： <a href="https://juejin.im/post/5a274ae9f265da430a5071eb">https://juejin.im/post/5a274ae9f265da430a5071eb</a></p>
-<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>官方推荐的跨域资源共享方案</p>
+        <h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>文章链接： <a href="https://juejin.im/post/5a274ae9f265da430a5071eb" target="_blank" rel="noopener">https://juejin.im/post/5a274ae9f265da430a5071eb</a></p>
+<p><em>同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身</em></p>
+<pre><code>正因如此，我们可以通过&lt;link&gt;标签，&lt;img&gt;标签以及&lt;script&gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源</code></pre><h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>官方推荐的跨域资源共享方案</p>
 <p>CORS是W3C颁布的一个浏览器技术规范，其全称为“跨域资源共享”（Cross-origin resource sharing），它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。它的意义在于，它是由W3C官方推广的允许通过AJAX技术跨域获取资源的规范，因此相较于JSONP而言，功能更加强大，使用起来也没有了hack的味道。</p>
 <p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request），浏览器对这两种请求的处理，是不一样的。</p>
 <p>只要同时满足以下两大条件，就属于简单请求。</p>
@@ -324,9 +323,9 @@ Access-Control-Expose-Headers: FooBar
 Content-Type: text/html; charset=utf-8</code></pre><ul>
 <li>Access-Control-Allow-Origin： 该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
 </ul>
-<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><h5 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h5><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。</p>
+<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><h5 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h5><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）。</p>
 <p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
-</script></p>
+
       
     </div>
     
@@ -439,7 +438,7 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -476,7 +475,7 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-number">1.</span> <span class="nav-text">JSONP</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-number">1.</span> <span class="nav-text">JSONP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS"><span class="nav-number">2.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单请求"><span class="nav-number">2.1.</span> <span class="nav-text">简单请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非简单请求"><span class="nav-number">2.2.</span> <span class="nav-text">非简单请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#预检请求"><span class="nav-number">2.2.1.</span> <span class="nav-text">预检请求</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

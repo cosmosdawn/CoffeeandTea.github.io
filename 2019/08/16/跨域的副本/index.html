@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="如何保证页面文件能被完整的送达浏览器互联网是一套理念和协议组成的体系结构 IP： 把数据包送达目的主机 如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之 udp 很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。">
+<meta name="description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tcp&#x2F;ip工作">
-<meta property="og:url" content="https://coffeeandtea.github.io/2019/08/11/tcp:ip/index.html">
+<meta property="og:title" content="关于跨域">
+<meta property="og:url" content="https://coffeeandtea.github.io/2019/08/16/跨域的副本/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="如何保证页面文件能被完整的送达浏览器互联网是一套理念和协议组成的体系结构 IP： 把数据包送达目的主机 如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之 udp 很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。">
+<meta property="og:description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-11T14:38:45.000Z">
+<meta property="og:updated_time" content="2019-08-16T08:11:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tcp&#x2F;ip工作">
-<meta name="twitter:description" content="如何保证页面文件能被完整的送达浏览器互联网是一套理念和协议组成的体系结构 IP： 把数据包送达目的主机 如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之 udp 很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。">
+<meta name="twitter:title" content="关于跨域">
+<meta name="twitter:description" content="JSONP同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过标签，标签以及标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。 文章链接： https://juejin.im/post/5a274ae9f265d">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/2019/08/11/tcp:ip/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/2019/08/16/跨域的副本/">
 
 
 
 
 
-  <title>tcp/ip工作 | Hexo</title>
+  <title>关于跨域 | Hexo</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/11/tcp:ip/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/16/跨域的副本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">tcp/ip工作</h1>
+          <h1 class="post-title" itemprop="name headline">关于跨域</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T22:38:45+08:00">
-                2019-08-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T16:09:55+08:00">
+                2019-08-16
               </time>
             
 
@@ -299,12 +299,34 @@
       
 
       
-        <h3 id="如何保证页面文件能被完整的送达浏览器"><a href="#如何保证页面文件能被完整的送达浏览器" class="headerlink" title="如何保证页面文件能被完整的送达浏览器"></a>如何保证页面文件能被完整的送达浏览器</h3><p>互联网是一套理念和协议组成的体系结构</p>
-<p>IP： 把数据包送达目的主机</p>
-<p>如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之</p>
-<p>udp</p>
-<p>很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。</p>
-
+        <h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p><strong>同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身</strong></p>
+<p>正因如此，我们可以通过<link>标签，<img>标签以及<script>标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源）。</p>
+<p>文章链接： <a href="https://juejin.im/post/5a274ae9f265da430a5071eb">https://juejin.im/post/5a274ae9f265da430a5071eb</a></p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>官方推荐的跨域资源共享方案</p>
+<p>CORS是W3C颁布的一个浏览器技术规范，其全称为“跨域资源共享”（Cross-origin resource sharing），它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。它的意义在于，它是由W3C官方推广的允许通过AJAX技术跨域获取资源的规范，因此相较于JSONP而言，功能更加强大，使用起来也没有了hack的味道。</p>
+<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request），浏览器对这两种请求的处理，是不一样的。</p>
+<p>只要同时满足以下两大条件，就属于简单请求。</p>
+<ul>
+<li>请求方法是以下三种之一：head、get、post</li>
+<li>http的头信息不超出以下几种子段：Accept、 Accept-language、 Content-Language、 Last-Event-ID、Content-Type只限于三个值： application/x-www-form-urlencoded、multipart/form-data、text/plain。</li>
+</ul>
+<p>凡是不满足上面两个条件，就属于非简单请求。</p>
+<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。</p>
+<pre><code>GET /cors HTTP/1.1
+Origin: http://api.bob.com
+Host: api.alice.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0...</code></pre><p>上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。<br>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。<br>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
+<pre><code>Access-Control-Allow-Origin: http://api.bob.com
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: FooBar
+Content-Type: text/html; charset=utf-8</code></pre><ul>
+<li>Access-Control-Allow-Origin： 该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
+</ul>
+<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><h5 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h5><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。</p>
+<p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+</script></p>
       
     </div>
     
@@ -328,8 +350,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/03/跨域/" rel="next" title="关于跨域">
-                <i class="fa fa-chevron-left"></i> 关于跨域
+              <a href="/2019/08/14/git/" rel="next" title="git">
+                <i class="fa fa-chevron-left"></i> git
               </a>
             
           </div>
@@ -337,10 +359,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/14/git/" rel="prev" title="git">
-                git <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -417,7 +435,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +472,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何保证页面文件能被完整的送达浏览器"><span class="nav-number">1.</span> <span class="nav-text">如何保证页面文件能被完整的送达浏览器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-number">1.</span> <span class="nav-text">JSONP</span></a></li></ol></div>
             
 
           </div>
