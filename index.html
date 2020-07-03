@@ -229,6 +229,834 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/03/Array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/03/Array/" itemprop="url">数组Array</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-03T00:46:43+08:00">
+                2020-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p><strong><em>想要吗？想要你说啊，你不说我怎么知道你想要</em></strong></p>
+<hr>
+<p>“<strong>为了按照某个方式进行排序，必须给sort方法传递一个比较函数，该函数决定了它的两个参数在排好序的数组中的先后顺序。假设第一个参数应该在前，比较函数应该返回一个小于0的数值，假如第一个参数应该在后，函数应该返回一个大于0的数值，如果两个数值相等，那么他们的顺序无关紧要，此时函数应该返回0。</strong>”</p>
+<p>这是js权威指南中对数组sort方法的描述，红包书中的描述与此类似，并给出了函数的例子：</p>
+<pre><code>function compare(value1, value2) {
+    if (value 1 &lt; value2) {
+        return -1;
+    } else if (value1 &gt; value2) {
+        return 1;
+    } else {
+        return 0;
+    }
+}</code></pre><p>只要将compare函数作为参数传递给sort方法即可，如下所示：</p>
+<pre><code>var values = [0,1,5,10,15];
+
+values.sort(compare); // 0,1,5,10,15</code></pre><p>这里的解释是：如果第一个参数应该位于第二个参数之前，则返回一个负数，如果第一个参数应该位于第二个参数之后则返回一个正数。</p>
+<p>所以其实这个函数的规则定义是一个<strong>从结果来推导条件</strong>的过程，函数的逻辑已经定义好了：无论你要比较什么，我的规则比较后的结果就是：<strong><em>如果第一个参数应该位于第二个参数之前，则返回一个负数，如果第一个参数应该位于第二个参数之后则返回一个正数</em></strong>，这里的a,b的理解就是<strong>待排序数组中的任意两个元素</strong>，没有什么顺序的规定，也不是什么一定相邻的两个元素，就是<strong>任意</strong>两个元素。我们使用sort来进行排序的时候实际是根据它比较结果的规则来去写我们的比较条件的，也就是if表达式，告诉它什么时候返回-1，什么时候返回1，也就是告诉它深呢时候把a排前面，什么时候把a排后面。这个规则要写完整，不能只写一半只告诉它什么情况下把a排在前面，其他情况不写，它就不知怎么排了。</p>
+<p>简单记忆： a - b 是生序 b - a 是降序，其实是一中“偷懒”的记忆方式，可以用来快速的进行排序，但是也要记得sort函数最原始的规则：如果第一个参数应该位于第二个参数之前，则返回一个负数，如果第一个参数应该位于第二个参数之后则返回一个正数。</p>
+<p>如果忘记了sort方法，可以去看自己在力扣上做的第1122题</p>
+<pre><code>https://leetcode-cn.com/problems/relative-sort-array/solution/sortfang-fa-zui-jing-jian-fang-shi-by-storm-24/</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/01/DNS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/01/DNS/" itemprop="url">Nds</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T15:04:39+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>DNS解析</li>
+<li>TCP链接</li>
+<li>发送http请求</li>
+<li>服务器处理请求并返回http报文</li>
+<li>浏览器解析渲染页面</li>
+<li>连接结束</li>
+</ul>
+<p>DNS缓存，减少浏览器访问dns服务器的时间</p>
+<p>部署CDN：CDN的域名不要和主站的域名一样，这样就会防止访问CDN时还携带着主站cookies的问题。</p>
+<p>浏览器端缓存</p>
+<p>服务端渲染ssr</p>
+<p>HTTP是不保存状态的协议，既无状态协议，协议本身对于请求或响应之间的通信状态不进行保存，因此连接双方不能知晓对方当前的身份和状态。这也是Cookie技术产生的重要原因之一：客户端的状态管理。浏览器会根据从服务器端发送的响应报文内 Set-Cookie 首部字段信息自动保持 Cookie。而每次客户端发送 HTTP 请求，都会在请求报文中携带 Cookie，作为服务端识别客户端身份状态的标识。</p>
+<p>应用层<br>传输层<br>网际层<br>链路层</p>
+<p>但是持久连接采用队头阻塞模式，下次请求必须等到上次响应返回后才能发起，如果上次的请求还没有返回响应内容，下次请求就必须只能等着，就是常说的队头阻塞。（解决方案，管道化）</p>
+<p>需要注意，如果使用反向代理，则在axios配置的时候，请求baseURL必须设置为字符串‘/’，否则proxy会匹配不到’/api’导致代理失败。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/01/http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/01/http/" itemprop="url">http</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T15:03:21+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>http所谓的“超文本传输协议”其实并不怎么管“传输”的事情。</p>
+<p>http协议的核心部分是它传输的报文内容。</p>
+<p>http是一个纯文本的协议，所以头数据都是ASCII码的文本，可以很容易地用肉眼</p>
+<p>阅读，不用借助程序解析也能看懂。</p>
+<p>起始行(start line) + 头部字段(header) = <strong><em>请求头</em></strong></p>
+<p>消息正文又称为<strong><em>实体</em></strong>但是与header对应，很多时候就直接称为<strong><em>body</em></strong></p>
+<p>http协议规定报文必须有header并且header之后必须要有一个空行，但是可以没有body</p>
+<p>在很多时候，特别是浏览器发送get请求的时候都是这样，http报文经常是只有header而没有body,相当于只发了一个超级“大头”过来，可以想象为：每时每刻网络上都有数不清的“大头儿子”在跑来跑去。不过这个大头也不能太大，虽然http协议对header的大小没有做限制，但是各个web服务器都不会允许过大的请求头，因为头部太大可能会占用大量的服务器资源，影响运行效率。</p>
+<p>请求行简要描述了客户端想要如何操作服务器端的资源。</p>
+<p>由三部分构成：</p>
+<ul>
+<li>请求方法</li>
+<li>请求目标</li>
+<li>版本号</li>
+</ul>
+<p>这三个部分通常使用空格来分隔。</p>
+<p>例如：GET / HTTP/1.1</p>
+<ul>
+<li>GET是请求方法</li>
+<li>/是请求目标</li>
+<li>HTTP/1.1是版本号</li>
+</ul>
+<p>意思就是： “服务器你好，我想获取网站根目录下的默认文件，我用的协议版本号是1.1请不要用1.0或者2.0回复我。</p>
+<p>请求行或状态行再加上头部字段集合就构成了http报文里完整的请求头或响应头。</p>
+<p>http头字段非常灵活，不仅可以使用标准里的host、connection等已经定义的头，也可以任意添加自定义头，这就给http协议带来了无限的扩展可能。</p>
+<p>注意：</p>
+<ul>
+<li>字段名不区分大小写，但是首字母大写的可读性更好</li>
+<li>字段里不允许出现空格、下划线_,但是可以使用连字符</li>
+</ul>
+<p>常用头字段</p>
+<ul>
+<li>通用字段</li>
+<li>请求字段</li>
+<li>响应字段</li>
+<li>实体字段： 实际上可以归为通用字段，但是专门用来描述body的额外信息</li>
+</ul>
+<p>对http报文的解析和处理实际上就是对头字段的处理，理解了头字段也就理解了http报文</p>
+<h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>属于请求字段，只能出现在请求头里，同时也是唯一一个http1.1规范里要求必须出现的字段，如果请求头部字段里没有这个host，那这就是一个错误的报文。host字段用来告诉服务器这个请求应该由哪个主机来处理，当一台计算机上托管了多个虚拟主机的时候，服务器端就需要用host字段来选择，有点像一个简单的“路由重定向”。</p>
+<p>1:如果拼 HTTP 报文的时候，在头字段后多加了一个 CRLF，导致出现了一个空行，会发生什么？<br>在header 下面第一个空行以后都会被当作body 体</p>
+<p>2:讲头字段时说“:”后的空格可以有多个，那为什么绝大多数情况下都只使用一个空格呢？<br>头部多一个空格就会多一个传输的字节，去掉无用的信息，保证传输的头部字节数尽量小</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/06/20/px2rem或postcss-px2rem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/20/px2rem或postcss-px2rem/" itemprop="url">移动端适配</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-20T19:34:01+08:00">
+                2020-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="px2rem或postcss-px2rem"><a href="#px2rem或postcss-px2rem" class="headerlink" title="px2rem或postcss-px2rem"></a>px2rem或postcss-px2rem</h3><ul>
+<li>在移动端中，为了适配不同的设备，通常用rem来做适配</li>
+<li>rem是通过根元素进行适配的，网页中的根元素指的是<html>，我们通过设置</html></li>
+</ul>
+<p>假值列表：</p>
+<p>以下这些是假值</p>
+<ul>
+<li>undefined</li>
+<li>null</li>
+<li>false</li>
+<li>+0、-0、NaN</li>
+<li>“”</li>
+</ul>
+<p>除了以上这些假值以外的值都是真值，也就是说没有一个真值列表，真值的列表可以无限长，无法一一列举，我们只能通过假值列表做为参考来判断一个值是不是真值。</p>
+<blockquote>
+<p>= 0 和 == -1 这样的写法不是很好，称为”抽象泄漏“，意思是在代码中暴露了底层的实现细节，这里指的是用-1作为失败时的返回值，这些细节应该被屏蔽掉。</p>
+</blockquote>
+<p>html是浏览器构建dom的蓝图，为了正确构建每个dom，浏览器还会修复它在蓝图中发现的问题。</p>
+<p>像普通人一样编写代码和像忍者一样编写代码的最大区别在于是否把js当成函数式语言来理解，对这一点的认知水平决定了你编写的代码的水平。</p>
+<p>对象能做的任何一件事，函数也都能做，函数也是对象，唯一的特殊之处在于它是可调用的，即函数会被调用以便执行某项动作。</p>
+<p>把函数作为第一类对象，是函数式编程的第一步</p>
+<p>回调函数不一定都是异步的，两码事</p>
+<p>数组 sort方法</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/06/17/EventLoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/17/EventLoop/" itemprop="url">eventloop</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-17T13:57:57+08:00">
+                2020-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>js是单线程的编程语言，单线程的运行环境，它有且只有一个调用栈，它每次只能够做一件事，这是单线程的意思，程序每次只可以运行一段代码</p>
+<p>调用栈是一个记录当前程序所在位置的数据结构，如果当前进入了某个函数，这个函数就会被放入栈里面，如果当前离开了某个函数，这个函数就会被弹出栈外，这是栈所做的事。</p>
+<pre><code>function foo() {
+    throw new Error(&apos;Oops!&apos;);
+}
+
+function bar() {
+    foo();
+}
+
+function baz() {
+    bar();
+}
+
+baz();</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/06/16/前端框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/16/前端框架/" itemprop="url">框架</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-16T15:10:26+08:00">
+                2020-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###<br>框架出现的目的并不是为了提升性能，而是为了可维护性、为了便于团队开发。但是天下没有白吃的午餐，你为了程序的可维护性，出让了一部分性能作为妥协，毕竟什么框架都没有手动原生操作性能高，因为框架要具有适普性，要能处理各种各样的场景.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/02/10/byte和bit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -735,900 +1563,11 @@ echo &apos;Hello World!&apos;</code></pre><p>这种先确定上层步骤，然�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/02/01/使用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/01/使用命令/" itemprop="url">使用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-01T15:41:48+08:00">
-                2020-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="什么是命令"><a href="#什么是命令" class="headerlink" title="什么是命令"></a>什么是命令</h3><p>命令可以是以下四种形式之一：</p>
-<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>当谈及到网络系统层面，几乎任何东西都能有Linux来实现，Linux被用来创建各式各样的网络系统和装置，包括防火墙、路由器、名称服务器，网络连接式存储设备等。</p>
-<p>ftp命令是“经典”程序之一，它的名字来源于其所使用的协议，就是文件传输协议。FTP被广发地用来从因特网上下载文件。大多数，网络浏览器都支持FTP，经常可以看到它们的uri以协议ftp://开头。在出现网络浏览器之前，ftp程序已经存在了.ftp程序可用来于FTP服务器进行通信，ftp服务器就是存储文件的计算机，这些文件能够通过网络下载和上传。</p>
-<h3 id="于远程主机安全通信"><a href="#于远程主机安全通信" class="headerlink" title="于远程主机安全通信"></a>于远程主机安全通信</h3><p>通过网络来远程操控类Unix的操作系统已经有很多年了。早些年，在因特网普遍推广之前，有一些受欢迎的程序被用来登录远程主机。它们是rlogin 和 telnet程序。然而这些程序，拥有和ftp程序一样的致命缺点；它们以明码形式来传输所有的交流信息（包括登录命令和密码）。这使得它们完全不适合在因特网时代使用。</p>
-<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p>为了解决这个问题，开发了一个新的协议，叫做ssh （secure shell）。ssh 解决了这两个基本的和远端的主机安全交流的问题。首先，他要认证远端的主机是否是为它所知的那台主机（这样就阻止了所谓的中间人攻击），其次，它加密了本地于远程主机之间所有的通讯信息。</p>
-<p>ssh 由两部分组成，ssh服务器运行在远端主机上，在端口22上监听收到的外部链接，而ssh客户端用在本地系统中，用来和远端服务器通信。</p>
-<p>大多数 Linux 发行版自带一个提供 SSH 功能的软件包，叫做 OpenSSH，来自于 BSD 项目。一些发行版 默认包含客户端和服务端两个软件包（例如 Red Hat），而另一些（比方说 Ubuntu）则只提供客户端。 为了能让系统接受远端的连接，它必须安装 OpenSSH-server 软件包，配置，运行它， 并且（如果系统正在运行，或者系统在防火墙之后）它必须允许在 TCP 端口 22 上接收网络连接</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/source map/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/source map/" itemprop="url">source map</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T21:48:23+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="从源码转换开始说起"><a href="#从源码转换开始说起" class="headerlink" title="从源码转换开始说起"></a>从源码转换开始说起</h3><p>js脚本现在变得越来越复杂，大部分源码（尤其是各种函数可和框架）都要经过转换，才能投入生产环境。常见的源码转换，主要有以下三种：</p>
-<ul>
-<li>压缩减少体积。比如jquery 1.9的源码，压缩前是252KB，压缩后是32KB。</li>
-<li>多个文件合并，减少http请求数。</li>
-<li>其他语言编译成javascript。最常见的例子就是CoffeeScript(还有各大框架的CommonJS源码)。</li>
-</ul>
-<p>这三种情况都使得实际运行的代码不同于开发代码，debug变得困难重重。</p>
-<p>通常js解释器会告诉你第几行第几列出错了，但是这对于转换后的代码毫无用处，因为所有的变量都改了名字。你看到报错信息，毫无头绪，根本不知道他所在的位置。这，就是source map想要解决的问题。</p>
-<h3 id="什么是sourcemap"><a href="#什么是sourcemap" class="headerlink" title="什么是sourcemap"></a>什么是sourcemap</h3><p>source map是一个信息文件，里面存储着位置信息，也即是说，转换后的代码的每一个位置，所对应的转换前的位置。有了它，出错的时候，debug工具将直接显示原始源代码，而不是转换后的代码。目前，暂时只有Chrome浏览器支持这个功能。在Developer Tools的Setting设置中，确认选择“Enable source maps”</p>
-<h3 id="如何启用source-map"><a href="#如何启用source-map" class="headerlink" title="如何启用source map"></a>如何启用source map</h3><p>只要在转换后的代码尾部，加上一行就行了</p>
-<p>//@ sourceMappingURL=/path/to/sourcemapfile</p>
-<p>map文件可以放在网络上，也可以放在本地文件系统</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/引言/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/引言/" itemprop="url">引言</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T15:09:53+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="GNU计划"><a href="#GNU计划" class="headerlink" title="GNU计划"></a>GNU计划</h3><p>GNU计划又称为<em>革奴</em>计划，是一个自由软件集体协作计划，1983年9月27日由理查德.斯托曼在麻省理工学院公开发起。他的目标是创建一套完全自由的操作系统，成为GNU.<br>理查德.斯托曼是一个天才的哲学家，自由软件运动的创始人，自由软件基金会创世者，他创建了GNU项目，编写了第一版GNU C编译器（gcc），创立了GNU通用公共协议（the GPL）等。</p>
-<h3 id="名字"><a href="#名字" class="headerlink" title="名字"></a>名字</h3><p>GNU是“GNU is not Unix” 的缩写。</p>
-<h3 id="自由"><a href="#自由" class="headerlink" title="自由"></a>自由</h3><p>自由是一种权利，它决定你的计算机能做什么，同时能够拥有这种“自由”的唯一方式就是知道计算机正在做什么。自由是指一台没有任何秘密的计算机，你可以从它那里了解一切，只要你用心的寻找。</p>
-<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>作为人类，本能的知道让计算机圆满完成工作的唯一途径，是用键盘来操作计算机。</p>
-<p>图形用户界面让简单的任务更容易完成，而命令行界面使得完成复杂的任务成为可能。</p>
-<p>因为linux是以Unix家族的操作系统为模版写成的，所以他分享了Unix丰富的命令行工具。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/什么是shell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/什么是shell/" itemprop="url">什么是shell</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T15:09:47+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="bash"><a href="#bash" class="headerlink" title="bash"></a>bash</h3><p>一说到命令行，我们真正指的是shell.shell就是一个程序，它接受从键盘输入的命令，然后把命令传递给操作系统去执行。几乎所有的Linux发行版都提供一个名为bash的来自GNU项目的shell程序。“bash”是“Bourne Again SHell“的缩写，所指的是这样一个事实，bash是最初Unix上由p<a href="https://zh.wikipedia.org/wiki/%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E4%BC%AF%E6%81%A9" target="_blank" rel="noopener">Steve Bourne 史蒂夫伯恩</a>写成shell程序的sh的增强版。</p>
-<p>所以shell就是一个从键盘接受命令，然后把命令传递给操作系统去执行的程序，bash是一种shell程序。</p>
-<h3 id="终端仿真器"><a href="#终端仿真器" class="headerlink" title="终端仿真器"></a>终端仿真器</h3><p>当使用图形用户界面时，我们需要另一个和shell交互的叫做终端仿真器的程序，在菜单中它们可能被简单称为“terminal”基本上它们都完成相同的事情，让我们能访问shell.</p>
-<h3 id="启动终端"><a href="#启动终端" class="headerlink" title="启动终端"></a>启动终端</h3><pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$</code></pre><p>这叫做shell提示符，无论何时当shell准备好了去接受输入时，它就会出现。不同的shell可能会以各种各样的面孔显示，它通常包括你的用户名@主机，紧接着当前的工作目录和一个美元符号💲<br>如果提示符的最后一个字符是”#”而不是“$”那么这个终端会话就有超级用户权限，这意味着，你要么是以root用户的身份登录，要么是选择的终端仿真器提供了超级用户权限。许多Linux发行版默认保存最后输入的500个命令，按下上箭头就会出现上次的命令。</p>
-<h3 id="复制和粘贴"><a href="#复制和粘贴" class="headerlink" title="复制和粘贴"></a>复制和粘贴</h3><p>虽然shell是和键盘打交道的，但是你可以在终端仿真器里使用鼠标。X窗口系统（是GUI工作的底层引擎）内建了一种机制，支持快速拷贝和站忒技巧。按下鼠标左键，沿着文本拖动鼠标高亮一些文本，那么这些文本就被拷贝到一个由X管理的缓冲区里面，然后按下鼠标中键，这些文本就被粘贴到光标所在的位置。</p>
-<p>注意：不要在一个终端窗口里使用Ctrl-c和Ctrl-v快捷键来执行拷贝和粘贴。它们不起作用，对于shell来说这两个控制代码有着不同的含义，它们早于Microsoft Windows定义复制粘贴的的含义，许多年之前就赋予了不同的意义。</p>
-<h3 id="几个简单的基础命令"><a href="#几个简单的基础命令" class="headerlink" title="几个简单的基础命令"></a>几个简单的基础命令</h3><p><strong>date</strong>显示系统当前时间和日期</p>
-<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ date
-2020年 1月31日 星期五 10时16分53秒 CST</code></pre><p><strong>cal</strong>显示当前月份的日历</p>
-<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ cal
-      一月 2020
-日 一 二 三 四 五 六
-          1  2  3  4
- 5  6  7  8  9 10 11
-12 13 14 15 16 17 18
-19 20 21 22 23 24 25
-26 27 28 29 30 31</code></pre><p><strong>df</strong>查看磁盘剩余空间的数量</p>
-<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ df
-Filesystem    512-blocks      Used Available Capacity iused      ifree %iused  Mounted on
-/dev/disk1s5   489620264  21466584 155803688    13%  484313 2447617007    0%   /
-devfs                684       684         0   100%    1187          0  100%   /dev
-/dev/disk1s1   489620264 308791640 155803688    67% 2740319 2445361001    0%   /System/Volumes/Data
-/dev/disk1s4   489620264   2099240 155803688     2%       2 2448101318    0%   /private/var/vm
-map auto_home          0         0         0   100%       0          0  100%   /System/Volumes/Data/home</code></pre><p><strong>exit</strong>可以通过关闭终端仿真器窗口，或者是在shell提示符下输入exit命令来终止一个终端会话。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/文件系统跳转/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/文件系统跳转/" itemprop="url">文件系统跳转</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T15:09:40+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>pwd</strong> 打印当前工作目录</p>
-<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ pwd
-/Users/wangxiaoyu</code></pre><p>当我们首次登录系统时，当前工作目录是我们的家目录。每个用户都有他自己的家目录，当用户以普通用户的身份登录操作系统的时候，家目录是唯一允许用户写入文件的地方。</p>
-<h3 id="几个快捷键"><a href="#几个快捷键" class="headerlink" title="几个快捷键"></a>几个快捷键</h3><pre><code>cd 更改工作目录到你的家目录
-
-cd - 更改工作目录到先前的工作目录
-
-cd ~user_name  更改工作目录到用户家目录。例如cd ~bob 会更改工作目录到用户bob的家目录</code></pre><h3 id="文件名的重要规则"><a href="#文件名的重要规则" class="headerlink" title="文件名的重要规则"></a>文件名的重要规则</h3><ul>
-<li>以 .字符开头的文件名是隐藏文件，ls命令不能列出来，用ls -a命令就可以了。当你创建了账号后，几个配置账号的隐藏文件被放置在你的家目录。</li>
-<li>文件名和命令是大小写敏感的</li>
-<li>Linux没有‘文件扩展名’的概念。</li>
-<li>虽然Linux支持长文件名，文件名可能包含空格、标点符号，但是标点符号仅限使用 . - _ 很重要的一点是，不要在文件名中使用空格。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/探究操作系统/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/31/探究操作系统/" itemprop="url">探究操作系统</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T15:09:32+08:00">
-                2020-01-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="几个对研究Linux系统有帮助的命令"><a href="#几个对研究Linux系统有帮助的命令" class="headerlink" title="几个对研究Linux系统有帮助的命令"></a>几个对研究Linux系统有帮助的命令</h3><ul>
-<li>ls 列出目录内容</li>
-<li>file 确定文件类型</li>
-<li>less 浏览文件内容</li>
-</ul>
-<p>ls 可以列出多个指定目录的内容。</p>
-<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ ls ~ /usr
-/Users/wangxiaoyu:
-AndroidStudioProjects    Music            node_modules
-Applications        Pictures        package-lock.json
-Desktop            Public            projects
-Documents        Training-ground        self
-Downloads        depends            北航论文
-Library            document
-Movies            learn
-
-/usr:
-X11        bin        libexec        sbin        standalone
-X11R6        lib        local        share</code></pre><p>上面的例子列出了用户家目录（字符～表示）和/usr目录的内容</p>
-<p>ls -l 改变输出格式，来得到更多的细节</p>
-<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ ls -l
-total 240
-drwxr-xr-x    3 wangxiaoyu  staff      96 10 31 14:58 AndroidStudioProjects
-drwx------@   5 wangxiaoyu  staff     160  7 19  2019 Applications
-drwx------@  10 wangxiaoyu  staff     320  1 30 19:21 Desktop
-drwx------@  44 wangxiaoyu  staff    1408  1 31 10:16 Documents
-drwx------@ 150 wangxiaoyu  staff    4800  1 30 12:42 Downloads
-drwx------@  80 wangxiaoyu  staff    2560 10 31 14:36 Library
-drwx------+   5 wangxiaoyu  staff     160  1  5 23:12 Movies
-drwx------+   5 wangxiaoyu  staff     160 10 10 22:05 Music
-drwx------+   5 wangxiaoyu  staff     160 11  8 22:24 Pictures
-drwxr-xr-x+   6 wangxiaoyu  staff     192 12  7 10:14 Public
-drwxr-xr-x    7 wangxiaoyu  staff     224  1 29 20:29 Training-ground
-drwxr-xr-x    9 wangxiaoyu  staff     288  1 30 19:21 depends
-drwxr-xr-x    7 wangxiaoyu  staff     224  1 30 12:27 document
-drwxr-xr-x   22 wangxiaoyu  staff     704  1 27 19:54 learn
-drwxr-xr-x   45 wangxiaoyu  staff    1440 12  7 10:13 node_modules
--rw-r--r--    1 wangxiaoyu  staff  120424 10 19 12:43 package-lock.json
-drwxr-xr-x   18 wangxiaoyu  staff     576  1 30 12:31 projects
-drwxr-xr-x   15 wangxiaoyu  staff     480 11 12 10:06 self
-drwxr-xr-x   17 wangxiaoyu  staff     544  1 17 14:57 北航论文</code></pre><p>使用ls命令的 -l 选项，则结果以长模式输出。</p>
-<h3 id="选项和参数"><a href="#选项和参数" class="headerlink" title="选项和参数"></a>选项和参数</h3><p>大多数的命令看起来像是这样</p>
-<pre><code>command -options arguments</code></pre><p>大多数命令使用的选项，是由一个中划线加上一个字符，例如 ‘-l’但是许多命令，包括来自GNU项目的命令，也支持长选项，长选项由两个中划线加上一个字（单词）组成。也有许多命令允许把多个的短选项串在一起使用，例如</p>
-<pre><code>ls -lt</code></pre><p>‘l’选项产生长格式输出，’t’选项按文件修改时间的先后来排序。</p>
-<h3 id="深入研究长格式输出"><a href="#深入研究长格式输出" class="headerlink" title="深入研究长格式输出"></a>深入研究长格式输出</h3><pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ ls -l
-total 240
-drwxr-xr-x    3 wangxiaoyu  staff      96 10 31 14:58 AndroidStudioProjects
-drwx------@   5 wangxiaoyu  staff     160  7 19  2019 Applications
-drwx------@  10 wangxiaoyu  staff     320  1 30 19:21 Desktop
-drwx------@  44 wangxiaoyu  staff    1408  1 31 10:16 Documents
-drwx------@ 150 wangxiaoyu  staff    4800  1 30 12:42 Downloads
-drwx------@  80 wangxiaoyu  staff    2560 10 31 14:36 Library
-drwx------+   5 wangxiaoyu  staff     160  1  5 23:12 Movies
-drwx------+   5 wangxiaoyu  staff     160 10 10 22:05 Music
-drwx------+   5 wangxiaoyu  staff     160 11  8 22:24 Pictures
-drwxr-xr-x+   6 wangxiaoyu  staff     192 12  7 10:14 Public
-drwxr-xr-x    7 wangxiaoyu  staff     224  1 29 20:29 Training-ground
-drwxr-xr-x    9 wangxiaoyu  staff     288  1 30 19:21 depends
-drwxr-xr-x    7 wangxiaoyu  staff     224  1 30 12:27 document
-drwxr-xr-x   22 wangxiaoyu  staff     704  1 27 19:54 learn
-drwxr-xr-x   45 wangxiaoyu  staff    1440 12  7 10:13 node_modules
--rw-r--r--    1 wangxiaoyu  staff  120424 10 19 12:43 package-lock.json
-drwxr-xr-x   18 wangxiaoyu  staff     576  1 30 12:31 projects
-drwxr-xr-x   15 wangxiaoyu  staff     480 11 12 10:06 self
-drwxr-xr-x   17 wangxiaoyu  staff     544  1 17 14:57 北航论文</code></pre><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-rw-r–r–</td>
-<td>对于文件的访问权限</td>
-</tr>
-<tr>
-<td>1</td>
-<td>文件的硬链接数目</td>
-</tr>
-<tr>
-<td>wangxiaoyu</td>
-<td>文件所有者的用户名</td>
-</tr>
-<tr>
-<td>staff</td>
-<td>文件所属用户组的名字</td>
-</tr>
-<tr>
-<td>120424</td>
-<td>以字节数表示的文件大小</td>
-</tr>
-<tr>
-<td>12:43</td>
-<td>上次修改文件的时间和日期</td>
-</tr>
-<tr>
-<td>package-lock.json</td>
-<td>文件名</td>
-</tr>
-</tbody></table>
-<h3 id="确定文件类型"><a href="#确定文件类型" class="headerlink" title="确定文件类型"></a>确定文件类型</h3><p>用file命令来确定文件类型，当调用file命令后，file命令会打印出文件内容的简单描述例如：</p>
-<pre><code>file picture.jpg
-
-picture.jpg: JPEG image data, JFIF standard 1.01</code></pre><p>有许多类型的文件，事实上在Linux中，有个普遍的观念是“一切皆文件“有一些文件格式不太常见，极少数文件相当陌生。</p>
-<p>less 命令是一个用来浏览文本文件的程序，Linux系统，有许多人类可读的文本文件。less程序为我们检查文本文件提供了方便。</p>
-<h3 id="什么是文本"><a href="#什么是文本" class="headerlink" title="什么是文本"></a>什么是文本</h3><p>在计算机中，有很多方法可以表达信息。所有的方法都涉及到在信息与一些数字之间确立一种关系，而这些数字可以用来代表信息。毕竟，计算机只能理解数字，这样所有的数据都被转换成数值来表示。</p>
-<p>文本是简单的字符与数字之间的一对一映射，非常紧凑，五十个字符的文本翻译成五十个字节的数据。文本只是包含简单的字符到数字的映射，理解这一点很重要。它和一些文字处理器文档不一样，比如说微软word文档，这些文件和简单的ASCII文件形成鲜明的对比，它们包含非常多文本元素来描述它的结构和格式。</p>
-<h3 id="为什么文本很重要"><a href="#为什么文本很重要" class="headerlink" title="为什么文本很重要"></a>为什么文本很重要</h3><p>许多包含系统设置的文件—配置文件，是以文本格式存储的，许多系统所用到的实际程序—-脚本，也是这种格式存储的。</p>
-<h3 id="less-is-more"><a href="#less-is-more" class="headerlink" title="less is more"></a>less is more</h3><p>less 程序是早期Unix程序more的改进版，less这个名字，对于习语“less is more” 开了个玩笑，这个习语也是现代主义建筑师和设计者的座右铭。</p>
-<p>less允许前后翻页，more只能向前翻页</p>
-<h3 id="旅行指南-文件布局"><a href="#旅行指南-文件布局" class="headerlink" title="旅行指南/文件布局"></a>旅行指南/文件布局</h3><p>Linux系统中，文件系统布局与类Unix系统的布局很相似，实际上，一个已经发布的标准，叫做<a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E6%A0%87%E5%87%86" target="_blank" rel="noopener">Linux文件系统层次标准</a>，详细说明了这种设计模式。不是所有的Linux发行版都根据这个标准，但大多数都是。</p>
-<h3 id="符号链接-软连接"><a href="#符号链接-软连接" class="headerlink" title="符号链接/软连接"></a>符号链接/软连接</h3><p>描绘一下这样的情景：一个程序要求使用某个包含在名为“foo”文件中的共享资源，但是“foo”经常改变版本号。 这样，在文件名中包含版本号，会是一个好主意，因此管理员或者其它相关方，会知道安装了哪个“foo”版本。 这会导致另一个问题。如果我们更改了共享资源的名字，那么我们必须跟踪每个可能使用了 这个共享资源的程序，当每次这个资源的新版本被安装后，都要让使用了它的程序去寻找新的资源名。 这听起来很没趣。这就是符号链接存在至今的原因。比方说，我们安装了文件 “foo” 的 2.6 版本，它的 文件名是 “foo-2.6”，然后创建了叫做 “foo” 的符号链接，这个符号链接指向 “foo-2.6”。 这意味着，当一个程序打开文件 “foo” 时，它实际上是打开文件 “foo-2.6”。 现在，每个人都很高兴。依赖于 “foo” 文件的程序能找到这个文件，并且我们能知道安装了哪个文件版本。 当升级到 “foo-2.7” 版本的时候，仅添加这个文件到文件系统中，删除符号链接 “foo”， 创建一个指向新版本的符号链接。这不仅解决了版本升级问题，而且还允许在系统中保存两个不同的文件版本。 假想 “foo-2.7” 有个错误（该死的开发者！），那我们得回到原来的版本。 一样的操作，我们只需要删除指向新版本的符号链接，然后创建指向旧版本的符号链接就可以了。</p>
-<p>有点类似于一个文件的快捷方式，上层的程序调用快捷方式，快捷方式指向真正的运行程序。<br>还有一种硬链接，同样允许文件有多个名字，但是硬链接以不同方法来创建多个文件名。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1674,7 +1613,7 @@ picture.jpg: JPEG image data, JFIF standard 1.01</code></pre><p>有许多类型�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
