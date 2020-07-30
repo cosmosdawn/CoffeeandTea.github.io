@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="http所谓的“超文本传输协议”其实并不怎么管“传输”的事情。 http协议的核心部分是它传输的报文内容。 http是一个纯文本的协议，所以头数据都是ASCII码的文本，可以很容易地用肉眼 阅读，不用借助程序解析也能看懂。 起始行(start line) + 头部字段(header) = 请求头 消息正文又称为实体但是与header对应，很多时候就直接称为body http协议规定报文必须有hea">
+<meta name="description" content="什么是函数式编程？数学中的函数f(x) = y 函数必须总是接受一个参数 函数必须总是返回一个值 函数应该依据接收到的参数而不是外部环境运行 对于一个给定的x,只会输出唯一的一个y  var percentValue = 5; var calculateTex = (value) =&amp;gt; {     return value/100 * (100 + percentValue )） }上面的计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="http">
-<meta property="og:url" content="https://coffeeandtea.github.io/2020/07/01/http/index.html">
+<meta property="og:title" content="javascript函数式编程">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/07/30/js函数式编程？/index.html">
 <meta property="og:site_name" content="秋夜已凉 02">
-<meta property="og:description" content="http所谓的“超文本传输协议”其实并不怎么管“传输”的事情。 http协议的核心部分是它传输的报文内容。 http是一个纯文本的协议，所以头数据都是ASCII码的文本，可以很容易地用肉眼 阅读，不用借助程序解析也能看懂。 起始行(start line) + 头部字段(header) = 请求头 消息正文又称为实体但是与header对应，很多时候就直接称为body http协议规定报文必须有hea">
+<meta property="og:description" content="什么是函数式编程？数学中的函数f(x) = y 函数必须总是接受一个参数 函数必须总是返回一个值 函数应该依据接收到的参数而不是外部环境运行 对于一个给定的x,只会输出唯一的一个y  var percentValue = 5; var calculateTex = (value) =&amp;gt; {     return value/100 * (100 + percentValue )） }上面的计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-03T03:54:26.573Z">
+<meta property="og:updated_time" content="2020-07-30T01:51:39.791Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="http">
-<meta name="twitter:description" content="http所谓的“超文本传输协议”其实并不怎么管“传输”的事情。 http协议的核心部分是它传输的报文内容。 http是一个纯文本的协议，所以头数据都是ASCII码的文本，可以很容易地用肉眼 阅读，不用借助程序解析也能看懂。 起始行(start line) + 头部字段(header) = 请求头 消息正文又称为实体但是与header对应，很多时候就直接称为body http协议规定报文必须有hea">
+<meta name="twitter:title" content="javascript函数式编程">
+<meta name="twitter:description" content="什么是函数式编程？数学中的函数f(x) = y 函数必须总是接受一个参数 函数必须总是返回一个值 函数应该依据接收到的参数而不是外部环境运行 对于一个给定的x,只会输出唯一的一个y  var percentValue = 5; var calculateTex = (value) =&amp;gt; {     return value/100 * (100 + percentValue )） }上面的计">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/2020/07/01/http/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/07/30/js函数式编程？/">
 
 
 
 
 
-  <title>http | 秋夜已凉 02</title>
+  <title>javascript函数式编程 | 秋夜已凉 02</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/01/http/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/js函数式编程？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">http</h1>
+          <h1 class="post-title" itemprop="name headline">javascript函数式编程</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T15:03:21+08:00">
-                2020-07-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T09:51:23+08:00">
+                2020-07-30
               </time>
             
 
@@ -299,47 +299,32 @@
       
 
       
-        <p>http所谓的“超文本传输协议”其实并不怎么管“传输”的事情。</p>
-<p>http协议的核心部分是它传输的报文内容。</p>
-<p>http是一个纯文本的协议，所以头数据都是ASCII码的文本，可以很容易地用肉眼</p>
-<p>阅读，不用借助程序解析也能看懂。</p>
-<p>起始行(start line) + 头部字段(header) = <strong><em>请求头</em></strong></p>
-<p>消息正文又称为<strong><em>实体</em></strong>但是与header对应，很多时候就直接称为<strong><em>body</em></strong></p>
-<p>http协议规定报文必须有header并且header之后必须要有一个空行，但是可以没有body</p>
-<p>在很多时候，特别是浏览器发送get请求的时候都是这样，http报文经常是只有header而没有body,相当于只发了一个超级“大头”过来，可以想象为：每时每刻网络上都有数不清的“大头儿子”在跑来跑去。不过这个大头也不能太大，虽然http协议对header的大小没有做限制，但是各个web服务器都不会允许过大的请求头，因为头部太大可能会占用大量的服务器资源，影响运行效率。</p>
-<p>请求行简要描述了客户端想要如何操作服务器端的资源。</p>
-<p>由三部分构成：</p>
-<ul>
-<li>请求方法</li>
-<li>请求目标</li>
-<li>版本号</li>
+        <h3 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h3><h5 id="数学中的函数"><a href="#数学中的函数" class="headerlink" title="数学中的函数"></a>数学中的函数</h5><pre><code>f(x) = y</code></pre><ul>
+<li>函数必须总是接受一个参数</li>
+<li>函数必须总是返回一个值</li>
+<li>函数应该依据接收到的参数而不是外部环境运行</li>
+<li>对于一个给定的x,只会输出唯一的一个y</li>
 </ul>
-<p>这三个部分通常使用空格来分隔。</p>
-<p>例如：GET / HTTP/1.1</p>
-<ul>
-<li>GET是请求方法</li>
-<li>/是请求目标</li>
-<li>HTTP/1.1是版本号</li>
+<pre><code>var percentValue = 5;
+var calculateTex = (value) =&gt; {
+    return value/100 * (100 + percentValue )）
+}</code></pre><p>上面的计税函数不是一个纯函数在于它依赖了全局变量percentValue ，修复方法很简单，只需要移动全局变量percentValue ，把它作为函数的参数改写如下：</p>
+<pre><code>var calculateTex = (value, percentValue ) =&gt; {
+return value/100 * (100 + percentValue )
+}</code></pre><p>现在calculateTex 可以被称为一个真正的纯函数了。<br>将函数对全局变量的依赖移到函数的参数中是最常见的一种“纯函数化”的方式，移除函数对全局变量的访问会使得函数的测试更加容易。</p>
+<h3 id="引用透明性-（Referential-Transparency）"><a href="#引用透明性-（Referential-Transparency）" class="headerlink" title="引用透明性 （Referential Transparency）"></a>引用透明性 （Referential Transparency）</h3><p>函数对于相同的输入都将返回相同的值，这一属性被称为引用透明性。依据函数的这一属性可以直接用函数的结果替换掉函数的调用，这个过程被称为替换模型，这些特性使得并发代码和缓存称为可能。多线程和同步的问题在于对全局数据的依赖上，而遵循引用透明性的函数只依赖参数的输入而不依赖全局数据，所以线程可以自由的运行且没有锁的机制。<br>引用透明性是一种<a href="https://en.wikipedia.org/wiki/Analytical_philosophy" target="_blank" rel="noopener">分析哲学</a></p>
+<h3 id="函数式编程与命令式编程的对比"><a href="#函数式编程与命令式编程的对比" class="headerlink" title="函数式编程与命令式编程的对比"></a>函数式编程与命令式编程的对比</h3><h5 id="命令式编程遍历数组"><a href="#命令式编程遍历数组" class="headerlink" title="命令式编程遍历数组"></a>命令式编程遍历数组</h5><pre><code>let array = [1,2,3]
+for (let i = 0; i&lt; array.length; i++) {
+console.log(array[i])
+}</code></pre><h5 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h5><pre><code>let array = [1,2,3]
+array.forEach(item =&gt; console.log(item))</code></pre><p>在函数式编程中我们移除了“如何做”的部分将他抽象到一个函数中（高阶函数），如此可以让开发者只需要关心手头的问题</p>
+<h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><ul>
+<li>纯函数不应该依赖任何外部变量，同时也不应该改变任何外部变量。</li>
+<li>纯函数应该像Math.max(3,4,5,6)一样，不需要看max的内部实现就能得到结果。</li>
+<li>纯函数允许我们并发的执行代码，因为纯函数不会改变它的环境，意味着我们不需要关心同步的问题。</li>
+<li>纯函数使缓存函数的输出避免下次重新计算成为可能</li>
+<li>纯函数应该被设计成只做一件事（单一职责）就像UNIX哲学那样，我们可以通过组合或者管道来完成复杂的任务</li>
 </ul>
-<p>意思就是： “服务器你好，我想获取网站根目录下的默认文件，我用的协议版本号是1.1请不要用1.0或者2.0回复我。</p>
-<p>请求行或状态行再加上头部字段集合就构成了http报文里完整的请求头或响应头。</p>
-<p>http头字段非常灵活，不仅可以使用标准里的host、connection等已经定义的头，也可以任意添加自定义头，这就给http协议带来了无限的扩展可能。</p>
-<p>注意：</p>
-<ul>
-<li>字段名不区分大小写，但是首字母大写的可读性更好</li>
-<li>字段里不允许出现空格、下划线_,但是可以使用连字符</li>
-</ul>
-<p>常用头字段</p>
-<ul>
-<li>通用字段</li>
-<li>请求字段</li>
-<li>响应字段</li>
-<li>实体字段： 实际上可以归为通用字段，但是专门用来描述body的额外信息</li>
-</ul>
-<p>对http报文的解析和处理实际上就是对头字段的处理，理解了头字段也就理解了http报文</p>
-<h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>属于请求字段，只能出现在请求头里，同时也是唯一一个http1.1规范里要求必须出现的字段，如果请求头部字段里没有这个host，那这就是一个错误的报文。host字段用来告诉服务器这个请求应该由哪个主机来处理，当一台计算机上托管了多个虚拟主机的时候，服务器端就需要用host字段来选择，有点像一个简单的“路由重定向”。</p>
-<p>1:如果拼 HTTP 报文的时候，在头字段后多加了一个 CRLF，导致出现了一个空行，会发生什么？<br>在header 下面第一个空行以后都会被当作body 体</p>
-<p>2:讲头字段时说“:”后的空格可以有多个，那为什么绝大多数情况下都只使用一个空格呢？<br>头部多一个空格就会多一个传输的字节，去掉无用的信息，保证传输的头部字节数尽量小</p>
 
       
     </div>
@@ -364,8 +349,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/20/px2rem或postcss-px2rem/" rel="next" title="移动端适配">
-                <i class="fa fa-chevron-left"></i> 移动端适配
+              <a href="/2020/07/03/Array/" rel="next" title="数组Array">
+                <i class="fa fa-chevron-left"></i> 数组Array
               </a>
             
           </div>
@@ -373,10 +358,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/01/DNS/" rel="prev" title="DNS">
-                DNS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -490,7 +471,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Host"><span class="nav-number">1.</span> <span class="nav-text">Host</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是函数式编程？"><span class="nav-number">1.</span> <span class="nav-text">什么是函数式编程？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数学中的函数"><span class="nav-number">1.0.1.</span> <span class="nav-text">数学中的函数</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#引用透明性-（Referential-Transparency）"><span class="nav-number">2.</span> <span class="nav-text">引用透明性 （Referential Transparency）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式编程与命令式编程的对比"><span class="nav-number">3.</span> <span class="nav-text">函数式编程与命令式编程的对比</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令式编程遍历数组"><span class="nav-number">3.0.1.</span> <span class="nav-text">命令式编程遍历数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数式编程"><span class="nav-number">3.0.2.</span> <span class="nav-text">函数式编程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#纯函数"><span class="nav-number">4.</span> <span class="nav-text">纯函数</span></a></li></div>
             
 
           </div>
