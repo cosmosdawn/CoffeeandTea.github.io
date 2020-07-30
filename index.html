@@ -229,6 +229,295 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/使用css变量的好处/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/30/使用css变量的好处/" itemprop="url">css变量稿一键换肤</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T15:22:43+08:00">
+                2020-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;].forEach(v =&gt; {
+const btn = document.getElementById(`${v}-theme-btn`);
+    btn.addEventListener(&quot;click&quot;, () =&gt; document.body.style.setProperty(&quot;--bg-color&quot;, v));
+});</code></pre><h4 id="使用css变量的好处"><a href="#使用css变量的好处" class="headerlink" title="使用css变量的好处"></a>使用css变量的好处</h4><ul>
+<li>减少样式代码的重复性</li>
+<li>增加样式代码的扩展性</li>
+<li>提高样式代码的灵活性</li>
+<li>增多一种css与js的通讯方式</li>
+<li>不用深层次遍历dom改变某个样式</li>
+</ul>
+<p>未完待续…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/关于缓存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/30/关于缓存/" itemprop="url">缓存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T14:21:33+08:00">
+                2020-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>浏览器每次发起请求之前都会先在浏览器缓存中查找该请求的结果以及缓存标识</li>
+<li>浏览器每次拿到返回的请求结果都会将该结果缓存和缓存表识存入浏览器缓存中</li>
+</ul>
+<h3 id="强制缓存规则的三种场景"><a href="#强制缓存规则的三种场景" class="headerlink" title="强制缓存规则的三种场景"></a>强制缓存规则的三种场景</h3><ul>
+<li>没有找到请求的缓存结果以及缓存标识（直接发起http请求）</li>
+<li>找到了请求的缓存结果以及缓存标识，但是显示已经失效（携带资源的缓存标识发起http请求—-协商缓存的过程）</li>
+<li>找到了请求的缓存结果和缓存标识，并且未失效，直接使用缓存中的结果</li>
+</ul>
+<h3 id="强制缓存的规则字段"><a href="#强制缓存的规则字段" class="headerlink" title="强制缓存的规则字段"></a>强制缓存的规则字段</h3><p>按优先级 </p>
+<pre><code>Cache-Control &gt; Expires</code></pre><h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>Expires是HTTP/1.0中控制网页缓存的字段，值为服务器返回的请求结果缓存的到期时间，即再次发起请求时，客户端的时间如果小于Expires的值，就可以直接使用缓存。</p>
+<h5 id="缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）"><a href="#缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）" class="headerlink" title="缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）"></a>缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）</h5><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>到了http/1.1，为了修复Expires的不可靠性，引入了Cache-Control的规则，他的值主要有：</p>
+<ul>
+<li>public: 允许中间代理服务器和客户端缓存</li>
+<li>private: 只允许客户端缓存不允许中间代理服务缓存（默认值）</li>
+<li>no-store: 所有内容不允许缓存（强制缓存和协商缓存都不用）</li>
+<li>no-catch: 客户端缓存内容，但是是否使用缓存需要经过协商缓存来验证</li>
+<li>max-age=xxx: 缓存会在xxx秒之后失效</li>
+</ul>
+<h3 id="memory-cache和disk-cache"><a href="#memory-cache和disk-cache" class="headerlink" title="memory cache和disk cache"></a>memory cache和disk cache</h3><p>刷新页面的时候我们会看到有些资源是from memory cache 有些则是from disk cache,这两个分别代表的是内存缓存和硬盘缓存。</p>
+<h5 id="memory-cache"><a href="#memory-cache" class="headerlink" title="memory cache"></a>memory cache</h5><ul>
+<li>快速读取：内存缓存会将编译解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取</li>
+<li>时效性：一旦该进程关闭，则该进程的内存则会清空。</li>
+</ul>
+<h5 id="disk-cache"><a href="#disk-cache" class="headerlink" title="disk cache"></a>disk cache</h5><ul>
+<li>硬盘缓存(from disk cache)：硬盘缓存则是直接将缓存写入硬盘文件中，读取缓存需要对该缓存存放的硬盘文件进行I/O操作，然后重新解析该缓存内容，读取复杂，速度比内存缓存慢</li>
+</ul>
+<p>在浏览器中浏览器会在js和图片等文件解析执行后直接存入内存缓存中，而css文件则会存入硬盘文件中，所以每次刷新页面有些是从内存缓存中读取，而有些则是从硬盘中读取。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存就是强缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否可以使用缓存的过程。主要有两种情况</p>
+<ul>
+<li>协商缓存生效，返回304</li>
+<li>协商缓存失效，返回一个新的请求结果以及200状态码</li>
+</ul>
+<h4 id="控制协商缓存的头字段"><a href="#控制协商缓存的头字段" class="headerlink" title="控制协商缓存的头字段"></a>控制协商缓存的头字段</h4><p><strong><em>Last-Modified/If-Modified-Since 和 Etag/If-None-Match</em></strong></p>
+<ul>
+<li>If-Modified-Since则是客户端再次发起该请求时，携带上次请求返回的Last-Modified值，通过此字段值告诉服务器该资源上次请求返回的最后被修改时间。服务器收到该请求，发现请求头含有If-Modified-Since字段，则会根据If-Modified-Since的字段值与该资源在服务器的最后被修改时间做对比，若服务器的资源最后被修改时间大于If-Modified-Since的字段值，则重新返回资源，状态码为200；否则则返回304，代表资源无更新，可继续使用缓存文件.</li>
+<li>Etag是服务器响应请求时，返回当前资源文件的一个唯一标识(由服务器生成)If-None-Match是客户端再次发起该请求时，携带上次请求返回的唯一标识Etag值，通过此字段值告诉服务器该资源上次请求返回的唯一标识值。服务器收到该请求后，发现该请求头中含有If-None-Match，则会根据If-None-Match的字段值与该资源在服务器的Etag值做对比，一致则返回304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码为200.</li>
+</ul>
+<p>Etag / If-None-Match优先级高于Last-Modified / If-Modified-Since，同时存在则只有Etag / If-None-Match生效。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，重新获取请求结果，再存入浏览器缓存中；生效则返回304，继续使用缓存。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/js函数式编程？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1328,259 +1617,6 @@ baz();</code></pre>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/02/10/字符集/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/10/字符集/" itemprop="url">深入浅出计算机组成原理-二进制编码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T17:03:57+08:00">
-                2020-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><p>字符集表示的可以是字符的一个集合，比如“中文”就是一个字符集，不过这样描述一个字集并不准确，想要更精确一点，我们可以说：“第一版《新华字典》里面出现的所有汉字”这是一个字符集。这样我们才能明确知道，一个字符在不在这个字符集里面。比如，我们日常说的Unicode，其实就是一个字符集，包含了150种语言的14万个不同的字符。</p>
-<h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>字符编码是对字符集里的这些字符，怎么一一用二进制表示出来的一个字典。我们上面说的Unicode，就可以用UTF-8、UTF-16、UTF-32来进行编码，存储成二进制。所以，有了字符集我们甚至可以自己发明自己的一种字符编码。</p>
-<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>同样的文本，采用不同的编码存储下来，如果另一个程序，用一种不同的编码方式来进行解码和展示，就会出现乱码。</p>
-<h3 id="字节流和字符流"><a href="#字节流和字符流" class="headerlink" title="字节流和字符流"></a>字节流和字符流</h3><p>在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。程序中的输入输出都是以流的形式保存的，流中保存的实际上全部是字节文件。</p>
-<p>所有文件的储存都是字节(byte)的存储，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，在储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取以形成字节序列。</p>
-<p>字节流可以用于任何类型的对象，包括二进制对象，而字符流只能处理字符或者字符串；字节流提供了处理任何类型的io操作的功能，但是它不能直接处理Unicode字符，而字符流就可以。</p>
-<p>字节流在操作的时候本身是不会用到缓冲区（内存）的，是与文本文件本身直接操作的，而字符流在操作的时候是用到缓冲区的。在所有的硬盘上保存文件或进行传输的时候都是以字节的方法进行的，包括图片也是按照字节完成，而字符是只有在内存中才会形成的，所以使用字节的操作是最多的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/02/04/光猫/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/04/光猫/" itemprop="url">网络系统</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-04T19:56:38+08:00">
-                2020-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h3><p>光纤猫名字的由来，以前ADSL上网要用到调制解调器，调制解调器的英文是Modem，人们根据谐音Modem，亲昵的称之为“猫”，而后来的光网络单元的形状，功能和调制解调器差不多，人们就沿用了猫的称呼，将其称之为光纤猫。</p>
-<p>互联网世界更像是由数不清的大小岛屿组成的“千岛之国”。</p>
-<p>互联网的正式名称是 Internet，里面存储着无穷无尽的信息资源，我们通常所说的“上网”实际上访问的只是互联网的一个子集“万维网”（World Wide Web），它基于 HTTP 协议，传输 HTML 等超文本资源，能力也就被限制在 HTTP 协议之内。</p>
-<h3 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h3><p>ip协议曾经有v1 v2 v3等早期协议版本，但是因为不够完善没有对外发布，v5仅仅用于实验室内部研究，也从未公开，所以我们知道的只有v4和v6.</p>
-<p>IPv4: 使用四组由点 “.”分隔的数字，例如192.168.0.1，总共约2^32，大约42亿个可以分配的地址。</p>
-<p>IPv6: 使用八组由冒号 “:” 分隔的数字作为地址，容量扩大了很多有2^128个。</p>
-<h3 id="四层负载均衡"><a href="#四层负载均衡" class="headerlink" title="四层负载均衡"></a>四层负载均衡</h3><p>工作在传输层之上，基于TCP/IP协议的特性，例如IP地址、端口号等实现对后端服务器的负载均衡。</p>
-<h3 id="七层负载均衡"><a href="#七层负载均衡" class="headerlink" title="七层负载均衡"></a>七层负载均衡</h3><p>工作在应用层上，看到的是http协议，解析http报文里的uri、主机名、资源类型等数据，再用适当的策略转发给后端服务器。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1631,7 +1667,7 @@ baz();</code></pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

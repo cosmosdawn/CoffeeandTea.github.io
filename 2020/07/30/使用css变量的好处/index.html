@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="JSONP文章链接： https://juejin.im/post/5a274ae9f265da430a5071eb 同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过&amp;lt;link&amp;gt;标签，&amp;lt;img&amp;gt;标签以及&amp;lt;script&amp;gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能">
+<meta name="description" content="[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;green&amp;quot;].forEach(v =&amp;gt; { const btn = document.getElementById(`${v}-theme-btn`);     btn.addEventListener(&amp;quot;click&amp;quot;, () =&amp;gt; document.body.style">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于跨域">
-<meta property="og:url" content="https://coffeeandtea.github.io/2019/08/03/跨域/index.html">
+<meta property="og:title" content="css变量稿一键换肤">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/07/30/使用css变量的好处/index.html">
 <meta property="og:site_name" content="秋夜已凉 02">
-<meta property="og:description" content="JSONP文章链接： https://juejin.im/post/5a274ae9f265da430a5071eb 同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过&amp;lt;link&amp;gt;标签，&amp;lt;img&amp;gt;标签以及&amp;lt;script&amp;gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能">
+<meta property="og:description" content="[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;green&amp;quot;].forEach(v =&amp;gt; { const btn = document.getElementById(`${v}-theme-btn`);     btn.addEventListener(&amp;quot;click&amp;quot;, () =&amp;gt; document.body.style">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-16T08:17:57.000Z">
+<meta property="og:updated_time" content="2020-07-30T07:22:43.909Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于跨域">
-<meta name="twitter:description" content="JSONP文章链接： https://juejin.im/post/5a274ae9f265da430a5071eb 同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身 正因如此，我们可以通过&amp;lt;link&amp;gt;标签，&amp;lt;img&amp;gt;标签以及&amp;lt;script&amp;gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能">
+<meta name="twitter:title" content="css变量稿一键换肤">
+<meta name="twitter:description" content="[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;green&amp;quot;].forEach(v =&amp;gt; { const btn = document.getElementById(`${v}-theme-btn`);     btn.addEventListener(&amp;quot;click&amp;quot;, () =&amp;gt; document.body.style">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/2019/08/03/跨域/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/07/30/使用css变量的好处/">
 
 
 
 
 
-  <title>关于跨域 | 秋夜已凉 02</title>
+  <title>css变量稿一键换肤 | 秋夜已凉 02</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/03/跨域/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/使用css变量的好处/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于跨域</h1>
+          <h1 class="post-title" itemprop="name headline">css变量稿一键换肤</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T20:04:48+08:00">
-                2019-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T15:22:43+08:00">
+                2020-07-30
               </time>
             
 
@@ -299,32 +299,17 @@
       
 
       
-        <h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>文章链接： <a href="https://juejin.im/post/5a274ae9f265da430a5071eb" target="_blank" rel="noopener">https://juejin.im/post/5a274ae9f265da430a5071eb</a></p>
-<p><em>同源策略只是阻止了通过ajax技术跨域获取资源，而并没有禁止跨域获取资源本身这件事本身</em></p>
-<pre><code>正因如此，我们可以通过&lt;link&gt;标签，&lt;img&gt;标签以及&lt;script&gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容，所以与其是是通过src属性获取这些资源，不如说是通过src引用了这些资源</code></pre><h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>官方推荐的跨域资源共享方案</p>
-<p>CORS是W3C颁布的一个浏览器技术规范，其全称为“跨域资源共享”（Cross-origin resource sharing），它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。它的意义在于，它是由W3C官方推广的允许通过AJAX技术跨域获取资源的规范，因此相较于JSONP而言，功能更加强大，使用起来也没有了hack的味道。</p>
-<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request），浏览器对这两种请求的处理，是不一样的。</p>
-<p>只要同时满足以下两大条件，就属于简单请求。</p>
-<ul>
-<li>请求方法是以下三种之一：head、get、post</li>
-<li>http的头信息不超出以下几种子段：Accept、 Accept-language、 Content-Language、 Last-Event-ID、Content-Type只限于三个值： application/x-www-form-urlencoded、multipart/form-data、text/plain。</li>
+        <pre><code>[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;].forEach(v =&gt; {
+const btn = document.getElementById(`${v}-theme-btn`);
+    btn.addEventListener(&quot;click&quot;, () =&gt; document.body.style.setProperty(&quot;--bg-color&quot;, v));
+});</code></pre><h4 id="使用css变量的好处"><a href="#使用css变量的好处" class="headerlink" title="使用css变量的好处"></a>使用css变量的好处</h4><ul>
+<li>减少样式代码的重复性</li>
+<li>增加样式代码的扩展性</li>
+<li>提高样式代码的灵活性</li>
+<li>增多一种css与js的通讯方式</li>
+<li>不用深层次遍历dom改变某个样式</li>
 </ul>
-<p>凡是不满足上面两个条件，就属于非简单请求。</p>
-<h4 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h4><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。</p>
-<pre><code>GET /cors HTTP/1.1
-Origin: http://api.bob.com
-Host: api.alice.com
-Accept-Language: en-US
-Connection: keep-alive
-User-Agent: Mozilla/5.0...</code></pre><p>上面的头信息中，Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。<br>如果Origin指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应。浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。<br>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。</p>
-<pre><code>Access-Control-Allow-Origin: http://api.bob.com
-Access-Control-Allow-Credentials: true
-Access-Control-Expose-Headers: FooBar
-Content-Type: text/html; charset=utf-8</code></pre><ul>
-<li>Access-Control-Allow-Origin： 该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</li>
-</ul>
-<h4 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h4><h5 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h5><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。<br>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）。</p>
-<p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+<p>未完待续…</p>
 
       
     </div>
@@ -349,8 +334,8 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/03/关于同源策略/" rel="next" title="同源策略再理解">
-                <i class="fa fa-chevron-left"></i> 同源策略再理解
+              <a href="/2020/07/30/关于缓存/" rel="next" title="缓存">
+                <i class="fa fa-chevron-left"></i> 缓存
               </a>
             
           </div>
@@ -358,10 +343,6 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/11/tcp:ip/" rel="prev" title="tcp/ip工作">
-                tcp/ip工作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,7 +456,7 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-number">1.</span> <span class="nav-text">JSONP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS"><span class="nav-number">2.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单请求"><span class="nav-number">2.1.</span> <span class="nav-text">简单请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非简单请求"><span class="nav-number">2.2.</span> <span class="nav-text">非简单请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#预检请求"><span class="nav-number">2.2.1.</span> <span class="nav-text">预检请求</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用css变量的好处"><span class="nav-number">1.</span> <span class="nav-text">使用css变量的好处</span></a></li></ol></div>
             
 
           </div>

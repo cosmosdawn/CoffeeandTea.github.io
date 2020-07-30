@@ -229,6 +229,292 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/28/前端知识大杂烩/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/28/前端知识大杂烩/" itemprop="url">前端知识大杂烩</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T21:26:52+08:00">
+                2017-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前端知识大杂烩"><a href="#前端知识大杂烩" class="headerlink" title="前端知识大杂烩"></a>前端知识大杂烩</h1><h3 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h3><p>1 判断是否来自微信浏览器</p>
+<pre><code>function isFromWeiXin() {
+    var ua = navigator.userAgent.toLowerCase()
+    if(ua.match(/MicroMessager/i) == &apos;micromessager&apos;){
+    return true
+    }
+    return false
+}</code></pre><p>2 判断手机的类型</p>
+<pre><code>var user = &apos;&apos;;
+if(/android/i.test(navigator.userAgent)){
+    user = &apos;1&apos;
+}
+if(/ipad|iphone|mac/i.test(navigator.userAgent)){
+    user = &apos;0&apos;
+}</code></pre><h3 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h3><p>搜索引擎的工作原理是什么？关键字网页内查询吗？为什么可以达到如此之快的速度？<br>答：  原理通俗来讲就是搜索引擎先在网上找来所有信息，这个过程将永远不停息的进行下去，然后建立一个数据库，然后对这些信息创建一个索引，当用户来搜索的时候，直接用自己归纳编排好的索引，找自己数据库里的信息反馈给用户。</p>
+<h3 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h3><p>互联网上的信息存储在无数个服务器上，任何搜索引擎想要回答用户的搜索，首先要把网页存储在自己本地的服务器上，这靠的就是网络爬虫。它不停的向各种网络发起请求，将所得到的网页存储起来。如何高效的爬取数据是一个很大的挑战，比如需要有成千上万个爬虫程序同时爬取数据，高效的将数据存储起来以便之后分析等。出于安全等因素考虑，很多网络服务器都有反恶意爬虫的功能。尽管他们所采用的策略各不相同，但是是共同点是他们的目标就是尽量只响应真人用户的请求，但是搜索引擎爬虫通常不需要担心这一点，因为大部分网站都希望提高自己的搜索排名，欢迎爬虫的到访。通常谷歌等搜索引擎和网站之间有约定，比如在网页上加一个特殊的标签，告诉爬虫这个网页是什么类型的，包含什么信息等，以便帮助爬虫更好的获取该网页的内容。</p>
+<h3 id="分数、权重"><a href="#分数、权重" class="headerlink" title="分数、权重"></a>分数、权重</h3><p>。。。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>搜索引擎是各种高深的算法和复杂的系统实现的完美结合，每一部分都在系统里起到关键作用。</p>
+<h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><p>确认URL以后，浏览器首先要查询域名，对应服务器的IP地址，一般需要20-120毫秒时间，浏览器缓存–&gt;本地host查询–&gt;dns服务器。dns查询完成之前，浏览器无法识别服务器IP，因此不下载任何数据。基于性能考虑，ISP运营商、局域网路由、操作系统、客户端（浏览器）都会有相应的dns缓存机制。</p>
+<ul>
+<li>IE 缓存 30 分钟，可以通过注册表中 DnsCacheTimeout 项设置；</li>
+<li>Firefox 混存 1 分钟，通过 network.dnsCacheExpiration 配置；</li>
+<li>Chrome - &gt; 设置 - &gt; 选项 - &gt; 高级选项 - &gt; 去勾 “用预提取 DNS 提高网页载入速度”</li>
+</ul>
+<h3 id="Favicon-ico"><a href="#Favicon-ico" class="headerlink" title="Favicon.ico"></a>Favicon.ico</h3><p>中文名称是网站头像。可以显示在网站的浏览器标签、地址栏左边和收藏夹，是展示网站个性的缩略logo标志，也可以说是网站头像，如果要让网站看起来更专业、更美、更有个性。Favicon.ico是必不可少的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/25/javascript语言精粹/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/25/javascript语言精粹/" itemprop="url">javascript语言精粹</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T20:24:06+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="javascript语言精粹"><a href="#javascript语言精粹" class="headerlink" title="javascript语言精粹"></a>javascript语言精粹</h3><h4 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><p>在web浏览器中每个 </p>
+<pre><code>&lt;script&gt; </code></pre><p>标签提供一个被编译且立即执行的编译单元，JavaScript把它们一起抛到一个公共的全局名字空间中。<br>switch、while、for和do语句允许有一个可选的前置标签label。它配合break语句来使用。<br>for-in循环用于枚举一个对象的所有属性名。在每次循环中object的下一个属性名字符串被赋值给variale。通常需要使用object.hasOwnProperty(variable)这个方法来确定一个属性是否是该对象的成员，还是来自于原型链。</p>
+<pre><code>for(myvar in obj){
+    if(obj.hasOwnProperty(myvar)){
+        //do something
+    }
+}</code></pre><p>do语句就像while语句，唯一的区别是它在代码执行之后而不是之前检测表达式的值，这就意味着代码块至少执行一次。<br>try语句执行一个代码块，并捕获该代码块抛出的任何异常。catch从句定义了一个新的变量variable来接受抛出的异常对象。<br>throw语句抛出一个异常，如果throw语句在一个try代码块中，那么控制流就会跳转到catch从句中。如果throw语句在函数中，则该函数调用被放弃，控制流跳转到调用该函数的try语句的catch从句中。throw语句中的表达式通常是一个对象字面量，包含一个name属性和一个message属性。异常捕获器可以使用这些信息去决定该做什么。return语句会导致从函数中提前返回，它也可以指定要被返回的值，如果没有指定返回的表达式，那么返回值就是undefined。JavaScript不允许在return关键字和表达式之间换行。</p>
+<h4 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h4><p>对象字面量是一种可以方便的按照指定规格创建新对象的表示法，属性名可以是标示符或者字符串，这些名字被当做字面量而不是变量名来对待，所以对象的属性名在编译时才能知道。属性的值就是表达式。</p>
+<h3 id="第三章-对象"><a href="#第三章-对象" class="headerlink" title="第三章 对象"></a>第三章 对象</h3><p>JavaScript的简单数据类型包括数字 字符串 布尔值 null值和undefined值。其他所有值都是对象。数字字符串和布尔值‘貌似’对象，因为它们有方法，但是它们是不可变的。JavaScript中的对象是可变的键控集合。在JavaScript中数组是对象，函数是对象正则表达式是对象。对象是属性的容器，其中每个属性都拥有名字和值，属性的名字可以是包括空字符串在内的任意字符串。属性值可以是除了undefined值之外的任何值。<br>JavaScript包含一种原型链的特性，允许对象继承另一个对象的属性。正确的使用它能减少对象初始化时消耗的时间和内存。</p>
+<h4 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h4><p>要检索对象里包含的值，可以采用在[]后缀中括住一个字符串表达式的方式。如果字符串表达式是一个字符串字面量，而且是一个合法的JavaScript标识符不是保留字，那么也可以使用.表示法来代替，优先考虑使用.</p>
+<p>||  运算符可以用来填充默认值；</p>
+<pre><code>var middle = stooge[&apos;middle-name&apos;] || &apos;none&apos;,
+var status = flight.status || &apos;unknow&apos;</code></pre><p>尝试从undefined的成员属性中取值将会导致TypeError异常。这时可以使用&amp;&amp;运算符来避免错误。</p>
+<pre><code>flight.e     // undefined
+flight.e.f   // throw &quot;TypeError&quot;
+flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>对象里的值可以通过赋值语句来更新，如果属性名已经存在在对象里了，哪儿这个属性的值就会被替换，如果对象之前没有那个属性名，那么该属性就会被扩充到对象中。</p>
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>每个对象都链接到一个原型对象，并且可以从中继承属性。所有通过对象字面量创建的对象都连接到Object.prototype，他是一个JavaScript中的标配对象。原型链在更新时是不起作用<code>的</code>，当我们对某个对象做出改变时，不会触及该对象的原型。原型链关系是一中动态的关系，如果我们添加一个新的属性到原型中，那么这个属性会立即对所有基于该原型的对象可见。</p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>delete运算符可以用来删除对象的属性，如果对象包含该属性，那么该属性就会被移除。它不会触及原型链中的任何对象。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数对象链接到Function.proptotype。（Function.proptotype再链接到Object.proptotype）每个函数在创建时候会附加两个隐藏属性：1函数的上下文和实现函数行为的代码。每个函数在创建时也随配有一个prototype属性。它的值是一个拥有constructor属性且值为该函数的对象，这个和隐藏链接到Function.prototype完全不同。<br>函数字面量可以出现在任何允许表达式出现的地方。函数也可以被定义在其他函数中，一个内部函数除了可以访问自己的参数和变量，同时它也可以自由访问把它嵌套在其中的父函数的参数和变量。通过函数字面量创建的函数对象包含一个链接到外部上下文的链接。这被称为闭包。他是JavaScript强大表现力的来源。<br>JavaScript创建一个函数的时候，会给该对象设置一个‘调用’属性，当JavaScript调用一个函数时，可以理解为调用此函数的调用属性。</p>
+<h3 id="函数字面量"><a href="#函数字面量" class="headerlink" title="函数字面量"></a>函数字面量</h3><p>//创建一个名为add的变量，并用来把两个数字相加的函数赋值给它。</p>
+<pre><code>var add = function(a,b){
+    return a + b
+}</code></pre><p>函数字面量包括四个部分：第一个部分是保留字function第二个部分是函数名（可以被省略），函数可以通过函数名来递归的调用自己。第三部分是包围在圆括号中的一组参数。多个参数用逗号隔开。第四部分是包围在花括号中的一组语句。这些语句是函数的主体，在函数被调用的时候执行。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/25/ios界面元素四栏（状态栏、导航栏、工具栏、tab栏）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1467,273 +1753,6 @@ se.src = &apos;http://anydomain.com/a.js&apos;</code></pre><p>将下载js和解�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/06/freemarker标签/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/06/freemarker标签/" itemprop="url">freemarker</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-06T14:13:57+08:00">
-                2017-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##freemarker<br>    ${…}freemarker将会输出真实的值来替换大括号内的表达式；这样的表达式被称为插值</p>
-<h3 id="freemarker标签"><a href="#freemarker标签" class="headerlink" title="freemarker标签"></a>freemarker标签</h3><p>标签以#开头。用户自定义的标签使用@来代替#<br>注释，跟HTML的注释方式相同，但是不会出现在输出中<br>其他任何不是ftl标签，插值或者注释的内容将会被视为静态文本，这些东西不会被freemarker解析，会被按照原样输出出来。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/06/Canvas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/06/Canvas/" itemprop="url">Canvas</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-06T09:37:39+08:00">
-                2017-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><h3 id="栅格"><a href="#栅格" class="headerlink" title="栅格"></a>栅格</h3><p>在开始画图之前，需要了解下画布栅格和坐标空间。canvas元素默认被网格所覆盖。通常来说网格中的一个单元相当于canvas元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。</p>
-<h3 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h3><p>不同于SVG，HTML中的元素canvas只支持一种原生的图形绘制：矩形。<br>三种方式绘制矩形：        </p>
-<pre><code>fillRect(x, y, width, height)  //绘制一个填充的矩形
-strokeRect(x, y, width, height)  //绘制一个矩形的边框
-clearRect(x, y, width, height)  //清除指定矩形区域，让清除部分完全透明。</code></pre><p>上述方法中，x y分别指定了在canvas画布上所绘制矩形的左上角的坐标。<br>width和height设置了矩形的尺寸。<br>以上的三个函数绘制之后会马上显现在canvas上，即时生效。    </p>
-<h3 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h3><ul>
-<li>首先需要创建路径起始点</li>
-<li>然后使用画图命令画出路径</li>
-<li>闭合路径</li>
-<li>一旦路径生成就可以通过描边或者填充路径区域来渲染图形</li>
-</ul>
-<h2 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h2><p>为了简化代码和提高性能，path2的对象已经可以在较新的浏览器中使用，用来缓存或者记录绘制命令，这样就可以快速的回顾路径。</p>
-<pre><code>Path2D()</code></pre><p>函数，将会返回一个新初始化的Path2D对象（可将一个路径作为变量–创建一个他的副本，或者将一个包含svg path数据的字符串作为变量）</p>
-<pre><code>new Path2D();   //空的Path对象
-new Path2D(path) // 克隆Path对象
-new Path2D(d);     //从svg建立Path对象</code></pre><p>所有的路径方法比如 moveTo, rect, arc 或 quadraticCurveTo等，如我们前面见过的，都可以在Path2D中使用。</p>
-<p>Path2D API 添加了 addPath作为将path结合起来的方法。当你想要从几个元素中来创建对象时，这将会很实用。比如</p>
-<pre><code>Path2D.addPath(path [, transform])</code></pre><p>添加一条路径到当前路径（可能添加了一个变换矩阵）</p>
-<h2 id="使用svg-paths"><a href="#使用svg-paths" class="headerlink" title="使用svg paths"></a>使用svg paths</h2><p>新的path2d api有另一个强大的特点，就是使用svg path data来初始化canvas上的路径。这将使你获取路径时可以以SVG或canvas的方式来重用它们。</p>
-<pre><code>var p = new Path2D(&quot;M10 10 h 80 v 80 h -80 z&quot;)</code></pre><p>上面一段svg路径的意思是： 现将路径移动到点(M10 10),然后再水平移动80个单位(h 80),然后下移80个单位(v 80),接着左移80个单位(h -80),再回到起点处(z)</p>
-<h2 id="色彩Colors"><a href="#色彩Colors" class="headerlink" title="色彩Colors"></a>色彩Colors</h2><h3 id="fillStyle-color-设置图形的填充颜色"><a href="#fillStyle-color-设置图形的填充颜色" class="headerlink" title="fillStyle = color     设置图形的填充颜色"></a>fillStyle = color     设置图形的填充颜色</h3><h3 id="strokeStyle-color-设置图形轮廓的颜色"><a href="#strokeStyle-color-设置图形轮廓的颜色" class="headerlink" title="strokeStyle = color  设置图形轮廓的颜色"></a>strokeStyle = color  设置图形轮廓的颜色</h3><p>color 可以是表示 CSS 颜色值的字符串，渐变对象或者图案对象。我们迟些再回头探讨渐变和图案对象。默认情况下，线条和填充颜色都是黑色（CSS 颜色值 #000000）。</p>
-<p>注意：  一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值。</p>
-<p>您输入的应该是符合 CSS3 颜色值标准 的有效字符串。下面的例子都表示同一种颜色。</p>
-<pre><code>// 这些 fillStyle 的值均为 &apos;橙色&apos;
-ctx.fillStyle = &quot;orange&quot;;
-ctx.fillStyle = &quot;#FFA500&quot;;
-ctx.fillStyle = &quot;rgb(255,165,0)&quot;;
-ctx.fillStyle = &quot;rgba(255,165,0,1)&quot;;</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1784,7 +1803,7 @@ ctx.fillStyle = &quot;rgba(255,165,0,1)&quot;;</code></pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

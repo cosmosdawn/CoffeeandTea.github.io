@@ -229,6 +229,254 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/29/vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/29/vue/" itemprop="url">Vue源码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-29T13:01:59+08:00">
+                2020-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="nextTick"><a href="#nextTick" class="headerlink" title="$nextTick"></a>$nextTick</h3><pre><code>Vue.prototype.$nextTick = function (fn: Function) {
+    return nextTick(fn, this)
+}</code></pre><p>$nextTick里面装的是一个回调函数。</p>
+<p>未完待续…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/29/git底层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/29/git底层/" itemprop="url">git</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-29T11:40:18+08:00">
+                2020-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>### </p>
+<p>Git最初向磁盘中存储对象时所使用的格式被称为是“松散”对象格式。但是git会时不时地将多个这些对象打包📦成一个称为“包对象”的二进制文件，以节省空间和提高效率。</p>
+<p>git gc</p>
+<p>git 打包对象时，会查找命名及大小相近的文件，并只保存文件不同版本之间的差异内容。git时常会自动对仓库进行重新打包以节省空间。</p>
+<h3 id="两种协议"><a href="#两种协议" class="headerlink" title="两种协议"></a>两种协议</h3><p>哑协议和智能协议</p>
+<p>哑协议虽然很简单但是效率很低，并且不能从客户端向服务器端发送数据。智能协议是更常用的传送数据的方法，但是他需要一在服务端运行一个进程，而这也是git的智能之处。它可以读取本地数据，理解客户端有什么和需要什么，并为它生成合适的包文件。总共有两组进程用于传输数据，他们分别负责上传和下载数据。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/27/PPPoe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1368,276 +1616,6 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/21/缓存/" itemprop="url">缓存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:46:29+08:00">
-                2019-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="服务器的缓存控制"><a href="#服务器的缓存控制" class="headerlink" title="服务器的缓存控制"></a>服务器的缓存控制</h3><ul>
-<li>浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源</li>
-<li>服务器响应请求，返回资源，同时标记资源的有效期</li>
-<li>浏览器缓存资源，等待下次重用</li>
-</ul>
-<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。</p>
-<p>注意： max-age是<strong>生存时间</strong>，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是数据离开服务器的时刻，而不是客户端收到报文的时刻，所以如果数据在传输的过程中耗费了大量的时间，到达客户端的时候存活时间就没有30秒了。</p>
-<h3 id="其他几个缓存控制属性"><a href="#其他几个缓存控制属性" class="headerlink" title="其他几个缓存控制属性"></a>其他几个缓存控制属性</h3><ul>
-<li>no_store: 买来的西瓜不允许放冰箱，要么立刻吃掉，要么立刻扔掉</li>
-<li>no_cache: 可以放进冰箱，但吃之前必须向超市询问有没有更新鲜的，有就吃超市里的。</li>
-<li>must-revalidate: 可以放进冰箱，保鲜期内可以吃，过期了就要问超市还让不让吃。</li>
-</ul>
-<h3 id="关于Cache-Control"><a href="#关于Cache-Control" class="headerlink" title="关于Cache-Control"></a>关于Cache-Control</h3><p>不止服务器可以发送”Cache-Control”头,浏览器也可以发送”Cache-Control”头，</p>
-<p>就是说请求-应答的双方都可以用这个字段进行缓存控制，互相协商缓存的使用策略。</p>
-<p>当你点击浏览器的“刷新”按钮的时候，浏览器会在请求头里面加一个<br><em>Cache-Control:max-age=0</em>因为max-age是生存时间，max-age=0的意思就是<br>“我要一个最最新鲜的西瓜”，而本地缓存里的数据至少保存了几秒钟了，所以<br>浏览器就不会使用缓存，而是向服务器发送请求。服务器看到max-age=0也就会用一个<br>最新生成的报文回应浏览器。</p>
-<p>而Ctrl+F5的“强制刷新” 其实是发送了一个Cache-Control:no-cache<br>含义和max-age=0基本一样。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/20/https/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/20/https/" itemprop="url">https? ssl/tls</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-20T01:11:38+08:00">
-                2019-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="什么是安全？怎样才安全？"><a href="#什么是安全？怎样才安全？" class="headerlink" title="什么是安全？怎样才安全？"></a>什么是安全？怎样才安全？</h3><ul>
-<li>机密性</li>
-<li>完整性</li>
-<li>身份认证</li>
-<li>不可否认</li>
-</ul>
-<p>https除了协议名和端口号（443）这两点不同之外在语法、语义上和http完全一样。</p>
-<p>https能够鉴别危险的网站，并且尽最大可能保证你的上网安全，防御黑客对信息的窃听、篡改或者“钓鱼”、伪造。</p>
-<p>https的秘密在于它把层的传输协议由tcp/ip换成了ssl/tls，由Http over tcp/ip变成了http over ssl/tls,让http运行在了安全的ssl/tls协议上，收发报文不再使用Socket API,而是调用专门的安全接口。</p>
-<h3 id="ssl-tls"><a href="#ssl-tls" class="headerlink" title="ssl/tls"></a>ssl/tls</h3><p>ssl—安全套接层，在osi模型中处于第五层，由网景公司于1994年发明，有v2和v3两个版本，而v1版本因为有严重的缺陷从未公开过。</p>
-<p>ssl发展到v3时期已经证明了它自身是一个非常好的安全通信协议，于是互联网工程组IETF在1999年把它改名为tls（传输层安全），正式标准化，版本号重新从1.0算起，所以其实TLS1.0就是SSLv3.1。</p>
-<p>今天的tls已经发行了有三个版本，2006年的1.1、 2008年的1.2、和2018年的1.3,每个新版本都紧跟着密码学的发展和互联网的现状，持续强化安全和性能，已经成为了信息安全领域的权威标准。</p>
-<p>目前应用最为广泛的tls是1.2，而之前的协议都已经被认为是不安全的，各大浏览器即将在2020年左右停止支持。</p>
-<p>tls由记录协议、握手协议、警告协议、变更密码规范协议、扩展协议等几个子协议组成，综合使用了对称加密、非对称加密、身份认证等许多密码学前沿技术。</p>
-<p>浏览器和服务器在使用tls建立连接的时候需要选择一组恰当的加密算法来实现安全通信，这些算法的组合被称为密码套件。</p>
-<h5 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL"></a>OpenSSL</h5><p>是一个著名的开源密码学程序库和工具包，几乎支持所有公开的加密算法和协议，已经成为了事实上的标准，许多应用软件都会使用它来作为底层库来实现tls功能，包括常用的web服务器Apache、Nginx等。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1688,7 +1666,7 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

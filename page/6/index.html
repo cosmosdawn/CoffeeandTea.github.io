@@ -229,6 +229,273 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/06/freemarker标签/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/06/freemarker标签/" itemprop="url">freemarker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-06T14:13:57+08:00">
+                2017-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##freemarker<br>    ${…}freemarker将会输出真实的值来替换大括号内的表达式；这样的表达式被称为插值</p>
+<h3 id="freemarker标签"><a href="#freemarker标签" class="headerlink" title="freemarker标签"></a>freemarker标签</h3><p>标签以#开头。用户自定义的标签使用@来代替#<br>注释，跟HTML的注释方式相同，但是不会出现在输出中<br>其他任何不是ftl标签，插值或者注释的内容将会被视为静态文本，这些东西不会被freemarker解析，会被按照原样输出出来。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/06/Canvas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/06/Canvas/" itemprop="url">Canvas</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-06T09:37:39+08:00">
+                2017-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><h3 id="栅格"><a href="#栅格" class="headerlink" title="栅格"></a>栅格</h3><p>在开始画图之前，需要了解下画布栅格和坐标空间。canvas元素默认被网格所覆盖。通常来说网格中的一个单元相当于canvas元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。</p>
+<h3 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h3><p>不同于SVG，HTML中的元素canvas只支持一种原生的图形绘制：矩形。<br>三种方式绘制矩形：        </p>
+<pre><code>fillRect(x, y, width, height)  //绘制一个填充的矩形
+strokeRect(x, y, width, height)  //绘制一个矩形的边框
+clearRect(x, y, width, height)  //清除指定矩形区域，让清除部分完全透明。</code></pre><p>上述方法中，x y分别指定了在canvas画布上所绘制矩形的左上角的坐标。<br>width和height设置了矩形的尺寸。<br>以上的三个函数绘制之后会马上显现在canvas上，即时生效。    </p>
+<h3 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h3><ul>
+<li>首先需要创建路径起始点</li>
+<li>然后使用画图命令画出路径</li>
+<li>闭合路径</li>
+<li>一旦路径生成就可以通过描边或者填充路径区域来渲染图形</li>
+</ul>
+<h2 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h2><p>为了简化代码和提高性能，path2的对象已经可以在较新的浏览器中使用，用来缓存或者记录绘制命令，这样就可以快速的回顾路径。</p>
+<pre><code>Path2D()</code></pre><p>函数，将会返回一个新初始化的Path2D对象（可将一个路径作为变量–创建一个他的副本，或者将一个包含svg path数据的字符串作为变量）</p>
+<pre><code>new Path2D();   //空的Path对象
+new Path2D(path) // 克隆Path对象
+new Path2D(d);     //从svg建立Path对象</code></pre><p>所有的路径方法比如 moveTo, rect, arc 或 quadraticCurveTo等，如我们前面见过的，都可以在Path2D中使用。</p>
+<p>Path2D API 添加了 addPath作为将path结合起来的方法。当你想要从几个元素中来创建对象时，这将会很实用。比如</p>
+<pre><code>Path2D.addPath(path [, transform])</code></pre><p>添加一条路径到当前路径（可能添加了一个变换矩阵）</p>
+<h2 id="使用svg-paths"><a href="#使用svg-paths" class="headerlink" title="使用svg paths"></a>使用svg paths</h2><p>新的path2d api有另一个强大的特点，就是使用svg path data来初始化canvas上的路径。这将使你获取路径时可以以SVG或canvas的方式来重用它们。</p>
+<pre><code>var p = new Path2D(&quot;M10 10 h 80 v 80 h -80 z&quot;)</code></pre><p>上面一段svg路径的意思是： 现将路径移动到点(M10 10),然后再水平移动80个单位(h 80),然后下移80个单位(v 80),接着左移80个单位(h -80),再回到起点处(z)</p>
+<h2 id="色彩Colors"><a href="#色彩Colors" class="headerlink" title="色彩Colors"></a>色彩Colors</h2><h3 id="fillStyle-color-设置图形的填充颜色"><a href="#fillStyle-color-设置图形的填充颜色" class="headerlink" title="fillStyle = color     设置图形的填充颜色"></a>fillStyle = color     设置图形的填充颜色</h3><h3 id="strokeStyle-color-设置图形轮廓的颜色"><a href="#strokeStyle-color-设置图形轮廓的颜色" class="headerlink" title="strokeStyle = color  设置图形轮廓的颜色"></a>strokeStyle = color  设置图形轮廓的颜色</h3><p>color 可以是表示 CSS 颜色值的字符串，渐变对象或者图案对象。我们迟些再回头探讨渐变和图案对象。默认情况下，线条和填充颜色都是黑色（CSS 颜色值 #000000）。</p>
+<p>注意：  一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值。</p>
+<p>您输入的应该是符合 CSS3 颜色值标准 的有效字符串。下面的例子都表示同一种颜色。</p>
+<pre><code>// 这些 fillStyle 的值均为 &apos;橙色&apos;
+ctx.fillStyle = &quot;orange&quot;;
+ctx.fillStyle = &quot;#FFA500&quot;;
+ctx.fillStyle = &quot;rgb(255,165,0)&quot;;
+ctx.fillStyle = &quot;rgba(255,165,0,1)&quot;;</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/05/Swiper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,7 +1097,7 @@ rule.test = new RegExp(rule.test.source.replace(&apos;%&apos;,&apos;&lt;\\\?&apo
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
