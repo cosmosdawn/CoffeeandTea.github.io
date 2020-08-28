@@ -229,6 +229,364 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/08/22/mockjs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/08/22/mockjs/" itemprop="url">MOCKjs</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-22T11:18:15+08:00">
+                2020-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="语法规范"><a href="#语法规范" class="headerlink" title="语法规范"></a>语法规范</h3><ul>
+<li>数据模版定义规范 DTD</li>
+<li>数据占位符定义规范 DPD</li>
+</ul>
+<h4 id="DTD"><a href="#DTD" class="headerlink" title="DTD"></a>DTD</h4><p>数据模版中的每个属性由三个部分构成： 属性名、生成规则、属性值：</p>
+<p>‘name|rule’: value</p>
+<p>// name: 属性名<br>// rule: 生成规则<br>// value: 属性值</p>
+<p>注意： 属性名和生成规则之间用竖线 ｜ 分隔</p>
+<ul>
+<li>生成规则是可以选择的</li>
+</ul>
+<h4 id="7种生成规则"><a href="#7种生成规则" class="headerlink" title="7种生成规则"></a>7种生成规则</h4><ul>
+<li>‘name|min-max’: value</li>
+<li>‘name|count’: value</li>
+<li>‘name|min-max.dmin-dmax’: value</li>
+<li>‘name|min-max.dcount’: value</li>
+<li>‘name|count.dmin-dmax’: value</li>
+<li>‘name|count.dcount’: value</li>
+<li>‘name|+step’: value</li>
+</ul>
+<p><strong>生成规则的含义需要依赖属性值的类型才能确定</strong></p>
+<p>属性值中可以含有@占位符<br>属性值还指定了最终值的初始值和类型</p>
+<h4 id="属性值是字符串String"><a href="#属性值是字符串String" class="headerlink" title="属性值是字符串String"></a>属性值是字符串String</h4><p>‘name|min-max’: string // 通过重复string生成一个字符串，重复次数大于等于min,小于等于max</p>
+<p>‘name|count’: string // 生成一个字符串，重复次数等于count</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>‘name|+1’: number // 属性值自动加1，初始值为number</p>
+<p>‘name|min-max’: number //生成一个大于等于min,小于等于max的整数，属性值number只是用来确定类型</p>
+<p>‘name|min-max.dmin-dmax’: number // 生成一个浮点数，整数部分大于等于min、小于等于max,小数部分保留dmin到dmax位</p>
+<pre><code>Mock.mock({
+    &apos;number1|1-100&apos;: 1,
+    &apos;number2|123.1-10&apos;: 1,
+    &apos;number3|123.3&apos;: 1,
+    &apos;number4|123.10&apos;: 1.23
+})
+
+// =&gt; 
+
+{
+  number1: 34,
+  number2: 123.3291431,
+  number3: 123.132,
+  number4: 123.2312349612
+}</code></pre><h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>‘name|1’: boolean // 随机生成一个布尔值，值为true的概率是1/2</p>
+<p>‘name|min-max’: value // 随机生成一个布尔值，值为value的概率是min/(min + max)</p>
+<pre><code>Mock.mock({
+    &apos;boolean1|1&apos;: true,
+    &apos;boolean2|1-3&apos;: false
+})
+
+// =&gt; 
+
+
+{ boolean1: true, boolean2: true }</code></pre><h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>‘name|count’: object // 从属性object中随机选取count个属性</p>
+<p>‘name|min-max’: object // 从属性值object中随机选取min到max个属性</p>
+<pre><code>Mock.mock({
+    &apos;obj|5&apos;: {
+        name: &apos;xiaoyu&apos;,
+        age: 20,
+        sex: &apos;man&apos;,
+        school: &apos;buaa&apos;,
+        year: 2020
+    }
+})
+
+// =&gt;
+
+{
+  obj: {
+              name: &apos;xiaoyu&apos;, 
+              sex: &apos;man&apos;, 
+              age: 20, 
+              year: 2020, 
+              school: &apos;buaa&apos; 
+          }
+}</code></pre><h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><p>‘name|1’: array // 从属性array中随机选取1个元素，作为最终值</p>
+<p>‘name|+1’: array // 从属性array中顺序选取1个元素，作为最终值</p>
+<p>‘name|min-max’: array // 通过重复属性值array生成一个新数组，重复次数大于等于min，小于等于max</p>
+<p>‘name|count’: array // 通过重复属性值array生成一个新数组，重复次数为count</p>
+<h3 id="DPD"><a href="#DPD" class="headerlink" title="DPD"></a>DPD</h3><p>占位符只是在属性值字符串中占个位置，并不出现在最终的属性值中</p>
+<p>占位符的格式为：</p>
+<p>@占位符<br>@占位符（参数 [,参数]）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/08/15/关于缓存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/08/15/关于缓存/" itemprop="url">关于缓存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-15T00:00:00+08:00">
+                2020-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>浏览器每次发起请求之前都会先在浏览器缓存中查找该请求的结果以及缓存标识</li>
+<li>浏览器每次拿到返回的请求结果都会将该结果缓存和缓存表识存入浏览器缓存中</li>
+</ul>
+<h3 id="强制缓存规则的三种场景"><a href="#强制缓存规则的三种场景" class="headerlink" title="强制缓存规则的三种场景"></a>强制缓存规则的三种场景</h3><ul>
+<li>没有找到请求的缓存结果以及缓存标识（直接发起http请求）</li>
+<li>找到了请求的缓存结果以及缓存标识，但是显示已经失效（携带资源的缓存标识发起http请求—-协商缓存的过程）</li>
+<li>找到了请求的缓存结果和缓存标识，并且未失效，直接使用缓存中的结果</li>
+</ul>
+<h3 id="强制缓存的规则字段"><a href="#强制缓存的规则字段" class="headerlink" title="强制缓存的规则字段"></a>强制缓存的规则字段</h3><p>按优先级 </p>
+<pre><code>Cache-Control &gt; Expires</code></pre><h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>Expires是HTTP/1.0中控制网页缓存的字段，值为服务器返回的请求结果缓存的到期时间，即再次发起请求时，客户端的时间如果小于Expires的值，就可以直接使用缓存。</p>
+<h5 id="缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）"><a href="#缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）" class="headerlink" title="缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）"></a>缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）</h5><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>到了http/1.1，为了修复Expires的不可靠性，引入了Cache-Control的规则，他的值主要有：</p>
+<ul>
+<li>public: 允许中间代理服务器和客户端缓存</li>
+<li>private: 只允许客户端缓存不允许中间代理服务缓存（默认值）</li>
+<li>no-store: 所有内容不允许缓存（强制缓存和协商缓存都不用）</li>
+<li>no-catch: 客户端缓存内容，但是是否使用缓存需要经过协商缓存来验证</li>
+<li>max-age=xxx: 缓存会在xxx秒之后失效</li>
+</ul>
+<h3 id="memory-cache和disk-cache"><a href="#memory-cache和disk-cache" class="headerlink" title="memory cache和disk cache"></a>memory cache和disk cache</h3><p>刷新页面的时候我们会看到有些资源是from memory cache 有些则是from disk cache,这两个分别代表的是内存缓存和硬盘缓存。</p>
+<h5 id="memory-cache"><a href="#memory-cache" class="headerlink" title="memory cache"></a>memory cache</h5><ul>
+<li>快速读取：内存缓存会将编译解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取</li>
+<li>时效性：一旦该进程关闭，则该进程的内存则会清空。</li>
+</ul>
+<h5 id="disk-cache"><a href="#disk-cache" class="headerlink" title="disk cache"></a>disk cache</h5><ul>
+<li>硬盘缓存(from disk cache)：硬盘缓存则是直接将缓存写入硬盘文件中，读取缓存需要对该缓存存放的硬盘文件进行I/O操作，然后重新解析该缓存内容，读取复杂，速度比内存缓存慢</li>
+</ul>
+<p>在浏览器中浏览器会在js和图片等文件解析执行后直接存入内存缓存中，而css文件则会存入硬盘文件中，所以每次刷新页面有些是从内存缓存中读取，而有些则是从硬盘中读取。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存就是强缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否可以使用缓存的过程。主要有两种情况</p>
+<ul>
+<li>协商缓存生效，返回304</li>
+<li>协商缓存失效，返回一个新的请求结果以及200状态码</li>
+</ul>
+<h4 id="控制协商缓存的头字段"><a href="#控制协商缓存的头字段" class="headerlink" title="控制协商缓存的头字段"></a>控制协商缓存的头字段</h4><p><strong><em>Last-Modified/If-Modified-Since 和 Etag/If-None-Match</em></strong></p>
+<ul>
+<li>If-Modified-Since则是客户端再次发起该请求时，携带上次请求返回的Last-Modified值，通过此字段值告诉服务器该资源上次请求返回的最后被修改时间。服务器收到该请求，发现请求头含有If-Modified-Since字段，则会根据If-Modified-Since的字段值与该资源在服务器的最后被修改时间做对比，若服务器的资源最后被修改时间大于If-Modified-Since的字段值，则重新返回资源，状态码为200；否则则返回304，代表资源无更新，可继续使用缓存文件.</li>
+<li>Etag是服务器响应请求时，返回当前资源文件的一个唯一标识(由服务器生成)If-None-Match是客户端再次发起该请求时，携带上次请求返回的唯一标识Etag值，通过此字段值告诉服务器该资源上次请求返回的唯一标识值。服务器收到该请求后，发现该请求头中含有If-None-Match，则会根据If-None-Match的字段值与该资源在服务器的Etag值做对比，一致则返回304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码为200.</li>
+</ul>
+<p>Etag / If-None-Match优先级高于Last-Modified / If-Modified-Since，同时存在则只有Etag / If-None-Match生效。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，重新获取请求结果，再存入浏览器缓存中；生效则返回304，继续使用缓存。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/使用css变量的好处/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -311,165 +669,6 @@ const btn = document.getElementById(`${v}-theme-btn`);
 <li>不用深层次遍历dom改变某个样式</li>
 </ul>
 <p>未完待续…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/30/关于缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/30/关于缓存/" itemprop="url">关于缓存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T14:21:33+08:00">
-                2020-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>浏览器每次发起请求之前都会先在浏览器缓存中查找该请求的结果以及缓存标识</li>
-<li>浏览器每次拿到返回的请求结果都会将该结果缓存和缓存表识存入浏览器缓存中</li>
-</ul>
-<h3 id="强制缓存规则的三种场景"><a href="#强制缓存规则的三种场景" class="headerlink" title="强制缓存规则的三种场景"></a>强制缓存规则的三种场景</h3><ul>
-<li>没有找到请求的缓存结果以及缓存标识（直接发起http请求）</li>
-<li>找到了请求的缓存结果以及缓存标识，但是显示已经失效（携带资源的缓存标识发起http请求—-协商缓存的过程）</li>
-<li>找到了请求的缓存结果和缓存标识，并且未失效，直接使用缓存中的结果</li>
-</ul>
-<h3 id="强制缓存的规则字段"><a href="#强制缓存的规则字段" class="headerlink" title="强制缓存的规则字段"></a>强制缓存的规则字段</h3><p>按优先级 </p>
-<pre><code>Cache-Control &gt; Expires</code></pre><h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>Expires是HTTP/1.0中控制网页缓存的字段，值为服务器返回的请求结果缓存的到期时间，即再次发起请求时，客户端的时间如果小于Expires的值，就可以直接使用缓存。</p>
-<h5 id="缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）"><a href="#缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）" class="headerlink" title="缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）"></a>缺点：客户端的时间是可以“灵活”改变的，你懂的～（不同时区，或者人为修改系统时间…）</h5><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>到了http/1.1，为了修复Expires的不可靠性，引入了Cache-Control的规则，他的值主要有：</p>
-<ul>
-<li>public: 允许中间代理服务器和客户端缓存</li>
-<li>private: 只允许客户端缓存不允许中间代理服务缓存（默认值）</li>
-<li>no-store: 所有内容不允许缓存（强制缓存和协商缓存都不用）</li>
-<li>no-catch: 客户端缓存内容，但是是否使用缓存需要经过协商缓存来验证</li>
-<li>max-age=xxx: 缓存会在xxx秒之后失效</li>
-</ul>
-<h3 id="memory-cache和disk-cache"><a href="#memory-cache和disk-cache" class="headerlink" title="memory cache和disk cache"></a>memory cache和disk cache</h3><p>刷新页面的时候我们会看到有些资源是from memory cache 有些则是from disk cache,这两个分别代表的是内存缓存和硬盘缓存。</p>
-<h5 id="memory-cache"><a href="#memory-cache" class="headerlink" title="memory cache"></a>memory cache</h5><ul>
-<li>快速读取：内存缓存会将编译解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取</li>
-<li>时效性：一旦该进程关闭，则该进程的内存则会清空。</li>
-</ul>
-<h5 id="disk-cache"><a href="#disk-cache" class="headerlink" title="disk cache"></a>disk cache</h5><ul>
-<li>硬盘缓存(from disk cache)：硬盘缓存则是直接将缓存写入硬盘文件中，读取缓存需要对该缓存存放的硬盘文件进行I/O操作，然后重新解析该缓存内容，读取复杂，速度比内存缓存慢</li>
-</ul>
-<p>在浏览器中浏览器会在js和图片等文件解析执行后直接存入内存缓存中，而css文件则会存入硬盘文件中，所以每次刷新页面有些是从内存缓存中读取，而有些则是从硬盘中读取。</p>
-<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存就是强缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否可以使用缓存的过程。主要有两种情况</p>
-<ul>
-<li>协商缓存生效，返回304</li>
-<li>协商缓存失效，返回一个新的请求结果以及200状态码</li>
-</ul>
-<h4 id="控制协商缓存的头字段"><a href="#控制协商缓存的头字段" class="headerlink" title="控制协商缓存的头字段"></a>控制协商缓存的头字段</h4><p><strong><em>Last-Modified/If-Modified-Since 和 Etag/If-None-Match</em></strong></p>
-<ul>
-<li>If-Modified-Since则是客户端再次发起该请求时，携带上次请求返回的Last-Modified值，通过此字段值告诉服务器该资源上次请求返回的最后被修改时间。服务器收到该请求，发现请求头含有If-Modified-Since字段，则会根据If-Modified-Since的字段值与该资源在服务器的最后被修改时间做对比，若服务器的资源最后被修改时间大于If-Modified-Since的字段值，则重新返回资源，状态码为200；否则则返回304，代表资源无更新，可继续使用缓存文件.</li>
-<li>Etag是服务器响应请求时，返回当前资源文件的一个唯一标识(由服务器生成)If-None-Match是客户端再次发起该请求时，携带上次请求返回的唯一标识Etag值，通过此字段值告诉服务器该资源上次请求返回的唯一标识值。服务器收到该请求后，发现该请求头中含有If-None-Match，则会根据If-None-Match的字段值与该资源在服务器的Etag值做对比，一致则返回304，代表资源无更新，继续使用缓存文件；不一致则重新返回资源文件，状态码为200.</li>
-</ul>
-<p>Etag / If-None-Match优先级高于Last-Modified / If-Modified-Since，同时存在则只有Etag / If-None-Match生效。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，重新获取请求结果，再存入浏览器缓存中；生效则返回304，继续使用缓存。</p>
 
           
         
@@ -1477,146 +1676,6 @@ baz();</code></pre>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/02/10/byte和bit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/10/byte和bit/" itemprop="url">基础知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T17:04:03+08:00">
-                2020-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="byte和bit"><a href="#byte和bit" class="headerlink" title="byte和bit"></a>byte和bit</h3><p>byte = 字节 1byte = 8bits</p>
-<p>1字节=8比特</p>
-<p>速度单位480mbps代表的是480兆比特/秒，它等于60兆字节/秒</p>
-<p>平时所说的硬盘容量是8GB，这里的B指的是byte就是字节。</p>
-<p>1KB = 1024bytes = 2^10bytes</p>
-<p>1MB = 1024KB = 2^20bytes</p>
-<p>常识： 与传输速度有关的b一般指的是bit，与容量有关的b一般指的是byte.</p>
-<p>另外：usb2.0的传输速度 480mbps = 60MB/S的传输速度还只是理论值，它还要受到系统环境的制约，其实际的读写速度约在11~16mb/s。</p>
-<p>Bit意为‘位’或者‘比特’是计算机运算的基础；Byte意为‘字节‘，是计算机文件大小的基本计算单位。</p>
-<p>显示器的bit值只会影响到色彩过渡时候的平滑程度，与显示器本身的色域是没有多大关系的。</p>
-<h3 id="Data-URI-Scheme优缺点"><a href="#Data-URI-Scheme优缺点" class="headerlink" title="Data URI Scheme优缺点"></a>Data URI Scheme优缺点</h3><p>优点</p>
-<ul>
-<li>减少资源请求链接数</li>
-<li>当访问外部资源很麻烦或者受限的时候，可以很好的利用Data URI Scheme</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>Data URL形式的图片不会被浏览器缓存，这意味着每次访问页面都会被下载一次，但是可以通过css文件的background-image样式规则使用Data URI Scheme，使其随css文件一同被浏览器缓存起来</li>
-<li>base64编码的体积是原数据的4/3，也就是说Data URL形式的图片会比二进制格式的图片体积大1/3</li>
-<li>移动端性能比较低。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1667,7 +1726,7 @@ baz();</code></pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

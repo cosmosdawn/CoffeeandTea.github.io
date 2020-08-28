@@ -229,6 +229,234 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/操作文件和目录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/31/操作文件和目录/" itemprop="url">操作文件和目录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T15:09:13+08:00">
+                2020-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><ul>
+<li>cp        复制文件和目录</li>
+<li>mv        移动/重命名文件和目录</li>
+<li>mkdir    创建目录</li>
+<li>rm        删除文件和目录</li>
+<li>ln        创建硬链接和符号链接</li>
+</ul>
+<p>这五个命令属于最常用的Linux命令之列，它们用来操作文件和目录。</p>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>匹配任意多个字符（包括零个或一个）</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配任意一个字符（不包括零个）</td>
+</tr>
+<tr>
+<td>[characters]</td>
+<td>匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td>[!characters]</td>
+<td>匹配任意一个不属于字符集中的字符</td>
+</tr>
+<tr>
+<td>[[:class:]]</td>
+<td>匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</tbody></table>
+<h4 id="表-1-普遍使用的字符类"><a href="#表-1-普遍使用的字符类" class="headerlink" title="表-1: 普遍使用的字符类"></a>表-1: 普遍使用的字符类</h4><table>
+<thead>
+<tr>
+<th>字符类</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[:alnum:]</td>
+<td>匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>匹配任意一个字母</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>匹配任意一个数字</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>匹配任意一个小些字母</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>匹配任意一个大写字母</td>
+</tr>
+</tbody></table>
+<p>借助通配符，为文件名构建非常复杂的选择标准成为可能， 接受文件名作为参数的任何命令，都可以使用通配符。</p>
+<h3 id="cp复制命令"><a href="#cp复制命令" class="headerlink" title="cp复制命令"></a>cp复制命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>运行结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cp file1 file2</td>
+<td>复制文件file1内容到文件file2.如果file2已经存在，file2的内容会被file1的内容重写，如果file2不存在，则会创建file2</td>
+</tr>
+<tr>
+<td>cp -i file1 file2</td>
+<td>同上，但是执行之前会提示用户确认</td>
+</tr>
+<tr>
+<td>cp file1 file2 dir1</td>
+<td>复制file1和file2到目录dir1.目录dir1必须存在</td>
+</tr>
+<tr>
+<td>cp dir1/* dir2</td>
+<td>使用一个通配符，在目录dir1中的所有文件都被复制到dir2中。dir2必须已经存在</td>
+</tr>
+</tbody></table>
+<h3 id="mv-移动和重命名文件"><a href="#mv-移动和重命名文件" class="headerlink" title="mv 移动和重命名文件"></a>mv 移动和重命名文件</h3><p>mv命令可以执行文件移动和文件命名任务，这依赖与你怎么使用它，任何一种情况下，完成操作后，原来的文件名不再存在。使用方法跟cp很像。</p>
+<pre><code>mv item1 item2</code></pre><p>把文件或目录item1移动或重命名为item2</p>
+<pre><code>mv item... directory</code></pre><p>把一个或多个条目从一个目录移动到另一个目录中</p>
+<h3 id="rm-删除文件和目录"><a href="#rm-删除文件和目录" class="headerlink" title="rm 删除文件和目录"></a>rm 删除文件和目录</h3><pre><code>rm file1 默默地删除文件
+
+rm -i file1 删除文件之前，提示用户确认信息
+
+rm -i file1 dir1 删除文件file1, 目录dir1, 以及dir1中的内容</code></pre><p>注意： 类Unix的操作系统，比如说Linux，没有复原命令，一旦你用rm删除了一些东西，他就消失了，Linux假定你很聪明，你应该知道你在做什么。</p>
+<h3 id="ln-创建链接"><a href="#ln-创建链接" class="headerlink" title="ln 创建链接"></a>ln 创建链接</h3><p>ln命令既可以创建硬链接，也可以创建符号链接。</p>
+<pre><code>ln file link  // 创建一个硬链接
+
+ln -s item link // 创建符号链接</code></pre><h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>硬链接是最初Unix创建链接的方式，每个文件默认会有一个硬链接，这个硬链接给予文件名字。我们每创建一个硬链接，就为一个文件创建了一个额外的目录项。硬链接有两个重要的局限性：</p>
+<ul>
+<li>一个硬链接不能关联它所在文件系统之外的文件。这是说一个链接不能关联于链接本身不在同一个磁盘分区上的文件</li>
+<li>一个硬链接不能关联一个目录</li>
+</ul>
+<h3 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h3><p>创建符号链接是为了克服硬链接的局限性。符号链接生效，是通过创建一个特殊类型的文件，这个文件中包含一个关联文件或目录的文本指针。在这一方面，它们和windows的快捷方式差不多，当然，符号链接早于Windows的快捷方式很多年。</p>
+<p>一个符号链接指向一个文件，而且这个符号链接本身与其它的符号链接几乎没有区别。 例如，如果你往一个符号链接里面写入东西，那么相关联的文件也被写入。然而， 当你删除一个符号链接时，只有这个链接被删除，而不是文件自身。如果先于符号链接 删除文件，这个链接仍然存在，但是不指向任何东西。在这种情况下，这个链接被称为 坏链接。在许多实现中，ls 命令会以不同的颜色展示坏链接，比如说红色，来显示它们 的存在。</p>
+<p>拷贝的时候可以使用一个圆点来简化当前工作目录的写法</p>
+<pre><code>cp /etc/passwd . // 把etc目录下的passwd文件拷贝到当前目录</code></pre><p>对于符号链接，有一点很重要，执行的大多数文件操作时针对的链接对象，而不是链接本身。而rm命令是个特例，当你删除链接的时候，删除的是链接本身，而不是链接的对象。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/29/vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1482,140 +1710,6 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/21/代理t/" itemprop="url">代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:47:36+08:00">
-                2019-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h3><p>服务本身不产生内容，而是处于中间位置，转发上下游的请求和响应，具有双重身份。当面向下游的用户的时候，表现为服务器，代表源服务器响应客户端的请求；而面向上游的源服务器的时候，又表现为客户端，代表客户端发送请求。</p>
-<h3 id="为什么要有代理？代理能干什么、带来什么好处？"><a href="#为什么要有代理？代理能干什么、带来什么好处？" class="headerlink" title="为什么要有代理？代理能干什么、带来什么好处？"></a>为什么要有代理？代理能干什么、带来什么好处？</h3><p>“计算机领域里的任何问题，都可以引入一个中间层来解决” TCP/IP协议栈是这样，代理也是这样。<br>代理处在HTTP通信的中间位置，对上屏蔽真实的客户端，对下屏蔽真实的服务器—–<strong><strong>欺上瞒下</strong></strong><br>在这个中间的<strong>小天地</strong>里，可以做很多有趣的事情。</p>
-<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>代理最基本的一个功能就是<strong>负载均衡</strong>，因为在面向客户端时屏蔽了源服务器，客户端看到的只是代理服务器，源服务器究竟有多少台、是哪些ip地址都不知道，于是代理服务器就可以掌握请求分发的大权，决定由后面的哪台服务器来响应请求。</p>
-<p><strong>轮询、一致性哈希</strong>等代理中常用的负载均衡算法的目标都是尽量把外部的流量合理的分散到多台源服务器<br>，提高系统的整体资源利用率和性能。</p>
-<p>除了负载均衡，代理服务器还可以执行更多的功能：</p>
-<ul>
-<li>健康检查； 使用<em>心跳</em>机制监控后端服务器，发现有故障就及时<em>踢出</em>集群，保证服务高可用</li>
-<li>安全防护： 保护被代理的后端服务器，限制ip地址或流量，抵御网络攻击和过载</li>
-<li>加密卸载： 对外网使用ssl/tls加密通信认证，而在安全的内网不加密，消除加解密成本</li>
-<li>数据过滤： 拦截上下行的数据，任意指定策略修改请求或者响应</li>
-<li>内容缓存： 暂存、复用服务器响应</li>
-</ul>
-<h4 id="一个可能的缺点"><a href="#一个可能的缺点" class="headerlink" title="一个可能的缺点"></a>一个可能的缺点</h4><p>代理有很多的好处，但是它<strong>欺上瞒下</strong>的特点，隐藏了真实的客户端和服务器，如果双方希望获取<br>到这些“真实”的原始信息该怎么办呢？</p>
-<p>首先，代理服务器需要使用字段<strong>Via</strong>标明代理的身份。</p>
-<p>Via是一个通用的字段，请求头或响应头里都可以出现。每当报文经过一个代理节点，代理服务器就会把<br>自身的信息追加到字段的末尾，就像是经手人盖了一个章。如果通信线路中有很多中间代理，就会在<br>Via里形成一个链表，这样就可以知道报文究竟走过了多少个代理。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1666,7 +1760,7 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
