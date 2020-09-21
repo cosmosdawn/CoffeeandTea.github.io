@@ -229,6 +229,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/22/缓存代理/" itemprop="url">缓存代理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
+<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
+<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
+<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
+<ul>
+<li>第一个当然是把报文转发给客户</li>
+<li>第二就是把报文存入自己的Cache里</li>
+</ul>
+<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
+<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
+<ul>
+<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
+<li>public: 表示缓存完全是</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1622,138 +1755,6 @@ var newPlayer = Object.assign({},player,{score:2});
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2017/12/29/Git2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/Git2/" itemprop="url">git</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T18:19:45+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><h4 id="bug分支"><a href="#bug分支" class="headerlink" title="bug分支"></a>bug分支</h4><p>软件开发中bug就像家常便饭一样，有了bug就需要修复，在git中由于分支是如此的强大，所以，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除。当你接受到一个代号为001的bug的任务的时候，很自然的，你想创建一个分支issue-001来修复它，但是，当前你正在dev上进行的工作还没有提交，并不是不想提交，而是工作只进行到一半，还没法提交，预计完成还需要1天的时间但是，必须在2个小时之内修复，怎么办？幸好git提供了一个stash功能，可以把当前工作现场储藏起来，等以后恢复现场后继续工作。</p>
-<pre><code>$ git stash
-saved working directory and index state WIP on dev:6224937 add merge
-HEAD is now at 6224937 add merge</code></pre><p>现在，用git status查看工作区，就是干净的（除非有没有被git管理的文件），因此可以放心的创建分支来修复bug，首先要确定在哪个分支上修复bug，假定需要在master分支上修复，就从master创建临时分支</p>
-<pre><code>$ git chekcout master
-Switched to branch &apos;master&apos;
-Your branch is ahead of &apos;origin/master&apos; by 6 commits
-$ git checkout -b issue-01
-Switched to a now branch &apos;issue001&apos;</code></pre><p>现在修复bug，修复完后提交。修复完后，切换到master分支并完成合并，最后删除issue-001分支。OK现在是时候接着回到dev分支干活了。</p>
-<pre><code>$ git checkout dev
-Switched to branch &apos;dev&apos;</code></pre><p>此时查看分支的话，会发现工作区是干净的，刚才的工作现成存到哪里去了？可以用git stash list命令看看</p>
-<pre><code>$ git stash list
-stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：一个是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1804,7 +1805,7 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

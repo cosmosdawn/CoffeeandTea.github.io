@@ -229,6 +229,238 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/探究操作系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/31/探究操作系统/" itemprop="url">探究操作系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T15:09:32+08:00">
+                2020-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="几个对研究Linux系统有帮助的命令"><a href="#几个对研究Linux系统有帮助的命令" class="headerlink" title="几个对研究Linux系统有帮助的命令"></a>几个对研究Linux系统有帮助的命令</h3><ul>
+<li>ls 列出目录内容</li>
+<li>file 确定文件类型</li>
+<li>less 浏览文件内容</li>
+</ul>
+<p>ls 可以列出多个指定目录的内容。</p>
+<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ ls ~ /usr
+/Users/wangxiaoyu:
+AndroidStudioProjects    Music            node_modules
+Applications        Pictures        package-lock.json
+Desktop            Public            projects
+Documents        Training-ground        self
+Downloads        depends            北航论文
+Library            document
+Movies            learn
+
+/usr:
+X11        bin        libexec        sbin        standalone
+X11R6        lib        local        share</code></pre><p>上面的例子列出了用户家目录（字符～表示）和/usr目录的内容</p>
+<p>ls -l 改变输出格式，来得到更多的细节</p>
+<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ ls -l
+total 240
+drwxr-xr-x    3 wangxiaoyu  staff      96 10 31 14:58 AndroidStudioProjects
+drwx------@   5 wangxiaoyu  staff     160  7 19  2019 Applications
+drwx------@  10 wangxiaoyu  staff     320  1 30 19:21 Desktop
+drwx------@  44 wangxiaoyu  staff    1408  1 31 10:16 Documents
+drwx------@ 150 wangxiaoyu  staff    4800  1 30 12:42 Downloads
+drwx------@  80 wangxiaoyu  staff    2560 10 31 14:36 Library
+drwx------+   5 wangxiaoyu  staff     160  1  5 23:12 Movies
+drwx------+   5 wangxiaoyu  staff     160 10 10 22:05 Music
+drwx------+   5 wangxiaoyu  staff     160 11  8 22:24 Pictures
+drwxr-xr-x+   6 wangxiaoyu  staff     192 12  7 10:14 Public
+drwxr-xr-x    7 wangxiaoyu  staff     224  1 29 20:29 Training-ground
+drwxr-xr-x    9 wangxiaoyu  staff     288  1 30 19:21 depends
+drwxr-xr-x    7 wangxiaoyu  staff     224  1 30 12:27 document
+drwxr-xr-x   22 wangxiaoyu  staff     704  1 27 19:54 learn
+drwxr-xr-x   45 wangxiaoyu  staff    1440 12  7 10:13 node_modules
+-rw-r--r--    1 wangxiaoyu  staff  120424 10 19 12:43 package-lock.json
+drwxr-xr-x   18 wangxiaoyu  staff     576  1 30 12:31 projects
+drwxr-xr-x   15 wangxiaoyu  staff     480 11 12 10:06 self
+drwxr-xr-x   17 wangxiaoyu  staff     544  1 17 14:57 北航论文</code></pre><p>使用ls命令的 -l 选项，则结果以长模式输出。</p>
+<h3 id="选项和参数"><a href="#选项和参数" class="headerlink" title="选项和参数"></a>选项和参数</h3><p>大多数的命令看起来像是这样</p>
+<pre><code>command -options arguments</code></pre><p>大多数命令使用的选项，是由一个中划线加上一个字符，例如 ‘-l’但是许多命令，包括来自GNU项目的命令，也支持长选项，长选项由两个中划线加上一个字（单词）组成。也有许多命令允许把多个的短选项串在一起使用，例如</p>
+<pre><code>ls -lt</code></pre><p>‘l’选项产生长格式输出，’t’选项按文件修改时间的先后来排序。</p>
+<h3 id="深入研究长格式输出"><a href="#深入研究长格式输出" class="headerlink" title="深入研究长格式输出"></a>深入研究长格式输出</h3><pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ ls -l
+total 240
+drwxr-xr-x    3 wangxiaoyu  staff      96 10 31 14:58 AndroidStudioProjects
+drwx------@   5 wangxiaoyu  staff     160  7 19  2019 Applications
+drwx------@  10 wangxiaoyu  staff     320  1 30 19:21 Desktop
+drwx------@  44 wangxiaoyu  staff    1408  1 31 10:16 Documents
+drwx------@ 150 wangxiaoyu  staff    4800  1 30 12:42 Downloads
+drwx------@  80 wangxiaoyu  staff    2560 10 31 14:36 Library
+drwx------+   5 wangxiaoyu  staff     160  1  5 23:12 Movies
+drwx------+   5 wangxiaoyu  staff     160 10 10 22:05 Music
+drwx------+   5 wangxiaoyu  staff     160 11  8 22:24 Pictures
+drwxr-xr-x+   6 wangxiaoyu  staff     192 12  7 10:14 Public
+drwxr-xr-x    7 wangxiaoyu  staff     224  1 29 20:29 Training-ground
+drwxr-xr-x    9 wangxiaoyu  staff     288  1 30 19:21 depends
+drwxr-xr-x    7 wangxiaoyu  staff     224  1 30 12:27 document
+drwxr-xr-x   22 wangxiaoyu  staff     704  1 27 19:54 learn
+drwxr-xr-x   45 wangxiaoyu  staff    1440 12  7 10:13 node_modules
+-rw-r--r--    1 wangxiaoyu  staff  120424 10 19 12:43 package-lock.json
+drwxr-xr-x   18 wangxiaoyu  staff     576  1 30 12:31 projects
+drwxr-xr-x   15 wangxiaoyu  staff     480 11 12 10:06 self
+drwxr-xr-x   17 wangxiaoyu  staff     544  1 17 14:57 北航论文</code></pre><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-rw-r–r–</td>
+<td>对于文件的访问权限</td>
+</tr>
+<tr>
+<td>1</td>
+<td>文件的硬链接数目</td>
+</tr>
+<tr>
+<td>wangxiaoyu</td>
+<td>文件所有者的用户名</td>
+</tr>
+<tr>
+<td>staff</td>
+<td>文件所属用户组的名字</td>
+</tr>
+<tr>
+<td>120424</td>
+<td>以字节数表示的文件大小</td>
+</tr>
+<tr>
+<td>12:43</td>
+<td>上次修改文件的时间和日期</td>
+</tr>
+<tr>
+<td>package-lock.json</td>
+<td>文件名</td>
+</tr>
+</tbody></table>
+<h3 id="确定文件类型"><a href="#确定文件类型" class="headerlink" title="确定文件类型"></a>确定文件类型</h3><p>用file命令来确定文件类型，当调用file命令后，file命令会打印出文件内容的简单描述例如：</p>
+<pre><code>file picture.jpg
+
+picture.jpg: JPEG image data, JFIF standard 1.01</code></pre><p>有许多类型的文件，事实上在Linux中，有个普遍的观念是“一切皆文件“有一些文件格式不太常见，极少数文件相当陌生。</p>
+<p>less 命令是一个用来浏览文本文件的程序，Linux系统，有许多人类可读的文本文件。less程序为我们检查文本文件提供了方便。</p>
+<h3 id="什么是文本"><a href="#什么是文本" class="headerlink" title="什么是文本"></a>什么是文本</h3><p>在计算机中，有很多方法可以表达信息。所有的方法都涉及到在信息与一些数字之间确立一种关系，而这些数字可以用来代表信息。毕竟，计算机只能理解数字，这样所有的数据都被转换成数值来表示。</p>
+<p>文本是简单的字符与数字之间的一对一映射，非常紧凑，五十个字符的文本翻译成五十个字节的数据。文本只是包含简单的字符到数字的映射，理解这一点很重要。它和一些文字处理器文档不一样，比如说微软word文档，这些文件和简单的ASCII文件形成鲜明的对比，它们包含非常多文本元素来描述它的结构和格式。</p>
+<h3 id="为什么文本很重要"><a href="#为什么文本很重要" class="headerlink" title="为什么文本很重要"></a>为什么文本很重要</h3><p>许多包含系统设置的文件—配置文件，是以文本格式存储的，许多系统所用到的实际程序—-脚本，也是这种格式存储的。</p>
+<h3 id="less-is-more"><a href="#less-is-more" class="headerlink" title="less is more"></a>less is more</h3><p>less 程序是早期Unix程序more的改进版，less这个名字，对于习语“less is more” 开了个玩笑，这个习语也是现代主义建筑师和设计者的座右铭。</p>
+<p>less允许前后翻页，more只能向前翻页</p>
+<h3 id="旅行指南-文件布局"><a href="#旅行指南-文件布局" class="headerlink" title="旅行指南/文件布局"></a>旅行指南/文件布局</h3><p>Linux系统中，文件系统布局与类Unix系统的布局很相似，实际上，一个已经发布的标准，叫做<a href="https://zh.wikipedia.org/wiki/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E6%A0%87%E5%87%86" target="_blank" rel="noopener">Linux文件系统层次标准</a>，详细说明了这种设计模式。不是所有的Linux发行版都根据这个标准，但大多数都是。</p>
+<h3 id="符号链接-软连接"><a href="#符号链接-软连接" class="headerlink" title="符号链接/软连接"></a>符号链接/软连接</h3><p>描绘一下这样的情景：一个程序要求使用某个包含在名为“foo”文件中的共享资源，但是“foo”经常改变版本号。 这样，在文件名中包含版本号，会是一个好主意，因此管理员或者其它相关方，会知道安装了哪个“foo”版本。 这会导致另一个问题。如果我们更改了共享资源的名字，那么我们必须跟踪每个可能使用了 这个共享资源的程序，当每次这个资源的新版本被安装后，都要让使用了它的程序去寻找新的资源名。 这听起来很没趣。这就是符号链接存在至今的原因。比方说，我们安装了文件 “foo” 的 2.6 版本，它的 文件名是 “foo-2.6”，然后创建了叫做 “foo” 的符号链接，这个符号链接指向 “foo-2.6”。 这意味着，当一个程序打开文件 “foo” 时，它实际上是打开文件 “foo-2.6”。 现在，每个人都很高兴。依赖于 “foo” 文件的程序能找到这个文件，并且我们能知道安装了哪个文件版本。 当升级到 “foo-2.7” 版本的时候，仅添加这个文件到文件系统中，删除符号链接 “foo”， 创建一个指向新版本的符号链接。这不仅解决了版本升级问题，而且还允许在系统中保存两个不同的文件版本。 假想 “foo-2.7” 有个错误（该死的开发者！），那我们得回到原来的版本。 一样的操作，我们只需要删除指向新版本的符号链接，然后创建指向旧版本的符号链接就可以了。</p>
+<p>有点类似于一个文件的快捷方式，上层的程序调用快捷方式，快捷方式指向真正的运行程序。<br>还有一种硬链接，同样允许文件有多个名字，但是硬链接以不同方法来创建多个文件名。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/01/31/操作文件和目录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1577,139 +1809,6 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/22/缓存代理/" itemprop="url">缓存代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
-                2019-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
-<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
-<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
-<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
-<ul>
-<li>第一个当然是把报文转发给客户</li>
-<li>第二就是把报文存入自己的Cache里</li>
-</ul>
-<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
-<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
-<ul>
-<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
-<li>public: 表示缓存完全是</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1760,7 +1859,7 @@ Content-Type: text/html; charset=utf-8</code></pre><ul>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
