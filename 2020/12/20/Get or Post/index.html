@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="秋夜已凉 02">
-<meta property="og:url" content="https://coffeeandtea.github.io/page/2/index.html">
+<meta name="description" content="http只是个行为准则，而tcp才是get和post怎么实现的基本。 不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限 加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很 大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Get or Post">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/12/20/Get or Post/index.html">
 <meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="http只是个行为准则，而tcp才是get和post怎么实现的基本。 不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限 加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很 大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-12-20T13:16:38.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="秋夜已凉 02">
+<meta name="twitter:title" content="Get or Post">
+<meta name="twitter:description" content="http只是个行为准则，而tcp才是get和post怎么实现的基本。 不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限 加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很 大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/page/2/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/12/20/Get or Post/">
 
 
 
 
 
-  <title>秋夜已凉 02</title>
+  <title>Get or Post | 秋夜已凉 02</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -229,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/Get or Post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -246,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/21/代理t/" itemprop="url">代理</a></h1>
+          <h1 class="post-title" itemprop="name headline">Get or Post</h1>
         
 
         <div class="post-meta">
@@ -260,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:47:36+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:09:01+08:00">
+                2020-12-20
               </time>
             
 
@@ -298,26 +299,57 @@
       
 
       
-        
-          
-            <h3 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h3><p>服务本身不产生内容，而是处于中间位置，转发上下游的请求和响应，具有双重身份。当面向下游的用户的时候，表现为服务器，代表源服务器响应客户端的请求；而面向上游的源服务器的时候，又表现为客户端，代表客户端发送请求。</p>
-<h3 id="为什么要有代理？代理能干什么、带来什么好处？"><a href="#为什么要有代理？代理能干什么、带来什么好处？" class="headerlink" title="为什么要有代理？代理能干什么、带来什么好处？"></a>为什么要有代理？代理能干什么、带来什么好处？</h3><p>“计算机领域里的任何问题，都可以引入一个中间层来解决” TCP/IP协议栈是这样，代理也是这样。<br>代理处在HTTP通信的中间位置，对上屏蔽真实的客户端，对下屏蔽真实的服务器—–<strong><strong>欺上瞒下</strong></strong><br>在这个中间的<strong>小天地</strong>里，可以做很多有趣的事情。</p>
-<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>代理最基本的一个功能就是<strong>负载均衡</strong>，因为在面向客户端时屏蔽了源服务器，客户端看到的只是代理服务器，源服务器究竟有多少台、是哪些ip地址都不知道，于是代理服务器就可以掌握请求分发的大权，决定由后面的哪台服务器来响应请求。</p>
-<p><strong>轮询、一致性哈希</strong>等代理中常用的负载均衡算法的目标都是尽量把外部的流量合理的分散到多台源服务器<br>，提高系统的整体资源利用率和性能。</p>
-<p>除了负载均衡，代理服务器还可以执行更多的功能：</p>
+        <p>http只是个行为准则，而tcp才是get和post怎么实现的基本。</p>
+<p>不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限</p>
+<p>加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很</p>
+<p>大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的</p>
+<p>部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数</p>
+<p>据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
+<p>还要看服务器对请求的实现的支持啊。</p>
+<p>GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</p>
+<p>get和post还有一个重大的区别，简单的说：get产生一个tcp数据包，post产生两个tcp数据包。</p>
+<p>不简单的说：对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
+<p>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
+<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开</p>
+<p>门迎接我”，然后再回头把货送过去。</p>
+<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但</p>
+<p>这是一个坑！跳入需谨慎。为什么？</p>
 <ul>
-<li>健康检查； 使用<em>心跳</em>机制监控后端服务器，发现有故障就及时<em>踢出</em>集群，保证服务高可用</li>
-<li>安全防护： 保护被代理的后端服务器，限制ip地址或流量，抵御网络攻击和过载</li>
-<li>加密卸载： 对外网使用ssl/tls加密通信认证，而在安全的内网不加密，消除加解密成本</li>
-<li>数据过滤： 拦截上下行的数据，任意指定策略修改请求或者响应</li>
-<li>内容缓存： 暂存、复用服务器响应</li>
+<li><p>GET与POST都有自己的语义，不能随便混用。</p>
+</li>
+<li><p>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证</p>
+</li>
 </ul>
-<h4 id="一个可能的缺点"><a href="#一个可能的缺点" class="headerlink" title="一个可能的缺点"></a>一个可能的缺点</h4><p>代理有很多的好处，但是它<strong>欺上瞒下</strong>的特点，隐藏了真实的客户端和服务器，如果双方希望获取<br>到这些“真实”的原始信息该怎么办呢？</p>
-<p>首先，代理服务器需要使用字段<strong>Via</strong>标明代理的身份。</p>
-<p>Via是一个通用的字段，请求头或响应头里都可以出现。每当报文经过一个代理节点，代理服务器就会把<br>自身的信息追加到字段的末尾，就像是经手人盖了一个章。如果通信线路中有很多中间代理，就会在<br>Via里形成一个链表，这样就可以知道报文究竟走过了多少个代理。</p>
+<p>数据包完整性上，有非常大的优点。</p>
+<ul>
+<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
+</ul>
+<p>Get/post</p>
+<p>如果尝试重新执行post请求，浏览器也会弹一个框提示这个刷新可能会有副作用，询问要不要继续。</p>
+<p>确认重新提交表单？</p>
+<p>把get实现为有副作用是个很可怕的事情。</p>
+<p>其实并不是GET只能用url，而是浏览器直接发出的GET只能由一个url触发。所以没办法，GET上要在url之外带一些参数就只能依靠url上附带querystring。但是HTTP协议本身并没有这个限制。</p>
+<p>浏览器的POST请求都来自表单提交。每次提交，表单的数据被浏览器用编码到HTTP请求的body里。浏览器发出的POST请求的body主要有有两种格式，一种是application/x-www-form-urlencoded用来传输简单的数据，大概就是”key1=value1&amp;key2=value2”这样的格式。另外一种是传文件，会采用multipart/form-data格式。采用后者是因为application/x-www-form-urlencoded的编码方式对于文件这种二进制的数据非常低效。</p>
+<p>浏览器在POST一个表单时，url上也可以带参数，只要<form action="url">里的url带querystring就行。只不过表单里面的那些用<input> 等标签经过用户操作产生的数据都在会在body里。</form></p>
+<p>因此我们一般会泛泛的说“GET请求没有body，只有url，请求数据放在url的querystring中；POST请求的数据在body中“。但这种情况仅限于浏览器发请求的场景。</p>
+<p>接口中的GET和POST</p>
+<p>Ajax  中</p>
+<p>太自由也带来了另一种麻烦，开发人员不得不每次讨论确定参数是放url的path里，querystring里，body里，header里这种问题，太低效了。于是就有了一些列接口规范/风格。其中名气最大的当属REST</p>
+<p>REST充分运用GET、POST、PUT和DELETE，约定了这4个接口分别获取、创建、替换和删除“资源”，REST最佳实践还推荐在请求体使用json格式。这样仅仅通过看HTTP的method就可以明白接口是什么意思，并且解析格式也得到了统一。</p>
+<p>babel-node 包含在 babel-cli 库，其实就是在 node 上包了一层， 在原来的 node 执行前拦截代码并转换成合适的格式</p>
+<p>最后：</p>
+<ul>
+<li>GET在浏览器回退时是无害的，而POST会再次提交请求。   </li>
+<li>GET产生的URL地址可以被Bookmark，而POST不可以。   </li>
+<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。   </li>
+<li>GET请求只能进行url编码，而POST支持多种编码方式。   </li>
+<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。   </li>
+<li>GET请求在URL中传送的参数是有长度限制的，而POST么有。   </li>
+<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。   </li>
+<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。   </li>
+<li>GET参数通过URL传递，POST放在Request body中。</li>
+</ul>
 
-          
-        
       
     </div>
     
@@ -334,12 +366,28 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/20/mySql小册/" rel="next" title="mySql小册">
+                <i class="fa fa-chevron-left"></i> mySql小册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -349,14 +397,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +409,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -560,6 +609,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

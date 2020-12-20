@@ -81,7 +81,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="秋夜已凉 02">
-<meta property="og:url" content="https://coffeeandtea.github.io/page/2/index.html">
+<meta property="og:url" content="https://coffeeandtea.github.io/archives/2020/12/index.html">
 <meta property="og:site_name" content="秋夜已凉 02">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -115,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/page/2/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/archives/2020/12/">
 
 
 
 
 
-  <title>秋夜已凉 02</title>
+  <title>归档 | 秋夜已凉 02</title>
   
 
 
@@ -140,8 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,148 +213,282 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
+
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
+
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 11 篇日志。 继续努力。
+      </span>
+
       
 
-  
+        
+        
+        
 
-  
-  
-  
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2020">2020</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/21/代理t/" itemprop="url">代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2020/12/20/Get or Post/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">Get or Post</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:47:36+08:00">
-                2019-07-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+            </a>
         
-          
-            <h3 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h3><p>服务本身不产生内容，而是处于中间位置，转发上下游的请求和响应，具有双重身份。当面向下游的用户的时候，表现为服务器，代表源服务器响应客户端的请求；而面向上游的源服务器的时候，又表现为客户端，代表客户端发送请求。</p>
-<h3 id="为什么要有代理？代理能干什么、带来什么好处？"><a href="#为什么要有代理？代理能干什么、带来什么好处？" class="headerlink" title="为什么要有代理？代理能干什么、带来什么好处？"></a>为什么要有代理？代理能干什么、带来什么好处？</h3><p>“计算机领域里的任何问题，都可以引入一个中间层来解决” TCP/IP协议栈是这样，代理也是这样。<br>代理处在HTTP通信的中间位置，对上屏蔽真实的客户端，对下屏蔽真实的服务器—–<strong><strong>欺上瞒下</strong></strong><br>在这个中间的<strong>小天地</strong>里，可以做很多有趣的事情。</p>
-<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>代理最基本的一个功能就是<strong>负载均衡</strong>，因为在面向客户端时屏蔽了源服务器，客户端看到的只是代理服务器，源服务器究竟有多少台、是哪些ip地址都不知道，于是代理服务器就可以掌握请求分发的大权，决定由后面的哪台服务器来响应请求。</p>
-<p><strong>轮询、一致性哈希</strong>等代理中常用的负载均衡算法的目标都是尽量把外部的流量合理的分散到多台源服务器<br>，提高系统的整体资源利用率和性能。</p>
-<p>除了负载均衡，代理服务器还可以执行更多的功能：</p>
-<ul>
-<li>健康检查； 使用<em>心跳</em>机制监控后端服务器，发现有故障就及时<em>踢出</em>集群，保证服务高可用</li>
-<li>安全防护： 保护被代理的后端服务器，限制ip地址或流量，抵御网络攻击和过载</li>
-<li>加密卸载： 对外网使用ssl/tls加密通信认证，而在安全的内网不加密，消除加解密成本</li>
-<li>数据过滤： 拦截上下行的数据，任意指定策略修改请求或者响应</li>
-<li>内容缓存： 暂存、复用服务器响应</li>
-</ul>
-<h4 id="一个可能的缺点"><a href="#一个可能的缺点" class="headerlink" title="一个可能的缺点"></a>一个可能的缺点</h4><p>代理有很多的好处，但是它<strong>欺上瞒下</strong>的特点，隐藏了真实的客户端和服务器，如果双方希望获取<br>到这些“真实”的原始信息该怎么办呢？</p>
-<p>首先，代理服务器需要使用字段<strong>Via</strong>标明代理的身份。</p>
-<p>Via是一个通用的字段，请求头或响应头里都可以出现。每当报文经过一个代理节点，代理服务器就会把<br>自身的信息追加到字段的末尾，就像是经手人盖了一个章。如果通信线路中有很多中间代理，就会在<br>Via里形成一个链表，这样就可以知道报文究竟走过了多少个代理。</p>
+      </h2>
 
-          
-        
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T21:09:01+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
       
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/12/20/mySql小册/" itemprop="url">
+              
+                <span itemprop="name">mySql小册</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T21:08:26+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/12/20/一些杂项/" itemprop="url">
+              
+                <span itemprop="name">samba、打包📦、模块化</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T21:05:36+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/12/20/viewport/" itemprop="url">
+              
+                <span itemprop="name">viewport</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T21:02:48+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/12/20/网络应用的性能问题/" itemprop="url">
+              
+                <span itemprop="name">网络应用的性能问题</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T21:02:03+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/12/20/React effect理解/" itemprop="url">
+              
+                <span itemprop="name">未命名</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T20:57:06+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2020/12/20/let's talk about functional programming/" itemprop="url">
+              
+                <span itemprop="name">一些函数式编程的思考🤔</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-12-20T11:23:21+08:00" content="2020-12-20">
+          12-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-  </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
 
 
 

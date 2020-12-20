@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="秋夜已凉 02">
-<meta property="og:url" content="https://coffeeandtea.github.io/page/2/index.html">
+<meta name="description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="samba、打包📦、模块化">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/12/20/一些杂项/index.html">
 <meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-12-20T13:16:49.855Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="秋夜已凉 02">
+<meta name="twitter:title" content="samba、打包📦、模块化">
+<meta name="twitter:description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/page/2/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/12/20/一些杂项/">
 
 
 
 
 
-  <title>秋夜已凉 02</title>
+  <title>samba、打包📦、模块化 | 秋夜已凉 02</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -229,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/一些杂项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -246,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/21/代理t/" itemprop="url">代理</a></h1>
+          <h1 class="post-title" itemprop="name headline">samba、打包📦、模块化</h1>
         
 
         <div class="post-meta">
@@ -260,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:47:36+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:05:36+08:00">
+                2020-12-20
               </time>
             
 
@@ -298,26 +299,46 @@
       
 
       
-        
-          
-            <h3 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h3><p>服务本身不产生内容，而是处于中间位置，转发上下游的请求和响应，具有双重身份。当面向下游的用户的时候，表现为服务器，代表源服务器响应客户端的请求；而面向上游的源服务器的时候，又表现为客户端，代表客户端发送请求。</p>
-<h3 id="为什么要有代理？代理能干什么、带来什么好处？"><a href="#为什么要有代理？代理能干什么、带来什么好处？" class="headerlink" title="为什么要有代理？代理能干什么、带来什么好处？"></a>为什么要有代理？代理能干什么、带来什么好处？</h3><p>“计算机领域里的任何问题，都可以引入一个中间层来解决” TCP/IP协议栈是这样，代理也是这样。<br>代理处在HTTP通信的中间位置，对上屏蔽真实的客户端，对下屏蔽真实的服务器—–<strong><strong>欺上瞒下</strong></strong><br>在这个中间的<strong>小天地</strong>里，可以做很多有趣的事情。</p>
-<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>代理最基本的一个功能就是<strong>负载均衡</strong>，因为在面向客户端时屏蔽了源服务器，客户端看到的只是代理服务器，源服务器究竟有多少台、是哪些ip地址都不知道，于是代理服务器就可以掌握请求分发的大权，决定由后面的哪台服务器来响应请求。</p>
-<p><strong>轮询、一致性哈希</strong>等代理中常用的负载均衡算法的目标都是尽量把外部的流量合理的分散到多台源服务器<br>，提高系统的整体资源利用率和性能。</p>
-<p>除了负载均衡，代理服务器还可以执行更多的功能：</p>
-<ul>
-<li>健康检查； 使用<em>心跳</em>机制监控后端服务器，发现有故障就及时<em>踢出</em>集群，保证服务高可用</li>
-<li>安全防护： 保护被代理的后端服务器，限制ip地址或流量，抵御网络攻击和过载</li>
-<li>加密卸载： 对外网使用ssl/tls加密通信认证，而在安全的内网不加密，消除加解密成本</li>
-<li>数据过滤： 拦截上下行的数据，任意指定策略修改请求或者响应</li>
-<li>内容缓存： 暂存、复用服务器响应</li>
-</ul>
-<h4 id="一个可能的缺点"><a href="#一个可能的缺点" class="headerlink" title="一个可能的缺点"></a>一个可能的缺点</h4><p>代理有很多的好处，但是它<strong>欺上瞒下</strong>的特点，隐藏了真实的客户端和服务器，如果双方希望获取<br>到这些“真实”的原始信息该怎么办呢？</p>
-<p>首先，代理服务器需要使用字段<strong>Via</strong>标明代理的身份。</p>
-<p>Via是一个通用的字段，请求头或响应头里都可以出现。每当报文经过一个代理节点，代理服务器就会把<br>自身的信息追加到字段的末尾，就像是经手人盖了一个章。如果通信线路中有很多中间代理，就会在<br>Via里形成一个链表，这样就可以知道报文究竟走过了多少个代理。</p>
+        <p>Samba简介：</p>
+<p>一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。</p>
+<p>代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。</p>
+<p>Babel编译后的es5代码都是在严格模式下的es5代码。</p>
+<p>箭头函数虽然称为函数，但是其并不存在属于自己的独立的this和arguments也就是说其使的是外部作用域中的this和arguments，这在es6中被称之为词法作用域this和词法作用域arguments.</p>
+<p>⁨iCloud 云盘⁩ ▸ ⁨桌面⁩ ▸ ⁨working zone⁩ ▸ ⁨小册⁩</p>
+<p>使用单个全局变量来把所有的代码都包含在一个函数内，由此来创建私有的命名空间和闭包作用域。</p>
+<p>文件引入的依赖关系非常重要。</p>
+<p>比如： 要使用backbone就必须先引入backbone的源文件，但是backbone又依赖underscore.js所以backbone的引入需要在</p>
+<p>underscore之后。</p>
+<p>粗俗来讲，模块打包就是将一小块一小块的代码粘成一大块。</p>
+<p>因为所有的模块都需要通过script标签引入到html中。然后用户访问你的页面的时候才能正常的显示和工作。</p>
+<p>每个独立的script意味着他们要被浏览器分别一个一个的加载。</p>
+<p>这就有可能导致页面载入时间过长。</p>
+<p>为了解决这个问题，就需要进行模块打包，把所有的模块合并到一个或者几个文件中，以此来减少http请求数。也就是从开发到</p>
+<p>上线前的构建环节。</p>
+<p>还有一种提升加载速度的方式就是代码压缩，就是在不影响代码正常工作的情况下压缩其体积。</p>
+<p>更小的文件体积意味着更短的加载时间。</p>
+<p>gulp和grunt一类的构建工具可以很方便的解决上述的问题，在开发的时候通过模块来阻止代码，上线时再合并</p>
+<p>压缩提供给浏览器。</p>
+<p>如果你的代码是通过非commonjs或者amd或者es6这类浏览器不支持的模块模式来组织的，那么合并压缩其实</p>
+<p>只是把一些原生的js代码合并在一起而已。</p>
+<p>但是如果你使用的是一些浏览器原生不支持的模块系统，你就需要使用一些专门的构建工具来把他们转化成浏览器支持的代码。这类工具就是我们最近经常听过的brosserify requirejs, webpack等等，模块化构建工具。</p>
+<p>为了实现模块化构建或者载入的功能，这类工具提供许多比如说你在改动了源代码之后自动重新构建的功能。</p>
+<p>打包CommonJS</p>
+<p>模块化构建工具Browserify是一个专门用来打包CommonJs模块以便在浏览器里运行的构建工具。</p>
+<p>browserify首先会通过抽象语法树来解析代码中的每一个require语句，在分析完所有的模块的依赖和结构之后，就会把所有的代码合并到一个文件中。然后你的html文件里引入一个bundle.js就好了。</p>
+<p>假如你使用的是amd，你会需要一些例如requirejs或者curl的amd加载器。模块价值工具可以在你的应用中按需加载模块代码。</p>
+<p>amd和commonjs最主要的区别是amd是异步加载模块的，也就是我们不必把所有的代码都打包到一个文件里面，模块加载不影响后续语句的执行，逐步加载的模块也不会导致页面阻塞无法响应。</p>
+<p>不过在实际的应用中，为了避免用户过多的请求对服务器造成压力。大多数的的开发者还是选择用r.js等一类的构建工具来合并压缩amd的模块。</p>
+<p>总的来说，amd和commonjs在构建中最大的区别是，在开发过程中，采用amd的应用直到正式上线发布之前都不需要构建。</p>
+<p>webpack是新推出的构建工具里最受欢迎的，它兼容commonjs amd es6等各类规范。</p>
+<p>webpack很重要的一个功能，提供了诸如code splitting （代码分割）的有用功能，它可以把你的代码分割成一个个的chunk然后按需加载优化性能。</p>
+<p>es6的与众不同： 体现在当你载入一个模块时，载入的操作实际是在编译时执行的，也即是在代码执行之前。</p>
+<p>让es6模块于冗余代码消除不同的是一种叫做tree shaking的技术。tree shaking 其实恰好是冗余代码消除的反向操作。它只加载你需要调用的代码，而不是删除不会被执行的代码。</p>
+<p>构建es6模块。</p>
+<p>让es6模块能在浏览器中运行的常用方法有以下几种。</p>
+<p>1 使用语法编译器，来把es6语法的代码编译成es5或者commonjs，amd, umd等其他形式。然后再通过browserify或者webpack一类的构建工具来进行构建。</p>
+<p>2 使用rollup.js. rollup.js打包出来的体积会更小.</p>
 
-          
-        
       
     </div>
     
@@ -334,12 +355,32 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/20/viewport/" rel="next" title="viewport">
+                <i class="fa fa-chevron-left"></i> viewport
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/20/mySql小册/" rel="prev" title="mySql小册">
+                mySql小册 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -349,14 +390,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +402,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -560,6 +602,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

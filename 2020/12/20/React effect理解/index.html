@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title： React effect理解加入依赖是在做什么useEffect本身是组件每次渲染都会执行的，加入effect是为了减少其执行的次数 加入空数组代表只执行一次 加入其他变量，表示在其改变的时候执行 当你调用 useEffect时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。 useEffect是在dom更新完成后做的事情。 一般来说，函数退出后，变量会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋夜已凉 02">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/12/20/React effect理解/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="title： React effect理解加入依赖是在做什么useEffect本身是组件每次渲染都会执行的，加入effect是为了减少其执行的次数 加入空数组代表只执行一次 加入其他变量，表示在其改变的时候执行 当你调用 useEffect时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。 useEffect是在dom更新完成后做的事情。 一般来说，函数退出后，变量会">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-12-20T12:57:06.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="秋夜已凉 02">
+<meta name="twitter:description" content="title： React effect理解加入依赖是在做什么useEffect本身是组件每次渲染都会执行的，加入effect是为了减少其执行的次数 加入空数组代表只执行一次 加入其他变量，表示在其改变的时候执行 当你调用 useEffect时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。 useEffect是在dom更新完成后做的事情。 一般来说，函数退出后，变量会">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/12/20/React effect理解/">
+
+
+
+
+
+  <title> | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/React effect理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T20:57:06+08:00">
+                2020-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="title：-React-effect理解"><a href="#title：-React-effect理解" class="headerlink" title="title： React effect理解"></a>title： React effect理解</h2><h3 id="加入依赖是在做什么"><a href="#加入依赖是在做什么" class="headerlink" title="加入依赖是在做什么"></a>加入依赖是在做什么</h3><p>useEffect本身是组件每次渲染都会执行的，加入effect是为了减少其执行的次数</p>
+<p>加入空数组代表只执行一次</p>
+<p>加入其他变量，表示在其改变的时候执行</p>
+<p>当你调用 useEffect时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。</p>
+<p>useEffect是在dom更新完成后做的事情。</p>
+<p>一般来说，函数退出后，变量会销毁，而state中的变量会被react保留</p>
+<p>const [count, setCount] = useState(0);</p>
+<p>我们声明了一个叫count的state变量，然后把它设置为0。React会在重新渲染时记住它当前的值，并提供最新的值给我们的函数。</p>
+<p>之所以叫做useState而不是createState，就是我们并不是每次都create这个state变量，而是只在组件第一次渲染的时候创建。</p>
+<p>当用户点击后，我们传递一个新的值给setCount。React会重新渲染Example组件，并把最新的count传给它。</p>
+<p>如果我们想使用多个state变量，它允许我们给不同的state变量取不同的名称。</p>
+<p>我们可以单独更新每一个state。（理解： 我们单独更新一个state, react会重新渲染函数组件，并用每个state的最新值去渲染，我们更新的那个state状态，得到更新，而那些没有setState的变量，之前的值就是最新的）</p>
+<p>当我们的state变量是一个复杂的对象或者数组时，不同于class的this.setState，更新state变量总是替换而不是合并。（理解： clss组件中的setState是合并式的更新，因此我们得以单独的跟新state中的某一个值）</p>
+<h4 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h4><p>数据获取、设置订阅以及手动更改react组件中的dom都属于副作用。</p>
+<p>1、无需清除的副作用</p>
+<p>有时候，我们只想在react更新dom之后运行一些额外的代码。比如发送网络请求</p>
+<p>，手动更新dom，记录日志等。</p>
+<p>在class组件中，render函数是不应该有任何副作用的。</p>
+<p>我们基本都希望在react更新dom之后才执行我们的操作。</p>
+<p>这就是为什么我们把副作用操作放在componentDidMount 和</p>
+<p>componentDidUpdate函数中。</p>
+<p>useEffect(() =&gt; {<br>    document.title = <code>you clicked ${count} times</code><br>})</p>
+<p>通过这个hook,你可以告诉react组件需要在渲染后执行某些操作。</p>
+<p>React会保存你传递的函数（我们将它称之为effect，重点理解：effect是我们</p>
+<p>传递的函数！！！而不是useEffect这个hooks api），并且在执行dom更新</p>
+<p>之后调用它。（理解：在useEffect中我们给它传递的是一个回调函数，将我们</p>
+<p>需要的操作放在回调函数中，react会在每次更改dom后执行我们的回调函数）</p>
+<p>理解： 因为我们传递的是一个函数，而函数是一个引用数据类型的数组，</p>
+<p>所以传递给useEffect的函数在每次渲染中都会不一样，每次渲染都会有自己的</p>
+<p>回调函数（内存地址不同，不是同一个函数对象），这是刻意为之。这正是</p>
+<p>我们可以在effect中获取最新的count的值，而不用担心其过期的原因。</p>
+<p>每次我们重新渲染，都会生成新的effect，替换掉之前的（effect是我们写在useEffect中的回调函数！！）</p>
+<p>某种意义上讲effect更像是渲染结果的一部分——每个effect 属于一次特定的渲染。</p>
+<p>不理解的地方：提示<br>与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。大多数情况下，effect 不需要同步地执行。在个别情况下（例如测量布局），有单独的 useLayoutEffect Hook 供你使用，其 API 与 useEffect 相同。</p>
+<p>是什么意思？</p>
+<p>解惑： useLayoutEffect 的函数签名与useEffect相同，但是它会在所有的DOM变更之后同步调用effect。可以使用它来读取DOM布局并同步触发重渲染。在浏览器执行绘制之前，</p>
+<p>useLayoutEffect内部的更新计划将被同步刷新。尽可能的使用标准的useEffect以避免阻塞视觉更新。</p>
+<p>useLayoutEffect与componentDidMount componentDidUpdate 的调用阶段是一样的。</p>
+<p>理解： 就是说类似vue中的nextTick componentDidMount componentDidUpdate useLayoutEffect, 会在dom更新完毕，浏览器执行绘制（肉眼看到新的页面）之前执行，如果在这里面做复杂的计算就会阻塞页面的渲染。而useEffect会在页面渲染完毕之后执行，所以不会阻塞页面的绘制渲染。</p>
+<p><a href="http://www.soolco.com/post/73226_1_1.html。" target="_blank" rel="noopener">http://www.soolco.com/post/73226_1_1.html。</a>  // 这篇文章说的很清楚</p>
+<p>2、需要清除的effect</p>
+<p>如果你的effect返回一个函数，react将会在执行清除操作时调用它（理解：写在这里的回调函数会在react卸载的时候执行，你可以在这块空间做任何自己的操作，同样我们也是return一个函数定义给react，react会在销毁的时机去调用它）</p>
+<p>忘记正确地处理componentDidUpdate是React应用中常见的bug来源。</p>
+<p>useEffect默认就会处理，它会在调用一个新的effect之前对前一个effect进行清理。</p>
+<p>如果某些特定值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用，只要传递数组作为useEffect的第二个参数即可。理解：所以我们传递第二个参数是为了减少effecta执行的次数。</p>
+<p>自定义hook是一个函数，函数内部可以调用其他的hook<br>与React组件不同的是，自定义hook不需要具有特殊的标识。我们可以自由的决定它的参数是什么，以及它应该返回的是什么（理解： 自定义hook不必须返回 一个值和一个set值的函数，换句话说，不非要成对出现，可以自由定义返回的东西，根据需求来）</p>
+<p>在多个hook之间传递信息：</p>
+<p>由于hook本身是函数，因此我们可以在他们之间传递信息。就像下面这样：</p>
+<p>const [recipentID, setRecipentID] = useState(1);</p>
+<p>const isRecipentOnline = useFriendStatus(recipientID);</p>
+<p>当我们通过select调用setRecipentID ，改变了recipentID后，useFriendStatus也会用最新的recipientID来执行。</p>
+<p>惰性初始state</p>
+<p>initialState参数只会在组件的初始化渲染中起作用，后续渲染时会被忽略。如果初始state需要通过复杂计算获得，则可以传入一个函数，在函数中计算并返回初始的state,此函数只在初始渲染的时候被调用：</p>
+<p>const [state, setState] = useState(() =&gt; {<br>    const initialState = someExpensiveComputation(props);<br>return initialState<br>})</p>
+<p>调用state    hook的更新函数并传入当前的state时，react会跳过子组件的渲染以及effect的执行，react使用Object.is比较算法来比较state.</p>
+<p>useCallback</p>
+<p>const memoizedCallback = useCallback(() =&gt; {<br>    doSomething(a, b);<br>}, [a, b]),</p>
+<p>返回一个memoized的回调函数。</p>
+<p>把内联回调函数及依赖项数组作为参数传入useCallback,</p>
+<p>它将返回该回调函数的memoized版本，该回调函数仅仅在</p>
+<p>某个依赖项改变时才会更新。</p>
+<p>当把回调函数传递给经过优化的并使用引用相等性去避免非必要</p>
+<p>渲染的子组件时，它将非常有用。比如（shouldComponentUpdate）</p>
+<p>useCallback(fn, deps)相当于useMemo(() =&gt; fn, deps).</p>
+<p>useMemo</p>
+<p>返回一个memoized值。</p>
+<p>把创建函数和依赖项数组作为参数传入useMemo,它仅会在某个依赖改</p>
+<p>变时才会重新计算memoized值。这种优化有助于避免每次渲染时</p>
+<p>都进行高开销的计算。</p>
+<p>传入useMemo的函数会在渲染期间执行。不要在这个函数中执行与</p>
+<p>渲染无关的操作。</p>
+<p>可以把useMemo作为性能优化的手段，但不要把它作为语义上的保证。</p>
+<p>应该先编写在没有useMemo的情况下也可以执行的代码—之后再在代码中</p>
+<p>添加useMemo，以达到性能优化的目的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/20/let's talk about functional programming/" rel="next" title="一些函数式编程的思考🤔">
+                <i class="fa fa-chevron-left"></i> 一些函数式编程的思考🤔
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/20/网络应用的性能问题/" rel="prev" title="网络应用的性能问题">
+                网络应用的性能问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title：-React-effect理解"><span class="nav-number">1.</span> <span class="nav-text">title： React effect理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加入依赖是在做什么"><span class="nav-number">1.1.</span> <span class="nav-text">加入依赖是在做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#副作用"><span class="nav-number">1.1.1.</span> <span class="nav-text">副作用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

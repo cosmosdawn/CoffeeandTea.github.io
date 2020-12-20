@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="缓存代理缓存 + 代理 = ‘缓存代理’ 针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能 够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。 加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。  第一个当然是把报文转">
+<meta name="description" content="let’s talk about functional programming原本我以为自己对于函数式编程是有一定的认知的，或者说自己对于这个概念的掌控是足够的，然而前段时间做的一个需求中遇到了大量的前辈大佬的“真函数式编程代码”还是被教育重新做人了🙄️于是特地从家中翻出从二手市场上淘来的《javaScriptES6函数式编程入门经典》细细研究起来，有所收获记录于此📝 函数的第一条原则是要小，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存代理">
-<meta property="og:url" content="https://coffeeandtea.github.io/2019/07/22/缓存代理/index.html">
+<meta property="og:title" content="一些函数式编程的思考🤔">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/12/20/let's talk about functional programming/index.html">
 <meta property="og:site_name" content="秋夜已凉 02">
-<meta property="og:description" content="缓存代理缓存 + 代理 = ‘缓存代理’ 针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能 够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。 加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。  第一个当然是把报文转">
+<meta property="og:description" content="let’s talk about functional programming原本我以为自己对于函数式编程是有一定的认知的，或者说自己对于这个概念的掌控是足够的，然而前段时间做的一个需求中遇到了大量的前辈大佬的“真函数式编程代码”还是被教育重新做人了🙄️于是特地从家中翻出从二手市场上淘来的《javaScriptES6函数式编程入门经典》细细研究起来，有所收获记录于此📝 函数的第一条原则是要小，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T01:58:29.000Z">
+<meta property="og:updated_time" content="2020-12-20T06:08:28.458Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存代理">
-<meta name="twitter:description" content="缓存代理缓存 + 代理 = ‘缓存代理’ 针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能 够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。 加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。  第一个当然是把报文转">
+<meta name="twitter:title" content="一些函数式编程的思考🤔">
+<meta name="twitter:description" content="let’s talk about functional programming原本我以为自己对于函数式编程是有一定的认知的，或者说自己对于这个概念的掌控是足够的，然而前段时间做的一个需求中遇到了大量的前辈大佬的“真函数式编程代码”还是被教育重新做人了🙄️于是特地从家中翻出从二手市场上淘来的《javaScriptES6函数式编程入门经典》细细研究起来，有所收获记录于此📝 函数的第一条原则是要小，">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/12/20/let's talk about functional programming/">
 
 
 
 
 
-  <title>缓存代理 | 秋夜已凉 02</title>
+  <title>一些函数式编程的思考🤔 | 秋夜已凉 02</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/let's talk about functional programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存代理</h1>
+          <h1 class="post-title" itemprop="name headline">一些函数式编程的思考🤔</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
-                2019-07-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T11:23:21+08:00">
+                2020-12-20
               </time>
             
 
@@ -299,20 +299,43 @@
       
 
       
-        <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
-<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
-<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
-<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
+        <h3 id="let’s-talk-about-functional-programming"><a href="#let’s-talk-about-functional-programming" class="headerlink" title="let’s talk about functional programming"></a>let’s talk about functional programming</h3><p>原本我以为自己对于函数式编程是有一定的认知的，或者说自己对于这个概念的掌控是足够的，然而前段时间做的一个需求中遇到了大量的前辈大佬的“真函数式编程代码”还是被教育重新做人了🙄️于是特地从家中翻出从二手市场上淘来的《javaScriptES6函数式编程入门经典》细细研究起来，有所收获记录于此📝</p>
+<p><strong>函数的第一条原则是要小，函数的第二条原则是要更小</strong>            –鲁迅</p>
+<h3 id="什么是函数式编程，为何它重要"><a href="#什么是函数式编程，为何它重要" class="headerlink" title="什么是函数式编程，为何它重要"></a>什么是函数式编程，为何它重要</h3><p>首先看一个数学中的函数</p>
+<pre><code>f(x) = y;</code></pre><p>该语句可以解读为： ‘一个函数f，以x作为参数，并返回输出y’</p>
+<p>该定义包含了以下几个关键点：</p>
 <ul>
-<li>第一个当然是把报文转发给客户</li>
-<li>第二就是把报文存入自己的Cache里</li>
+<li>函数总是接受一个参数</li>
+<li>函数总是返回一个值</li>
+<li>函数应该根据接受到的参数而不是外部环境运行</li>
+<li>对于一个给定的x只会输出一个唯一的y</li>
 </ul>
-<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
-<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
-<ul>
-<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
-<li>public: 表示缓存完全是</li>
-</ul>
+<p>函数式编程技术主要就是基于数学函数和它的思想</p>
+<p>来看一个简单的计税函数</p>
+<pre><code>let percentValue = 5;
+let calculateTax = (value) =&gt; {
+    return value/100 * (100 + percentValue)
+}                    </code></pre><p>这个函数准确的实现了我们的想法，但是从数学的定义上分析，就会发现calculateTax依赖了全局变量percentValue，因此在数学上它不能被称之为一个真正的函数。修复方法很简单，我们只需要移动percentValue，把它作为函数的参数。</p>
+<pre><code>let calculateTax = (value, percentValue) =&gt; {
+    return value/100 * (100 + percentValue)
+}</code></pre><p>现在calculateTax函数可以被称为一个真正的函数了。</p>
+<p><strong>移除一个函数内部对全局变量的访问会使得该函数的测试更加容易</strong></p>
+<p>函数式编程是一种范式，我们能够以此创建仅依赖输入就可以完成自身逻辑的函数。这保证了当函数被多次调用时仍然返回相同的结果。函数不会改变任何外部环境的变量，这将产生可缓存的、可测试的代码库。</p>
+<h3 id="引用透明性"><a href="#引用透明性" class="headerlink" title="引用透明性"></a>引用透明性</h3><p>所有的函数对于相同的输入都将返回相同的值，函数的这一特性被称为<strong>引用透明性</strong></p>
+<p>看一个例子</p>
+<pre><code>let identity = (i) =&gt; {return i}</code></pre><p>定义一个简单的函数identity，无论传入什么作为输入，该函数都会把它返回，在函数内部没有全局引用，我们的函数只根据传入的参数i进行操作，该函数满足引用透明性条件。</p>
+<pre><code>sum(4,5) + identity(1)</code></pre><p>根据引用透明性的定义，可以把上面的语句转换为：</p>
+<pre><code>sum(4,5) + 1</code></pre><p>该过程称为<strong>替换模型</strong>因为我们可以直接替换函数的结果（因为函数的逻辑不依赖其他全局变量）这一特性使得并发代码和缓存成为可能。</p>
+<h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>引用透明性使得我们可以轻松地采用多线程来运行代码，根本不需要同步。为什么呢？因为同步的问题在于线程在并发运行的的时候不应该依赖全局变量。而遵循引用透明性的函数只依赖来自参数的输入，不会对全局产生任何依赖，这里没有任何“锁”🔒的概念，所以线程可以自由的运行（虽然js引擎是单线程…）</p>
+<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>由于函数会为给定饿输入返回相同的值，实际上我们就可以缓存它。假设函数factorial用来计算给定数组的阶乘，其接受输入作为参数以计算其阶乘，5的阶乘是120，如果用户第二次用5来调用factorial，如果factorial遵循引用透明性，我们就可以直接返回缓存的值120而不用再重新计算一遍。</p>
+<h3 id="命令式、函数式、抽象"><a href="#命令式、函数式、抽象" class="headerlink" title="命令式、函数式、抽象"></a>命令式、函数式、抽象</h3><p><strong>函数式编程主张声明式编程和编写抽象的代码</strong></p>
+<p>以遍历一个数组为例子：命令式编程方法遍历如下：</p>
+<pre><code>let array = [1,2,3]
+for (i=0;i&lt;array.length;i++){
+    console.log(array[i])
+}</code></pre><p>采用声明式编程方法遍历：</p>
+<pre><code>let array = [1,2,3]
+array.forEach((element) =&gt; console.log(element))</code></pre><p>理解体会：移除“如何”做的部分，使用一个函数来处理“如何”做的部分，将关注点放在手头的问题（做什么上）</p>
 
       
     </div>
@@ -337,8 +360,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/21/代理t/" rel="next" title="代理">
-                <i class="fa fa-chevron-left"></i> 代理
+              <a href="/2019/08/11/tcp:ip/" rel="next" title="tcp/ip工作">
+                <i class="fa fa-chevron-left"></i> tcp/ip工作
               </a>
             
           </div>
@@ -347,8 +370,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/03/关于同源策略/" rel="prev" title="同源策略再理解">
-                同源策略再理解 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/12/20/React effect理解/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -463,7 +486,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存代理"><span class="nav-number">1.</span> <span class="nav-text">缓存代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#private和public"><span class="nav-number">2.</span> <span class="nav-text">private和public</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#let’s-talk-about-functional-programming"><span class="nav-number">1.</span> <span class="nav-text">let’s talk about functional programming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是函数式编程，为何它重要"><span class="nav-number">2.</span> <span class="nav-text">什么是函数式编程，为何它重要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用透明性"><span class="nav-number">3.</span> <span class="nav-text">引用透明性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发"><span class="nav-number">3.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存"><span class="nav-number">3.2.</span> <span class="nav-text">缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令式、函数式、抽象"><span class="nav-number">4.</span> <span class="nav-text">命令式、函数式、抽象</span></a></li></ol></div>
             
 
           </div>
