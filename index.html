@@ -405,7 +405,134 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，传递进去的函�
 <p>要想页面给用户丝滑顺畅的感受，就要努力完成每秒60帧的目标💪，具体到每一帧就要控制在16.67ms之内，因为浏览器内部通常还会有不同的线程之间调度的工作，所以通常留给我们的V8的时间只有10ms，我们应该尽量保证在10ms的时间内完成js的执行。。。</p>
 <h4 id="用像素管道的方式来看前端优化问题"><a href="#用像素管道的方式来看前端优化问题" class="headerlink" title="用像素管道的方式来看前端优化问题"></a>用像素管道的方式来看前端优化问题</h4><p><strong>像素管道</strong></p>
 <p>浏览器将像素绘制到页面一般要经过以下几个过程：</p>
+<p>js -&gt; style -&gt; layout -&gt; paint -&gt; composite</p>
 <p><img src="https://user-gold-cdn.xitu.io/2019/6/27/16b985d17a121138?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p>1、 js: 一般我们使用js来实现一个视觉变化的效果。</p>
+<p>2、 style: 样式计算,根据匹配选择器计算出哪些元素应用哪些css规则的过程</p>
+<p>3、 layout: 布局，在知道对一个元素应用哪些规则之后，浏览器即可开始计算它要占据的空间大小及其在屏幕的位置</p>
+<p>4、 paint: 绘制，有时候也叫栅格化是一个fill像素点的过程</p>
+<p>5、 composite: 合成，用于处理不同的层级之间的关系，比如谁盖在谁的上面</p>
+<p>一个帧内要做这么多事情。。。。如果js执行时间过长超过16.67ms，就会block住，那么就会丢掉一帧的绘制。</p>
+<p>我们可以看到 JS，Style 和 Composite 是不可避免的，因为需要 JS 来引发样式的改变，Style 来计算更改后最终的样式，Composite 来合成各个层最</p>
+<p>终进行显示。Layout 和 Paint 这两个步骤不一定会被触发，所以在优化的过程中，如果是需要频繁触发的改变，我们应该尽可能避免 Layout 和 </p>
+<p>Paint。</p>
+<h4 id="尽量使用-transform-和-opacity-属性更改来实现动画"><a href="#尽量使用-transform-和-opacity-属性更改来实现动画" class="headerlink" title="尽量使用 transform 和 opacity 属性更改来实现动画"></a>尽量使用 transform 和 opacity 属性更改来实现动画</h4><p><strong>性能最佳的像素管道版本会避免 Layout 和 Paint</strong></p>
+<p>为了实现此目标，需要坚持更改可以由合成器单独处理的属性。常用的两个属性符合条件：transform 和 opacity。</p>
+<p>另外：想知道每种 CSS 属性的更改是否会触发 Layout，Paint，Composite，可以通过 <img src="csstriggers.com" alt="csstriggers.com"> 查看。</p>
+<p>有一种能有效减小 Layout 和 Paint 的方法是将元素提升，像 Photoshop 中层的概念一样，样式也有层的概念，不同的层根据不同顺序叠加起来，通过 Composite 最终显</p>
+<p>示出来。在每个层中对这个层进行 Layout 或者 Paint 是不会影响其他层的，一般会根据整个页面的语义将页面分为几个层。</p>
+<p>提升元素还有一个好处就是会将动画从 CPU 转移到 GPU 来完成，来实现硬件加速。</p>
+<h4 id="尽量避免-Layout"><a href="#尽量避免-Layout" class="headerlink" title="尽量避免 Layout"></a>尽量避免 Layout</h4><p>让 DOM 脱离文档流再对其进行操作，所有操作完成后添加进文档流，这样可以将重排及重绘的次数降低到一次或两次（脱离文档流及回归文档流的时</p>
+<p>候），以下方法可以让元素脱离文档流：</p>
+<ul>
+<li>隐藏元素 —— display: none;（事实上 display：none 不会让元素出现在 layout tree 中）。</li>
+<li>使用 DocumentFragment（推荐，只有一次 re-flow）。</li>
+<li>将原始元素拷贝到一个脱离文档的节点中，修改这个副本，完成后再�替换掉原始元素。</li>
+</ul>
+<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>利用事件冒泡的机制来处理子元素事件的绑定，将子元素的 DOM 事件，交由它们的父元素来进行处理，可以有效降低页面的开销 —— 由于事件的冒泡</p>
+<p>特性，只需要给父组件添加一个监听事件，就能够捕获到冒泡自子元素的事件，再通过 e.target 来获取真正被操作的子元素。</p>
+<h4 id="使用-requestAnimationFrame"><a href="#使用-requestAnimationFrame" class="headerlink" title="使用 requestAnimationFrame"></a>使用 requestAnimationFrame</h4><p>在某个单个帧中，有可能发生这种情况，在某一帧中会被多次触发某个事件（比如 scroll），这个事件又会频繁的触发样式的修改，导致可能需要多次 </p>
+<p>Layout 或者 Paint，这是一种浪费，过于频繁的 Layout 和 Paint 会造成卡顿，而且实际上一帧中并不需要重复 Layout 或者 Paint 那么多次。</p>
+<p>这个时候就可以用到 rAF 了，先放上一段 MDN 上对 rAF 的解释：</p>
+<p>window.requestAnimationFrame() 方法告诉浏览器您希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画。该方法使用一个回调</p>
+<p>函数作为参数，这个回调函数会在浏览器重绘之前调用。</p>
+<p>在下一次重绘之前调用，理解： 重点不在于“重绘之前” 而是“下一次” 是下一次！不是本次！</p>
+<p>简单来说，rAF的作用就是将传给rAF的回调函数，安排在下一帧的一开始执行。这样就能保证这个回调函数最先执行，并且因为</p>
+<p>绝大多数浏览器都是60fps，所以rAF自带截流效果。</p>
+<p>这里要提一下浏览器的事件循环，在浏览器的一轮事件循环中，会有 task -&gt; microtask -&gt; UI render，这么的一个循序，rAF 将回调函数放在下一帧的</p>
+<p>开头，就是已经让其所在的那一轮的 UI 先 render，然后再在下一帧的最开始去执行.</p>
+<p>开头，就是已经让其所在的那一轮的 UI 先 render，然后再在下一帧的最开始去执行（该句是重点理解句）</p>
+<p>在调用 rAF 时，有一点切记：不要在 rAF 的回调函数中先修改样式，再查询样式，这样就失去了 rAF 的作用。可以将对样式的查询提前到回调函数中或</p>
+<p>者 rAF 中尽量靠前的位置。</p>
+<p>眼睛分辨不出高低帧，但是人的手是可以感知到的</p>
+<p>函数调用栈，其实就是执行上下文栈，每当调用一个函数</p>
+<p>时就会产生一个新的执行上下文，同时新产生的这个执行</p>
+<p>上下文就会被压入执行上下文栈中。</p>
+<p>全局上下文最先入栈，并且在离开页面时才会出栈，js引擎</p>
+<p>不断的执行上下文栈中栈定的那个执行上下文，在它执行完毕后</p>
+<p>将它出栈，直到整个执行栈为空。</p>
+<p>关于执行栈有5点注意：</p>
+<ul>
+<li>单线程</li>
+<li>同步执行</li>
+<li>只有一个全局上下文</li>
+<li>可以有无数个函数上下文（理论是函数上下文没有限制，但是太多了会爆栈）</li>
+<li>每个函数调用都会创建一个新的执行上下文</li>
+</ul>
+<p>明确一个概念： 函数上下文执行栈是与js引擎相关的概念，</p>
+<p>而异步/回调是与运行环境相关的概念。</p>
+<p>如果执行栈与异步机制完全无关，我们写了无数遍的点击触发回调是如何做到的呢？是运行环境（浏览器/Node）来完成的， 在浏览器中，异步机制是借助 event loop 来实现的，</p>
+<p>event loop 是异步的一种实现机制。JavaScript 引擎只是“傻傻”的一直执行栈顶的函数，而运行环境负责管理在什么时候压入执行上下文栈什么函数来让引擎执行</p>
+<p>JavaScript 引擎本身并没有时间的概念，只是一个按需执行 JavaScript 任意代码片段的环境。“事件”（ JavaScript 代码执行）调度总是由包含它的环境进行。</p>
+<p>另外，从一个侧面可以反应出执行上下文栈与异步无关的 —— 执行上下文栈是写在 ECMA-262 的规范中，需要遵守它的是浏览器的 JavaScript 引擎，比如 V8、Quantum 等。</p>
+<p>event loop 的是写在 HTML 的规范中，需要遵守它的是各个浏览器，比如 Chrome、Firefox 等。</p>
+<p>浏览器和浏览器的js引擎是两码事。</p>
+<p>一个页面有一个event loop ，但是一个event loop 可以有多个</p>
+<p>task queues.</p>
+<p>每个来自相同 task source 并由相同 event loop（比如，Document 的计时器产生的回调函数，Document 的鼠标移动产生的事件，Document 的解析器产生的 tasks） 管理</p>
+<p>的 task 都必须加入到同一个 task queue 中，可是来自不同 task sources 的 tasks 可能会被排入到不同的 task queues 中。</p>
+<p>来自相同的 task source 的 task 将会被排入相同的 task queue，但是规范说来自不同 task sources 的 tasks 可能会被排入到不同的 task queues 中，也就是说一个 task queue 中</p>
+<p>可能排列着来自不同 task sources 的 tasks，但是具体什么 task source 对应什么 task queue，规范并没有具体说明。</p>
+<p>一般我们看个各个文章中对于 task queue 的描述都是只有一个，不论是网络，用户时间内还是计时器都会被 Web APIs 排入到用一个 task queue 中，但事实上规范中明确表示了是</p>
+<p>有多个 task queues，并举例说明了这样设计的意义：</p>
+<p>举例来说，一个用户代理可以有一个处理键盘鼠标事件的 task queue（来自 user interaction task source)，还有一个 task queue 来处理所有其他的。用户代理可以以 75% 的几率</p>
+<p>先处理鼠标和键盘的事件，这样既不会彻底不执行其他 task queues 的前提下保证用户界面的响应， 而且不会让来自同一个 task source 的事件顺序错乱</p>
+<p>当用户代理将要排入任务时，必须将任务排入相关的event loop 的task queues;</p>
+<p>这句话很关键，是用户代理来控制任务的调度。</p>
+<p>关于Web APIs</p>
+<p>我们都知道 JavaScript 的执行是单线程的，但是浏览器并不是单线程的，Web APIs 就是一些额外的线程，它们通常由 C++ 来实现，用来处理非同步事件比如 DOM 事件，http 请</p>
+<p>求，setTimeout 等。他们是浏览器实现并发的入口，对于 Node.JavaScript 来说，就是一些 C++ 的 APIs。</p>
+<p>try {<br>  setTimeout(() =&gt; {<br>    throw new Error(“Error - from try statement”);<br>  }, 0);<br>} catch (e) {<br>  console.error(e);<br>}</p>
+<p>整个过程是这样的：执行到 setTimeout 时先同步地将回调函数注册给 Web APIs 的 timer，要清楚此时 setTimeout 的回调函数此时根本没有入调用栈甚至连 task queue 都没有进入，所以 try 的这个代码块就执行结束了，没有抛出任何 error，catch 也被直接跳过，同步执行完毕。<br>等到 timer 的计时到了（要注意并不一定是下一个 event loop，因为 setTimeout 在每个浏览器中的最短时间是不确定的，在 Chrome 中执行几次也会发现每次时间都不同，0 ms ~ 2 ms 都有），会将 setTimeout 中的回调放入 task queue 中，此时 event loop 中的 current task 为 null，就将这个回调函数设为 current task 并开始同步执行，此时调用栈中只有一个全局上下文，try catch 已经结束了，就会直接将这个 error 丢出。</p>
+<p>大概意思就是，当错误抛出的时候，已经没有了try catch的上下文了，</p>
+<p>就捕获不到抛出的错误了</p>
+<p>终于明白了： try catch无法捕获setTimeout异步任务中的错误的原因。</p>
+<p>（React Server Components 和 server render 服务端渲染）</p>
+<p>能捕获到的异常，必须是线程执行已经进入try catch，并且try catch未执行</p>
+<p>完的时候抛出来的。</p>
+<p>代码报错的时候，线程已经执行完try catch ，这种不能捕获到异常</p>
+<p>setTimeout 里面报错，实际上是100ms之后执行的代码报错，此时代码</p>
+<p>块try catch 已经执行完成了，所以无法捕获异常。</p>
+<p>总结： 能被 try catch 捕捉到的异常，必须是在报错的时候，线程执行已经进入 try catch 代码块，且处在 try catch 里面，这个时候才能被捕捉到。</p>
+<p>如果是在之前，或者之后，都无法捕捉异常。</p>
+<p>另外promise没有异常：</p>
+<p>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获，不管是同步还是异步。</p>
+<p>核心原因是因为 Promise 在执行回调中都用 try catch 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常。</p>
+<p>敲黑板了： 不要用 try catch 包裹 Promise , Promise 很强大，不用担心异常会往上抛！我们只需要给 Promise 增加 Promise#catch 就 OK 了</p>
+<p>js是单线程，当脚步抛出了未捕获的异常会使得这个脚本挂起，后面的代码无法执行。</p>
+<p><a href="https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/" target="_blank" rel="noopener">https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/</a></p>
+<p>how to write fast memory-officient js</p>
+<p>要将用户的修改thunk起来，然后只修改一次dom，所以需要使用microTask</p>
+<p>在UI更新渲染前执行，就算有多次修改，也会只修改一次dom，然后进行渲染</p>
+<p>（更新一下，现在 Vue 的 nextTick 实现移除了 MutationObserver 的方式（兼容性原因），取而代之的是使用 MessageChannel。）</p>
+<p>其实用什么具体的api不是最关键的，重要的是使用microTask在UI render</p>
+<p>之前进行thunk.</p>
+<h3 id="关于event-loop"><a href="#关于event-loop" class="headerlink" title="关于event loop"></a>关于event loop</h3><p>不知道有没有人跟我我一样产生过这样的疑问</p>
+<p>1、浏览器的一次事件循环♻️的时间是多久？是16.67ms吗？</p>
+<p>2、我当前的这行代码执行的时候处于当前循环的什么位置？ 是循环的开始？还是中间位置，还是循环马上要结束了？</p>
+<p>我大概知道产生这样疑问，说明对对浏览器内部event loop的心智模型是不对的，但是很长一段时间以来，无论是在看vue中的nextTick还是一些文章中介绍的“下次dom更新。。“这样的字眼时心中总是感觉有一层不甚明确的概念，What exactly is a event loop tick?</p>
+<p>现在理解如下：</p>
+<p>当浏览器解析到一个script开始标签时，整个这个标签整体可以看作是对应一次Tick</p>
+<pre><code>&lt;script&gt;
+    // Tick开始
+    console.log(&apos;同步代码&apos;)
+    ...
+    setTimeout(() =&gt; {
+        console.log(&apos;宏任务队列代码&apos;)
+    })
+    ...
+    Promise.then(() =&gt; {
+        console.log(&apos;微任务队列代码&apos;)
+    })
+    requestAnimationFrame(() =&gt; {
+        console.log(&apos;本次微任务之后下次宏任务之前的代码。。&apos;)
+    })
+    ...
+    // Tick结束
+&lt;/script&gt;</code></pre><p>浏览器在执行这段代码的时候，浏览器会为其开辟一块儿内存空间作为程序的执行栈，整块代码会作为一个main调用最先进入执行栈开始执行，可以认为此时开启了一个宏任务，浏览器会依次执行该栈中的函数，遇到同步代码就执行，遇到setTimeout这样的Webapi调用，会将其压入宏任务队列中下次Tick再执行，遇到Promise.then这样的代码，它属于是本次Tick运行中产生的微任务代码，会将其放入微任务队列，在本次Tick结束之前（即所有的同步代码都执行完毕）会对其进行调用。也即是浏览器的每一个Tick会执行一个宏任务以及在该宏任务执行期间产生微任务。（自己产生的微任务，自己执行掉，不会留到下一个Tick去执行）</p>
+<p>而requestAnimationFrame是个比较特殊的调用，它根本不在event loop的生命周期里，这个api也并不属于JS运行时，而是浏览器宿主环境提供的，它属于另一个主题——渲染。</p>
+<p>浏览器作为一个复杂的应用是多线程工作的，除了运行JS的线程外，还有渲染线程，定时器触发线程，HTTP 请求线程等等。JS线程可以读取并且修改DOM而渲染线程也需要读取DOM，这是一个典型的多线程竞争临界资源的问题。 所以浏览器就把这两个线程设计成互斥的，即同时只能有一个线程在执行。</p>
+<p>渲染原本就不应该出现在event loop相关的知识体系里。因为event loop显然是在讨论JS如何运行的问题，而渲染则是浏览器另外一个线程的工作。但是requestAnimationFrame的出现却把这两件事情给关联起来不在V8环境里，只是浏览器又开放的一个在渲染之前发生的新的hook。所以它对应的animation callback queue的处理方式也是不一样的。<br>通过调用requestAnimationFrame我们可以在下次渲染之前执行回调函数。那下次渲染具体是哪个时间点呢？渲染和event loop有什么关系呢？简单来说，就是在每一次event loop的末尾，判断当前页面是否处于渲染时机，是就重新渲染。而渲染时机又是个啥，查阅资料发现有点“玄学”～ 有屏幕的硬件限制，跟机器性能有关联，跟js执行是否超时有关联，总之要不要渲染是一个多方面因素条件综合下来浏览器判断的结果。有点React中shouldComponentUpdate内味儿～但无论如何requestAnimationFrame保证的就是在浏览器下次渲染之前一定会被调用。</p>
 
           
         
