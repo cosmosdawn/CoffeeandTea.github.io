@@ -229,6 +229,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/25/最近在看的一些东西记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/25/最近在看的一些东西记录/" itemprop="url">最近在看的一些东西记录📝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-25T17:22:34+08:00">
+                2020-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>写React几个月了，接触到的，听到的较多的一个词“functional programming”函数式编程。在工作中也遇到了不少之前的大佬写的函数式代码，乍看之下还是有些“眼生”。</p>
+<h4 id="函数式？函数式编程？"><a href="#函数式？函数式编程？" class="headerlink" title="函数式？函数式编程？"></a>函数式？函数式编程？</h4><p>1、函数式是一个数学概念： </p>
+<pre><code>f(x) = y;</code></pre><p>函数式本身是很纯粹的一个概念，表达的就是函数定义域到值域之间一种特定的映射关系。（定义域中的一个值经过计算<strong><strong>有且仅有</strong></strong>一个值与之对应，也即只能得到一个确定的结果）。</p>
+<pre><code>f(x) = y;</code></pre><p>这个数学函数式表达了以下几层意思：</p>
+<ul>
+<li>函数总是接受一个参数—x</li>
+<li>函数总是返回一个值—y</li>
+<li>函数应该根据接受的参数而不是外部环境运行</li>
+<li>对于一个给定的x只会输出一个唯一的y</li>
+</ul>
+<p>2、函数式编程技术主要就是基于数学函数和它的思想。</p>
+<p>比如有一个简单的计税函数如下：</p>
+<pre><code>let percentValue = 5;
+let calculateTax = (value) =&gt; {
+    return value/100 * (100 + percentValue)
+}            </code></pre><p>这个函数准确的实现了我们的想法，但是从数学的定义上分析，就会发现calculateTax依赖了全局变量percentValue，因此在数学上它不能被称之为一个真正的函数。修复方法很简单，我们只需要移动percentValue，把它作为函数的参数。</p>
+<pre><code>let calculateTax = (value, percentValue) =&gt; {
+return value/100 * (100 + percentValue)
+}        </code></pre><p>现在calculateTax函数可以被称为一个真正的函数了。</p>
+<p><strong>移除一个函数内部对全局变量的访问会使得该函数的测试更加容易</strong></p>
+<h4 id="函数式编程的特性"><a href="#函数式编程的特性" class="headerlink" title="函数式编程的特性"></a>函数式编程的特性</h4><p>1、引用透明性</p>
+<p>定义：所有的函数对于相同的输入都将返回相同的值，函数的这一特性被称为<strong>引用透明性</strong></p>
+<p>🌰例：</p>
+<pre><code>let identity = (i) = {return i}</code></pre><p>定义一个简单的函数identity，无论传入什么作为输入，该函数都会把它返回，在函数内部没有全局引用，我们的函数只根据传入的参数i进行操作，该函数满足引用透明性条件。</p>
+<pre><code>sum(4,5) + identity(1)</code></pre><p>根据引用透明性的定义，可以把上面的语句转换为：</p>
+<pre><code>sum(4,5) + 1; // 直接用结果替换函数的计算过程</code></pre><p>该过程称为<strong>替换模型</strong>，因为我们可以直接替换函数的结果（因为函数的逻辑不依赖其他全局变量）而正是这一特性使得代码和缓存成为可能！</p>
+<p>2、 并发？</p>
+<p>引用透明性使得我们可以轻松地采用多线程来运行代码，根本不需要同步。为什么呢？因为同步的问题在于线程在并发运行的的时候不应该依赖全局变量。而遵循引用透明性的函数只依赖来自参数的输入，不会对全局产生任何依赖，这里没有任何“锁”🔒的概念，所以线程可以自由的运行（虽然js引擎是单线程…）</p>
+<p>3、 缓存？</p>
+<p>由于函数会为给定饿输入返回相同的值，实际上我们就可以缓存它。假设函数factorial用来计算给定数组的阶乘，其接受输入作为参数以计算其阶乘，5的阶乘是120，如果用户第二次用5来调用factorial，如果factorial遵循引用透明性，我们就可以直接返回缓存的值120而不用再重新计算一遍。</p>
+<p>函数式编程对比命令式编程主张移除“如何”做的部分，使用一个函数来处理“如何”做的部分，将关注点放在手头的工作上即”做什么“。</p>
+<h4 id="为什么函数式好？"><a href="#为什么函数式好？" class="headerlink" title="为什么函数式好？"></a>为什么函数式好？</h4><p>slice和splice两个函数在做数据处理的时候很类似，但是实现的方式却大不相同。</p>
+<pre><code>let xs = [1,2,3,4,5];
+
+xs.slice(0,3); // 返回 [1,2,3];
+xs.slice(0,3); // 返回 [1,2,3];
+xs.slice(0,3); // 返回 [1,2,3];
+.
+.
+. // 无论调用多少次它都能保证相同的输出。</code></pre><p>而splice却会嚼烂调用它的那个数组，然后再吐出来🤮，这就产生了副作用，即这个数组永久的改变了🤷‍♂️</p>
+<p>函数式编程讨厌这种会改变数据的函数，追求的是那种更加”可靠“的每次都能返回同样结果的函数。</p>
+<p>就像上面的那个计税函数中，非函数式（即纯函数）的版本中，其计算结果依赖了全局变量percentValue，这是令人沮丧的🤦‍♂️，因为引入外部变量，增加了我们对函数的认知负荷和心理负担。程序中到处充斥着的这些不纯的函数，往往是产生BUG的罪魁祸首！</p>
+<p>另一方面，使用纯函数的形式，函数自己就能做到自给自足，并且随时都可以放心大胆将其“打包带走”📦</p>
+<p>函数式编程让我想到了之前在网上看到的两种关于线缆艺术的图片：</p>
+<p>非函数式编程就行下图：</p>
+<p><img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fi2.kknews.cc%2FSIG%3D3al92tl%2F5r8o00052qp53p9sq7n9.jpg&imgrefurl=https%3A%2F%2Fkknews.cc%2Fzh-my%2Fnews%2F5exvzo6.html&tbnid=siwu9UR5z48WLM&vet=12ahUKEwjCzpzp5ujtAhXYFKYKHbwGB2IQMygDegUIARCYAQ..i&docid=1HVthXWwbj6jfM&w=640&h=475&q=%E7%BA%BF%E7%BC%86%E8%89%BA%E6%9C%AF&ved=2ahUKEwjCzpzp5ujtAhXYFKYKHbwGB2IQMygDegUIARCYAQ" alt></p>
+<p>函数式编程就好很多：</p>
+<p><img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fpic.17qq.com%2Fuploads%2Fhswawrcscx.jpeg&imgrefurl=https%3A%2F%2Fj.17qq.com%2Farticle%2Fhkkcpghlv.html&tbnid=banuyLeaOn4PhM&vet=12ahUKEwjCzpzp5ujtAhXYFKYKHbwGB2IQMygIegUIARCiAQ..i&docid=I8MwlMzUsrRsNM&w=329&h=439&q=%E7%BA%BF%E7%BC%86%E8%89%BA%E6%9C%AF&ved=2ahUKEwjCzpzp5ujtAhXYFKYKHbwGB2IQMygIegUIARCiAQ" alt></p>
+<h4 id="作用-副作用？"><a href="#作用-副作用？" class="headerlink" title="作用? 副作用？"></a>作用? 副作用？</h4><p>作用：可以理解为一切除了计算结果之外发生的事情。</p>
+<p>副作用：是在计算结果的过程中，系统状态的一种变化，或者与外部世界进行的任何可观察的交互。</p>
+<p>具体到前端开发中，副作用包括但不限于：</p>
+<ul>
+<li>更改文件系统</li>
+<li>往数据库插入记录</li>
+<li>发送一个 http 请求</li>
+<li>可变数据</li>
+<li>打印/log</li>
+<li>获取用户输入</li>
+<li>DOM 查询</li>
+<li>访问系统状态</li>
+<li>…</li>
+</ul>
+<p>函数式编程的哲学里认为副作用是造成问题的主要原因。这一假定不无道理，在只有我和你的世界里，我不会出问题，然而问题产生了，那么肯定是你出了问题…</p>
+<p>但是我们做业务开发不是写静态页面，我们是用页面来承载我们的业务。从这个角度看，我一种“业务都是通过副作用完成的”感觉～</p>
+<p>那React是怎么平衡纯函数与副作用的呢？</p>
+<h4 id="effect-hooks"><a href="#effect-hooks" class="headerlink" title="effect? hooks?"></a>effect? hooks?</h4><p>React16.8引入了hooks API.对其中的useEffect感触比较多.在类组件中render函数就是个纯函数，负责实现UI = F(state)而业务操作多放在componentDidMount、updated、willUnmounted…等声明周期钩子中，其实单单就从组件生命周期的心智模型来理解，这样就挺好的。</p>
+<p>但是生命周期是咋来的？<br>how do you think about componentDidMount?<br>useEffect(() =&gt; {doSomething}, []) === componentDidMount?? really???</p>
+<p>在看React的hooks介绍文档的时候，看到这么一句？</p>
+<p>本来下面接着的内容该是柯里化、compose函数组合、管道啥的，但是对于柯里化看了一段时间感觉还是没有一个让自己“豁然开朗”的点，先留着，转而说说React</p>
+<h3 id="函数式编程与React…"><a href="#函数式编程与React…" class="headerlink" title="函数式编程与React…"></a>函数式编程与React…</h3><p>关于react有一个很形象的公式 UI = F(state)  可以说是总结的非常到位了！</p>
+<p>React强调数据的不可变性，把每一确定时刻的UI状态当作是电影🎬中的某一个确定的帧，长什么样子是确定的是由确定的state状态确定的，要让我渲染UI的另外一种状态，麻烦用另一个state来驱动，这给我一种“死板且靠谱”的感受～</p>
+<p>Vue信奉数据可变哲学，React则选择数据不可变哲学🙅‍♂️</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/Get or Post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1608,139 +1799,6 @@ array.forEach((element) =&gt; console.log(element))</code></pre><p>理解体会�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/22/缓存代理/" itemprop="url">缓存代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
-                2019-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
-<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
-<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
-<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
-<ul>
-<li>第一个当然是把报文转发给客户</li>
-<li>第二就是把报文存入自己的Cache里</li>
-</ul>
-<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
-<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
-<ul>
-<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
-<li>public: 表示缓存完全是</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1791,7 +1849,7 @@ array.forEach((element) =&gt; console.log(element))</code></pre><p>理解体会�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -229,6 +229,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/22/缓存代理/" itemprop="url">缓存代理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
+<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
+<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
+<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
+<ul>
+<li>第一个当然是把报文转发给客户</li>
+<li>第二就是把报文存入自己的Cache里</li>
+</ul>
+<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
+<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
+<ul>
+<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
+<li>public: 表示缓存完全是</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -400,7 +533,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
