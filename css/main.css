@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5390f4;
+  background: #ffb87f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2659,4 +2659,11 @@ embed {
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
+}
+.sidebar {
+  background: url("https://api.berryapi.net/?service=App.Bing.Images");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: cover;
 }
