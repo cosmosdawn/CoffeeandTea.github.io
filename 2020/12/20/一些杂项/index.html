@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="秋夜已凉 02">
 <meta property="og:description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-12-20T13:16:49.855Z">
+<meta property="og:updated_time" content="2020-12-28T07:19:51.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="samba、打包📦、模块化">
 <meta name="twitter:description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
@@ -338,6 +338,30 @@
 <p>让es6模块能在浏览器中运行的常用方法有以下几种。</p>
 <p>1 使用语法编译器，来把es6语法的代码编译成es5或者commonjs，amd, umd等其他形式。然后再通过browserify或者webpack一类的构建工具来进行构建。</p>
 <p>2 使用rollup.js. rollup.js打包出来的体积会更小.</p>
+<h3 id="关于Web-APIs"><a href="#关于Web-APIs" class="headerlink" title="关于Web APIs"></a>关于Web APIs</h3><p>我们都知道 JavaScript 的执行是单线程的，但是浏览器并不是单线程的，Web APIs 就是一些额外的线程，它们通常由 C++ 来实现，用来处理非同步事件比如 DOM 事件，http 请</p>
+<p>求，setTimeout 等。他们是浏览器实现并发的入口，对于 Node.JavaScript 来说，就是一些 C++ 的 APIs。</p>
+<p>try {<br>  setTimeout(() =&gt; {<br>    throw new Error(“Error - from try statement”);<br>  }, 0);<br>} catch (e) {<br>  console.error(e);<br>}</p>
+<p>整个过程是这样的：执行到 setTimeout 时先同步地将回调函数注册给 Web APIs 的 timer，要清楚此时 setTimeout 的回调函数此时根本没有入调用栈甚至连 task queue 都没有进入，所以 try 的这个代码块就执行结束了，没有抛出任何 error，catch 也被直接跳过，同步执行完毕。<br>等到 timer 的计时到了（要注意并不一定是下一个 event loop，因为 setTimeout 在每个浏览器中的最短时间是不确定的，在 Chrome 中执行几次也会发现每次时间都不同，0 ms ~ 2 ms 都有），会将 setTimeout 中的回调放入 task queue 中，此时 event loop 中的 current task 为 null，就将这个回调函数设为 current task 并开始同步执行，此时调用栈中只有一个全局上下文，try catch 已经结束了，就会直接将这个 error 丢出。</p>
+<p>大概意思就是，当错误抛出的时候，已经没有了try catch的上下文了，</p>
+<p>就捕获不到抛出的错误了</p>
+<p>终于明白了： try catch无法捕获setTimeout异步任务中的错误的原因。</p>
+<p>能捕获到的异常，必须是线程执行已经进入try catch，并且try catch未执行</p>
+<p>完的时候抛出来的。</p>
+<p>代码报错的时候，线程已经执行完try catch ，这种不能捕获到异常</p>
+<p>setTimeout 里面报错，实际上是100ms之后执行的代码报错，此时代码</p>
+<p>块try catch 已经执行完成了，所以无法捕获异常。</p>
+<p>总结： 能被 try catch 捕捉到的异常，必须是在报错的时候，线程执行已经进入 try catch 代码块，且处在 try catch 里面，这个时候才能被捕捉到。</p>
+<p>如果是在之前，或者之后，都无法捕捉异常。</p>
+<p>另外promise没有异常：</p>
+<p>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获，不管是同步还是异步。</p>
+<p>核心原因是因为 Promise 在执行回调中都用 try catch 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常。</p>
+<p>敲黑板了： 不要用 try catch 包裹 Promise , Promise 很强大，不用担心异常会往上抛！我们只需要给 Promise 增加 Promise#catch 就 OK 了</p>
+<p>js是单线程，当脚步抛出了未捕获的异常会使得这个脚本挂起，后面的代码无法执行。</p>
+<p>要将用户的修改thunk起来，然后只修改一次dom，所以需要使用microTask</p>
+<p>在UI更新渲染前执行，就算有多次修改，也会只修改一次dom，然后进行渲染</p>
+<p>（更新一下，现在 Vue 的 nextTick 实现移除了 MutationObserver 的方式（兼容性原因），取而代之的是使用 MessageChannel。）</p>
+<p>其实用什么具体的api不是最关键的，重要的是使用microTask在UI render</p>
+<p>之前进行thunk.</p>
 
       
     </div>
@@ -426,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -469,6 +502,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Web-APIs"><span class="nav-number">1.</span> <span class="nav-text">关于Web APIs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
