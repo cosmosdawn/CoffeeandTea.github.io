@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="秋夜已凉 02">
 <meta property="og:description" content="http只是个行为准则，而tcp才是get和post怎么实现的基本。 不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限 加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很 大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-12-20T13:16:38.568Z">
+<meta property="og:updated_time" content="2020-12-29T06:44:16.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Get or Post">
 <meta name="twitter:description" content="http只是个行为准则，而tcp才是get和post怎么实现的基本。 不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限 加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很 大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2">
@@ -330,7 +330,7 @@
 <p>把get实现为有副作用是个很可怕的事情。</p>
 <p>其实并不是GET只能用url，而是浏览器直接发出的GET只能由一个url触发。所以没办法，GET上要在url之外带一些参数就只能依靠url上附带querystring。但是HTTP协议本身并没有这个限制。</p>
 <p>浏览器的POST请求都来自表单提交。每次提交，表单的数据被浏览器用编码到HTTP请求的body里。浏览器发出的POST请求的body主要有有两种格式，一种是application/x-www-form-urlencoded用来传输简单的数据，大概就是”key1=value1&amp;key2=value2”这样的格式。另外一种是传文件，会采用multipart/form-data格式。采用后者是因为application/x-www-form-urlencoded的编码方式对于文件这种二进制的数据非常低效。</p>
-<p>浏览器在POST一个表单时，url上也可以带参数，只要<form action="url">里的url带querystring就行。只不过表单里面的那些用<input> 等标签经过用户操作产生的数据都在会在body里。</form></p>
+<p>浏览器在POST一个表单时，url上也可以带参数，只要<form action="url">里的url带querystring就行。只不过表单里面的那些用”input”等标签经过用户操作产生的数据都在会在body里。</form></p>
 <p>因此我们一般会泛泛的说“GET请求没有body，只有url，请求数据放在url的querystring中；POST请求的数据在body中“。但这种情况仅限于浏览器发请求的场景。</p>
 <p>接口中的GET和POST</p>
 <p>Ajax  中</p>
