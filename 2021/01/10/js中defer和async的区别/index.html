@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="js中defer和async的区别//最原始的情况  &amp;lt;script src=&amp;apos;script.js&amp;apos;&amp;gt;&amp;lt;/script&amp;gt;  没有defer或者async，浏览器会立即加载并执行指定的脚本，‘立即’的意思是指在渲染*script*标签之后的文档元素之前，也就是不等待后续载入的文档元素，读到就加载并执行。  //async的情况  &amp;lt;script as">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中defer和async的区别">
+<meta property="og:url" content="https://coffeeandtea.github.io/2021/01/10/js中defer和async的区别/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="js中defer和async的区别//最原始的情况  &amp;lt;script src=&amp;apos;script.js&amp;apos;&amp;gt;&amp;lt;/script&amp;gt;  没有defer或者async，浏览器会立即加载并执行指定的脚本，‘立即’的意思是指在渲染*script*标签之后的文档元素之前，也就是不等待后续载入的文档元素，读到就加载并执行。  //async的情况  &amp;lt;script as">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://segmentfault.com/img/bVcQV0">
+<meta property="og:updated_time" content="2021-01-10T04:46:04.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中defer和async的区别">
+<meta name="twitter:description" content="js中defer和async的区别//最原始的情况  &amp;lt;script src=&amp;apos;script.js&amp;apos;&amp;gt;&amp;lt;/script&amp;gt;  没有defer或者async，浏览器会立即加载并执行指定的脚本，‘立即’的意思是指在渲染*script*标签之后的文档元素之前，也就是不等待后续载入的文档元素，读到就加载并执行。  //async的情况  &amp;lt;script as">
+<meta name="twitter:image" content="http://segmentfault.com/img/bVcQV0">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2021/01/10/js中defer和async的区别/">
+
+
+
+
+
+  <title>js中defer和async的区别 | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/js中defer和async的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js中defer和async的区别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
+                2021-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="js中defer和async的区别"><a href="#js中defer和async的区别" class="headerlink" title="js中defer和async的区别"></a>js中defer和async的区别</h2><pre><code>//最原始的情况
+ &lt;script src=&apos;script.js&apos;&gt;&lt;/script&gt;
+ 没有defer或者async，浏览器会立即加载并执行指定的脚本，‘立即’的意思是指在渲染*script*标签之后的文档元素之前，也就是不等待后续载入的文档元素，读到就加载并执行。
+ //async的情况
+ &lt;script asycn src=&apos;script.js&apos;&gt;&lt;/script&gt;
+ 有了async,加载和渲染后续文档元素的过程将和script.js的加载与执行并行进行（异步）。
+ //defer的情况
+ &lt;script defer src=&apos;script.js&apos;&gt;&lt;/script&gt;
+ 有defer,加载后续文档元素的过程将和script.js并行进行（异步），但是script.js的执行要在所有元素解析完成之后，也就是DOMContentLoaded事件触发之前完成。是的，是之前。</code></pre><p>下面是一张三种加载方式的对比图<br><img src="http://segmentfault.com/img/bVcQV0" alt="Aaron Swartz"></p>
+<p>async和defer一样，不会阻塞当前文档的解析，他会异步下载脚本，但是和defer不同的是，asnync会在脚本下载完成后立即执行，如果项目中脚本之间存在依赖关系，不推荐使用async</p>
+<h3 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h3><p>DOMContentLoaded与OnLoad事件，前者：页面document已经解析完成，页面中的dom元素已经可用，但是页面中引用的图片、subframe可能还没加载完。后者Onload：页面中的所有资源都加载完毕，包括图片。浏览器的载入进度在这时才会停止。这两个时间点将页面加载的timeline分成了三个阶段。</p>
+<h3 id="defer-属性声明"><a href="#defer-属性声明" class="headerlink" title="defer 属性声明"></a>defer 属性声明</h3><p>其实浏览器默认加载js文件是同步阻塞的就是因为怕js文件中会有比如document.write()或者类似的dom修改，而声明了defer属性的script标签，其实就是表明，这个脚本中不会有document.write或者其他dom修改。</p>
+<h3 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h3><p>什么是延迟加载？    </p>
+<p>延迟加载: 有些js代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。延迟加载就是一开始并不加载这些暂时用不到的js,而是在需要的时候或者稍后再通过js的控制来异步加载。也就是将js切分成很多模块，页面初始化时只加载需要立即执行的js，然后其他js的加载延迟到第一次需要用到的时候再加载。特别是页面有大量不同的模块组成，很多可能暂时不用或者根本就没用到。就像<em>图片的延迟加载</em>在图片出现在可视区域时，才加载显示图片。</p>
+<h3 id="script的两个阶段：-加载和执行"><a href="#script的两个阶段：-加载和执行" class="headerlink" title="script的两个阶段： 加载和执行"></a>script的两个阶段： 加载和执行</h3><p>js的加载其实是由两个阶段组成： <em>下载内容（download bytes）</em> 和<em>执行（parse and execute）</em> 浏览器在下载完js的内容后就会立即对其解释执行，不管是同步的还是异步的。下载后都会立即执行，而浏览器在解析执行js阶段是阻塞任何操作的，这时候的浏览器处于无响应状态。我们都知道通过网络下载script需要明显的时间，单容易忽略第二阶段，解析和执行也是需要时间的，script的解析和执行所花的时间比我们想象中的要多。延迟执行的原理: 将js先异步下载缓存起来，但是不立即执行，而是在第一次需要的时候执行一次。利用特殊的技巧可以做到下载和执行的分离。比如将js的内容作为Image或者object对象加载缓存起来，这样就不会立即执行了，然后在第一次需要的时候再执行。</p>
+<h3 id="script标签使用的历史"><a href="#script标签使用的历史" class="headerlink" title="script标签使用的历史"></a>script标签使用的历史</h3><p>1script放在head中</p>
+<pre><code>&lt;head&gt;
+    &lt;script src=&apos;..&apos;&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre><p>阻止了后续的下载，在IE6-7中script是顺序下载的，而不是现在的并行下载、顺序执行的方式，在下载和执行阶组织渲染，这就是页面卡的根源！</p>
+<p>2 script放在页面底部</p>
+<pre><code>&lt;script src=&apos;..&apos;&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre><p>不阻止其他下载（底部/body前）<br>在IE6-7中script是顺序下载的；在下载和解析执行阶段阻止渲染</p>
+<p>3 异步加载script</p>
+<pre><code>var se = document.createElement(&apos;script&apos;)
+se.src = &apos;http://script.js&apos;
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(se)</code></pre><p>在所有浏览器中script都是并行下载，只在解析执行阶段阻止渲染</p>
+<p>4 异步下载 + 按需执行（图片预加载）</p>
+<pre><code>var se = new Image()
+se.onload = registerScript()
+se.src = &apos;http://anydomain.com/a.js&apos;</code></pre><p>将下载js和解析执行js分离出来。不阻止其他下载，在所有浏览器中script都是并行下载不阻止渲染直到真正需要时。</p>
+<h3 id="异步加载的问题"><a href="#异步加载的问题" class="headerlink" title="异步加载的问题"></a>异步加载的问题</h3><p>在异步加载的时候，无法使用document.write输出文档内容<br>在同步模式下，document.write是在当前script所在位置输出文档的。而在异步模式下，浏览器继续处理后续页面的内容，根本无法确定document.write应该输出到什么位置，所以异步模式下document.write不可行。而到了页面已经onload之后，再执行document.wrire将导致当前页面的内容被清空，因为它会自动触发document.open方法。实际上docuemnt.write的名声并不好，最好少用。</p>
+<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p>常用于跨域请求数据的JSONP，也可以理解为一种脚本的同步加载：我们在本站声明一个回调函数，然后向外站用src请求一个js文件，文件中的代码是用外站的数据对本站函数进行调用，就实现了使用外站数据的目的。虽然函数是本站声明的，数据是外站的，外站调用本站函数，但是把它理解为同步加载和执行就简单了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/10/js函数式编程？/" rel="next" title="javascript函数式编程">
+                <i class="fa fa-chevron-left"></i> javascript函数式编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/10/px2rem或postcss-px2rem/" rel="prev" title="移动端适配">
+                移动端适配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js中defer和async的区别"><span class="nav-number">1.</span> <span class="nav-text">js中defer和async的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充说明："><span class="nav-number">1.1.</span> <span class="nav-text">补充说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer-属性声明"><span class="nav-number">1.2.</span> <span class="nav-text">defer 属性声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延迟加载"><span class="nav-number">1.3.</span> <span class="nav-text">延迟加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#script的两个阶段：-加载和执行"><span class="nav-number">1.4.</span> <span class="nav-text">script的两个阶段： 加载和执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#script标签使用的历史"><span class="nav-number">1.5.</span> <span class="nav-text">script标签使用的历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步加载的问题"><span class="nav-number">1.6.</span> <span class="nav-text">异步加载的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">1.7.</span> <span class="nav-text">jsonp</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

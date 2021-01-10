@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="事件js程序采用了异步事件驱动编程模型。在这种程序设计风格下，当文档，浏览器，元素，或者与之相关的对象发生某些有趣的事情时，web浏览器就会产生事件。例如，当web浏览器加载完文档，用户把鼠标指针移动到超链接上或者敲击键盘时候，web浏览器都会产生事件。如果 JavaScript 应用程序关注特定类型的事件，那么它可以注册当这类事件发生时要调用的一个或多个函数。请注意，这种风格并不只应用于 Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件">
+<meta property="og:url" content="https://coffeeandtea.github.io/2021/01/10/Functional Components/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="事件js程序采用了异步事件驱动编程模型。在这种程序设计风格下，当文档，浏览器，元素，或者与之相关的对象发生某些有趣的事情时，web浏览器就会产生事件。例如，当web浏览器加载完文档，用户把鼠标指针移动到超链接上或者敲击键盘时候，web浏览器都会产生事件。如果 JavaScript 应用程序关注特定类型的事件，那么它可以注册当这类事件发生时要调用的一个或多个函数。请注意，这种风格并不只应用于 Web">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-10T04:46:03.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="事件">
+<meta name="twitter:description" content="事件js程序采用了异步事件驱动编程模型。在这种程序设计风格下，当文档，浏览器，元素，或者与之相关的对象发生某些有趣的事情时，web浏览器就会产生事件。例如，当web浏览器加载完文档，用户把鼠标指针移动到超链接上或者敲击键盘时候，web浏览器都会产生事件。如果 JavaScript 应用程序关注特定类型的事件，那么它可以注册当这类事件发生时要调用的一个或多个函数。请注意，这种风格并不只应用于 Web">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2021/01/10/Functional Components/">
+
+
+
+
+
+  <title>事件 | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/Functional Components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">事件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
+                2021-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>js程序采用了异步事件驱动编程模型。在这种程序设计风格下，当文档，浏览器，元素，或者与之相关的对象发生某些有趣的事情时，web浏览器就会产生事件。例如，当web浏览器加载完文档，用户把鼠标指针移动到超链接上或者敲击键盘时候，web浏览器都会产生事件。如果 JavaScript 应用程序关注特定类型的事件，那么它可以注册当这类事件发生时要调用的一个或多个函数。请注意，这种风格并不只应用于 Web 编程，所有使用图形用户界面的应用程序都采用了它，它们静待某些事情发生（即，它们等待事件发生），然后它们响应。<br>请注意，事件本身并不是一个需要定义的技术名词。简而言之，事件就是 Web 浏览器通知应用程序发生了什么事情，这种在传统软件工程中被称为观察员模式。</p>
+<h3 id="offsetWidth-width-clientWidth"><a href="#offsetWidth-width-clientWidth" class="headerlink" title="offsetWidth width clientWidth"></a>offsetWidth width clientWidth</h3><p>width: css中设置的大小<br>clientWidth: width + padding<br>offsetWidth: width + padding + border </p>
+<p>documentElement属性返回文档的根节点<br>语法：<br>documentObject.documentElement</p>
+<p>document.body   返回html dom中的body节点即 <body><br>document.documentElement  返回html dom中的root节点  即<html></html></body></p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在获取scrollTop方面的差异<br>兼容方案：   var scrollTop = document.documentElement.scrollTop || docuent.body.scrollTop</p>
+<h3 id="scrollTop"><a href="#scrollTop" class="headerlink" title="scrollTop"></a>scrollTop</h3><p>可以获取或者设置一个元素的内容垂直滚动的像素数。一个元素的scrollTop值是这个元素的顶部到它的最顶部可见内容的距离的度量。当一个元素的内容没有产生垂直方向的滚动条，那么它的scrollTop值是0.</p>
+<h3 id="html事件处理程序"><a href="#html事件处理程序" class="headerlink" title="html事件处理程序"></a>html事件处理程序</h3><p>某个元素支持额每种事件，都可以使用一个与之相应的事件处理程序同名的html特性来指定。这个特性的值应该是能够执行的javascript代码。例如要在按钮被单击时执行一些JavaScript，可以像下面这样编写代码：</p>
+<pre><code>&lt;input type=&quot;button&quot; value=&quot;Click Me&quot; onclick=&quot;console.log(&apos;Clicked&apos;)&quot;&gt;</code></pre><h3 id="clientX-事件属性，是一个事件属性。返回当事件被触发时鼠标指针相对于浏览器页面（或者客户区）的水平坐标。客户区域指的是当前的窗口。"><a href="#clientX-事件属性，是一个事件属性。返回当事件被触发时鼠标指针相对于浏览器页面（或者客户区）的水平坐标。客户区域指的是当前的窗口。" class="headerlink" title="clientX 事件属性，是一个事件属性。返回当事件被触发时鼠标指针相对于浏览器页面（或者客户区）的水平坐标。客户区域指的是当前的窗口。"></a>clientX 事件属性，是一个事件属性。返回当事件被触发时鼠标指针相对于浏览器页面（或者客户区）的水平坐标。客户区域指的是当前的窗口。</h3><p>语法：   event.clientX</p>
+<h3 id="scrollWidth-clientWidth-offsetWidth-的区别"><a href="#scrollWidth-clientWidth-offsetWidth-的区别" class="headerlink" title="scrollWidth clientWidth offsetWidth 的区别"></a>scrollWidth clientWidth offsetWidth 的区别</h3><p>说明：   scrollWidth: 对象实际内容的宽度（注意强调的是元素中的内容），会随着对象中内容超过可是区域后而变大。</p>
+<p>clientWidth :对象内容的可是区域的宽度，不包括滚动条边线，除非对象元素自身的显示变大才会变大是元素自身的一个可见区域</p>
+<p>offsetWidth：  对象的整体的实际宽度，跟clientWidth的区别仅仅是包括滚动条边线，同样是随着对象的显示大小的变化而变化。</p>
+<h3 id="target"><a href="#target" class="headerlink" title="target"></a>target</h3><p>在事件处理程序内部，对象this始终等于currentTarget的值，而target则只包含事件的实际目标。如果直接将事件处理程序指定给了目标元素，则this currentTarget 和 target包含相同的值。</p>
+<pre><code>var btn = document.getElementById(&apos;myBtn&apos;)
+btn.onclick = function(event) {
+    console.log(event.currentTarget === this);  // true
+    console.log(event.target === this) // true
+}</code></pre><p>这个例子检测了currentTarget和target与this的值。由于click事件的目标是按钮，因此三个值是相同的，但是如果事件处理程序存在于按钮的父节点中，那么这些值是不相同的</p>
+<pre><code>document.body.onclick = function(event) {
+    console.log(event.currentTarget === document.body)// true
+    console.log(this === document.body) // true
+    console.log(event.target === document.getElementById(&apos;myBtn&apos;))   // true
+}</code></pre><p>当点击这个例子中的按钮时候，this和currentTarget都等于docuent.body,因为事件处理程序是注册到这个元素上的，然而，target元素却等于按钮元素，因为它是click事件真正的目标。由于按钮上并没有注册事件处理程序，结果 click 事件就冒泡到了 document.body，在那里事件才得到了处理。</p>
+<p>事件对象的 eventPhase 属性，可以用来确定事件当前正位于事件流的哪个阶段。如果是在捕获阶段调用的事件处理程序，那么 eventPhase 等于 1；如果事件处理程序处于目标对象上，则 eventPhase 等于 2；如果是在冒泡阶段调用的事件处理程序，eventPhase 等于 3。这里要注意的是，尽管“处于目标”发生在冒泡阶段，但 eventPhase 仍然一直等于 2。来看下面的例子。</p>
+<pre><code>var btn = document.getElementById(&quot;myBtn&quot;);</code></pre><p>btn.onclick = function(event){<br>    console.log(event.eventPhase); // 2<br>};<br>document.body.addEventListener(“click”, function(event){<br>    console.log(event.eventPhase); // 1<br>}, true);<br>document.body.onclick = function(event){<br>    console.log(event.eventPhase); // 3<br>};</p>
+<p>当单击这个例子中的按钮时，首先执行的事件处理程序是在捕获阶段触发的添加到 document.body 中的那一个，结果会弹出一个警告框显示表示 eventPhase 的 1。接着，会触发在按钮上注册的事件处理程序，此时的 eventPhase 值为 2。最后一个被触发的事件处理程序，是在冒泡阶段执行的添加到 document.body 上的那一个，显示 eventPhase 的值为 3。而当 eventPhase 等于 2 时，this、target 和 currentTarget 始终都是相等的</p>
+<p>只有在事件处理程序执行期间，event对象才会存在，一旦事件处理程序执行完毕，event对象就会销毁</p>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><pre><code>    class Square extends React.Component {
+  render() {
+    return (
+      &lt;button className=&quot;square&quot; onClick={() =&gt; alert(&apos;click&apos;)}&gt;
+        {this.props.value}
+      &lt;/button&gt;
+    );
+  }
+}</code></pre><p>Doing onClick={alert(‘click’)} would alert immediately instead of when the button is clicked.</p>
+<p>意思是说做事件绑定的时候如果直接写onClick={alert(‘click’)}是不对的会在你没有点击之前直接就执行了。因为在{}中的是js是会立即执行的。onClick只是React中的一个标记，是React认识的标志，React在编译的时候肯定会搜集这些标记来翻译成浏览器中的click事件。</p>
+<p>In JavaScript classes, you need to explicitly call super(); when defining the constructor of a subclass.</p>
+<p>在定义一个子类的constructor的时候务必记得要调用super();</p>
+<pre><code>    class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
+  render() {
+    return (
+      &lt;button className=&quot;square&quot; onClick={() =&gt; alert(&apos;click&apos;)}&gt;
+        {this.props.value}
+      &lt;/button&gt;
+    );
+  }
+}</code></pre><p>用state来代替props</p>
+<pre><code>        class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
+  render() {
+    return (
+      &lt;button className=&quot;square&quot; onClick={() =&gt; this.setState({value: &apos;X&apos;})}&gt;
+        {this.state.value}
+      &lt;/button&gt;
+    );
+  }
+}</code></pre><p>Whenever this.setState is called, an update to the component is scheduled, causing React to merge in the passed state update and rerender the component along with its descendants.</p>
+<p>每当this.setState方法被调用的时候，react就会根据最新的state来进行一次更新。</p>
+<p>When you want to aggregate data from multiple children or to have two child components communicate with each other, move the state upwards so that it lives in the parent component. The parent can then pass the state back down to the children via props, so that the child components are always in sync with each other and with the parent.</p>
+<p>当想要两个字组件交流或者父亲组件做一个数据的统计的时候，要move the state upwards 就是将state传递到父组件中去。</p>
+<p>Now we need to change what happens when a square is clicked. The Board component now stores which squares are filled, which means we need some way for Square to update the state of Board.<br>Since component state is considered private, we can’t update Board’s state directly from Square.</p>
+<p>state是组件私有的，我们不能直接在另一个组件中改变其他组件的state</p>
+<p>The usual pattern here is pass down a function from Board to Square that gets called when the square is clicked. </p>
+<p>通常的处理方式是父组件pass down 一个方法给子组件来调用</p>
+<p>There are generally two ways for changing data. The first method is to mutate the data by directly changing the values of a variable. The second method is to replace the data with a new copy of the object that also includes desired changes.</p>
+<p>有两种改变数据的方式：第一种是直接修改原始数据，第二种是创建一个新的备份。</p>
+<p>第一种：直接修改</p>
+<pre><code>var player = {score: 1,name:&apos;xiaoyu&apos;};
+player.score = 2;
+// 现在player = {score: 2,name: &apos;xiaoyu&apos;};</code></pre><p>第二种：创建备份</p>
+<pre><code>var player = {score: 1, name: &apos;xiaoyu&apos;};
+var newPlayer = Object.assign({},player,{score:2});
+现在没有改变原来的player对象而是创建了一个新的对象</code></pre><p>虽然两种方式的最终结果是一样的，但是第二种方式可以帮助我们提高组件的性能。</p>
+<h3 id="好处1-Easier-Undo-Redo-and-Time-Travel"><a href="#好处1-Easier-Undo-Redo-and-Time-Travel" class="headerlink" title="好处1: Easier Undo/Redo and Time Travel"></a>好处1: Easier Undo/Redo and Time Travel</h3><p>Immutability also makes some complex features much easier to implement. For example, further in this tutorial we will implement time travel between different stages of the game. Avoiding data mutations lets us keep a reference to older versions of the data, and switch between them if we need to.</p>
+<p>更加方便的回退。我们可以保持对旧版本数据的引用，从而更加从容的在新旧状态之间来回切换。</p>
+<h3 id="好处2：-Tracking-Changes-跟踪变化"><a href="#好处2：-Tracking-Changes-跟踪变化" class="headerlink" title="好处2： Tracking Changes 跟踪变化"></a>好处2： Tracking Changes 跟踪变化</h3><p>Determining if a mutated object has changed is complex because changes are made directly to the object. This then requires comparing the current object to a previous copy, traversing the entire object tree, and comparing each variable and value. This process can become increasingly complex.</p>
+<p>Determining how an immutable object has changed is considerably easier. If the object being referenced is different from before, then the object has changed. That’s it.</p>
+<p>如果采用直接在原来的数据对象中修改的方式，那么当发生一个改变的时候要前后对数据对象进行对比找到做了改变的地方，而采用方式二则容易判断多了 ，只要对象的引用改变了，那数据对象就改变了。如此简单。</p>
+<h3 id="好处3-Determining-When-to-Re-render-in-React"><a href="#好处3-Determining-When-to-Re-render-in-React" class="headerlink" title="好处3: Determining When to Re-render in React"></a>好处3: Determining When to Re-render in React</h3><p>The biggest benefit of immutability in React comes when you build simple pure components. Since immutable data can more easily determine if changes have been made, it also helps to determine when a component requires being re-rendered.<br>To learn more about shouldComponentUpdate() and how you can build pure components take a look at Optimizing Performance.</p>
+<p>最大的好处就是，当你写的组件是符合‘单一指责’的组件的时候，不改变原始数据的方式可以更加方便的判断是否发生了数据的变化继而它也更加方便的来判断是否要进行从新渲染。</p>
+<h2 id="Functional-Components"><a href="#Functional-Components" class="headerlink" title="Functional Components"></a>Functional Components</h2><p>功能组件<br>We’ve removed the constructor, and in fact, React supports a simpler syntax called functional components for component types like Square that only consist of a render method. Rather than define a class extending React.Component, simply write a function that takes props and returns what should be rendered.</p>
+<p>React支持一种我们称为‘功能组件‘的组件。它只包含一个render渲染函数。并且写的时候不用很麻烦的定义一个类来继承React.Component而是简单的写一个带参数的function 然后返回需要被渲染（render）的东西就可以了。<br>改写之前的组件</p>
+<pre><code>function Square(props) {
+    return (
+        &lt;button className=&quot;square&quot; onClick={props.onClick}&gt;{props.value}&lt;/button&gt;
+    )
+}</code></pre><p>You’ll need to change this.props to props both times it appears. Many components in your apps will be able to be written as functional components: these components tend to be easier to write and React will optimize them more in the future.</p>
+<p>大多数的组件都可以写成功能组件，这种组件写起来更加的简单并且react以后会对功能组件的优化越来越好。</p>
+<p>Note that onClick={props.onClick()} would not work because it would call props.onClick immediately instead of passing it down.</p>
+<p>一定要注意这里的方法调用的写法，{}中的js代码会立即执行，我们需要的是将一个函数传递下去不是直接执行这个函数。</p>
+<p>We’ll want the top-level Game component to be responsible for displaying the list of moves. So just as we pulled the state up before from Square into Board, let’s now pull it up again from Board into Game – so that we have all the information we need at the top level.</p>
+<p>用game组件来做一个历史的步骤的记录，就像我们将state从square提到board中去一样我们再次将state从board中提到game中去。<br>First, set up the initial state for Game by adding a constructor to it:<br>那么首先就要初始化game到state状态（既然设计到要保存状态那就要写constructor函数了，这个可以做为一个判断标准诶）</p>
+<p>Then change Board so that it takes squares via props and has its own onClick prop specified by Game, like the transformation we made for Square earlier.</p>
+<p>然后就要改写board了，让它从game传递出来的到props中获得squares和onClick事件属性。<br>接下来要做的：</p>
+<ul>
+<li>Delete the constructor in Board.</li>
+<li>Replace this.state.squares[i] with this.props.squares[i] in Board’s renderSquare.</li>
+<li>Replace this.handleClick(i) with this.props.onClick(i) in Board’s renderSquare.</li>
+</ul>
+<p>删除board中的构造函数<br>替换 this.state.squares[i] 为 this.props.squares[i]<br>替换this.handleClick(i) 为 this.props.onClick(i)</p>
+<h3 id="the-keys"><a href="#the-keys" class="headerlink" title="the keys"></a>the keys</h3><p>When a key is added to the set, a component is created; when a key is removed, a component is destroyed. Keys tell React about the identity of each component, so that it can maintain the state across rerenders. </p>
+<p>It’s strongly recommended that you assign proper keys whenever you build dynamic lists.</p>
+<p>在生成动态列表时候一定要确保分配正确的keys<br>Component keys don’t need to be globally unique, only unique relative to the immediate siblings.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/10/EventLoop/" rel="next" title="EventLoop">
+                <i class="fa fa-chevron-left"></i> EventLoop
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/10/PPPoe/" rel="prev" title="PPPoE">
+                PPPoE <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">1.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#offsetWidth-width-clientWidth"><span class="nav-number">2.</span> <span class="nav-text">offsetWidth width clientWidth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollTop"><span class="nav-number">4.</span> <span class="nav-text">scrollTop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html事件处理程序"><span class="nav-number">5.</span> <span class="nav-text">html事件处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clientX-事件属性，是一个事件属性。返回当事件被触发时鼠标指针相对于浏览器页面（或者客户区）的水平坐标。客户区域指的是当前的窗口。"><span class="nav-number">6.</span> <span class="nav-text">clientX 事件属性，是一个事件属性。返回当事件被触发时鼠标指针相对于浏览器页面（或者客户区）的水平坐标。客户区域指的是当前的窗口。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollWidth-clientWidth-offsetWidth-的区别"><span class="nav-number">7.</span> <span class="nav-text">scrollWidth clientWidth offsetWidth 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#target"><span class="nav-number">8.</span> <span class="nav-text">target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React"><span class="nav-number">9.</span> <span class="nav-text">React</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#好处1-Easier-Undo-Redo-and-Time-Travel"><span class="nav-number">10.</span> <span class="nav-text">好处1: Easier Undo/Redo and Time Travel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#好处2：-Tracking-Changes-跟踪变化"><span class="nav-number">11.</span> <span class="nav-text">好处2： Tracking Changes 跟踪变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#好处3-Determining-When-to-Re-render-in-React"><span class="nav-number">12.</span> <span class="nav-text">好处3: Determining When to Re-render in React</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Functional-Components"><span class="nav-number"></span> <span class="nav-text">Functional Components</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-keys"><span class="nav-number">1.</span> <span class="nav-text">the keys</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
