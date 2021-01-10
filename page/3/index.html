@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/www/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/05/19/操作文件和目录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/www/" itemprop="url">www</a></h1>
+                <a class="post-title-link" href="/2020/05/19/操作文件和目录/" itemprop="url">操作文件和目录</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,236 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-19T00:00:00+08:00">
+                2020-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><ul>
+<li>cp        复制文件和目录</li>
+<li>mv        移动/重命名文件和目录</li>
+<li>mkdir    创建目录</li>
+<li>rm        删除文件和目录</li>
+<li>ln        创建硬链接和符号链接</li>
+</ul>
+<p>这五个命令属于最常用的Linux命令之列，它们用来操作文件和目录。</p>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>匹配任意多个字符（包括零个或一个）</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配任意一个字符（不包括零个）</td>
+</tr>
+<tr>
+<td>[characters]</td>
+<td>匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td>[!characters]</td>
+<td>匹配任意一个不属于字符集中的字符</td>
+</tr>
+<tr>
+<td>[[:class:]]</td>
+<td>匹配任意一个属于指定字符类中的字符</td>
+</tr>
+</tbody></table>
+<h4 id="表-1-普遍使用的字符类"><a href="#表-1-普遍使用的字符类" class="headerlink" title="表-1: 普遍使用的字符类"></a>表-1: 普遍使用的字符类</h4><table>
+<thead>
+<tr>
+<th>字符类</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[:alnum:]</td>
+<td>匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>匹配任意一个字母</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>匹配任意一个数字</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>匹配任意一个小些字母</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>匹配任意一个大写字母</td>
+</tr>
+</tbody></table>
+<p>借助通配符，为文件名构建非常复杂的选择标准成为可能， 接受文件名作为参数的任何命令，都可以使用通配符。</p>
+<h3 id="cp复制命令"><a href="#cp复制命令" class="headerlink" title="cp复制命令"></a>cp复制命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>运行结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cp file1 file2</td>
+<td>复制文件file1内容到文件file2.如果file2已经存在，file2的内容会被file1的内容重写，如果file2不存在，则会创建file2</td>
+</tr>
+<tr>
+<td>cp -i file1 file2</td>
+<td>同上，但是执行之前会提示用户确认</td>
+</tr>
+<tr>
+<td>cp file1 file2 dir1</td>
+<td>复制file1和file2到目录dir1.目录dir1必须存在</td>
+</tr>
+<tr>
+<td>cp dir1/* dir2</td>
+<td>使用一个通配符，在目录dir1中的所有文件都被复制到dir2中。dir2必须已经存在</td>
+</tr>
+</tbody></table>
+<h3 id="mv-移动和重命名文件"><a href="#mv-移动和重命名文件" class="headerlink" title="mv 移动和重命名文件"></a>mv 移动和重命名文件</h3><p>mv命令可以执行文件移动和文件命名任务，这依赖与你怎么使用它，任何一种情况下，完成操作后，原来的文件名不再存在。使用方法跟cp很像。</p>
+<pre><code>mv item1 item2</code></pre><p>把文件或目录item1移动或重命名为item2</p>
+<pre><code>mv item... directory</code></pre><p>把一个或多个条目从一个目录移动到另一个目录中</p>
+<h3 id="rm-删除文件和目录"><a href="#rm-删除文件和目录" class="headerlink" title="rm 删除文件和目录"></a>rm 删除文件和目录</h3><pre><code>rm file1 默默地删除文件
+
+rm -i file1 删除文件之前，提示用户确认信息
+
+rm -i file1 dir1 删除文件file1, 目录dir1, 以及dir1中的内容</code></pre><p>注意： 类Unix的操作系统，比如说Linux，没有复原命令，一旦你用rm删除了一些东西，他就消失了，Linux假定你很聪明，你应该知道你在做什么。</p>
+<h3 id="ln-创建链接"><a href="#ln-创建链接" class="headerlink" title="ln 创建链接"></a>ln 创建链接</h3><p>ln命令既可以创建硬链接，也可以创建符号链接。</p>
+<pre><code>ln file link  // 创建一个硬链接
+
+ln -s item link // 创建符号链接</code></pre><h3 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h3><p>硬链接是最初Unix创建链接的方式，每个文件默认会有一个硬链接，这个硬链接给予文件名字。我们每创建一个硬链接，就为一个文件创建了一个额外的目录项。硬链接有两个重要的局限性：</p>
+<ul>
+<li>一个硬链接不能关联它所在文件系统之外的文件。这是说一个链接不能关联于链接本身不在同一个磁盘分区上的文件</li>
+<li>一个硬链接不能关联一个目录</li>
+</ul>
+<h3 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h3><p>创建符号链接是为了克服硬链接的局限性。符号链接生效，是通过创建一个特殊类型的文件，这个文件中包含一个关联文件或目录的文本指针。在这一方面，它们和windows的快捷方式差不多，当然，符号链接早于Windows的快捷方式很多年。</p>
+<p>一个符号链接指向一个文件，而且这个符号链接本身与其它的符号链接几乎没有区别。 例如，如果你往一个符号链接里面写入东西，那么相关联的文件也被写入。然而， 当你删除一个符号链接时，只有这个链接被删除，而不是文件自身。如果先于符号链接 删除文件，这个链接仍然存在，但是不指向任何东西。在这种情况下，这个链接被称为 坏链接。在许多实现中，ls 命令会以不同的颜色展示坏链接，比如说红色，来显示它们 的存在。</p>
+<p>拷贝的时候可以使用一个圆点来简化当前工作目录的写法</p>
+<pre><code>cp /etc/passwd . // 把etc目录下的passwd文件拷贝到当前目录</code></pre><p>对于符号链接，有一点很重要，执行的大多数文件操作时针对的链接对象，而不是链接本身。而rm命令是个特例，当你删除链接的时候，删除的是链接本身，而不是链接的对象。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/05/09/www/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/09/www/" itemprop="url">www</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T00:00:00+08:00">
+                2020-05-09
               </time>
             
 
@@ -367,7 +595,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/vitual-dom原理与简单实现/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/04/22/mySql小册/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -386,7 +614,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/vitual-dom原理与简单实现/" itemprop="url">vitual-dom原理与简单实现</a></h1>
+                <a class="post-title-link" href="/2020/04/22/mySql小册/" itemprop="url">mySql小册</a></h1>
         
 
         <div class="post-meta">
@@ -398,8 +626,8 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-22T00:00:00+08:00">
+                2020-04-22
               </time>
             
 
@@ -438,7 +666,47 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
       
         
           
-            <h2 id="vitual-dom原理与简单实现"><a href="#vitual-dom原理与简单实现" class="headerlink" title="vitual-dom原理与简单实现"></a>vitual-dom原理与简单实现</h2><p>有一个简单粗暴的办法，就是一旦数据发生变化，就重新绘制整个视图，也就是重新设置下innerHTML.但是问题是这样性价比太高，对于简单的局部的小数据还可以，一旦遇到大型复杂的应用就不行了，所以我们采用JavaScript的方法来模拟dom数，用新渲染的对象树去和旧的对象树进行对比，记录下变化的地方，然后应用到真实的dom树上，这样就不用全部重新渲染了，这就是虚拟dom的优势。</p>
+            <p>如果你愿意，可以打开多个shell，每个shell都是用mysql -uroot -p 来运行多个客户端程序，每个客户端程序都是互不影响的。</p>
+<p>如果你有多个电脑，也可以试试把他们那用局域网连接起来，在一个电脑上启动mysql服务器程序，在另一个电脑上执行mysql命令时候 使用ip地址作为主机名来连接到服务器。</p>
+<p>我们直接在黑框框里输入密码很可能被别人看到，这和你当着别人的面输入银行卡密码没啥区别，所以我们在执行mysql连接服务器的时候可以不显式的写出密码，就像这样：</p>
+<p>mysql -uroot -p</p>
+<p>运行着的服务器程序和客户端程序本质上都是计算机上的一个进程，所以客户端进程向服务器进程发送请求并得到回复的过程本质上是一个进程间通信的过程！</p>
+<p>MySQL支持下边三种客户端进程和服务器进程的通信方式。</p>
+<p>真实环境中，数据库服务器进程和客户端进程可能运行在不同的主机中，它们之间必须通过网络来进行通讯。MySQL采用TCP作为服务器和客户端之间的网络通信协议。在网络环境下，每台计算机都有一个唯一的IP地址，如果某个进程有需要采用TCP协议进行网络通信方面的需求，可以向操作系统申请一个端口号，这是一个整数值，它的取值范围是0~65535。这样在网络中的其他进程就可以通过IP地址 + 端口号的方式来与这个进程连接，这样进程之间就可以通过网络进行通信了</p>
+<p>MySQL服务器启动的时候会默认申请3306端口号，之后就在这个端口号上等待客户端进程进行连接，用书面一点的话来说，MySQL服务器会默认监听3306端口。</p>
+<p>如果3306端口号已经被别的进程占用了或者我们单纯的想自定义该数据库实例监听的端口号，那我们可以在启动服务器程序的命令行里添加-P参数来明确指定一下端口号，比如这样：</p>
+<p>mysql -P3307</p>
+<p>其实不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）.</p>
+<p>客户端可以向服务器发送增删改查各类请求</p>
+<p>服务器程序处理来自客户端的查询请求大致需要经过三个部分：分别是连接管理、理解与优化、存储引擎。</p>
+<p>客户端进程可以采用我们上边介绍的TCP/IP、命名管道或共享内存、Unix域套接字这几种方式之一来与服务器进程建立连接，每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个线程来专门处理与这个客户端的交互，当该客户端退出时会与服务器断开连接，服务器并不会立即把与该客户端交互的线程销毁掉，而是把它缓存起来，在另一个新的客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就起到了不频繁创建和销毁线程的效果，从而节省开销。从这一点大家也能看出，MySQL服务器会为每一个连接进来的客户端分配一个线程，但是线程分配的太多了会严重影响系统性能，所以我们也需要限制一下可以同时连接到服务器的客户端数量，至于怎么限制我们后边再说哈～</p>
+<p>在客户端程序发起连接的时候，需要携带主机信息、用户名、密码，服务器程序会对客户端程序提供的这些信息进行认证，如果认证失败，服务器程序会拒绝连接。另外，如果客户端程序和服务器程序不运行在一台计算机上，我们还可以采用使用了SSL（安全套接字）的网络连接进行通信，来保证数据传输的安全性。</p>
+<p>当连接建立后，与该客户端关联的服务器线程会一直等待客户端发送过来的请求，MySQL服务器接收到的请求只是一个文本消息，该文本消息还要经过各种处理</p>
+<p>MySQL服务器程序处理查询请求会把刚刚处理过的查询请求和结果缓存起来，如果下一次有一模一样的请求过来，直接从缓存中查找结果就好了，就不用再傻呵呵的去底层的表中查找了。</p>
+<p>这个查询缓存可以在不同客户端之间共享，也就是说如果客户端A刚刚查询了一个语句，而客户端B之后发送了同样的查询请求，那么客户端B的这次查询就可以直接使用查询缓存中的数据。。</p>
+<p>如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。</p>
+<p>不过既然是缓存，那就有它缓存失效的时候。MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了INSERT、 UPDATE、DELETE、TRUNCATE TABLE、ALTER TABLE、DROP TABLE或 DROP DATABASE语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！</p>
+<p> 虽然查询缓存有时可以提升系统性能，但也不得不因维护这块缓存而造成一些开销，比如每次都要去查询缓存中检索，查询请求处理完需要更新查询缓存，维护该查询缓存对应的内存区域。从MySQL 5.7.20开始，不推荐使用查询缓存，并在MySQL 8.0中删除</p>
+<p>语法解析：</p>
+<p>如果查询缓存没有命中，接下来就需要进入正式的查询阶段了。因为客户端程序发送过来的请求只是一段文本而已，所以</p>
+<p>mysql服务器程序首先要对这段文本做分析，判断请求的语法是否正确，然后从文本中将要查询的表、各种查询条件都提取出来放到MySql服务器内部使用的一些数据结构上来。</p>
+<p>这个从指定的文本中提取出我们需要的信息本质上算是一个编译过程，涉及词法解析、语法分析、语义分析等阶段，这些问题不属于我们讨论的范畴，大家只要了解在处理请求的过程中需要这个步骤就好了。</p>
+<p>查询优化：语法解析之后，服务器程序获得到了需要的信息，比如要查询的列是哪些，表是哪个，搜索条件是什么等等，但光有这些是不够的，因为我们写的MySQL语句执行起来效率可能并不是很高，MySQL的优化程序会对我们的语句做一些优化，如外连接转换为内连接、表达式简化、子查询转为连接吧啦吧啦的一堆东西。优化的结果就是生成一个执行计划，这个执行计划表明了应该使用哪些索引进行查询，表之间的连接顺序是啥样的。我们可以使用EXPLAIN语句来查看某个语句的执行计划，关于查询优化这部分的详细内容我们后边会仔细唠叨，现在你只需要知道在MySQL服务器程序处理请求的过程中有这么一个步骤就好了。</p>
+<p>存储引擎</p>
+<p>截止到服务器程序完成了查询优化为止，还没有真正的去访问真实的数据表，MySQL服务器把数据的存储和提取操作都封装到了一个叫存储引擎的模块里。我们知道表是由一行一行的记录组成的，但这只是一个逻辑上的概念，物理上如何表示记录，怎么从表中读取数据，怎么把数据写入具体的物理存储器上，这都是存储引擎负责的事情。为了实现不同的功能，MySQL提供了各式各样的存储引擎，不同存储引擎管理的表具体的存储结构可能不同，采用的存取算法也可能不同。</p>
+<p>为什么叫<code>引擎</code>呢？因为这个名字更拉风～ 其实这个存储引擎以前叫做<code>表处理器</code>，后来可能人们觉得太土，就改成了<code>存储引擎</code>的叫法，它的功能就是接收上层传下来的指令，然后对表中的数据进行提取或写入操作。</p>
+<p>为了管理方便，人们把连接管理、查询缓存、语法解析、查询优化这些并不涉及真实数据存储的功能划分为MySQL server的功能，把真实存取数据的功能划分为存储引擎的功能。</p>
+<p>各种不同的存储引擎向上边的MySQL server层提供统一的调用接口（也就是存储引擎API），包含了几十个底层函数，像”读取索引第一条内容”、”读取索引下一条内容”、”插入记录”等等。。</p>
+<p>所以在MySQL server完成了查询优化后，只需按照生成的执行计划调用底层存储引擎提供的API，获取到数据后返回给客户端就好了。</p>
+<p>常用存储引擎</p>
+<p>mySQL支持很多种存储引擎</p>
+<p>其实我们最常用的就是InnoDB和MyISAM，有时会提一下Memory。其中InnoDB是MySQL默认的存储引擎</p>
+<p>不同的存储引擎支持不同的功能</p>
+<p>存储引擎是负责对表中的数据进行提取和写入工作的，我们可以为不同的表设置不同的存储引擎，也就是说不同的表可以有不同的物理存储结构，不同的提取和写入方式。</p>
+<p>如果我们想显式的指定一下表的存储引擎，那可以这么写：</p>
+<p>CREATE TABLE 表名(<br>    建表语句;<br>) ENGINE = 存储引擎名称;</p>
+<p>如果表已经建好了，我们也可以使用下边这个语句来修改表的存储引擎：</p>
+<p>ALTER TABLE 表名 ENGINE = 存储引擎名称;</p>
 
           
         
@@ -487,7 +755,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/vue/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/04/15/vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -506,7 +774,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/vue/" itemprop="url">Vue源码</a></h1>
+                <a class="post-title-link" href="/2020/04/15/vue/" itemprop="url">Vue源码</a></h1>
         
 
         <div class="post-meta">
@@ -518,8 +786,8 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-15T00:00:00+08:00">
+                2020-04-15
               </time>
             
 
@@ -610,7 +878,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/seajs/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/03/31/网络应用的性能问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -629,7 +897,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/seajs/" itemprop="url">sea.js</a></h1>
+                <a class="post-title-link" href="/2020/03/31/网络应用的性能问题/" itemprop="url">网络应用的性能问题</a></h1>
         
 
         <div class="post-meta">
@@ -641,8 +909,8 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-31T00:00:00+08:00">
+                2020-03-31
               </time>
             
 
@@ -681,9 +949,21 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
       
         
           
-            <h3 id="seajs"><a href="#seajs" class="headerlink" title="seajs"></a>seajs</h3><p>在seajs中，所有的JavaScript模块都遵循CMD模块定义规范，该规范明确了模块的基本书写格式和基本交互规则。在CMD规范中一个模块就是一个文件。代码的书写格式如下：</p>
-<pre><code>define(factory);</code></pre><h4 id="define-Function"><a href="#define-Function" class="headerlink" title="define Function"></a>define Function</h4><p>define是一个全局函数，用来定义模块。<br>define接受factory参数，factory可以是一个函数，也可以是一个对象或者字符串。factory为对象、字符串时，表示模块的接口就是该对象、字符串。比如可以如下定义一个json数据模块：</p>
-<pre><code>define（{“foo”：“bar”}）;</code></pre>
+            <p>发现并解决网络应用的性能问题</p>
+<p>如果浏览器创建和显示某一帧所需的时间过长，则该帧会被跳过，根本不会显示。取而代之的是，您将看到下一帧（或紧接其后的帧），因此对象跳过此间隙而非平滑移动。</p>
+<p>（原来卡顿抖动是因为这个原因）</p>
+<p>通过确保应用运行的帧率始终保持在每秒 60 帧 (60fps)，可避免卡顿现象。有许多因素与应用的帧率有关，并且有多种 JavaScript 和 CSS 编码方法可减轻或彻底消除卡顿，实现所期望的帧率。</p>
+<p>基础知识：  网络性能面板Network</p>
+<p>Network 面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP 请求与响应标头和 Cookie，等等</p>
+<p>查看 DOMContentLoaded 和 load 事件信息</p>
+<p>network面板突出显示两个事件：  domcontentLoaded  和  load</p>
+<p>解析页面的初始标记时会触发domContentLoaded 此事件将会在network的两个地方显示：  1 在overview窗格的蓝色竖条线表示事件<br>2在summary窗格中，可以看到事件的确切时间。</p>
+<p>页面完全加载时将会触发load，此事件显示在三个地方</p>
+<p>1 overview窗格中的红色竖线表示该事件</p>
+<p>2 requests Table中的红色竖线</p>
+<p>3 summary 窗格 可以看到确切的时间</p>
+<p>过滤请求： 使用内容类型按钮可以仅显示选定内容类型的资源。</p>
+
           
         
       
@@ -731,7 +1011,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/source map/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/03/19/byte和bit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -750,7 +1030,7 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/source map/" itemprop="url">source map</a></h1>
+                <a class="post-title-link" href="/2020/03/19/byte和bit/" itemprop="url">基础知识</a></h1>
         
 
         <div class="post-meta">
@@ -762,8 +1042,8 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-19T00:00:00+08:00">
+                2020-03-19
               </time>
             
 
@@ -802,454 +1082,26 @@ sed -i -e&apos;s/1.6.2//g&apos; -e&apos;s/nginx\//WS/g&apos; -e&apos;s/&quot;NGI
       
         
           
-            <h3 id="从源码转换开始说起"><a href="#从源码转换开始说起" class="headerlink" title="从源码转换开始说起"></a>从源码转换开始说起</h3><p>js脚本现在变得越来越复杂，大部分源码（尤其是各种函数可和框架）都要经过转换，才能投入生产环境。常见的源码转换，主要有以下三种：</p>
+            <h3 id="byte和bit"><a href="#byte和bit" class="headerlink" title="byte和bit"></a>byte和bit</h3><p>byte = 字节 1byte = 8bits</p>
+<p>1字节=8比特</p>
+<p>速度单位480mbps代表的是480兆比特/秒，它等于60兆字节/秒</p>
+<p>平时所说的硬盘容量是8GB，这里的B指的是byte就是字节。</p>
+<p>1KB = 1024bytes = 2^10bytes</p>
+<p>1MB = 1024KB = 2^20bytes</p>
+<p>常识： 与传输速度有关的b一般指的是bit，与容量有关的b一般指的是byte.</p>
+<p>另外：usb2.0的传输速度 480mbps = 60MB/S的传输速度还只是理论值，它还要受到系统环境的制约，其实际的读写速度约在11~16mb/s。</p>
+<p>Bit意为‘位’或者‘比特’是计算机运算的基础；Byte意为‘字节‘，是计算机文件大小的基本计算单位。</p>
+<p>显示器的bit值只会影响到色彩过渡时候的平滑程度，与显示器本身的色域是没有多大关系的。</p>
+<h3 id="Data-URI-Scheme优缺点"><a href="#Data-URI-Scheme优缺点" class="headerlink" title="Data URI Scheme优缺点"></a>Data URI Scheme优缺点</h3><p>优点</p>
 <ul>
-<li>压缩减少体积。比如jquery 1.9的源码，压缩前是252KB，压缩后是32KB。</li>
-<li>多个文件合并，减少http请求数。</li>
-<li>其他语言编译成javascript。最常见的例子就是CoffeeScript(还有各大框架的CommonJS源码)。</li>
+<li>减少资源请求链接数</li>
+<li>当访问外部资源很麻烦或者受限的时候，可以很好的利用Data URI Scheme</li>
 </ul>
-<p>这三种情况都使得实际运行的代码不同于开发代码，debug变得困难重重。</p>
-<p>通常js解释器会告诉你第几行第几列出错了，但是这对于转换后的代码毫无用处，因为所有的变量都改了名字。你看到报错信息，毫无头绪，根本不知道他所在的位置。这，就是source map想要解决的问题。</p>
-<h3 id="什么是sourcemap"><a href="#什么是sourcemap" class="headerlink" title="什么是sourcemap"></a>什么是sourcemap</h3><p>source map是一个信息文件，里面存储着位置信息，也即是说，转换后的代码的每一个位置，所对应的转换前的位置。有了它，出错的时候，debug工具将直接显示原始源代码，而不是转换后的代码。目前，暂时只有Chrome浏览器支持这个功能。在Developer Tools的Setting设置中，确认选择“Enable source maps”</p>
-<h3 id="如何启用source-map"><a href="#如何启用source-map" class="headerlink" title="如何启用source map"></a>如何启用source map</h3><p>只要在转换后的代码尾部，加上一行就行了</p>
-<p>//@ sourceMappingURL=/path/to/sourcemapfile</p>
-<p>map文件可以放在网络上，也可以放在本地文件系统</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/px2rem或postcss-px2rem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/px2rem或postcss-px2rem/" itemprop="url">移动端适配</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="px2rem或postcss-px2rem"><a href="#px2rem或postcss-px2rem" class="headerlink" title="px2rem或postcss-px2rem"></a>px2rem或postcss-px2rem</h3><ul>
-<li>在移动端中，为了适配不同的设备，通常用rem来做适配</li>
-<li>rem是通过根元素进行适配的，网页中的根元素指的是<html>，我们通过设置</html></li>
-</ul>
-<p>假值列表：</p>
-<p>以下这些是假值</p>
+<p>缺点</p>
 <ul>
-<li>undefined</li>
-<li>null</li>
-<li>false</li>
-<li>+0、-0、NaN</li>
-<li>“”</li>
-</ul>
-<p>除了以上这些假值以外的值都是真值，也就是说没有一个真值列表，真值的列表可以无限长，无法一一列举，我们只能通过假值列表做为参考来判断一个值是不是真值。</p>
-<blockquote>
-<p>= 0 和 == -1 这样的写法不是很好，称为”抽象泄漏“，意思是在代码中暴露了底层的实现细节，这里指的是用-1作为失败时的返回值，这些细节应该被屏蔽掉。</p>
-</blockquote>
-<p>html是浏览器构建dom的蓝图，为了正确构建每个dom，浏览器还会修复它在蓝图中发现的问题。</p>
-<p>像普通人一样编写代码和像忍者一样编写代码的最大区别在于是否把js当成函数式语言来理解，对这一点的认知水平决定了你编写的代码的水平。</p>
-<p>对象能做的任何一件事，函数也都能做，函数也是对象，唯一的特殊之处在于它是可调用的，即函数会被调用以便执行某项动作。</p>
-<p>把函数作为第一类对象，是函数式编程的第一步</p>
-<p>回调函数不一定都是异步的，两码事</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/js中defer和async的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/js中defer和async的区别/" itemprop="url">js中defer和async的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="js中defer和async的区别"><a href="#js中defer和async的区别" class="headerlink" title="js中defer和async的区别"></a>js中defer和async的区别</h2><pre><code>//最原始的情况
- &lt;script src=&apos;script.js&apos;&gt;&lt;/script&gt;
- 没有defer或者async，浏览器会立即加载并执行指定的脚本，‘立即’的意思是指在渲染*script*标签之后的文档元素之前，也就是不等待后续载入的文档元素，读到就加载并执行。
- //async的情况
- &lt;script asycn src=&apos;script.js&apos;&gt;&lt;/script&gt;
- 有了async,加载和渲染后续文档元素的过程将和script.js的加载与执行并行进行（异步）。
- //defer的情况
- &lt;script defer src=&apos;script.js&apos;&gt;&lt;/script&gt;
- 有defer,加载后续文档元素的过程将和script.js并行进行（异步），但是script.js的执行要在所有元素解析完成之后，也就是DOMContentLoaded事件触发之前完成。是的，是之前。</code></pre><p>下面是一张三种加载方式的对比图<br><img src="http://segmentfault.com/img/bVcQV0" alt="Aaron Swartz"></p>
-<p>async和defer一样，不会阻塞当前文档的解析，他会异步下载脚本，但是和defer不同的是，asnync会在脚本下载完成后立即执行，如果项目中脚本之间存在依赖关系，不推荐使用async</p>
-<h3 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h3><p>DOMContentLoaded与OnLoad事件，前者：页面document已经解析完成，页面中的dom元素已经可用，但是页面中引用的图片、subframe可能还没加载完。后者Onload：页面中的所有资源都加载完毕，包括图片。浏览器的载入进度在这时才会停止。这两个时间点将页面加载的timeline分成了三个阶段。</p>
-<h3 id="defer-属性声明"><a href="#defer-属性声明" class="headerlink" title="defer 属性声明"></a>defer 属性声明</h3><p>其实浏览器默认加载js文件是同步阻塞的就是因为怕js文件中会有比如document.write()或者类似的dom修改，而声明了defer属性的script标签，其实就是表明，这个脚本中不会有document.write或者其他dom修改。</p>
-<h3 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h3><p>什么是延迟加载？    </p>
-<p>延迟加载: 有些js代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。延迟加载就是一开始并不加载这些暂时用不到的js,而是在需要的时候或者稍后再通过js的控制来异步加载。也就是将js切分成很多模块，页面初始化时只加载需要立即执行的js，然后其他js的加载延迟到第一次需要用到的时候再加载。特别是页面有大量不同的模块组成，很多可能暂时不用或者根本就没用到。就像<em>图片的延迟加载</em>在图片出现在可视区域时，才加载显示图片。</p>
-<h3 id="script的两个阶段：-加载和执行"><a href="#script的两个阶段：-加载和执行" class="headerlink" title="script的两个阶段： 加载和执行"></a>script的两个阶段： 加载和执行</h3><p>js的加载其实是由两个阶段组成： <em>下载内容（download bytes）</em> 和<em>执行（parse and execute）</em> 浏览器在下载完js的内容后就会立即对其解释执行，不管是同步的还是异步的。下载后都会立即执行，而浏览器在解析执行js阶段是阻塞任何操作的，这时候的浏览器处于无响应状态。我们都知道通过网络下载script需要明显的时间，单容易忽略第二阶段，解析和执行也是需要时间的，script的解析和执行所花的时间比我们想象中的要多。延迟执行的原理: 将js先异步下载缓存起来，但是不立即执行，而是在第一次需要的时候执行一次。利用特殊的技巧可以做到下载和执行的分离。比如将js的内容作为Image或者object对象加载缓存起来，这样就不会立即执行了，然后在第一次需要的时候再执行。</p>
-<h3 id="script标签使用的历史"><a href="#script标签使用的历史" class="headerlink" title="script标签使用的历史"></a>script标签使用的历史</h3><p>1script放在head中</p>
-<pre><code>&lt;head&gt;
-    &lt;script src=&apos;..&apos;&gt;&lt;/script&gt;
-&lt;/head&gt;</code></pre><p>阻止了后续的下载，在IE6-7中script是顺序下载的，而不是现在的并行下载、顺序执行的方式，在下载和执行阶组织渲染，这就是页面卡的根源！</p>
-<p>2 script放在页面底部</p>
-<pre><code>&lt;script src=&apos;..&apos;&gt;&lt;/script&gt;
-&lt;/body&gt;</code></pre><p>不阻止其他下载（底部/body前）<br>在IE6-7中script是顺序下载的；在下载和解析执行阶段阻止渲染</p>
-<p>3 异步加载script</p>
-<pre><code>var se = document.createElement(&apos;script&apos;)
-se.src = &apos;http://script.js&apos;
-document.getElementsByTagName(&apos;head&apos;)[0].appendChild(se)</code></pre><p>在所有浏览器中script都是并行下载，只在解析执行阶段阻止渲染</p>
-<p>4 异步下载 + 按需执行（图片预加载）</p>
-<pre><code>var se = new Image()
-se.onload = registerScript()
-se.src = &apos;http://anydomain.com/a.js&apos;</code></pre><p>将下载js和解析执行js分离出来。不阻止其他下载，在所有浏览器中script都是并行下载不阻止渲染直到真正需要时。</p>
-<h3 id="异步加载的问题"><a href="#异步加载的问题" class="headerlink" title="异步加载的问题"></a>异步加载的问题</h3><p>在异步加载的时候，无法使用document.write输出文档内容<br>在同步模式下，document.write是在当前script所在位置输出文档的。而在异步模式下，浏览器继续处理后续页面的内容，根本无法确定document.write应该输出到什么位置，所以异步模式下document.write不可行。而到了页面已经onload之后，再执行document.wrire将导致当前页面的内容被清空，因为它会自动触发document.open方法。实际上docuemnt.write的名声并不好，最好少用。</p>
-<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p>常用于跨域请求数据的JSONP，也可以理解为一种脚本的同步加载：我们在本站声明一个回调函数，然后向外站用src请求一个js文件，文件中的代码是用外站的数据对本站函数进行调用，就实现了使用外站数据的目的。虽然函数是本站声明的，数据是外站的，外站调用本站函数，但是把它理解为同步加载和执行就简单了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/js函数式编程？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/js函数式编程？/" itemprop="url">javascript函数式编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h3><h5 id="数学中的函数"><a href="#数学中的函数" class="headerlink" title="数学中的函数"></a>数学中的函数</h5><pre><code>f(x) = y</code></pre><ul>
-<li>函数必须总是接受一个参数</li>
-<li>函数必须总是返回一个值</li>
-<li>函数应该依据接收到的参数而不是外部环境运行</li>
-<li>对于一个给定的x,只会输出唯一的一个y</li>
-</ul>
-<pre><code>var percentValue = 5;
-var calculateTex = (value) =&gt; {
-    return value/100 * (100 + percentValue )）
-}</code></pre><p>上面的计税函数不是一个纯函数在于它依赖了全局变量percentValue ，修复方法很简单，只需要移动全局变量percentValue ，把它作为函数的参数改写如下：</p>
-<pre><code>var calculateTex = (value, percentValue ) =&gt; {
-return value/100 * (100 + percentValue )
-}</code></pre><p>现在calculateTex 可以被称为一个真正的纯函数了。<br>将函数对全局变量的依赖移到函数的参数中是最常见的一种“纯函数化”的方式，移除函数对全局变量的访问会使得函数的测试更加容易。</p>
-<h3 id="引用透明性-（Referential-Transparency）"><a href="#引用透明性-（Referential-Transparency）" class="headerlink" title="引用透明性 （Referential Transparency）"></a>引用透明性 （Referential Transparency）</h3><p>函数对于相同的输入都将返回相同的值，这一属性被称为引用透明性。依据函数的这一属性可以直接用函数的结果替换掉函数的调用，这个过程被称为替换模型，这些特性使得并发代码和缓存称为可能。多线程和同步的问题在于对全局数据的依赖上，而遵循引用透明性的函数只依赖参数的输入而不依赖全局数据，所以线程可以自由的运行且没有锁的机制。<br>引用透明性是一种<a href="https://en.wikipedia.org/wiki/Analytical_philosophy" target="_blank" rel="noopener">分析哲学</a></p>
-<h3 id="函数式编程与命令式编程的对比"><a href="#函数式编程与命令式编程的对比" class="headerlink" title="函数式编程与命令式编程的对比"></a>函数式编程与命令式编程的对比</h3><h5 id="命令式编程遍历数组"><a href="#命令式编程遍历数组" class="headerlink" title="命令式编程遍历数组"></a>命令式编程遍历数组</h5><pre><code>let array = [1,2,3]
-for (let i = 0; i&lt; array.length; i++) {
-console.log(array[i])
-}</code></pre><h5 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h5><pre><code>let array = [1,2,3]
-array.forEach(item =&gt; console.log(item))</code></pre><p>在函数式编程中我们移除了“如何做”的部分将他抽象到一个函数中（高阶函数），如此可以让开发者只需要关心手头的问题</p>
-<h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><ul>
-<li>纯函数不应该依赖任何外部变量，同时也不应该改变任何外部变量。</li>
-<li>纯函数应该像Math.max(3,4,5,6)一样，不需要看max的内部实现就能得到结果。</li>
-<li>纯函数允许我们并发的执行代码，因为纯函数不会改变它的环境，意味着我们不需要关心同步的问题。</li>
-<li>纯函数使缓存函数的输出避免下次重新计算成为可能</li>
-<li>纯函数应该被设计成只做一件事（单一职责）就像UNIX哲学那样，我们可以通过组合或者管道来完成复杂的任务</li>
+<li>Data URL形式的图片不会被浏览器缓存，这意味着每次访问页面都会被下载一次，但是可以通过css文件的background-image样式规则使用Data URI Scheme，使其随css文件一同被浏览器缓存起来</li>
+<li>base64编码的体积是原数据的4/3，也就是说Data URL形式的图片会比二进制格式的图片体积大1/3</li>
+<li>移动端性能比较低。</li>
 </ul>
 
           
@@ -1299,7 +1151,7 @@ array.forEach(item =&gt; console.log(item))</code></pre><p>在函数式编程中
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/javascript语言精粹/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/03/19/引言/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1318,7 +1170,7 @@ array.forEach(item =&gt; console.log(item))</code></pre><p>在函数式编程中
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/javascript语言精粹/" itemprop="url">javascript语言精粹</a></h1>
+                <a class="post-title-link" href="/2020/03/19/引言/" itemprop="url">引言</a></h1>
         
 
         <div class="post-meta">
@@ -1330,8 +1182,8 @@ array.forEach(item =&gt; console.log(item))</code></pre><p>在函数式编程中
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:04+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-19T00:00:00+08:00">
+                2020-03-19
               </time>
             
 
@@ -1370,29 +1222,12 @@ array.forEach(item =&gt; console.log(item))</code></pre><p>在函数式编程中
       
         
           
-            <h3 id="javascript语言精粹"><a href="#javascript语言精粹" class="headerlink" title="javascript语言精粹"></a>javascript语言精粹</h3><h4 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><p>在web浏览器中每个 </p>
-<pre><code>&lt;script&gt; </code></pre><p>标签提供一个被编译且立即执行的编译单元，JavaScript把它们一起抛到一个公共的全局名字空间中。<br>switch、while、for和do语句允许有一个可选的前置标签label。它配合break语句来使用。<br>for-in循环用于枚举一个对象的所有属性名。在每次循环中object的下一个属性名字符串被赋值给variale。通常需要使用object.hasOwnProperty(variable)这个方法来确定一个属性是否是该对象的成员，还是来自于原型链。</p>
-<pre><code>for(myvar in obj){
-    if(obj.hasOwnProperty(myvar)){
-        //do something
-    }
-}</code></pre><p>do语句就像while语句，唯一的区别是它在代码执行之后而不是之前检测表达式的值，这就意味着代码块至少执行一次。<br>try语句执行一个代码块，并捕获该代码块抛出的任何异常。catch从句定义了一个新的变量variable来接受抛出的异常对象。<br>throw语句抛出一个异常，如果throw语句在一个try代码块中，那么控制流就会跳转到catch从句中。如果throw语句在函数中，则该函数调用被放弃，控制流跳转到调用该函数的try语句的catch从句中。throw语句中的表达式通常是一个对象字面量，包含一个name属性和一个message属性。异常捕获器可以使用这些信息去决定该做什么。return语句会导致从函数中提前返回，它也可以指定要被返回的值，如果没有指定返回的表达式，那么返回值就是undefined。JavaScript不允许在return关键字和表达式之间换行。</p>
-<h4 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h4><p>对象字面量是一种可以方便的按照指定规格创建新对象的表示法，属性名可以是标示符或者字符串，这些名字被当做字面量而不是变量名来对待，所以对象的属性名在编译时才能知道。属性的值就是表达式。</p>
-<h3 id="第三章-对象"><a href="#第三章-对象" class="headerlink" title="第三章 对象"></a>第三章 对象</h3><p>JavaScript的简单数据类型包括数字 字符串 布尔值 null值和undefined值。其他所有值都是对象。数字字符串和布尔值‘貌似’对象，因为它们有方法，但是它们是不可变的。JavaScript中的对象是可变的键控集合。在JavaScript中数组是对象，函数是对象正则表达式是对象。对象是属性的容器，其中每个属性都拥有名字和值，属性的名字可以是包括空字符串在内的任意字符串。属性值可以是除了undefined值之外的任何值。<br>JavaScript包含一种原型链的特性，允许对象继承另一个对象的属性。正确的使用它能减少对象初始化时消耗的时间和内存。</p>
-<h4 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h4><p>要检索对象里包含的值，可以采用在[]后缀中括住一个字符串表达式的方式。如果字符串表达式是一个字符串字面量，而且是一个合法的JavaScript标识符不是保留字，那么也可以使用.表示法来代替，优先考虑使用.</p>
-<p>||  运算符可以用来填充默认值；</p>
-<pre><code>var middle = stooge[&apos;middle-name&apos;] || &apos;none&apos;,
-var status = flight.status || &apos;unknow&apos;</code></pre><p>尝试从undefined的成员属性中取值将会导致TypeError异常。这时可以使用&amp;&amp;运算符来避免错误。</p>
-<pre><code>flight.e     // undefined
-flight.e.f   // throw &quot;TypeError&quot;
-flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>对象里的值可以通过赋值语句来更新，如果属性名已经存在在对象里了，哪儿这个属性的值就会被替换，如果对象之前没有那个属性名，那么该属性就会被扩充到对象中。</p>
-<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>每个对象都链接到一个原型对象，并且可以从中继承属性。所有通过对象字面量创建的对象都连接到Object.prototype，他是一个JavaScript中的标配对象。原型链在更新时是不起作用<code>的</code>，当我们对某个对象做出改变时，不会触及该对象的原型。原型链关系是一中动态的关系，如果我们添加一个新的属性到原型中，那么这个属性会立即对所有基于该原型的对象可见。</p>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>delete运算符可以用来删除对象的属性，如果对象包含该属性，那么该属性就会被移除。它不会触及原型链中的任何对象。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数对象链接到Function.proptotype。（Function.proptotype再链接到Object.proptotype）每个函数在创建时候会附加两个隐藏属性：1函数的上下文和实现函数行为的代码。每个函数在创建时也随配有一个prototype属性。它的值是一个拥有constructor属性且值为该函数的对象，这个和隐藏链接到Function.prototype完全不同。<br>函数字面量可以出现在任何允许表达式出现的地方。函数也可以被定义在其他函数中，一个内部函数除了可以访问自己的参数和变量，同时它也可以自由访问把它嵌套在其中的父函数的参数和变量。通过函数字面量创建的函数对象包含一个链接到外部上下文的链接。这被称为闭包。他是JavaScript强大表现力的来源。<br>JavaScript创建一个函数的时候，会给该对象设置一个‘调用’属性，当JavaScript调用一个函数时，可以理解为调用此函数的调用属性。</p>
-<h3 id="函数字面量"><a href="#函数字面量" class="headerlink" title="函数字面量"></a>函数字面量</h3><p>//创建一个名为add的变量，并用来把两个数字相加的函数赋值给它。</p>
-<pre><code>var add = function(a,b){
-    return a + b
-}</code></pre><p>函数字面量包括四个部分：第一个部分是保留字function第二个部分是函数名（可以被省略），函数可以通过函数名来递归的调用自己。第三部分是包围在圆括号中的一组参数。多个参数用逗号隔开。第四部分是包围在花括号中的一组语句。这些语句是函数的主体，在函数被调用的时候执行。</p>
+            <h3 id="GNU计划"><a href="#GNU计划" class="headerlink" title="GNU计划"></a>GNU计划</h3><p>GNU计划又称为<em>革奴</em>计划，是一个自由软件集体协作计划，1983年9月27日由理查德.斯托曼在麻省理工学院公开发起。他的目标是创建一套完全自由的操作系统，成为GNU.<br>理查德.斯托曼是一个天才的哲学家，自由软件运动的创始人，自由软件基金会创世者，他创建了GNU项目，编写了第一版GNU C编译器（gcc），创立了GNU通用公共协议（the GPL）等。</p>
+<h3 id="名字"><a href="#名字" class="headerlink" title="名字"></a>名字</h3><p>GNU是“GNU is not Unix” 的缩写。</p>
+<h3 id="自由"><a href="#自由" class="headerlink" title="自由"></a>自由</h3><p>自由是一种权利，它决定你的计算机能做什么，同时能够拥有这种“自由”的唯一方式就是知道计算机正在做什么。自由是指一台没有任何秘密的计算机，你可以从它那里了解一切，只要你用心的寻找。</p>
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>作为人类，本能的知道让计算机圆满完成工作的唯一途径，是用键盘来操作计算机。</p>
+<p>图形用户界面让简单的任务更容易完成，而命令行界面使得完成复杂的任务成为可能。</p>
+<p>因为linux是以Unix家族的操作系统为模版写成的，所以他分享了Unix丰富的命令行工具。</p>
 
           
         
@@ -1441,7 +1276,7 @@ flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href=
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/https/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/03/17/字符集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1460,7 +1295,7 @@ flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href=
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/https/" itemprop="url">https? ssl/tls</a></h1>
+                <a class="post-title-link" href="/2020/03/17/字符集/" itemprop="url">深入浅出计算机组成原理-二进制编码</a></h1>
         
 
         <div class="post-meta">
@@ -1472,8 +1307,8 @@ flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href=
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T00:00:00+08:00">
+                2020-03-17
               </time>
             
 
@@ -1512,22 +1347,275 @@ flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href=
       
         
           
-            <h3 id="什么是安全？怎样才安全？"><a href="#什么是安全？怎样才安全？" class="headerlink" title="什么是安全？怎样才安全？"></a>什么是安全？怎样才安全？</h3><ul>
-<li>机密性</li>
-<li>完整性</li>
-<li>身份认证</li>
-<li>不可否认</li>
+            <h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><p>字符集表示的可以是字符的一个集合，比如“中文”就是一个字符集，不过这样描述一个字集并不准确，想要更精确一点，我们可以说：“第一版《新华字典》里面出现的所有汉字”这是一个字符集。这样我们才能明确知道，一个字符在不在这个字符集里面。比如，我们日常说的Unicode，其实就是一个字符集，包含了150种语言的14万个不同的字符。</p>
+<h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>字符编码是对字符集里的这些字符，怎么一一用二进制表示出来的一个字典。我们上面说的Unicode，就可以用UTF-8、UTF-16、UTF-32来进行编码，存储成二进制。所以，有了字符集我们甚至可以自己发明自己的一种字符编码。</p>
+<h3 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h3><p>同样的文本，采用不同的编码存储下来，如果另一个程序，用一种不同的编码方式来进行解码和展示，就会出现乱码。</p>
+<h3 id="字节流和字符流"><a href="#字节流和字符流" class="headerlink" title="字节流和字符流"></a>字节流和字符流</h3><p>在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。程序中的输入输出都是以流的形式保存的，流中保存的实际上全部是字节文件。</p>
+<p>所有文件的储存都是字节(byte)的存储，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，在储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取以形成字节序列。</p>
+<p>字节流可以用于任何类型的对象，包括二进制对象，而字符流只能处理字符或者字符串；字节流提供了处理任何类型的io操作的功能，但是它不能直接处理Unicode字符，而字符流就可以。</p>
+<p>字节流在操作的时候本身是不会用到缓冲区（内存）的，是与文本文件本身直接操作的，而字符流在操作的时候是用到缓冲区的。在所有的硬盘上保存文件或进行传输的时候都是以字节的方法进行的，包括图片也是按照字节完成，而字符是只有在内存中才会形成的，所以使用字节的操作是最多的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/03/14/缓存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/14/缓存/" itemprop="url">缓存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T00:00:00+08:00">
+                2020-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="服务器的缓存控制"><a href="#服务器的缓存控制" class="headerlink" title="服务器的缓存控制"></a>服务器的缓存控制</h3><ul>
+<li>浏览器发现缓存中没有数据，于是发送请求，向服务器获取资源</li>
+<li>服务器响应请求，返回资源，同时标记资源的有效期</li>
+<li>浏览器缓存资源，等待下次重用</li>
 </ul>
-<p>https除了协议名和端口号（443）这两点不同之外在语法、语义上和http完全一样。</p>
-<p>https能够鉴别危险的网站，并且尽最大可能保证你的上网安全，防御黑客对信息的窃听、篡改或者“钓鱼”、伪造。</p>
-<p>https的秘密在于它把层的传输协议由tcp/ip换成了ssl/tls，由Http over tcp/ip变成了http over ssl/tls,让http运行在了安全的ssl/tls协议上，收发报文不再使用Socket API,而是调用专门的安全接口。</p>
-<h3 id="ssl-tls"><a href="#ssl-tls" class="headerlink" title="ssl/tls"></a>ssl/tls</h3><p>ssl—安全套接层，在osi模型中处于第五层，由网景公司于1994年发明，有v2和v3两个版本，而v1版本因为有严重的缺陷从未公开过。</p>
-<p>ssl发展到v3时期已经证明了它自身是一个非常好的安全通信协议，于是互联网工程组IETF在1999年把它改名为tls（传输层安全），正式标准化，版本号重新从1.0算起，所以其实TLS1.0就是SSLv3.1。</p>
-<p>今天的tls已经发行了有三个版本，2006年的1.1、 2008年的1.2、和2018年的1.3,每个新版本都紧跟着密码学的发展和互联网的现状，持续强化安全和性能，已经成为了信息安全领域的权威标准。</p>
-<p>目前应用最为广泛的tls是1.2，而之前的协议都已经被认为是不安全的，各大浏览器即将在2020年左右停止支持。</p>
-<p>tls由记录协议、握手协议、警告协议、变更密码规范协议、扩展协议等几个子协议组成，综合使用了对称加密、非对称加密、身份认证等许多密码学前沿技术。</p>
-<p>浏览器和服务器在使用tls建立连接的时候需要选择一组恰当的加密算法来实现安全通信，这些算法的组合被称为密码套件。</p>
-<h5 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL"></a>OpenSSL</h5><p>是一个著名的开源密码学程序库和工具包，几乎支持所有公开的加密算法和协议，已经成为了事实上的标准，许多应用软件都会使用它来作为底层库来实现tls功能，包括常用的web服务器Apache、Nginx等。</p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>里面的值max-age=30就是资源的有效时间只有30秒，相当于告诉浏览器，这个页面只能缓存30秒，之后就过期了，不能用。</p>
+<p>注意： max-age是<strong>生存时间</strong>，又叫做新鲜度，它的时间的计算起点是响应报文的创建时间，也就是数据离开服务器的时刻，而不是客户端收到报文的时刻，所以如果数据在传输的过程中耗费了大量的时间，到达客户端的时候存活时间就没有30秒了。</p>
+<h3 id="其他几个缓存控制属性"><a href="#其他几个缓存控制属性" class="headerlink" title="其他几个缓存控制属性"></a>其他几个缓存控制属性</h3><ul>
+<li>no_store: 买来的西瓜不允许放冰箱，要么立刻吃掉，要么立刻扔掉</li>
+<li>no_cache: 可以放进冰箱，但吃之前必须向超市询问有没有更新鲜的，有就吃超市里的。</li>
+<li>must-revalidate: 可以放进冰箱，保鲜期内可以吃，过期了就要问超市还让不让吃。</li>
+</ul>
+<h3 id="关于Cache-Control"><a href="#关于Cache-Control" class="headerlink" title="关于Cache-Control"></a>关于Cache-Control</h3><p>不止服务器可以发送”Cache-Control”头,浏览器也可以发送”Cache-Control”头，</p>
+<p>就是说请求-应答的双方都可以用这个字段进行缓存控制，互相协商缓存的使用策略。</p>
+<p>当你点击浏览器的“刷新”按钮的时候，浏览器会在请求头里面加一个<br><em>Cache-Control:max-age=0</em>因为max-age是生存时间，max-age=0的意思就是<br>“我要一个最最新鲜的西瓜”，而本地缓存里的数据至少保存了几秒钟了，所以<br>浏览器就不会使用缓存，而是向服务器发送请求。服务器看到max-age=0也就会用一个<br>最新生成的报文回应浏览器。</p>
+<p>而Ctrl+F5的“强制刷新” 其实是发送了一个Cache-Control:no-cache<br>含义和max-age=0基本一样。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/02/18/光猫/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/18/光猫/" itemprop="url">网络系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-18T00:00:00+08:00">
+                2020-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h3><p>光纤猫名字的由来，以前ADSL上网要用到调制解调器，调制解调器的英文是Modem，人们根据谐音Modem，亲昵的称之为“猫”，而后来的光网络单元的形状，功能和调制解调器差不多，人们就沿用了猫的称呼，将其称之为光纤猫。</p>
+<p>互联网世界更像是由数不清的大小岛屿组成的“千岛之国”。</p>
+<p>互联网的正式名称是 Internet，里面存储着无穷无尽的信息资源，我们通常所说的“上网”实际上访问的只是互联网的一个子集“万维网”（World Wide Web），它基于 HTTP 协议，传输 HTML 等超文本资源，能力也就被限制在 HTTP 协议之内。</p>
+<h3 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h3><p>ip协议曾经有v1 v2 v3等早期协议版本，但是因为不够完善没有对外发布，v5仅仅用于实验室内部研究，也从未公开，所以我们知道的只有v4和v6.</p>
+<p>IPv4: 使用四组由点 “.”分隔的数字，例如192.168.0.1，总共约2^32，大约42亿个可以分配的地址。</p>
+<p>IPv6: 使用八组由冒号 “:” 分隔的数字作为地址，容量扩大了很多有2^128个。</p>
+<h3 id="四层负载均衡"><a href="#四层负载均衡" class="headerlink" title="四层负载均衡"></a>四层负载均衡</h3><p>工作在传输层之上，基于TCP/IP协议的特性，例如IP地址、端口号等实现对后端服务器的负载均衡。</p>
+<h3 id="七层负载均衡"><a href="#七层负载均衡" class="headerlink" title="七层负载均衡"></a>七层负载均衡</h3><p>工作在应用层上，看到的是http协议，解析http报文里的uri、主机名、资源类型等数据，再用适当的策略转发给后端服务器。</p>
 
           
         
@@ -1613,7 +1701,7 @@ flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

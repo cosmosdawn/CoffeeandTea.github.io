@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于同源策略同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。 以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？ 先来看如果没有了同源策略会是什么样子。 假设没有同源限制，A网站的API可以被任何来源的AJAX请求访">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同源策略再理解">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/07/01/关于同源策略/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="关于同源策略同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。 以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？ 先来看如果没有了同源策略会是什么样子。 假设没有同源限制，A网站的API可以被任何来源的AJAX请求访">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-10T07:23:52.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="同源策略再理解">
+<meta name="twitter:description" content="关于同源策略同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。 以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？ 先来看如果没有了同源策略会是什么样子。 假设没有同源限制，A网站的API可以被任何来源的AJAX请求访">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/07/01/关于同源策略/">
+
+
+
+
+
+  <title>同源策略再理解 | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/07/01/关于同源策略/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">同源策略再理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T00:00:00+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="关于同源策略"><a href="#关于同源策略" class="headerlink" title="关于同源策略"></a>关于同源策略</h3><p>同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。</p>
+<p>以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？</p>
+<p>先来看如果没有了同源策略会是什么样子。</p>
+<p>假设没有同源限制，A网站的API可以被任何来源的AJAX请求访问，包括获取用户的隐私信息，只看用户有没有登录，现在有个坏人做了一个网站B，坏人在B网页中用AJAX访问A网站的API，如果一个用户访问B之前已经登录了A，那这个请求包含A网站的cookie信息，也就会被A网站认为用户已经登录，这样用户在A网站的隐私信息就泄露给了控制B网站的坏人。</p>
+<p>其实同源策略就是说一个网站的api接口定义，只允许自己网站的网页来请求访问。比如说淘宝网的一个接口比如长这个样子：<a href="http://taobao.com/api/shoppingCart/list" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list</a><br>请求这个接口就可以获得你的购物车中的商品，按照正常的操作流程，你自己登陆你自己的淘宝账号，点击右上角购物车的图标，网页发送这个接口请求到淘宝的后台然后网站在新的页面返回你的购物车中的商品，于是你看到了你自己的购物车中都有些什么。此时你想：这个接口是开放的，任何人都知道淘宝查看购物车商品的接口是<a href="http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？</a><br>假如我是一个黑客，我做了一个网页运行在xiaoyu.com上，在这个网站上我写好了请求脚本去请求<a href="http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。</a></p>
+<p>所以其实是同源策略也是基于：1、浏览器向一个域发送请求的时候会带上这个域的cookies（而不管当前页面是否运行在哪个域）。2服务器端受到请求校验cookies通过后就理所当然的认为这是自家的程序员开发的网页发出的合法请求于是就乖乖返回了结果或者执行了操作。这两点‘简单’的设计让浏览器发送请求更加方便也让服务器处理请求更加方便但是却有着巨大的安全漏洞，那就是我们无法保证发送请求的脚本是运行在该运行的网站上，我在家写一个attack.html的页面在里面请求淘宝接口，只要我拿到了你淘宝的cookies我把网页用浏览器本地打开执行，攻击就完成了，这太简答了！所以浏览器才会有同源策略，不是运行在taobao.com的页面请求taobao的接口是跨域的，不能给你通过。</p>
+<p>另外，同源策略只是阻止你读取ajax返回的内容，实际上请求依然发送到了服务器。</p>
+<p>有疑问？下篇讲一讲跨域就懂了</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/30/代理t/" rel="next" title="代理">
+                <i class="fa fa-chevron-left"></i> 代理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/11/缓存代理/" rel="prev" title="缓存代理">
+                缓存代理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于同源策略"><span class="nav-number">1.</span> <span class="nav-text">关于同源策略</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

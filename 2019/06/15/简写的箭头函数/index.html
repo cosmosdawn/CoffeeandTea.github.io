@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="属性的简洁表示使用场景：一个我们声明的对象中包含若干属性，其属性值由变量表示，且变量名和属性名一样。 // es5的写法 var  listenters = [] function listen() {} var events = {     listtenters: listtenters,     listen: listen }    上面es5的写法中产生了重复代码，可以使用ES6中的属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 new Feature">
+<meta property="og:url" content="https://coffeeandtea.github.io/2019/06/15/简写的箭头函数/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="属性的简洁表示使用场景：一个我们声明的对象中包含若干属性，其属性值由变量表示，且变量名和属性名一样。 // es5的写法 var  listenters = [] function listen() {} var events = {     listtenters: listtenters,     listen: listen }    上面es5的写法中产生了重复代码，可以使用ES6中的属性">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-10T07:05:19.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 new Feature">
+<meta name="twitter:description" content="属性的简洁表示使用场景：一个我们声明的对象中包含若干属性，其属性值由变量表示，且变量名和属性名一样。 // es5的写法 var  listenters = [] function listen() {} var events = {     listtenters: listtenters,     listen: listen }    上面es5的写法中产生了重复代码，可以使用ES6中的属性">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2019/06/15/简写的箭头函数/">
+
+
+
+
+
+  <title>ES6 new Feature | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/06/15/简写的箭头函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6 new Feature</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-15T00:00:00+08:00">
+                2019-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="属性的简洁表示"><a href="#属性的简洁表示" class="headerlink" title="属性的简洁表示"></a>属性的简洁表示</h3><p>使用场景：一个我们声明的对象中包含若干属性，其属性值由变量表示，且变量名和属性名一样。</p>
+<pre><code>// es5的写法
+var  listenters = []
+function listen() {}
+var events = {
+    listtenters: listtenters,
+    listen: listen
+}    </code></pre><p>上面es5的写法中产生了重复代码，可以使用ES6中的属性简洁写法如下</p>
+<pre><code>var listeners = []
+function listen() {}
+var events = {listeners, listen}</code></pre><p>语义更加清晰，代码可读性强，可维护性提升。</p>
+<h3 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a>gulp</h3><p>gulp.src(globs,[,options])</p>
+<p>options.read   类型boolean，默认值true，如果设置为false，那么file.contents会返回空值，也即是不会去读取文件。</p>
+<h3 id="es6"><a href="#es6" class="headerlink" title="es6"></a>es6</h3><p>es6为一些已有的功能提供了非破坏性更新，这类更新中的大部分可以理解为语法糖，称之为语法糖，意味着，这类新的语法能做的事情其实用es5也可以做，只是会稍微复杂一些。</p>
+<h3 id="可以计算的属性名"><a href="#可以计算的属性名" class="headerlink" title="可以计算的属性名"></a>可以计算的属性名</h3><p>对象字面量的另一个重要更新是允许使用可计算的属性名，在es5中也可以给对象添加属性名为变量的属性，一般的做法是</p>
+<pre><code>var expertise = &apos;xiaoyu&apos;
+var person = {
+    name: &apos;wang&apos;,
+    age: 24
+}
+person[expertise] = {
+    years: 5,
+    interests: [&apos;a&apos;,&apos;b&apos;]
+}</code></pre><p>也就是先声明一个名为expertise的变量，然后通过person[expertise]这种形式将变量添加到对象person的属性；在es6中对象字面量可以使用计算属性了，将任何表达式放在中括号中，表达式的计算结果将会是对应的属性名，上面的代码用es6来写如下：</p>
+<pre><code>var expertise = &apos;journalism&apos;
+var person = {
+    name: &apos;wang&apos;,
+    age: 27,
+    [expertise]: {
+        interests: [&apos;a&apos;,&apos;b&apos;]
+    }
+}</code></pre><h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>简写属性和计算属性不可以同时写，因为简写属性是一种在编译阶段就会生效的语法糖，而计算属性名是在运行时候才生效，如果将二者混合使用，代码会报错。</p>
+<pre><code>var expertise = &apos;journalism&apos;
+var journalism = {
+  years: 5,
+  interests: [&apos;international&apos;, &apos;politics&apos;, &apos;internet&apos;]
+}
+var person = {
+  name: &apos;Sharon&apos;,
+  age: 27,
+  [expertise] // 这里会报语法错误
+}
+不能既用简写属性又用计算属性。</code></pre><h3 id="方法定义"><a href="#方法定义" class="headerlink" title="方法定义"></a>方法定义</h3><pre><code>es6的对象字面量方法简写允许我们省略对象方法的function关键字以及之后的冒号。如下：
+
+        var emitter = {
+  events: {},
+  on(type, fn) {
+    if (this.events[type] === undefined) {
+      this.events[type] = []
+    }
+    this.events[type].push(fn)
+  },
+  emit(type, event) {
+    if (this.events[type] === undefined) {
+      return
+    }
+    this.events[type].forEach(function (fn) {
+      fn(event)
+    })
+  }
+}</code></pre><h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>js中声明的普通函数，一般有函数名，一系列参数和函数体，如下：</p>
+<pre><code>function name(parameters){
+    function body
+}</code></pre><p>普通匿名函数则没有函数名，匿名函数通常会被赋值给一个变量/属性，有时候还会被直接调用：</p>
+<pre><code>var example = function (parameters){
+    // function body
+}</code></pre><p>es6为我们提供了一种写匿名函数的新方法，就是箭头函数。箭头函数不要使用function关键字，其参数和函数体之间以=&gt; 相连接：</p>
+<pre><code>var example = (parameters) =&gt; {
+    // function body
+}</code></pre><p>箭头函数与传统的匿名函数之间的区别：</p>
+<ul>
+<li>箭头函数不能被直接的命名，但是可以赋值给一个变量</li>
+<li>箭头函数不能用作构造函数，不能对箭头函数使用new关键字</li>
+<li>箭头函数没有prototype属性</li>
+<li>箭头函数绑定了词法作用域，不会修改this的指向</li>
+</ul>
+<h3 id="词法作用域："><a href="#词法作用域：" class="headerlink" title="词法作用域："></a>词法作用域：</h3><p>箭头函数的函数体内使用的this,arguments,super等都是指向包含箭头函数的上下文，箭头函数本身不产生新的上下文。</p>
+<h3 id="关于arguments"><a href="#关于arguments" class="headerlink" title="关于arguments"></a>关于arguments</h3><pre><code>//es5
+    function puzzle() {
+  return function () {
+    console.log(arguments)
+  }
+}
+puzzle(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)(1, 2, 3) 
+输出的是1 2 3因为对常规的匿名函数而言，arguments指向的是匿名函数本身。
+//es6
+
+    function puzzle() {
+  return ()=&gt;{
+    console.log(arguments)
+  }
+}
+puzzle(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)(1, 2, 3)
+输出a b c 
+因为箭头函数的特殊性决定其本身没有arguments对象，这里的arguments其实是父函数的参数。</code></pre><h2 id="简写的箭头函数"><a href="#简写的箭头函数" class="headerlink" title="简写的箭头函数"></a>简写的箭头函数</h2><p>完整的箭头函数是这样的</p>
+<pre><code>var example = (para) =&gt; {
+    function body
+}</code></pre><p>简写1:<br>当只有一个参数时，可以省略参数的括号</p>
+<pre><code>var single = value =&gt; {
+        return value * 2
+    }</code></pre><p>简写2：<br>对于只有单行表达式并且表达式的值为return返回值的箭头函数来说，可以将函数体的大括号和return关键字省略，会静默返回该单一表达式的值</p>
+<pre><code>var double = (value) =&gt; value * 2</code></pre><p>简写3：<br>上述两种形式可以合并使用，而得到更加简洁的形式</p>
+<pre><code>var double = value =&gt; value * 2</code></pre><h3 id="简写箭头函数带来的问题"><a href="#简写箭头函数带来的问题" class="headerlink" title="简写箭头函数带来的问题"></a>简写箭头函数带来的问题</h3><p>当你的简写箭头函数返回值是一个对象时，需要用小括号将返回的对象括起来，否则，浏览器会将对象的{}解析为箭头函数的函数体的开始结束标记</p>
+<pre><code>var obje = () =&gt; ({modular: &apos;es6&apos;})</code></pre><h3 id="什么时候使用箭头函数"><a href="#什么时候使用箭头函数" class="headerlink" title="什么时候使用箭头函数"></a>什么时候使用箭头函数</h3><p>不应该盲目的在一切地方使用，比如说一个行数很多的复杂函数，使用=&gt;代替function关键字带来的简洁性并不明显。不过对于非常简单的函数，箭头函数确实可以让代码更简洁，所以应该将箭头函数用在简单函数中。</p>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>某种程度上解构可以看做是变量赋值的语法糖，可以应用于对象，数组甚至函数的参数。</p>
+<h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><p>例子，有如下一个对象（蝙蝠侠）</p>
+<pre><code>    var character = {
+  name: &apos;Bruce&apos;,
+  pseudonym: &apos;Batman&apos;,
+  metadata: {
+    age: 34,
+    gender: &apos;male&apos;
+  },
+  batarang: [&apos;gas pellet&apos;, &apos;bat-mobile control&apos;, &apos;bat-cuffs&apos;]
+}</code></pre><p>如果现在有一个变量pseudonym，想让他的值指向character.pseudonym，使用es5我们需要这样做</p>
+<pre><code>var pseudonym = character.pseudonym</code></pre><p>es6可以这样实现</p>
+<pre><code>var {pseudonym} = character</code></pre><p>也可以在一行中同时声明多个变量</p>
+<pre><code>var {pseudonym,name} = character</code></pre><p>还可以混用解构赋值和常规的自定义变量</p>
+<pre><code>var {pseudonym} = charcter, two = 2</code></pre><p>解构赋值的规律就是你要设置的变量的名字和你要指向的对象中的变量名相同，从而可以直接用解构赋值来简写，但是如果不一样怎么办呢？解构赋值允许我们使用别名alias,比如我们想把charater.pseudonym赋值给变量xiaoyu,可以按下面的语句这样做</p>
+<pre><code>var {pseudonym: xiaoyu} = character</code></pre><p>这样做就可以达到目的了。<br>解构其实就是一种语法糖</p>
+<p>解构也可以添加默认值，如果右侧不存在对应的值，默认值就会生效，添加的默认值可以是数值，字符串，函数，对象，也可以是某一个已经存在的变量。</p>
+<pre><code>var {boots = {size: 10}} = character
+console.log(boots) // {size: 10}</code></pre><p>这样boots变量就会首先从character对象中取对应的boots字段，如果有就使用，如果没有则，设置的默认值生效。</p>
+<h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><p>数组解构的语法和对象解构是类似的，区别在于，数组解构我们使用中括号而不是花括号。</p>
+<pre><code>var coor = [12,7]
+var [x,y] = coor
+console.log(x) // 12</code></pre><p>数组解构也允许跳过不想用的值，在对应的地方留白即可</p>
+<pre><code>var names = [&apos;xiaoyu&apos;,&apos;wang&apos;,&apos;yujia&apos;]
+var [firname,,lastname] = names</code></pre><p>在es5中，当我们需要交换两个变量的值的时候，需要借助第三个变量</p>
+<pre><code>var left = 5, right = 7
+var aux = left //先把left的值给aux
+left = righg   //把right的值给left
+right = aux    //最后把aux的值给right就完成了互换</code></pre><p>使用解构，一切变得简单</p>
+<pre><code>var left = 5, right = 7
+
+[left,right] = [right] = [left]</code></pre><h3 id="函数解构"><a href="#函数解构" class="headerlink" title="函数解构"></a>函数解构</h3><p>可以给函数的参数添加默认值</p>
+<pre><code>function test(a,b=2){
+    return Math.pow(a,b)
+}</code></pre><p>箭头函数同样支持使用默认值，需要注意的是，如果使用默认值，即使只有一个参数也一定要使用小括号括起来。</p>
+<h3 id="Temporal-Dead-Zone-（死区）"><a href="#Temporal-Dead-Zone-（死区）" class="headerlink" title="Temporal Dead Zone （死区）"></a>Temporal Dead Zone （死区）</h3><pre><code>简单说就是如果你的代码在某个作用域内，在let声明之前调用了let声明的变量，就会报错。
+
+    {
+        console.log(name)
+        let name = &apos;xiaoyu&apos;
+    }</code></pre><p>需要注意的是，let声明的变量同样存在变量提升，这意味着，变量会在我们进入块作用域时候就去创建，TDZ也是在这时候创建的，他保证该变量不该被访问，只有在代码运行到let声明所在的位置时，TDZ才会消失，访问限制才会取消，变量才可以被访问。</p>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>const声明也具有类似let的块作用域，同样具有TDZ机制。实际上TDZ是因为const才被创建，随后才被应用到let声明中。</p>
+<h4 id="const-和-let-的主要区别"><a href="#const-和-let-的主要区别" class="headerlink" title="const 和 let 的主要区别"></a>const 和 let 的主要区别</h4><ul>
+<li>const声明的变量在声明时候必须赋值，否则会报错</li>
+<li>被const声明的变量不能再被赋予别的值。</li>
+<li>注意，const声明的变量并非意味着其对应的值是不可以变的，真正不能变的是对该值的引用。</li>
+</ul>
+<h3 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h3><p>从commonjs谈起，因为在网页端没有模块化编程只是页面JavaScript逻辑复杂，但是也可以工作，但是在服务器端却一定要有模块，所以虽然JavaScript在web端发展这么多年，第一个流行的模块化规范却由服务器端的JavaScript应用带来的，commonJS规范是由nodejs发扬光大，这标志这JavaScript模块化编程正式登上舞台。</p>
+<h3 id="定义模块"><a href="#定义模块" class="headerlink" title="定义模块"></a>定义模块</h3><p>根据CommonJS规范，一个单独的文件就是一个模块，每一个模块都是一个单独的作用域，也即是说在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</p>
+<h3 id="模块输出"><a href="#模块输出" class="headerlink" title="模块输出"></a>模块输出</h3><p>模块只有一个出口，module.exports对象，我们需要把模块希望输出的内容放入该对象。</p>
+<h3 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h3><p>加载模块使用require方法，该方法读取一个文件并执行，返回文件内部的module.exports对象<br>举个栗子🌰</p>
+<pre><code>//模块定义 myModel.js
+
+var name = &apos;xiaoyu&apos;
+
+function sayName() {
+    console.log(name)
+}
+
+function sayFullName(firstName) {
+    cnosole.log(firstName + name)
+}
+
+module.exports = {
+    sayName: sayName,
+    sayFullName: sayFullName
+}
+
+//在另一个模块中加载上一个模块
+
+var nameModule = require(&apos;./myModel.js&apos;)
+
+nameModule.sayFullName();</code></pre><p>不同的实现对require时的路径有不同要求，一般情况下可以省略js扩展名，可以使用相对路径，也可以使用绝对路径，甚至可以省略路径直接使用模块名（前提是模块是内置的模块）</p>
+<h3 id="尴尬的浏览器"><a href="#尴尬的浏览器" class="headerlink" title="尴尬的浏览器"></a>尴尬的浏览器</h3><p>仔细看上面的代码，会发现require是同步的，模块系统需要同步读取模块内容，并编译模块接口,这在服务器端实现很简单，也很自然，然而想在浏览器端实现问题却很多。浏览器端加载JavaScript最佳、最容易的方式是在document中插入script标签，但是脚本标签天生异步，传统CommonJS模块在浏览器环境中无法正常加载。解决思路之一是，开发一个服务器端组件，对模块代码做静态分析，将模块与它的依赖列表一起返回给浏览器端，这很好使，但是需要服务器安装额外的组件，并因此要调整一系列底层架构。另一种解决思路是，用一套标准模板来封装模块定义，但是对于模块应该怎么定义和加载，又产生的分歧：</p>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h4><p>amd就是asynchronous module definition,中文名字是异步模块定义的意思。他是一个在浏览器端模块化开发的规范，由于不是JavaScript原生支持，使用AMD规范进行页面开发需要用到对应的库函数，也就是大名鼎鼎的requirejs实际上AMD是requirejs在推广过程中对模块定义的规范的产出。<br>requirejs主要解决两个问题</p>
+<ul>
+<li><p>多个js文件可能有依赖关系，被依赖的文件需要早于依赖它的文件加载到浏览器</p>
+</li>
+<li><p>js加载的时候浏览器会停止页面渲染，加载文件越多，页面失去响应时间越长。</p>
+<h3 id="应该把script标签放在哪里？"><a href="#应该把script标签放在哪里？" class="headerlink" title="应该把script标签放在哪里？"></a>应该把script标签放在哪里？</h3><p>平时最常使用的是同步加载的方式：</p>
+  <script src="http://yourdomain.com/scritp.js"></script>
+
+</li>
+</ul>
+<p>同步模式，又称为阻塞模式，会阻塞浏览器的后续处理，停止了后续的解析，因此停止了后续文件的加载（比如图像）、渲染、代码执行。<br>js之所以要同步执行，是因为js中可能有输出document内容、修改dom、重定向等行为，所以要默认同步执行才是安全的。以前的一般建议是把scritp放在页面末尾/body之前，这样尽可能减少阻塞行为，而先让页面展示出来。简单说：同步加载的网络timeline是瀑布模型，而异步加载的timeline是并发模型。</p>
+<h3 id="应该吧把script标签放在底部哪里？"><a href="#应该吧把script标签放在底部哪里？" class="headerlink" title="应该吧把script标签放在底部哪里？"></a>应该吧把script标签放在底部哪里？</h3><p>许多人以为只要放在底部就可以了，不论是body标签闭合之前还是body标签闭合之后，其实这还是有区别的。从HTML2.0开始起，放在body标签闭合之后就是不合标准的，之所以浏览器没有报错是，是因为如果在body标签闭合之后再出现script或者任何元素的开始标签，都是parse error浏览器会忽略之前的,即视作仍然在body内，所以实际效果跟放在body标签闭合之前是没有区别的。所以，只要是让浏览器做了多余的事情都是不好的，虽然差别细微，但是还是应该按照标准来，放在body标签闭合之前。</p>
+<h3 id="jQuery中ready和load事件的区别"><a href="#jQuery中ready和load事件的区别" class="headerlink" title="jQuery中ready和load事件的区别"></a>jQuery中ready和load事件的区别</h3><h4 id="哪个先执行"><a href="#哪个先执行" class="headerlink" title="哪个先执行"></a>哪个先执行</h4><p>答案：  ready先执行，load后执行</p>
+<h4 id="dom文档加载的步骤"><a href="#dom文档加载的步骤" class="headerlink" title="dom文档加载的步骤"></a>dom文档加载的步骤</h4><ul>
+<li>解析HTML解构</li>
+<li>加载外部脚本和样式表文件</li>
+<li>解析并执行脚本代码</li>
+<li>构造HTML dom模型     //ready</li>
+<li>加载图片等外部文件</li>
+<li>页面加载完毕      //load</li>
+</ul>
+<p>从上面的描述中可以了解到，ready在第四部就执行了，但是load要在第六步完成之后才执行。</p>
+<h4 id="ready事件"><a href="#ready事件" class="headerlink" title="ready事件"></a>ready事件</h4><p>ready事件在dom结构绘制完成之后就会执行，这样就能确保就算有大量的媒体文件没有加载出来，js代码一样可以执行。</p>
+<h3 id="常见的异步加载"><a href="#常见的异步加载" class="headerlink" title="常见的异步加载"></a>常见的异步加载</h3><pre><code>（function() {
+    var s = document.createElement(&apos;script&apos;);
+    s.type = &apos;text/javascript&apos;
+    s.async = true
+    s.src = &apos;http://yourdomain.com/script.js&apos;
+    var x = document.getElementsByTagName(&apos;script&apos;)[0]
+    x.parentNode.insertBefore(s.x);
+}）()</code></pre><p>异步加载又叫非阻塞，浏览器在下载执行js同时，还会继续进行后续页面的处理。这种方法是在页面中script标签内，用js创建一个script元素并插入到document中，这样就做到了非阻塞的下载js代码。此方法被称为<strong>script dom element法</strong>，不要求js同源。将js代码包裹在匿名函数中并立即执行的方式是为了保护变量名不会外泄到外面。这是很常见的方式，尤其是在js库中被普遍使用。但是这种加载方式会在加载完成之前阻止onload事件的触发。</p>
+<h4 id="onload时的异步加载"><a href="#onload时的异步加载" class="headerlink" title="onload时的异步加载"></a>onload时的异步加载</h4><pre><code>（function() {
+    function async_load(){
+        var s = document.createElement(&apos;script&apos;);
+    s.type = &apos;text/javascript&apos;
+    s.async = true
+    s.src = &apos;http://yourdomain.com/script.js&apos;
+    var x = document.getElementsByTagName(&apos;script&apos;)[0]
+    x.parentNode.insertBefore(s.x);
+    }
+    if(window.attachEvent){
+        window.attachEvent(&apos;onload&apos;,async_load)
+    }else{
+        window.addEventListener(&apos;load&apos;,async_load,false)
+    }
+}）()</code></pre><p>和前面的方式差不多，但关键是它不是立即开始异步加载js，而是在onload时才开始异步加载。这样就解决了阻塞onload事件触发的问题。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/19/在一个nginx上面配置多个虚拟主机的方法：/" rel="next" title="Nginx 入门">
+                <i class="fa fa-chevron-left"></i> Nginx 入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/17/使用命令/" rel="prev" title="使用命令">
+                使用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的简洁表示"><span class="nav-number">1.</span> <span class="nav-text">属性的简洁表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp"><span class="nav-number">2.</span> <span class="nav-text">gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6"><span class="nav-number">3.</span> <span class="nav-text">es6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可以计算的属性名"><span class="nav-number">4.</span> <span class="nav-text">可以计算的属性名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意："><span class="nav-number">4.1.</span> <span class="nav-text">注意：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法定义"><span class="nav-number">5.</span> <span class="nav-text">方法定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">6.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词法作用域："><span class="nav-number">7.</span> <span class="nav-text">词法作用域：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于arguments"><span class="nav-number">8.</span> <span class="nav-text">关于arguments</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#简写的箭头函数"><span class="nav-number"></span> <span class="nav-text">简写的箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简写箭头函数带来的问题"><span class="nav-number">1.</span> <span class="nav-text">简写箭头函数带来的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候使用箭头函数"><span class="nav-number">2.</span> <span class="nav-text">什么时候使用箭头函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解构赋值"><span class="nav-number">3.</span> <span class="nav-text">解构赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象解构"><span class="nav-number">4.</span> <span class="nav-text">对象解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组解构"><span class="nav-number">5.</span> <span class="nav-text">数组解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数解构"><span class="nav-number">6.</span> <span class="nav-text">函数解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Dead-Zone-（死区）"><span class="nav-number">7.</span> <span class="nav-text">Temporal Dead Zone （死区）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">8.</span> <span class="nav-text">const</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#const-和-let-的主要区别"><span class="nav-number">8.1.</span> <span class="nav-text">const 和 let 的主要区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonJs"><span class="nav-number">9.</span> <span class="nav-text">CommonJs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义模块"><span class="nav-number">10.</span> <span class="nav-text">定义模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块输出"><span class="nav-number">11.</span> <span class="nav-text">模块输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载模块"><span class="nav-number">12.</span> <span class="nav-text">加载模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尴尬的浏览器"><span class="nav-number">13.</span> <span class="nav-text">尴尬的浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AMD"><span class="nav-number">13.1.</span> <span class="nav-text">AMD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应该把script标签放在哪里？"><span class="nav-number">14.</span> <span class="nav-text">应该把script标签放在哪里？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应该吧把script标签放在底部哪里？"><span class="nav-number">15.</span> <span class="nav-text">应该吧把script标签放在底部哪里？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery中ready和load事件的区别"><span class="nav-number">16.</span> <span class="nav-text">jQuery中ready和load事件的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#哪个先执行"><span class="nav-number">16.1.</span> <span class="nav-text">哪个先执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dom文档加载的步骤"><span class="nav-number">16.2.</span> <span class="nav-text">dom文档加载的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ready事件"><span class="nav-number">16.3.</span> <span class="nav-text">ready事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的异步加载"><span class="nav-number">17.</span> <span class="nav-text">常见的异步加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#onload时的异步加载"><span class="nav-number">17.1.</span> <span class="nav-text">onload时的异步加载</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

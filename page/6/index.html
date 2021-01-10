@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/Array/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/05/19/在一个nginx上面配置多个虚拟主机的方法：/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/Array/" itemprop="url">数组排序</a></h1>
+                <a class="post-title-link" href="/2019/05/19/在一个nginx上面配置多个虚拟主机的方法：/" itemprop="url">Nginx 入门</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-19T00:00:00+08:00">
+                2019-05-19
               </time>
             
 
@@ -300,361 +300,43 @@
       
         
           
-            <h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p><strong><em>想要吗？想要你说啊，你不说我怎么知道你想要</em></strong></p>
-<hr>
-<p>“<strong>为了按照某个方式进行排序，必须给sort方法传递一个比较函数，该函数决定了它的两个参数在排好序的数组中的先后顺序。假设第一个参数应该在前，比较函数应该返回一个小于0的数值，假如第一个参数应该在后，函数应该返回一个大于0的数值，如果两个数值相等，那么他们的顺序无关紧要，此时函数应该返回0。</strong>”</p>
-<p>这是js权威指南中对数组sort方法的描述，红包书中的描述与此类似，并给出了函数的例子：</p>
-<pre><code>function compare(value1, value2) {
-    if (value 1 &lt; value2) {
-        return -1;
-    } else if (value1 &gt; value2) {
-        return 1;
-    } else {
-        return 0;
+            <h4 id="Nginx-入门"><a href="#Nginx-入门" class="headerlink" title="Nginx 入门"></a>Nginx 入门</h4><p>Nginx由核心和模块组成</p>
+<p>Gzip</p>
+<p>Server 节点</p>
+<p>一个server就是一个虚拟主机</p>
+<h3 id="在一个nginx上面配置多个虚拟主机的方法："><a href="#在一个nginx上面配置多个虚拟主机的方法：" class="headerlink" title="在一个nginx上面配置多个虚拟主机的方法："></a>在一个nginx上面配置多个虚拟主机的方法：</h3><p>配置多个server</p>
+<pre><code>server     {
+    listen 80;
+    server_name xiaoyu.work;   //这里只写域名就行了不用加协议
+    root index.html;
+
+    location / {
+        root html/CoffeeandTea.github.io;  //这是一个项目
+        index index.html;
     }
-}</code></pre><p>只要将compare函数作为参数传递给sort方法即可，如下所示：</p>
-<pre><code>var values = [0,1,5,10,15];
-
-values.sort(compare); // 0,1,5,10,15</code></pre><p>这里的解释是：如果第一个参数应该位于第二个参数之前，则返回一个负数，如果第一个参数应该位于第二个参数之后则返回一个正数。</p>
-<p>所以其实这个函数的规则定义是一个<strong>从结果来推导条件</strong>的过程，函数的逻辑已经定义好了：无论你要比较什么，我的规则比较后的结果就是：<strong><em>如果第一个参数应该位于第二个参数之前，则返回一个负数，如果第一个参数应该位于第二个参数之后则返回一个正数</em></strong>，这里的a,b的理解就是<strong>待排序数组中的任意两个元素</strong>，没有什么顺序的规定，也不是什么一定相邻的两个元素，就是<strong>任意</strong>两个元素。我们使用sort来进行排序的时候实际是根据它比较结果的规则来去写我们的比较条件的，也就是if表达式，告诉它什么时候返回-1，什么时候返回1，也就是告诉它深呢时候把a排前面，什么时候把a排后面。这个规则要写完整，不能只写一半只告诉它什么情况下把a排在前面，其他情况不写，它就不知怎么排了。</p>
-<p>简单记忆： a - b 是生序 b - a 是降序，其实是一中“偷懒”的记忆方式，可以用来快速的进行排序，但是也要记得sort函数最原始的规则：如果第一个参数应该位于第二个参数之前，则返回一个负数，如果第一个参数应该位于第二个参数之后则返回一个正数。</p>
-<p>如果忘记了sort方法，可以去看自己在力扣上做的第1122题</p>
-<pre><code>https://leetcode-cn.com/problems/relative-sort-array/solution/sortfang-fa-zui-jing-jian-fang-shi-by-storm-24/</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/最近在看的一些东西记录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/最近在看的一些东西记录/" itemprop="url">最近在看的一些东西记录📝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T00:00:00+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>写React几个月了，接触到的，听到的较多的一个词“functional programming”函数式编程。在工作中也遇到了不少之前的大佬写的函数式代码，乍看之下还是有些“眼生”。</p>
-<h4 id="函数式？函数式编程？"><a href="#函数式？函数式编程？" class="headerlink" title="函数式？函数式编程？"></a>函数式？函数式编程？</h4><p>1、函数式是一个数学概念： </p>
-<pre><code>f(x) = y;</code></pre><p>函数式本身是很纯粹的一个概念，表达的就是函数定义域到值域之间一种特定的映射关系。（定义域中的一个值经过计算<strong><strong>有且仅有</strong></strong>一个值与之对应，也即只能得到一个确定的结果）。</p>
-<pre><code>f(x) = y;</code></pre><p>这个数学函数式表达了以下几层意思：</p>
-<ul>
-<li>函数总是接受一个参数—x</li>
-<li>函数总是返回一个值—y</li>
-<li>函数应该根据接受的参数而不是外部环境运行</li>
-<li>对于一个给定的x只会输出一个唯一的y</li>
-</ul>
-<p>2、函数式编程技术主要就是基于数学函数和它的思想。</p>
-<p>比如有一个简单的计税函数如下：</p>
-<pre><code>let percentValue = 5;
-let calculateTax = (value) =&gt; {
-    return value/100 * (100 + percentValue)
-}            </code></pre><p>这个函数准确的实现了我们的想法，但是从数学的定义上分析，就会发现calculateTax依赖了全局变量percentValue，因此在数学上它不能被称之为一个真正的函数。修复方法很简单，我们只需要移动percentValue，把它作为函数的参数。</p>
-<pre><code>let calculateTax = (value, percentValue) =&gt; {
-return value/100 * (100 + percentValue)
-}        </code></pre><p>现在calculateTax函数可以被称为一个真正的函数了。</p>
-<p><strong>移除一个函数内部对全局变量的访问会使得该函数的测试更加容易</strong></p>
-<h4 id="函数式编程的特性"><a href="#函数式编程的特性" class="headerlink" title="函数式编程的特性"></a>函数式编程的特性</h4><p>1、引用透明性</p>
-<p>定义：所有的函数对于相同的输入都将返回相同的值，函数的这一特性被称为<strong>引用透明性</strong></p>
-<p>🌰例：</p>
-<pre><code>let identity = (i) = {return i}</code></pre><p>定义一个简单的函数identity，无论传入什么作为输入，该函数都会把它返回，在函数内部没有全局引用，我们的函数只根据传入的参数i进行操作，该函数满足引用透明性条件。</p>
-<pre><code>sum(4,5) + identity(1)</code></pre><p>根据引用透明性的定义，可以把上面的语句转换为：</p>
-<pre><code>sum(4,5) + 1; // 直接用结果替换函数的计算过程</code></pre><p>该过程称为<strong>替换模型</strong>，因为我们可以直接替换函数的结果（因为函数的逻辑不依赖其他全局变量）而正是这一特性使得代码和缓存成为可能！</p>
-<p>2、 并发？</p>
-<p>引用透明性使得我们可以轻松地采用多线程来运行代码，根本不需要同步。为什么呢？因为同步的问题在于线程在并发运行的的时候不应该依赖全局变量。而遵循引用透明性的函数只依赖来自参数的输入，不会对全局产生任何依赖，这里没有任何“锁”🔒的概念，所以线程可以自由的运行（虽然js引擎是单线程…）</p>
-<p>3、 缓存？</p>
-<p>由于函数会为给定饿输入返回相同的值，实际上我们就可以缓存它。假设函数factorial用来计算给定数组的阶乘，其接受输入作为参数以计算其阶乘，5的阶乘是120，如果用户第二次用5来调用factorial，如果factorial遵循引用透明性，我们就可以直接返回缓存的值120而不用再重新计算一遍。</p>
-<p>函数式编程对比命令式编程主张移除“如何”做的部分，使用一个函数来处理“如何”做的部分，将关注点放在手头的工作上即”做什么“。</p>
-<h4 id="为什么函数式好？"><a href="#为什么函数式好？" class="headerlink" title="为什么函数式好？"></a>为什么函数式好？</h4><p>slice和splice两个函数在做数据处理的时候很类似，但是实现的方式却大不相同。</p>
-<pre><code>let xs = [1,2,3,4,5];
-
-xs.slice(0,3); // 返回 [1,2,3];
-xs.slice(0,3); // 返回 [1,2,3];
-xs.slice(0,3); // 返回 [1,2,3];
-.
-.
-. // 无论调用多少次它都能保证相同的输出。</code></pre><p>而splice却会嚼烂调用它的那个数组，然后再吐出来🤮，这就产生了副作用，即这个数组永久的改变了🤷‍♂️</p>
-<p>函数式编程讨厌这种会改变数据的函数，追求的是那种更加”可靠“的每次都能返回同样结果的函数。</p>
-<p>就像上面的那个计税函数中，非函数式（即纯函数）的版本中，其计算结果依赖了全局变量percentValue，这是令人沮丧的🤦‍♂️，因为引入外部变量，增加了我们对函数的认知负荷和心理负担。程序中到处充斥着的这些不纯的函数，往往是产生BUG的罪魁祸首！</p>
-<p>另一方面，使用纯函数的形式，函数自己就能做到自给自足，并且随时都可以放心大胆将其“打包带走”📦</p>
-<p>函数式编程让我想到了之前在网上看到的两种关于线缆艺术的图片：</p>
-<p>非函数式编程就行下图：</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg" alt></p>
-<p>每个函数从哪里来到哪里去，因为有依赖全局变量的可能因素存在，同时函数本身也可能会改变其他函数所依赖的外部变量，所以让人看上去就比较乱，不敢轻举妄动。</p>
-<p>函数式编程就好很多：</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/images.jpeg?e=1609135970&token=T5lShVWgYrnGva4f5ljCfxSx1tt65eFTpYguVm5r:KhdOwWBDJ3sxCaQc71w-jfCKrII=" alt></p>
-<p>函数式编程因为做到了“字给自足”我需要的东西都在我自己内部，不依赖外部变量，同时你放心我很单纯我也不会去改变外面的什么，所以给人的感觉就是看上去比较清爽，数据清晰的感觉。</p>
-<p>本来下面接着的内容该是柯里化、compose函数组合、管道啥的，但是对于柯里化看了一段时间感觉还是没有一个让自己“豁然开朗”的点，先留着，转而说说React</p>
-<h3 id="函数式编程与React…"><a href="#函数式编程与React…" class="headerlink" title="函数式编程与React…"></a>函数式编程与React…</h3><p>关于react有一个很形象的公式 UI = F(state)  可以说是总结的非常到位了！</p>
-<p>React强调数据的不可变性，把每一确定时刻的UI状态当作是电影🎬中的某一个确定的帧，长什么样子是确定的是由确定的state状态确定的，要让我渲染UI的另外一种状态，麻烦用另一个state来驱动，这给我一种“死板且靠谱”的感受～</p>
-<p>Vue信奉数据可变哲学🙆，React则选择数据不可变哲学🙅‍♂️</p>
-<h4 id="作用-副作用？"><a href="#作用-副作用？" class="headerlink" title="作用? 副作用？"></a>作用? 副作用？</h4><p>作用：可以理解为一切除了计算结果之外发生的事情。</p>
-<p>副作用：是在计算结果的过程中，系统状态的一种变化，或者与外部世界进行的任何可观察的交互。</p>
-<p>具体到前端开发中，副作用包括但不限于：</p>
-<ul>
-<li>更改文件系统</li>
-<li>往数据库插入记录</li>
-<li>发送一个 http 请求</li>
-<li>可变数据</li>
-<li>打印/log</li>
-<li>获取用户输入</li>
-<li>DOM 查询</li>
-<li>访问系统状态</li>
-<li>…</li>
-</ul>
-<p>函数式编程的哲学里认为副作用是造成问题的主要原因。这一假定不无道理，在只有我和你的世界里，我不会出问题，然而问题产生了，那么肯定是你出了问题…<br>React主张的即是函数式的编程，但是我们做业务开发不是写静态页面，我们是用页面来承载我们的业务。从这个角度看，我有一种“业务都是通过副作用完成的”感觉～</p>
-<p>那React是怎么平衡纯函数与副作用的呢？</p>
-<h4 id="effect-hooks"><a href="#effect-hooks" class="headerlink" title="effect? hooks?"></a>effect? hooks?</h4><p>React16.8引入了hooks API.对其中的useEffect感触比较多.在类组件中render函数就是个纯函数，负责实现UI = F(state)而业务操作多放在componentDidMount、updated、willUnmounted…等生命周期钩子中，其实单单就从组件生命周期的心智模型来理解，这样就挺好的。</p>
-<p>1、但是生命周期是咋来的？ </p>
-<p>2、how do you think about componentDidMount?  </p>
-<p>3、useEffect(() =&gt; {doSomething}, []) === componentDidMount           really???</p>
-<p>在看React的hooks介绍文档的时候，在介绍到effect的执行时机的时候看到有这么一句话：</p>
-<pre><code>与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。</code></pre><p>what??😺  就是说componentDidMount会阻塞浏览器更新屏幕咯？<br>答案： 是的。componentDidMount指的是组件在内存上中已经完成“挂载”一切已成定数，只等浏览器的GUI线程对页面进行渲染了，只有浏览器的GUI线程对页面进行了绘制操作，我们的肉眼才能看到屏幕上的内容。所以如果一个组件定义如下：</p>
-<pre><code>class Demo extends Compponent({
-    componentDidMount() {
-        console.log(&apos;now you see me!&apos;)
-    }
-    render() {
-        return (
-            &lt;div&gt;You can see me with your naked eye&lt;/div&gt;
-        )
-    }
-})</code></pre><p>我们会先在控制台看到log的打印输出，然后才看到屏幕上渲染的内容。所以说componentDidMount会阻塞浏览器更新屏幕，指的就是componentDidMount中的内容属于当前Tick任务周期内的工作，浏览器会等到V8将这一工作做完，才让GUI线程执行绘制操作。</p>
-<p>useEffect与componentDidMount的不同点在与useEffect中的effect操作会等到浏览器render完成之后（是真正意义上的render，肉眼看见的那种，不是内存中的挂载。）才会执行副作用操作，所以其不会阻塞浏览器的渲染。真正跟componentDidMount一致的是useLayoutEffect。它会排在浏览器GUI线程对页面进行渲染之前执行。<br>React建议一开始先使用useEffect,只有当它出问题时候再尝试使用useLayoutEffect。</p>
-<p>另外：关于“用了hooks的函数式组件每次渲染都有属于每次自己的、单独的effect，每次的effect都是全新的，而不是上次的。。。<br>”此类的说法。理解： effect是传给useEffect()这个API的回调函数，而不是useEffect这个api(听起来好像是废话～)</p>
-<pre><code>const effect = () =&gt; {
-    console.log(&apos;i am effect&apos;)
 }
 
-useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“hold住它～” 而传递进去的函数才是每次都不一样的effect.</p>
-<p>生命周期函数也叫生命周期钩子函数 life cycle hooks function,其中也有一个单词’hook’,回过头来看，似乎又有一种“大一统”的感觉。</p>
-<p>其实都是业务模型的抽象，我们在写componentDidMount或者其他任何生命周期钩子函数的时候并不是在写componentDidMount或者什么，而是在写“我希望在这个时候做点什么事情。。。“的业务需求模型</p>
-<p>hooks用函数式的方式优化更新了这种业务模型，使之看起来似乎更加合理，编写起来更加清爽方便。</p>
-<h3 id="由hooks-API-想到的Redux-的设计"><a href="#由hooks-API-想到的Redux-的设计" class="headerlink" title="由hooks API 想到的Redux 的设计"></a>由hooks API 想到的Redux 的设计</h3><p>“React不是一套完整的前端解决方案，它只提供了view层面的支持。。。。组件通信和数据管理它没有给出解决方案。。。“这是网上一些介绍 why redux 的文章中经常会看到的一话（也有很多声音说redux是过度设计..）那么redux做了什么为什么用了它数据就能‘整整齐齐’不易出错了呢？</p>
-<p>我的理解就是“开源节流”的一个想法，没有用redux时，任何组件都可以随便任何时set任何State,这样就造成数据很乱，没有一个数据的“交通规则”，用了redux之后大家统一通过dispatchAction的方式来提交对数据改变的“申请”，dispatch就是更改数据的通道—-“开源”<br>提交的各种action，到了reducer这里会做统一的处理，每种type的action，能做的改动都是被reducer严格定义好的，只有reducer中有注册的类型才能被执行，这样就严格的限制了可对数据造成更改的范围—-“节流”. 一些文章中介绍说，redux做的就是当你想改变全局的state的时候“大张旗鼓”的告诉我。。。。<strong>大张旗鼓</strong>用的好，我的觉得Hook其实有点类似的味道，hooks只能在函数式组件中用，函数式组件本身就很纯，你给我什么我就渲染什么仅此而起，而当你想要做一些其他的小动作的时候也要<strong>大张旗鼓</strong>的告诉我，怎么个大张旗鼓呢，useEffect这个Api的名字，就很说明问题了—-“是的，我就是在这里在做会带来副作用的小动作啊～🤷‍♂️”。 这样就能比价清晰的将纯粹渲染的部分和带有副作用的部分划分开来，既能减少产生问题的可能，也方便对问题进行追查。</p>
-<h3 id="关于每秒60帧"><a href="#关于每秒60帧" class="headerlink" title="关于每秒60帧"></a>关于每秒60帧</h3><p>看了一些介绍FPS和浏览器刷新率的科普文章，直接抛结论：</p>
-<p>目前大部分电脑的屏幕刷新率是60Hz即每秒钟页面会刷新60次，也即是60帧的画面。这是显示器硬件层面的，浏览器的刷新频率一般与屏幕的刷新率保持一致或者略低于屏幕的刷新率,基本也是60Hz,所以平均每一帧的耗时是1000/60 = 16.67ms. (浏览器的fps高于显示器的fps是无意义的性能浪费，因为即使你绘制的贼快，屏幕不刷新依旧看不出来变化～)</p>
-<p>不同帧率给人的直观感受： </p>
+// 配置另一个项目的地址
+server     {
+    listen 80;
+    server_name stormen.cn;  // 第二个域名
+    root index.html;
+
+    location / {
+        root html/CoffeeandTea.github.io;  //这是另一个项目
+        index index.html;
+    }
+}</code></pre><p>这样配置后，重启nginx就可以做到：访问xiaoyu.work访问的是博客的项目，访问stormen.cn访问的是另一个项目了。</p>
+<p>有的网站不支持IP访问</p>
+<p>apache是多线程的，它为每个请求开启一个新的线程（或者是进程，取决于你的配合）。Nginx和node.js不是多线程的，因为线程的消耗太重了，所以他们采用单线程，基于事件的，这就把处理众多连接所产出的线程/进程消耗消除了。</p>
+<p>node中的模型跟浏览器中很是类似，如果有三个人同时访问一个node站点的话，三个请求的真正处理操作不在这个node线程中，这个线程运行的是event loop，把请求分发到worker线程，worker线程应该是c++实现的，完了之后再通过callback的方式把返回的结果返回给客户端。<br>可以类比于浏览器中的webapi的事件。</p>
+<p>node 运行的机制：</p>
 <ul>
-<li>帧率能够达到 50 ～ 60 FPS 的动画将会相当流畅，让人倍感舒适；</li>
-<li>帧率在 30 ～ 50 FPS 之间的动画，因各人敏感程度不同，舒适度因人而异；</li>
-<li>帧率在 30 FPS 以下的动画，让人感觉到明显的卡顿和不适感；</li>
-<li>帧率波动很大的动画，亦会使人感觉到卡顿</li>
+<li>V8引擎解析javascript脚本</li>
+<li>解析后的代码，调用node api</li>
+<li>libuv库负责nodeAPI的执行，它将不同的任务分配给不同的线程，形成一个event loop（事件循环），以异步的方式将任务的执行结果返回给V8引擎。</li>
+<li>V8引擎再将结果返回给用户。</li>
 </ul>
-<p>要想页面给用户丝滑顺畅的感受，就要努力完成每秒60帧的目标💪，具体到每一帧就要控制在16.67ms之内，因为浏览器内部通常还会有不同的线程之间调度的工作，所以通常留给我们的V8的时间只有10ms，我们应该尽量保证在10ms的时间内完成js的执行。。。</p>
-<h4 id="用像素管道的方式来看前端优化问题"><a href="#用像素管道的方式来看前端优化问题" class="headerlink" title="用像素管道的方式来看前端优化问题"></a>用像素管道的方式来看前端优化问题</h4><p><strong>像素管道</strong></p>
-<p>浏览器将像素绘制到页面一般要经过以下几个过程：</p>
-<p> JS / CSS -&gt; style -&gt; layout -&gt; paint -&gt; composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg" alt></p>
-<p>1、 js: 一般我们使用js来实现一个视觉变化的效果。</p>
-<p>2、 style: 样式计算,根据匹配选择器计算出哪些元素应用哪些css规则的过程</p>
-<p>3、 layout: 布局，在知道对一个元素应用哪些规则之后，浏览器即可开始计算它要占据的空间大小及其在屏幕的位置</p>
-<p>4、 paint: 绘制，有时候也叫栅格化是一个fill像素点的过程</p>
-<p>5、 composite: 合成，用于处理不同的层级之间的关系，比如谁盖在谁的上面</p>
-<p>一个帧内要做这么多事情。。。。如果js执行时间过长超过16.67ms，就会block住，那么就会丢掉一帧的绘制。</p>
-<p>那么如何着手优化它呢？</p>
-<p>JS，Style 和 Composite 是不可避免的，因为需要 JS 来引发样式的改变，Style 来计算更改后最终的样式，Composite 来合成各个层最终进行显示。Layout 和 Paint 这两个步骤不一定会被触发，所以在优化的过程中，如果是需要频繁触发的改变，我们应该尽可能避免 Layout 和 Paint。</p>
-<p>1、最耗费性能之重排！</p>
-<p>管道运行方式<br>JS/CSS —&gt; Style —&gt; Layout —&gt; Paint —&gt; Composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg" alt><br>此过程就是我们常说的浏览器重排，也就是改变了元素的几何属性（例如宽度、高度、左侧或顶部位置等），那么浏览器将必须检查所有其他元素，然后“自动重排”页面。任何受影响的部分都需要重新绘制，而且最终绘制的元素需进行合成，重排进行了管道的每一步，性能受到较大影响。</p>
-<p>2、稍好之重绘<br>管道运行方式<br>JS/CSS —&gt; Style —&gt; Paint —&gt; Composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout.jpg" alt><br>重绘，也就是修改“paint only”属性（例如背景图片、文字颜色或阴影等），即不会影响页面布局的属性，则浏览器会跳过布局，但仍将执行绘制。</p>
-<p>3、性能最好之不重拍也不重绘<br>管道运行方式<br>JS/CSS —&gt; Style —&gt; Composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout-paint.jpg" alt><br>此过程不会重排重绘，仅仅是进行合成，也就是修改 transform 和 opacity 属性更改来实现动画，性能得到较大提升，最适合于应用生命周期中的高压力点，例如动画或滚动。</p>
-<h4 id="尽量使用-transform-和-opacity-属性更改来实现动画"><a href="#尽量使用-transform-和-opacity-属性更改来实现动画" class="headerlink" title="尽量使用 transform 和 opacity 属性更改来实现动画"></a>尽量使用 transform 和 opacity 属性更改来实现动画</h4><p><strong>性能最佳的像素管道版本会避免 Layout 和 Paint</strong></p>
-<p>为了实现此目标，需要坚持更改可以由合成器单独处理的属性。常用的两个属性符合条件：transform 和 opacity。</p>
-<p>另外：想知道每种 CSS 属性的更改是否会触发 Layout，Paint，Composite，可以通过 <a href="https://csstriggers.com/" target="_blank" rel="noopener">csstriggers.com</a> 查看。</p>
-<p>有一种能有效减小 Layout 和 Paint 的方法是将元素提升，像 Photoshop 中层的概念一样，样式也有层的概念，不同的层根据不同顺序叠加起来，通过 Composite 最终显</p>
-<p>示出来。在每个层中对这个层进行 Layout 或者 Paint 是不会影响其他层的，一般会根据整个页面的语义将页面分为几个层。</p>
-<p>提升元素还有一个好处就是会将动画从 CPU 转移到 GPU 来完成，来实现硬件加速。</p>
-<h4 id="尽量避免-Layout"><a href="#尽量避免-Layout" class="headerlink" title="尽量避免 Layout"></a>尽量避免 Layout</h4><p>让 DOM 脱离文档流再对其进行操作，所有操作完成后添加进文档流，这样可以将重排及重绘的次数降低到一次或两次（脱离文档流及回归文档流的时</p>
-<p>候），以下方法可以让元素脱离文档流：</p>
-<ul>
-<li>隐藏元素 —— display: none;（事实上 display：none 不会让元素出现在 layout tree 中）。</li>
-<li>使用 DocumentFragment（推荐，只有一次 re-flow）。</li>
-<li>将原始元素拷贝到一个脱离文档的节点中，修改这个副本，完成后再替换掉原始元素。</li>
-</ul>
-<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>利用事件冒泡的机制来处理子元素事件的绑定，将子元素的 DOM 事件，交由它们的父元素来进行处理，可以有效降低页面的开销 —— 由于事件的冒泡</p>
-<p>特性，只需要给父组件添加一个监听事件，就能够捕获到冒泡自子元素的事件，再通过 e.target 来获取真正被操作的子元素。</p>
-<h4 id="使用-requestAnimationFrame"><a href="#使用-requestAnimationFrame" class="headerlink" title="使用 requestAnimationFrame"></a>使用 requestAnimationFrame</h4><p>在某个单个帧中，有可能发生这种情况，在某一帧中会被多次触发某个事件（比如 scroll），这个事件又会频繁的触发样式的修改，导致可能需要多次 </p>
-<p>Layout 或者 Paint，这是一种浪费，过于频繁的 Layout 和 Paint 会造成卡顿，而且实际上一帧中并不需要重复 Layout 或者 Paint 那么多次。</p>
-<p>这个时候就可以用到 rAF 了，先放上一段 MDN 上对 rAF 的解释：</p>
-<p>window.requestAnimationFrame() 方法告诉浏览器您希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画。该方法使用一个回调</p>
-<p>函数作为参数，这个回调函数会在浏览器重绘之前调用。</p>
-<p>在下一次重绘之前调用，理解： 重点不在于“重绘之前” 而是“下一次” 是下一次！不是本次！</p>
-<p>简单来说，rAF的作用就是将传给rAF的回调函数，安排在下一帧的一开始执行。这样就能保证这个回调函数最先执行，并且因为</p>
-<p>绝大多数浏览器都是60fps，所以rAF自带截流效果。</p>
-<p>在浏览器的一轮事件循环中，会有 task -&gt; microtask -&gt; UI render，这么的一个循序，rAF 将回调函数放在下一帧的</p>
-<p>开头，就是已经让其所在的那一轮的 UI 先 render，然后再在下一帧的最开始去执行.</p>
-<p>理解： 开头，就是已经让其所在的那一轮的 UI 先 render，然后再在下一帧的最开始去执行。<br>在调用 rAF 时，有一点切记：不要在 rAF 的回调函数中先修改样式，再查询样式，这样就失去了 rAF 的作用。可以将对样式的查询提前到回调函数中或者 rAF 中尽量靠前的位置。</p>
-<h4 id="关于执行上下文"><a href="#关于执行上下文" class="headerlink" title="关于执行上下文"></a>关于执行上下文</h4><p>函数调用栈，其实就是执行上下文栈，每当调用一个函数</p>
-<p>时就会产生一个新的执行上下文，同时新产生的这个执行</p>
-<p>上下文就会被压入执行上下文栈中。</p>
-<p>全局上下文最先入栈，并且在离开页面时才会出栈，js引擎</p>
-<p>不断的执行上下文栈中栈定的那个执行上下文，在它执行完毕后</p>
-<p>将它出栈，直到整个执行栈为空。</p>
-<p>关于执行栈有5点注意：</p>
-<ul>
-<li>单线程</li>
-<li>同步执行</li>
-<li>只有一个全局上下文</li>
-<li>可以有无数个函数上下文（理论是函数上下文没有限制，但是太多了会爆栈）</li>
-<li>每个函数调用都会创建一个新的执行上下文</li>
-</ul>
-<p>明确一个概念： 函数上下文执行栈是与js引擎相关的概念，</p>
-<p>而异步/回调是与运行环境相关的概念。</p>
-<p>如果执行栈与异步机制完全无关，我们写了无数遍的点击触发回调是如何做到的呢？是运行环境（浏览器/Node）来完成的， 在浏览器中，异步机制是借助 event loop 来实现的，</p>
-<p>event loop 是异步的一种实现机制。JavaScript 引擎只是“傻傻”的一直执行栈顶的函数，而运行环境负责管理在什么时候压入执行上下文栈什么函数来让引擎执行</p>
-<p>JavaScript 引擎本身并没有时间的概念，只是一个按需执行 JavaScript 任意代码片段的环境。“事件”（ JavaScript 代码执行）调度总是由包含它的环境进行。</p>
-<p>另外，从一个侧面可以反应出执行上下文栈与异步无关的 —— 执行上下文栈是写在 ECMA-262 的规范中，需要遵守它的是浏览器的 JavaScript 引擎，比如 V8、Quantum 等。</p>
-<p>event loop 的是写在 HTML 的规范中，需要遵守它的是各个浏览器，比如 Chrome、Firefox 等。</p>
-<p>浏览器和浏览器的js引擎是两码事。</p>
-<p>一个页面有一个event loop ，但是一个event loop 可以有多个</p>
-<p>task queues.</p>
-<p>每个来自相同 task source 并由相同 event loop（比如，Document 的计时器产生的回调函数，Document 的鼠标移动产生的事件，Document 的解析器产生的 tasks） 管理</p>
-<p>的 task 都必须加入到同一个 task queue 中，可是来自不同 task sources 的 tasks 可能会被排入到不同的 task queues 中。</p>
-<p>来自相同的 task source 的 task 将会被排入相同的 task queue，但是规范说来自不同 task sources 的 tasks 可能会被排入到不同的 task queues 中，也就是说一个 task queue 中</p>
-<p>可能排列着来自不同 task sources 的 tasks，但是具体什么 task source 对应什么 task queue，规范并没有具体说明。</p>
-<p>一般我们看个各个文章中对于 task queue 的描述都是只有一个，不论是网络，用户时间内还是计时器都会被 Web APIs 排入到用一个 task queue 中，但事实上规范中明确表示了是</p>
-<p>有多个 task queues，并举例说明了这样设计的意义：</p>
-<p>举例来说，一个用户代理可以有一个处理键盘鼠标事件的 task queue（来自 user interaction task source)，还有一个 task queue 来处理所有其他的。用户代理可以以 75% 的几率</p>
-<p>先处理鼠标和键盘的事件，这样既不会彻底不执行其他 task queues 的前提下保证用户界面的响应， 而且不会让来自同一个 task source 的事件顺序错乱</p>
-<p>当用户代理将要排入任务时，必须将任务排入相关的event loop 的task queues;</p>
-<p>这句话很关键，是用户代理来控制任务的调度。</p>
-<h3 id="关于event-loop"><a href="#关于event-loop" class="headerlink" title="关于event loop"></a>关于event loop</h3><p>不知道有没有人跟我我一样产生过这样的疑问</p>
-<p>1、浏览器的一次事件循环♻️的时间是多久？是16.67ms吗？</p>
-<p>2、我当前的这行代码执行的时候处于当前循环的什么位置？ 是循环的开始？还是中间位置，还是循环马上要结束了？</p>
-<p>我大概知道产生这样疑问，说明对对浏览器内部event loop的心智模型是不对的，但是很长一段时间以来，无论是在看vue中的nextTick还是一些文章中介绍的“下次dom更新。。“这样的字眼时心中总是感觉有一层不甚明确的概念，What exactly is a event loop tick?</p>
-<p>现在理解如下：</p>
-<p>当浏览器解析到一个script开始标签时，整个这个标签整体可以看作是对应一次Tick</p>
-<pre><code>&lt;script&gt;
-    // Tick开始
-    console.log(&apos;同步代码&apos;)
-    ...
-    setTimeout(() =&gt; {
-        console.log(&apos;宏任务队列代码&apos;)
-    })
-    ...
-    Promise.then(() =&gt; {
-        console.log(&apos;微任务队列代码&apos;)
-    })
-    requestAnimationFrame(() =&gt; {
-        console.log(&apos;本次微任务之后下次宏任务之前的代码。。&apos;)
-    })
-    ...
-    // Tick结束
-&lt;/script&gt;</code></pre><p>浏览器在执行这段代码的时候，浏览器会为其开辟一块儿内存空间作为程序的执行栈，整块代码会作为一个main调用最先进入执行栈开始执行，可以认为此时开启了一个宏任务，浏览器会依次执行该栈中的函数，遇到同步代码就执行，遇到setTimeout这样的Webapi调用，会将其压入宏任务队列中下次Tick再执行，遇到Promise.then这样的代码，它属于是本次Tick运行中产生的微任务代码，会将其放入微任务队列，在本次Tick结束之前（即所有的同步代码都执行完毕）会对其进行调用。也即是浏览器的每一个Tick会执行一个宏任务以及在该宏任务执行期间产生微任务。（自己产生的微任务，自己执行掉，不会留到下一个Tick去执行）</p>
-<p>而requestAnimationFrame是个比较特殊的调用，它根本不在event loop的生命周期里，这个api也并不属于JS运行时，而是浏览器宿主环境提供的，它属于另一个主题——渲染。</p>
-<p>浏览器作为一个复杂的应用是多线程工作的，除了运行JS的线程外，还有渲染线程，定时器触发线程，HTTP 请求线程等等。JS线程可以读取并且修改DOM而渲染线程也需要读取DOM，这是一个典型的多线程竞争临界资源的问题。 所以浏览器就把这两个线程设计成互斥的，即同时只能有一个线程在执行。</p>
-<p>渲染原本就不应该出现在event loop相关的知识体系里。因为event loop显然是在讨论JS如何运行的问题，而渲染则是浏览器另外一个线程的工作。但是requestAnimationFrame的出现却把这两件事情给关联起来不在V8环境里，只是浏览器又开放的一个在渲染之前发生的新的hook。所以它对应的animation callback queue的处理方式也是不一样的。<br>通过调用requestAnimationFrame我们可以在下次渲染之前执行回调函数。那下次渲染具体是哪个时间点呢？渲染和event loop有什么关系呢？简单来说，就是在每一次event loop的末尾，判断当前页面是否处于渲染时机，是就重新渲染。而渲染时机又是个啥，查阅资料发现有点“玄学”～ 有屏幕的硬件限制，跟机器性能有关联，跟js执行是否超时有关联，总之要不要渲染是一个多方面因素条件综合下来浏览器判断的结果。有点React中shouldComponentUpdate内味儿～但无论如何requestAnimationFrame保证的就是在浏览器下次渲染之前一定会被调用。</p>
-<p>参考链接🔗：<br> <a href="https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/" target="_blank" rel="noopener">how to write fast memory-officient js</a></p>
-<p><a href="https://developers.google.com/web/fundamentals/performance/rendering?hl=zh-cn" target="_blank" rel="noopener">dev tools</a></p>
-<p><a href="https://zh-hans.reactjs.org/docs/hooks-overview.html" target="_blank" rel="noopener">hooks</a></p>
-<p><a href="https://support.apple.com/zh-cn/HT210742" target="_blank" rel="noopener">fps</a><br><a href="https://www.sohu.com/a/224846336_374283" target="_blank" rel="noopener">30帧、60帧、120帧对画面影响有多大？ </a><br><a href="http://www.soolco.com/post/73226_1_1.html" target="_blank" rel="noopener">useEffect的执行时机</a><br><a href="https://zhuanlan.zhihu.com/p/101374817" target="_blank" rel="noopener">理解event loop的n重境界</a></p>
 
           
         
@@ -703,7 +385,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/Get or Post/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/05/10/vue2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -722,7 +404,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/20/Get or Post/" itemprop="url">Get or Post</a></h1>
+                <a class="post-title-link" href="/2019/05/10/vue2/" itemprop="url">vue</a></h1>
         
 
         <div class="post-meta">
@@ -734,8 +416,8 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:09:01+08:00">
-                2020-12-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-10T00:00:00+08:00">
+                2019-05-10
               </time>
             
 
@@ -774,569 +456,914 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
       
         
           
-            <p>http只是个行为准则，而tcp才是get和post怎么实现的基本。</p>
-<p>不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限</p>
-<p>加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很</p>
-<p>大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的</p>
-<p>部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数</p>
-<p>据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
-<p>还要看服务器对请求的实现的支持啊。</p>
-<p>GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</p>
-<p>get和post还有一个重大的区别，简单的说：get产生一个tcp数据包，post产生两个tcp数据包。</p>
-<p>不简单的说：对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
-<p>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
-<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开</p>
-<p>门迎接我”，然后再回头把货送过去。</p>
-<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但</p>
-<p>这是一个坑！跳入需谨慎。为什么？</p>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Vue的核心库仅仅关注视图层。<br>像Vue这种跟artTemplate的不同之处就在于，artTemplate这一类都属于字符串模板引擎（技术）而Vue属于是DOM模板引擎技术。Vue官网的第一个例子就已经很好的解释了：    </p>
+<pre><code>&lt;div id=&apos;app&apos;&gt;
+    {{message}}
+&lt;/div&gt;
+
+var app = new Vue({
+    el: &apos;#app&apos;,
+    data: {
+        message: &apos;hello world&apos;
+    }
+})
+
+浏览器渲染结果：   hello world</code></pre><p>这看起来跟单单渲染一个字符串很类似，但是vue在背后做了大量的工作，现在数据已经和DOM绑定在一起了。所有元素都是响应式的了。</p>
+<h2 id="数据与方法"><a href="#数据与方法" class="headerlink" title="数据与方法"></a>数据与方法</h2><p>当一个Vue实例被创建时，它向Vue的响应式系统中加入了其data对象中可以找到的所有的属性。当这些属性的值发生改变时，视图将会产生’响应’，即匹更新为新的值。<br>除了data属性，Vue实例暴露了一些有用的实例属性和方法。它们都有前缀$以便于用户自定义的属性作区分。例如</p>
+<pre><code>var data = {a: 1}
+var vm = new Vue({
+    el: &apos;#exampel&apos;,
+    data: data
+})
+
+vm.$data ==== data    // true
+vm.$el === document.getElementById(&apos;example&apos;) // true
+
+vm.$watch(&apos;a&apos;, function(newValue, oldValue){
+    // 这个回调函数将会在vm.a改变后调用
+})</code></pre><h3 id="实例生命周期"><a href="#实例生命周期" class="headerlink" title="实例生命周期"></a>实例生命周期</h3><p>一个实例在created了之后只是刚刚初始化了实例内部的this指针的指向</p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>不要在选项属性或者回调函数上使用箭头函数，因为箭头函数是和父级上下文绑定在一起的，this不会是如你所预期的Veu实例，经常会导致错误的发生。</p>
+<h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><p>Vue.js 使用了基于 HTML 的模板语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。所有 Vue.js 的模板都是合法的 HTML ，所以能被遵循规范的浏览器和 HTML 解析器解析<br>在底层实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，在应用状态改变时，Vue能够智能地计算出重新渲染组件的最小代价并应用到DOM操作上。</p>
+<h3 id="DOM模板解析注意事项"><a href="#DOM模板解析注意事项" class="headerlink" title="DOM模板解析注意事项"></a>DOM模板解析注意事项</h3><p>当使用DOM作为模板时，会受到HTML本身的一些限制，因为VUE只有在浏览器解析、规范化模板之后才能获取其内容。（这一句话要重点理解!）</p>
+<h2 id="自定义事件系统"><a href="#自定义事件系统" class="headerlink" title="自定义事件系统"></a>自定义事件系统</h2><p>我们知道，父组件使用PROP传递数据给子组件。但是子组件怎么跟父组件通信呢？这个时候就用到了Vue的自定义事件系统。</p>
+<h3 id="使用v-on绑定自定义事件"><a href="#使用v-on绑定自定义事件" class="headerlink" title="使用v-on绑定自定义事件"></a>使用v-on绑定自定义事件</h3><p>每个Vue实例都实现了事件接口：</p>
 <ul>
-<li><p>GET与POST都有自己的语义，不能随便混用。</p>
+<li>使用$on(eventName)监听事件</li>
+<li>使用$emit(eventName)触发事件</li>
+</ul>
+<p>注意： Vue的事件系统与浏览器的EventTarget API有所不同。尽管它们运行起来类似，但是$on $emit并不是addEventListener    dispachEvent的别名。<br>另外，父组件可以在使用子组件的地方直接使用v-on来监听子组件触发的事件。<br>注意：  不能使用$on侦听子组件释放的事件，而必须在模板里面直接使用v-on绑定。</p>
+<h3 id="给组件绑定原生事件"><a href="#给组件绑定原生事件" class="headerlink" title="给组件绑定原生事件"></a>给组件绑定原生事件</h3><p>有时候，可能我们想在某个组件的根元素上监听一个原生事件，可以使用v-on的修饰符.native 例如：</p>
+<pre><code>&lt;my-component v-on:click.native=&quot;doSomeThing&quot;&gt;&lt;/my-component&gt;</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/04/28/DNS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/28/DNS/" itemprop="url">DNS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-28T00:00:00+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="浏览器发起请求的几个重要步骤"><a href="#浏览器发起请求的几个重要步骤" class="headerlink" title="浏览器发起请求的几个重要步骤"></a>浏览器发起请求的几个重要步骤</h3><ul>
+<li>DNS解析</li>
+<li>TCP链接</li>
+<li>发送http请求</li>
+<li>服务器处理请求并返回http报文</li>
+<li>浏览器解析渲染页面</li>
+<li>连接结束</li>
+</ul>
+<p>DNS缓存，减少浏览器访问dns服务器的时间</p>
+<p>部署CDN：CDN的域名不要和主站的域名一样，这样就会防止访问CDN时还携带着主站cookies的问题。</p>
+<p>浏览器端缓存</p>
+<p>服务端渲染ssr</p>
+<p>HTTP是不保存状态的协议，即无状态协议，协议本身对于请求或响应之间的通信状态不进行保存，因此连接双方不能知晓对方当前的身份和状态。这也是Cookie技术产生的重要原因之一：客户端的状态管理。浏览器会根据从服务器端发送的响应报文内 Set-Cookie 首部字段信息自动保持 Cookie。而每次客户端发送 HTTP 请求，都会在请求报文中携带 Cookie，作为服务端识别客户端身份状态的标识。</p>
+<h3 id="TCP-IP四层网络模型"><a href="#TCP-IP四层网络模型" class="headerlink" title="TCP/IP四层网络模型"></a>TCP/IP四层网络模型</h3><p>应用层<br>传输层<br>网际层<br>链路层</p>
+<p>持久连接采用队头阻塞模式，下次请求必须等到上次响应返回后才能发起，如果上次的请求还没有返回响应内容，下次请求就必须只能等着，就是常说的队头阻塞。（解决方案，管道化）</p>
+<p>需要注意，如果使用反向代理，则在axios配置的时候，请求baseURL必须设置为字符串‘/’，否则proxy会匹配不到’/api’导致代理失败。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/04/10/正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/10/正则表达式/" itemprop="url">正则表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T00:00:00+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h4 id="构造函数定义"><a href="#构造函数定义" class="headerlink" title="构造函数定义"></a>构造函数定义</h4><p>接受两个参数，一个是要匹配的字符串模式（这个参数需要是字符串，不能是正则表达式字面量），另一个是标志字符串，g i m</p>
+<pre><code>var reg = new RegExp(&apos;java[script]&apos;,&apos;gim&apos;)</code></pre><p>g,i,m是可选的参数，其中g：全文查找–模式被应用于所有的字符串，而不是发现第一个匹配项时就立即停止。i:忽略大小写。m:多行查找，在达到一行文本末尾时还会继续查找下一行中是否存在模式匹配的项。<br>在es3中，正则表达式字面量会始终共享一个RegExp实例，而使用构造函数创建的每个RegExp都是一个新的实例。但是在es5中正则表达式字面量和构造函数一样，都会创建新的RegExp实例。</p>
+<p>replace(RegExp/str,str_replace),replace方法接受两个参数，第一个参数为字符串或者正则对象，第二个参数为字符串或一个回调函数。如果是字符串，第二个参数将会替换第一个参数匹配到的值，然后将替换后的原文本作为返回值返回。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/01/23/函数节流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/23/函数节流/" itemprop="url">函数节流</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T00:00:00+08:00">
+                2019-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="函数节流"><a href="#函数节流" class="headerlink" title="函数节流"></a>函数节流</h3><p>window的resize事件不是在resize结束之后调用的，具体是怎样一个频率我们不得而知，但是却是在不停的调用，直到窗口大小不再变化。类似的机制还用鼠标的mousemove，都是在短时间内重复触发。在红包书中有专门的应对此问题的函数节流</p>
+<pre><code>function throttle(method,context) {
+    clearTimeout(method.tId);
+    method.tId = setTimeout(function() {
+        method.call(context)
+    },500)
+}</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/12/27/PropTypes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/27/PropTypes/" itemprop="url">PropTypes</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T00:00:00+08:00">
+                2018-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h3><p>在React15.5版本之后，React的校验工作转移到了一个单独的库。<br>使用的时候安装prop-types库，它会导出一系列的验证器，用于确保收到的数据是有效的。</p>
+<p>有如下不同的验证器：</p>
+<pre><code>import PropTypes from &apos;prop-types&apos;;
+
+MyComponents.propTypes = {
+// 你可以指定某一个prop是一个特定的js类型，默认情况下这些都是可选的
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+  optionalSymbol: PropTypes.symbol,
+
+  optionalNode: PropTypes.node, // 该类型的prop代表的是一个节点
+  optionalElement: PropTypes.element,  // 代表一个React element 
+  optionalMessage: PropTypes.instanceOf(Message), // 声明这是一个类的实例
+
+  optionalEnum: PropTypes.oneOf([&apos;News&apos;, &apos;Photos&apos;]), // 保证值在某一个确定的范围内
+
+optionalUnion: PropTypes.oneOfType([
+PropTypes.string,
+PropTypes.number,
+PropTypes.instanceOf(Message)
+  ]),                     // 保证是其中的一种类型的一个对象
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),  // 某种特定类型的数组
+      optionalObjectOf: PropTypes.objectOf(PropTypes.number),// 具有某种特定类型属性的对象
+      optionalObjectWithShape: PropTypes.shape({
+color: PropTypes.string,
+fontSize: PropTypes.number
+  }),      // 直接指定长成什么样子的对象
+ requiredFunc: PropTypes.func.isRequired,    // 可以在后面追加isRequired 来确保提供指定类型的prop（如果没有指定就会发出警告）
+ requiredAny: PropTypes.any.isRequired,    // 代表任意类型的数据（但是必须要有）
+
+ // 下面是一个自定义验证器
+ customProp: function(props, propName, componentName) {
+if (!/matchme/.test(props[propName])) {
+  return new Error(
+    &apos;Invalid prop `&apos; + propName + &apos;` supplied to&apos; +
+    &apos; `&apos; + componentName + &apos;`. Validation failed.&apos;
+  );
+}
+  },
+      customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
+    if (!/matchme/.test(propValue[key])) {
+      return new Error(
+        &apos;Invalid prop `&apos; + propFullName + &apos;` supplied to&apos; +
+        &apos; `&apos; + componentName + &apos;`. Validation failed.&apos;
+      );
+    }
+  })
+};
+}</code></pre><h3 id="可以指定默认的属性"><a href="#可以指定默认的属性" class="headerlink" title="可以指定默认的属性"></a>可以指定默认的属性</h3><pre><code>class Greeting extends React.Component {
+  render() {
+    return (
+      &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
+    );
+  }
+}
+
+    // Specifies the default values for props:
+Greeting.defaultProps = {
+  name: &apos;Stranger&apos;
+};
+
+// Renders &quot;Hello, Stranger&quot;:
+ReactDOM.render(
+  &lt;Greeting /&gt;,
+  document.getElementById(&apos;example&apos;)
+);
+
+
+默认属性可以保证当组件不能从父组件获取属性的时候，可以有一个默认的属性，然后我们配置的属性验证器照样会对默认属性做检查。</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/12/27/VueSSR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/27/VueSSR/" itemprop="url">VueSSR</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T00:00:00+08:00">
+                2018-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="VueSSR"><a href="#VueSSR" class="headerlink" title="VueSSR"></a>VueSSR</h3><pre><code>runlnNewContext false</code></pre><h3 id="什么是ssr"><a href="#什么是ssr" class="headerlink" title="什么是ssr?"></a>什么是ssr?</h3><p>默认情况下vue是构建客户端应用程序的框架，可以在浏览器中输出Vue组件，进行生成Dom的操作，然而，也可以将同一个组件渲染为服务器端的html字符串，将他们直接发送到浏览器，最后将静态标记‘混合’为客户端上完全交互的应用程序。</p>
+<p>服务器渲染的 Vue.js 应用程序也可以被认为是”同构”或”通用”，因为应用程序的大部分代码都可以在服务器和客户端上运行。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
+<li><p>更好的seo Google 和 Bing可以很好的对同步javascript应用程序进行索引。同步是关键，如果你的应用程序初始展示菊花图，然后通过ajax获取内容，抓取工具不会等到异步完成后再行抓取页面内容。也就是说，如果 SEO 对你的站点至关重要，而你的页面又是异步获取内容，则你可能需要服务器端渲染(SSR)解决此问题。</p>
 </li>
-<li><p>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证</p>
+<li><p>更快的内容到达时间。（time-to-content）对于那些「内容到达时间(time-to-content)与转化率直接相关」的应用程序而言，服务器端渲染(SSR)至关重要。<br>需要权衡的地方：</p>
+</li>
+<li><p>开发条件所限制，浏览器特定的代码，只能在特定的生命周期中使用；一些外部扩展库(external library)可能需要特殊处理，才能在服务器渲染应用程序中运行。</p>
+</li>
+<li><p>涉及构建及部署的更多要求。与可以部署在任何静态文件服务器上的完全静态单页面应用程序(SPA)不同，服务器渲染应用程序，需要处于 Node.js server 运行环境。</p>
+</li>
+<li><p>更多的服务端负载。在 Node.js 中渲染完整的应用程序，显然会比仅仅提供静态文件的 server 更加大量占用 CPU 资源(CPU-intensive - CPU 密集)，因此如果你预料在高流量环境(high traffic)下使用，请准备相应的服务器负载，并明智地采用缓存策略。</p>
 </li>
 </ul>
-<p>数据包完整性上，有非常大的优点。</p>
-<ul>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
+<p> 还有可能会用到预渲染</p>
+<p>模版插值</p>
+<p>在纯客户端应用程序中，每个用户会在他们各自的浏览器中使用新的应用程序实例，对于服务器端渲染，我们希望也是如此：每个请求都是全新的，独立的应用程序示例，以便不会有交叉请求造成的状态污染。</p>
+<p>禁用响应式数据</p>
+<p>生命周期钩子函数：   只会用到beforeCreate 和 created 会用到。</p>
+<p>这就是说任何其他生命周期钩子函数中的代码（例如 beforeMount 或 mounted），只会在客户端执行。</p>
+<p>此外还需要注意的是，你应该避免在 beforeCreate 和 created 生命周期时产生全局副作用的代码，例如在其中使用 setInterval 设置 timer。在纯客户端(client-side only)的代码中，我们可以设置一个 timer，然后在 beforeDestroy 或 destroyed 生命周期时将其销毁。但是，由于在 SSR 期间并不会调用销毁钩子函数，所以 timer 将永远保留下来。为了避免这种情况，请将副作用代码移动到 beforeMount 或 mounted 生命周期中。</p>
+<p>通用代码不可接受特定平台的 API，因此如果你的代码中，直接使用了像 window 或 document，这种仅浏览器可用的全局变量，则会在 Node.js 中执行时抛出错误，反之也是如此。</p>
+<p>对于共享于服务器和客户端，但用于不同平台 API 的任务(task)，建议将平台特定实现包含在通用 API 中，或者使用为你执行此操作的 library。例如，axios 是一个 HTTP 客户端，可以向服务器和客户端都暴露相同的 API。</p>
+<p>对于仅浏览器可用的 API，通常方式是，在「纯客户端(client-only)」的生命周期钩子函数中惰性访问(lazily access)它们。</p>
+<p>请注意，考虑到如果第三方 library 不是以上面的通用用法编写，则将其集成到服务器渲染的应用程序中，可能会很棘手。你可能要通过模拟(mock)一些全局变量来使其正常运行，但这只是 hack 的做法，并且可能会干扰到其他 library 的环境检测代码。</p>
+<p>避免状态单例</p>
+<p>需要提前知道哪些组件有ajax请求，等把这些请求都返回了数据之后，才开始组件的渲染。</p>
+<p>是否必须使用vueX是的，当预先获取到ajax的数据后，Vue组件还没开始渲染，所以，我们得把数据先存在某个地方。</p>
+<p>当Vue组件开始渲染的时候，还得把数据拿出来，正确的传递到各个组件中。</p>
+<p>在浏览器渲染的时候，需要正确解析window.INITIAL_STATE,并传递到各个组件中。</p>
+<p>因此我们需要有这么一个独立于视图以外的地方，来存储 管理和传递数据。这就是VueX存在的理由。</p>
+<p>后端已经把ajax数据转换成html数据了，为什么还需要把ajax数据通过window.INITIAL_STATE传递到前端？因为前端渲染的时候仍然需要知道这些数据。举个例子，一个组件，给他绑定一个点击事件，点击的时候，打印this.msg.现在后端是把组件html渲染出来了，但是事件的绑定肯定还是得有浏览器来完成，如果浏览器拿不到跟服务器端相同的数据，在触发点击事件的时候，这个msg字段去哪里找呢？</p>
+<h3 id="反向代理的作用"><a href="#反向代理的作用" class="headerlink" title="反向代理的作用"></a>反向代理的作用</h3><ul>
+<li>保护网站的安全</li>
+<li>通过配置缓存功能加速web请求</li>
+<li>实现负载均衡</li>
 </ul>
-<p>Get/post</p>
-<p>如果尝试重新执行post请求，浏览器也会弹一个框提示这个刷新可能会有副作用，询问要不要继续。</p>
-<p>确认重新提交表单？</p>
-<p>把get实现为有副作用是个很可怕的事情。</p>
-<p>其实并不是GET只能用url，而是浏览器直接发出的GET只能由一个url触发。所以没办法，GET上要在url之外带一些参数就只能依靠url上附带querystring。但是HTTP协议本身并没有这个限制。</p>
-<p>浏览器的POST请求都来自表单提交。每次提交，表单的数据被浏览器用编码到HTTP请求的body里。浏览器发出的POST请求的body主要有有两种格式，一种是application/x-www-form-urlencoded用来传输简单的数据，大概就是”key1=value1&amp;key2=value2”这样的格式。另外一种是传文件，会采用multipart/form-data格式。采用后者是因为application/x-www-form-urlencoded的编码方式对于文件这种二进制的数据非常低效。</p>
-<p>浏览器在POST一个表单时，url上也可以带参数，只要<form action="url">里的url带querystring就行。只不过表单里面的那些用”input”等标签经过用户操作产生的数据都在会在body里。</form></p>
-<p>因此我们一般会泛泛的说“GET请求没有body，只有url，请求数据放在url的querystring中；POST请求的数据在body中“。但这种情况仅限于浏览器发请求的场景。</p>
-<p>接口中的GET和POST</p>
-<p>Ajax  中</p>
-<p>太自由也带来了另一种麻烦，开发人员不得不每次讨论确定参数是放url的path里，querystring里，body里，header里这种问题，太低效了。于是就有了一些列接口规范/风格。其中名气最大的当属REST</p>
-<p>REST充分运用GET、POST、PUT和DELETE，约定了这4个接口分别获取、创建、替换和删除“资源”，REST最佳实践还推荐在请求体使用json格式。这样仅仅通过看HTTP的method就可以明白接口是什么意思，并且解析格式也得到了统一。</p>
-<p>babel-node 包含在 babel-cli 库，其实就是在 node 上包了一层， 在原来的 node 执行前拦截代码并转换成合适的格式</p>
-<p>最后：</p>
-<ul>
-<li>GET在浏览器回退时是无害的，而POST会再次提交请求。   </li>
-<li>GET产生的URL地址可以被Bookmark，而POST不可以。   </li>
-<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。   </li>
-<li>GET请求只能进行url编码，而POST支持多种编码方式。   </li>
-<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。   </li>
-<li>GET请求在URL中传送的参数是有长度限制的，而POST么有。   </li>
-<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。   </li>
-<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。   </li>
-<li>GET参数通过URL传递，POST放在Request body中。</li>
+<p>非阻塞、高并发连接：官方测试能够支撑5万并发得益于Nginx使用了最新的epoll模型。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/11/20/px2rem或postcss-px2rem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/20/px2rem或postcss-px2rem/" itemprop="url">移动端适配</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-20T00:00:00+08:00">
+                2018-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="px2rem或postcss-px2rem"><a href="#px2rem或postcss-px2rem" class="headerlink" title="px2rem或postcss-px2rem"></a>px2rem或postcss-px2rem</h3><ul>
+<li>在移动端中，为了适配不同的设备，通常用rem来做适配</li>
+<li>rem是通过根元素进行适配的，网页中的根元素指的是<html>，我们通过设置</html></li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/mySql小册/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/20/mySql小册/" itemprop="url">mySql小册</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:08:26+08:00">
-                2020-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果你愿意，可以打开多个shell，每个shell都是用mysql -uroot -p 来运行多个客户端程序，每个客户端程序都是互不影响的。</p>
-<p>如果你有多个电脑，也可以试试把他们那用局域网连接起来，在一个电脑上启动mysql服务器程序，在另一个电脑上执行mysql命令时候 使用ip地址作为主机名来连接到服务器。</p>
-<p>我们直接在黑框框里输入密码很可能被别人看到，这和你当着别人的面输入银行卡密码没啥区别，所以我们在执行mysql连接服务器的时候可以不显式的写出密码，就像这样：</p>
-<p>mysql -uroot -p</p>
-<p>运行着的服务器程序和客户端程序本质上都是计算机上的一个进程，所以客户端进程向服务器进程发送请求并得到回复的过程本质上是一个进程间通信的过程！</p>
-<p>MySQL支持下边三种客户端进程和服务器进程的通信方式。</p>
-<p>真实环境中，数据库服务器进程和客户端进程可能运行在不同的主机中，它们之间必须通过网络来进行通讯。MySQL采用TCP作为服务器和客户端之间的网络通信协议。在网络环境下，每台计算机都有一个唯一的IP地址，如果某个进程有需要采用TCP协议进行网络通信方面的需求，可以向操作系统申请一个端口号，这是一个整数值，它的取值范围是0~65535。这样在网络中的其他进程就可以通过IP地址 + 端口号的方式来与这个进程连接，这样进程之间就可以通过网络进行通信了</p>
-<p>MySQL服务器启动的时候会默认申请3306端口号，之后就在这个端口号上等待客户端进程进行连接，用书面一点的话来说，MySQL服务器会默认监听3306端口。</p>
-<p>如果3306端口号已经被别的进程占用了或者我们单纯的想自定义该数据库实例监听的端口号，那我们可以在启动服务器程序的命令行里添加-P参数来明确指定一下端口号，比如这样：</p>
-<p>mysql -P3307</p>
-<p>其实不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）.</p>
-<p>客户端可以向服务器发送增删改查各类请求</p>
-<p>服务器程序处理来自客户端的查询请求大致需要经过三个部分：分别是连接管理、理解与优化、存储引擎。</p>
-<p>客户端进程可以采用我们上边介绍的TCP/IP、命名管道或共享内存、Unix域套接字这几种方式之一来与服务器进程建立连接，每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个线程来专门处理与这个客户端的交互，当该客户端退出时会与服务器断开连接，服务器并不会立即把与该客户端交互的线程销毁掉，而是把它缓存起来，在另一个新的客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就起到了不频繁创建和销毁线程的效果，从而节省开销。从这一点大家也能看出，MySQL服务器会为每一个连接进来的客户端分配一个线程，但是线程分配的太多了会严重影响系统性能，所以我们也需要限制一下可以同时连接到服务器的客户端数量，至于怎么限制我们后边再说哈～</p>
-<p>在客户端程序发起连接的时候，需要携带主机信息、用户名、密码，服务器程序会对客户端程序提供的这些信息进行认证，如果认证失败，服务器程序会拒绝连接。另外，如果客户端程序和服务器程序不运行在一台计算机上，我们还可以采用使用了SSL（安全套接字）的网络连接进行通信，来保证数据传输的安全性。</p>
-<p>当连接建立后，与该客户端关联的服务器线程会一直等待客户端发送过来的请求，MySQL服务器接收到的请求只是一个文本消息，该文本消息还要经过各种处理</p>
-<p>MySQL服务器程序处理查询请求会把刚刚处理过的查询请求和结果缓存起来，如果下一次有一模一样的请求过来，直接从缓存中查找结果就好了，就不用再傻呵呵的去底层的表中查找了。</p>
-<p>这个查询缓存可以在不同客户端之间共享，也就是说如果客户端A刚刚查询了一个语句，而客户端B之后发送了同样的查询请求，那么客户端B的这次查询就可以直接使用查询缓存中的数据。。</p>
-<p>如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。</p>
-<p>不过既然是缓存，那就有它缓存失效的时候。MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了INSERT、 UPDATE、DELETE、TRUNCATE TABLE、ALTER TABLE、DROP TABLE或 DROP DATABASE语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！</p>
-<p> 虽然查询缓存有时可以提升系统性能，但也不得不因维护这块缓存而造成一些开销，比如每次都要去查询缓存中检索，查询请求处理完需要更新查询缓存，维护该查询缓存对应的内存区域。从MySQL 5.7.20开始，不推荐使用查询缓存，并在MySQL 8.0中删除</p>
-<p>语法解析：</p>
-<p>如果查询缓存没有命中，接下来就需要进入正式的查询阶段了。因为客户端程序发送过来的请求只是一段文本而已，所以</p>
-<p>mysql服务器程序首先要对这段文本做分析，判断请求的语法是否正确，然后从文本中将要查询的表、各种查询条件都提取出来放到MySql服务器内部使用的一些数据结构上来。</p>
-<p>这个从指定的文本中提取出我们需要的信息本质上算是一个编译过程，涉及词法解析、语法分析、语义分析等阶段，这些问题不属于我们讨论的范畴，大家只要了解在处理请求的过程中需要这个步骤就好了。</p>
-<p>查询优化：语法解析之后，服务器程序获得到了需要的信息，比如要查询的列是哪些，表是哪个，搜索条件是什么等等，但光有这些是不够的，因为我们写的MySQL语句执行起来效率可能并不是很高，MySQL的优化程序会对我们的语句做一些优化，如外连接转换为内连接、表达式简化、子查询转为连接吧啦吧啦的一堆东西。优化的结果就是生成一个执行计划，这个执行计划表明了应该使用哪些索引进行查询，表之间的连接顺序是啥样的。我们可以使用EXPLAIN语句来查看某个语句的执行计划，关于查询优化这部分的详细内容我们后边会仔细唠叨，现在你只需要知道在MySQL服务器程序处理请求的过程中有这么一个步骤就好了。</p>
-<p>存储引擎</p>
-<p>截止到服务器程序完成了查询优化为止，还没有真正的去访问真实的数据表，MySQL服务器把数据的存储和提取操作都封装到了一个叫存储引擎的模块里。我们知道表是由一行一行的记录组成的，但这只是一个逻辑上的概念，物理上如何表示记录，怎么从表中读取数据，怎么把数据写入具体的物理存储器上，这都是存储引擎负责的事情。为了实现不同的功能，MySQL提供了各式各样的存储引擎，不同存储引擎管理的表具体的存储结构可能不同，采用的存取算法也可能不同。</p>
-<p>为什么叫<code>引擎</code>呢？因为这个名字更拉风～ 其实这个存储引擎以前叫做<code>表处理器</code>，后来可能人们觉得太土，就改成了<code>存储引擎</code>的叫法，它的功能就是接收上层传下来的指令，然后对表中的数据进行提取或写入操作。</p>
-<p>为了管理方便，人们把连接管理、查询缓存、语法解析、查询优化这些并不涉及真实数据存储的功能划分为MySQL server的功能，把真实存取数据的功能划分为存储引擎的功能。</p>
-<p>各种不同的存储引擎向上边的MySQL server层提供统一的调用接口（也就是存储引擎API），包含了几十个底层函数，像”读取索引第一条内容”、”读取索引下一条内容”、”插入记录”等等。。</p>
-<p>所以在MySQL server完成了查询优化后，只需按照生成的执行计划调用底层存储引擎提供的API，获取到数据后返回给客户端就好了。</p>
-<p>常用存储引擎</p>
-<p>mySQL支持很多种存储引擎</p>
-<p>其实我们最常用的就是InnoDB和MyISAM，有时会提一下Memory。其中InnoDB是MySQL默认的存储引擎</p>
-<p>不同的存储引擎支持不同的功能</p>
-<p>存储引擎是负责对表中的数据进行提取和写入工作的，我们可以为不同的表设置不同的存储引擎，也就是说不同的表可以有不同的物理存储结构，不同的提取和写入方式。</p>
-<p>如果我们想显式的指定一下表的存储引擎，那可以这么写：</p>
-<p>CREATE TABLE 表名(<br>    建表语句;<br>) ENGINE = 存储引擎名称;</p>
-<p>如果表已经建好了，我们也可以使用下边这个语句来修改表的存储引擎：</p>
-<p>ALTER TABLE 表名 ENGINE = 存储引擎名称;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/一些杂项/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/20/一些杂项/" itemprop="url">samba、打包📦、模块化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:05:36+08:00">
-                2020-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Samba简介：</p>
-<p>一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。</p>
-<p>代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。</p>
-<p>Babel编译后的es5代码都是在严格模式下的es5代码。</p>
-<p>箭头函数虽然称为函数，但是其并不存在属于自己的独立的this和arguments也就是说其使的是外部作用域中的this和arguments，这在es6中被称之为词法作用域this和词法作用域arguments.</p>
-<p>⁨iCloud 云盘⁩ ▸ ⁨桌面⁩ ▸ ⁨working zone⁩ ▸ ⁨小册⁩</p>
-<p>使用单个全局变量来把所有的代码都包含在一个函数内，由此来创建私有的命名空间和闭包作用域。</p>
-<p>文件引入的依赖关系非常重要。</p>
-<p>比如： 要使用backbone就必须先引入backbone的源文件，但是backbone又依赖underscore.js所以backbone的引入需要在</p>
-<p>underscore之后。</p>
-<p>粗俗来讲，模块打包就是将一小块一小块的代码粘成一大块。</p>
-<p>因为所有的模块都需要通过script标签引入到html中。然后用户访问你的页面的时候才能正常的显示和工作。</p>
-<p>每个独立的script意味着他们要被浏览器分别一个一个的加载。</p>
-<p>这就有可能导致页面载入时间过长。</p>
-<p>为了解决这个问题，就需要进行模块打包，把所有的模块合并到一个或者几个文件中，以此来减少http请求数。也就是从开发到</p>
-<p>上线前的构建环节。</p>
-<p>还有一种提升加载速度的方式就是代码压缩，就是在不影响代码正常工作的情况下压缩其体积。</p>
-<p>更小的文件体积意味着更短的加载时间。</p>
-<p>gulp和grunt一类的构建工具可以很方便的解决上述的问题，在开发的时候通过模块来阻止代码，上线时再合并</p>
-<p>压缩提供给浏览器。</p>
-<p>如果你的代码是通过非commonjs或者amd或者es6这类浏览器不支持的模块模式来组织的，那么合并压缩其实</p>
-<p>只是把一些原生的js代码合并在一起而已。</p>
-<p>但是如果你使用的是一些浏览器原生不支持的模块系统，你就需要使用一些专门的构建工具来把他们转化成浏览器支持的代码。这类工具就是我们最近经常听过的brosserify requirejs, webpack等等，模块化构建工具。</p>
-<p>为了实现模块化构建或者载入的功能，这类工具提供许多比如说你在改动了源代码之后自动重新构建的功能。</p>
-<p>打包CommonJS</p>
-<p>模块化构建工具Browserify是一个专门用来打包CommonJs模块以便在浏览器里运行的构建工具。</p>
-<p>browserify首先会通过抽象语法树来解析代码中的每一个require语句，在分析完所有的模块的依赖和结构之后，就会把所有的代码合并到一个文件中。然后你的html文件里引入一个bundle.js就好了。</p>
-<p>假如你使用的是amd，你会需要一些例如requirejs或者curl的amd加载器。模块价值工具可以在你的应用中按需加载模块代码。</p>
-<p>amd和commonjs最主要的区别是amd是异步加载模块的，也就是我们不必把所有的代码都打包到一个文件里面，模块加载不影响后续语句的执行，逐步加载的模块也不会导致页面阻塞无法响应。</p>
-<p>不过在实际的应用中，为了避免用户过多的请求对服务器造成压力。大多数的的开发者还是选择用r.js等一类的构建工具来合并压缩amd的模块。</p>
-<p>总的来说，amd和commonjs在构建中最大的区别是，在开发过程中，采用amd的应用直到正式上线发布之前都不需要构建。</p>
-<p>webpack是新推出的构建工具里最受欢迎的，它兼容commonjs amd es6等各类规范。</p>
-<p>webpack很重要的一个功能，提供了诸如code splitting （代码分割）的有用功能，它可以把你的代码分割成一个个的chunk然后按需加载优化性能。</p>
-<p>es6的与众不同： 体现在当你载入一个模块时，载入的操作实际是在编译时执行的，也即是在代码执行之前。</p>
-<p>让es6模块于冗余代码消除不同的是一种叫做tree shaking的技术。tree shaking 其实恰好是冗余代码消除的反向操作。它只加载你需要调用的代码，而不是删除不会被执行的代码。</p>
-<p>构建es6模块。</p>
-<p>让es6模块能在浏览器中运行的常用方法有以下几种。</p>
-<p>1 使用语法编译器，来把es6语法的代码编译成es5或者commonjs，amd, umd等其他形式。然后再通过browserify或者webpack一类的构建工具来进行构建。</p>
-<p>2 使用rollup.js. rollup.js打包出来的体积会更小.</p>
-<h3 id="关于Web-APIs"><a href="#关于Web-APIs" class="headerlink" title="关于Web APIs"></a>关于Web APIs</h3><p>我们都知道 JavaScript 的执行是单线程的，但是浏览器并不是单线程的，Web APIs 就是一些额外的线程，它们通常由 C++ 来实现，用来处理非同步事件比如 DOM 事件，http 请</p>
-<p>求，setTimeout 等。他们是浏览器实现并发的入口，对于 Node.JavaScript 来说，就是一些 C++ 的 APIs。</p>
-<p>try {<br>  setTimeout(() =&gt; {<br>    throw new Error(“Error - from try statement”);<br>  }, 0);<br>} catch (e) {<br>  console.error(e);<br>}</p>
-<p>整个过程是这样的：执行到 setTimeout 时先同步地将回调函数注册给 Web APIs 的 timer，要清楚此时 setTimeout 的回调函数此时根本没有入调用栈甚至连 task queue 都没有进入，所以 try 的这个代码块就执行结束了，没有抛出任何 error，catch 也被直接跳过，同步执行完毕。<br>等到 timer 的计时到了（要注意并不一定是下一个 event loop，因为 setTimeout 在每个浏览器中的最短时间是不确定的，在 Chrome 中执行几次也会发现每次时间都不同，0 ms ~ 2 ms 都有），会将 setTimeout 中的回调放入 task queue 中，此时 event loop 中的 current task 为 null，就将这个回调函数设为 current task 并开始同步执行，此时调用栈中只有一个全局上下文，try catch 已经结束了，就会直接将这个 error 丢出。</p>
-<p>大概意思就是，当错误抛出的时候，已经没有了try catch的上下文了，</p>
-<p>就捕获不到抛出的错误了</p>
-<p>终于明白了： try catch无法捕获setTimeout异步任务中的错误的原因。</p>
-<p>能捕获到的异常，必须是线程执行已经进入try catch，并且try catch未执行</p>
-<p>完的时候抛出来的。</p>
-<p>代码报错的时候，线程已经执行完try catch ，这种不能捕获到异常</p>
-<p>setTimeout 里面报错，实际上是100ms之后执行的代码报错，此时代码</p>
-<p>块try catch 已经执行完成了，所以无法捕获异常。</p>
-<p>总结： 能被 try catch 捕捉到的异常，必须是在报错的时候，线程执行已经进入 try catch 代码块，且处在 try catch 里面，这个时候才能被捕捉到。</p>
-<p>如果是在之前，或者之后，都无法捕捉异常。</p>
-<p>另外promise没有异常：</p>
-<p>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获，不管是同步还是异步。</p>
-<p>核心原因是因为 Promise 在执行回调中都用 try catch 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常。</p>
-<p>敲黑板了： 不要用 try catch 包裹 Promise , Promise 很强大，不用担心异常会往上抛！我们只需要给 Promise 增加 Promise#catch 就 OK 了</p>
-<p>js是单线程，当脚步抛出了未捕获的异常会使得这个脚本挂起，后面的代码无法执行。</p>
-<p>要将用户的修改thunk起来，然后只修改一次dom，所以需要使用microTask</p>
-<p>在UI更新渲染前执行，就算有多次修改，也会只修改一次dom，然后进行渲染</p>
-<p>（更新一下，现在 Vue 的 nextTick 实现移除了 MutationObserver 的方式（兼容性原因），取而代之的是使用 MessageChannel。）</p>
-<p>其实用什么具体的api不是最关键的，重要的是使用microTask在UI render</p>
-<p>之前进行thunk.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/viewport/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/20/viewport/" itemprop="url">viewport</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:02:48+08:00">
-                2020-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>web前端领域，像素分为设别像素和css像素，</p>
-<p>一个css像素的大小是可以改变的，比如用户缩放页面的时候，实际上是在缩小或者放大css像素，而设备像素无论大小还是数量都是不变的。</p>
-<p>一个块元素默认的宽度是其父元素的100%，是基于起父元素的，所以25%指的是父元素宽度的25%，所以，body元素的默认宽度是html元素宽度的100%</p>
-<p>但是html元素的宽度又是基于谁的呢？这个时候就要引入一个概念，初始包含块和视口。</p>
-<p>记住一句话： 视口是html元素的父元素，所以我们称视口为初始包含块。所以html元素的百分比是基于视口的。</p>
-<p>第一个视口：布局视口。</p>
-<p>首先： 需要了解一个事实： 浏览器厂商是希望满足用户的要求的，即在手机也能浏览为PC端设计的网站，所以浏览器厂商必须想办法来在满足~</p>
-<p>在pc浏览器中，视口只有一个，并且视口的宽度 = 浏览器窗口的宽度。</p>
-<p>但是在移动端也要根据这个来设计的话（移动端浏览器窗口宽度就是屏幕宽度），那么PC端设计的网站在移动端看起来会很丑，因为PC端的网页宽度在800 ~ 1024个CSS像素，而手机屏幕要窄的多，这个时候再PC端25%的宽度在移动端看起来会很窄。所以，布局视口的概念产生了</p>
-<p>布局视口： 移动端css布局的依据视口，css布局会根据布局视口来进行计算。</p>
-<p>也就是说在移动端，视口和浏览器窗口不再关联，实际上布局视口的宽度要比浏览器窗口大的多（在手机和平板中浏览器布局视口的宽度在768～1024像素之间）</p>
-<p>获取布局视口的宽度和高度；</p>
-<p>document.documentElement.clientWidth<br>document.documentElement.clientHeight</p>
-<p>视觉视口：  更好理解一些，就是用户正在看到网站的区域</p>
-<p>理想视口： 理想视口，这是我们最需要关注的视口，现在我们来回顾一下我们知道了哪些视口，有两个，分别是：布局视口，视觉视口。</p>
-<p>布局视口的宽度一般在 680~1024像素之间，这样可以使得PC网站在手机中不被压扁，但是这并不理想，因为手机更适合窄的网站，换句话说，布局视口并不是最理想的宽度，所以，就引入了理想视口。</p>
-<p>理想视口，定义了理想视口的宽度，比如对于iphone5来讲，理想视口是320*568。但是最终作用的还是布局视口，因为我们的css是依据布局视口计算的，所以你可以这样理解理想视口：理想的布局视口。下面这段代码可以告诉手机浏览器要把布局视口设为理想视口：</p>
-<meta name="viewport" content="width=device-width">
-
-<p>上面那段代码告诉浏览器：将布局视口的宽度设为理想视口。所以，上面代码中的width指的是布局视口的宽 device-width 实际上就是理想视口的宽度。</p>
-<p>题外话：  meta视口是苹果公司Apple创造的，别的移动端浏览器都直接复制了它。</p>
-<p>像素是网页布局的基础，最开始web开发者基本靠直觉使用它。</p>
-<p>一个像素就是计算机屏幕显示一种特定颜色的最小区域；设备宽度相同，像素越高，画面就更细致更清晰</p>
-<p>css像素，为web开发者创造的，在css和js中使用的抽象层</p>
-<p>当你给一个元素设置200px时，那么它到底会跨越多少个设备像素呢，这个取决于屏幕特性和缩放；比如2倍视网膜屏就是跨越了400像素，如果用户放大，那么跨越的设备像素就越多；每一个css和js测试返回的元素宽度仍然为200px；开发者就不用关心这个元素到底跨越了多少个设备像素，而是把复杂的计算交给了浏览器，这就是为什么说CSS像素是专门为Web开发者创造的一个抽象层</p>
-<p>在桌面浏览器中，视口的宽度等于浏览器窗口的宽度。</p>
-<p>视觉视口与设备的屏幕一样宽，并且它的css像素数会随着用户缩放而改变。</p>
-<p>布局视口的默认宽度并不是一个理想的宽度，大家从上面的图就可以看出来了，所以苹果公司就引进了理想窗口这个概念：</p>
-<p>它是对设备来说最理想的布局视口尺寸。显示在理想视口中的页面拥有最理想的浏览和阅读的宽度，用户刚进入页面时不再需要缩放。</p>
-<meta name="viewport" content="width=device-width">
-
-<p>上面这行代码就是告诉浏览器，布局视口的宽度应该与理想视口的宽度一致。</p>
-<p>我们平时在chrome控制台里看到的尺寸就是理想尺寸</p>
-<p>注意： 理想尺寸是由浏览器厂商决定的，同一个设备可以有不同的尺寸。</p>
-<p>不同设备的相同浏览器理想窗口也会不同，比如手机和平板</p>
-<p>而且会随着设备转向改变。</p>
-<p>虽然有那么多不同尺寸的理想视口，但是平时开发我们只要告诉浏览器使用它的理想视口（也就是上面那行代码），就没问题了。</p>
-<p>总结： 桌面中浏览器窗口就是约束你的css布局窗口，它也决定用户可以看到什么</p>
-<p>在手机上，桌面窗口被拆分成了两个：布局视口会限制你的CSS布局；视觉视口决定用户能看到什么</p>
-<p>移动端浏览器还有一个理想视口，它是对于特定设备上的特定浏览器的布局视口的一个理想尺寸</p>
-<p>可以把布局视口的尺寸设置为理想视口。实际上，这就是响应式设计的基础。</p>
-<p>缩放：  手机上放大/缩小 视觉视口，布局视口不会改变，所以我们看到的css布局是不变的</p>
-<p>桌面上放大/缩小  视觉视口，由于桌面上的布局视口和视觉视口是同一个，所以布局视口也会改变，这就是我们在桌面端缩放样式有时候会错乱的原因。</p>
-<p>（据说移动端css布局不改变也是因为移动端进行重新布局的成本太高）</p>
-<p>分辨率：  它有2个概念，一个是设备的分辨率，一个是css/js里的分辨率，这2个东西不是并不是一回事</p>
-<p>物理分辨率：DPI：像素数量/宽度（以英寸为单位）得到设备每英寸的点数<br>无论如何js都无法获取设备的物理分辨率, screen.width并不可靠</p>
-<p>设备像素比</p>
-<p>设备像素比：Device Pixel Ratio（简称DPR），是设备像素和理想视口的比值。<br>比如，iphone早起设备像素是320，理想视口宽度也是320，所以DPR就是1。后来的视网膜屏，iphone设备像素变成了640，理想窗口不变320，所以DPR也就变成了2。</p>
+<p>假值列表：</p>
+<p>以下这些是假值</p>
 <ul>
-<li>js通过window.devicePixelRatio, css通过device-pixel-ratio(基于webkit)来获取。</li>
-<li>DPR也是浏览器厂商决定的，所以也有很多种，并不一定都为整数</li>
+<li>undefined</li>
+<li>null</li>
+<li>false</li>
+<li>+0、-0、NaN</li>
+<li>“”</li>
 </ul>
+<p>除了以上这些假值以外的值都是真值，也就是说没有一个真值列表，真值的列表可以无限长，无法一一列举，我们只能通过假值列表做为参考来判断一个值是不是真值。</p>
+<blockquote>
+<p>= 0 和 == -1 这样的写法不是很好，称为”抽象泄漏“，意思是在代码中暴露了底层的实现细节，这里指的是用-1作为失败时的返回值，这些细节应该被屏蔽掉。</p>
+</blockquote>
+<p>html是浏览器构建dom的蓝图，为了正确构建每个dom，浏览器还会修复它在蓝图中发现的问题。</p>
+<p>像普通人一样编写代码和像忍者一样编写代码的最大区别在于是否把js当成函数式语言来理解，对这一点的认知水平决定了你编写的代码的水平。</p>
+<p>对象能做的任何一件事，函数也都能做，函数也是对象，唯一的特殊之处在于它是可调用的，即函数会被调用以便执行某项动作。</p>
+<p>把函数作为第一类对象，是函数式编程的第一步</p>
+<p>回调函数不一定都是异步的，两码事</p>
 
           
         
@@ -1385,7 +1412,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/网络应用的性能问题/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/11/19/artTemplate高效的秘密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1404,7 +1431,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/20/网络应用的性能问题/" itemprop="url">网络应用的性能问题</a></h1>
+                <a class="post-title-link" href="/2018/11/19/artTemplate高效的秘密/" itemprop="url">artTemplate高效的秘密</a></h1>
         
 
         <div class="post-meta">
@@ -1416,8 +1443,8 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T21:02:03+08:00">
-                2020-12-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T00:00:00+08:00">
+                2018-11-19
               </time>
             
 
@@ -1456,20 +1483,18 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
       
         
           
-            <p>发现并解决网络应用的性能问题</p>
-<p>如果浏览器创建和显示某一帧所需的时间过长，则该帧会被跳过，根本不会显示。取而代之的是，您将看到下一帧（或紧接其后的帧），因此对象跳过此间隙而非平滑移动。</p>
-<p>（原来卡顿抖动是因为这个原因）</p>
-<p>通过确保应用运行的帧率始终保持在每秒 60 帧 (60fps)，可避免卡顿现象。有许多因素与应用的帧率有关，并且有多种 JavaScript 和 CSS 编码方法可减轻或彻底消除卡顿，实现所期望的帧率。</p>
-<p>基础知识：  网络性能面板Network</p>
-<p>Network 面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP 请求与响应标头和 Cookie，等等</p>
-<p>查看 DOMContentLoaded 和 load 事件信息</p>
-<p>network面板突出显示两个事件：  domcontentLoaded  和  load</p>
-<p>解析页面的初始标记时会触发domContentLoaded 此事件将会在network的两个地方显示：  1 在overview窗格的蓝色竖条线表示事件<br>2在summary窗格中，可以看到事件的确切时间。</p>
-<p>页面完全加载时将会触发load，此事件显示在三个地方</p>
-<p>1 overview窗格中的红色竖线表示该事件</p>
-<p>2 requests Table中的红色竖线</p>
-<p>3 summary 窗格 可以看到确切的时间</p>
-<p>过滤请求： 使用内容类型按钮可以仅显示选定内容类型的资源。</p>
+            <h2 id="artTemplate高效的秘密"><a href="#artTemplate高效的秘密" class="headerlink" title="artTemplate高效的秘密"></a>artTemplate高效的秘密</h2><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p>arttemplate的编译赋值过程是在渲染之前完成的，这种方式称之为‘预编译’。artTemplate模板编译器会根据一些简单的规则提取好所有模板变量，声明在渲染函数头部，这个函数类似下面这样：    </p>
+<pre><code>var render = function($data){
+    var content = $data.content,
+    $out = &apos;&apos;;
+    $out += &apos;&lt;h3&gt;&apos;;
+    if(typeof content === &apos;string&apos;){
+            $out += content;
+    }
+    $out += &apos;&lt;h3&gt;&apos;;
+    return $out;
+}</code></pre><p>这个自动生成的函数就如同一个手工编写的JavaScript函数一样，同等的执行次数下无论CPU还是内存占用有有显著减少，性能近乎极限。</p>
+<h3 id="更快的字符串相加方式"><a href="#更快的字符串相加方式" class="headerlink" title="更快的字符串相加方式"></a>更快的字符串相加方式</h3><p>很多人误以为数组 push 方法拼接字符串会比 += 快，要知道这仅仅是 IE6-8 的浏览器下。实测表明现代浏览器使用 += 会比数组 push 方法快，而在 v8 引擎中，使用 += 方式比数组拼接快 4.7 倍。所以 artTemplate 根据 javascript 引擎特性采用了两种不同的字符串拼接方式。</p>
 
           
         
@@ -1518,7 +1543,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/React effect理解/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/11/14/arttempalte/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1537,7 +1562,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/12/20/React effect理解/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/11/14/arttempalte/" itemprop="url">arttempalte</a></h1>
         
 
         <div class="post-meta">
@@ -1549,8 +1574,8 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T20:57:06+08:00">
-                2020-12-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T00:00:00+08:00">
+                2018-11-14
               </time>
             
 
@@ -1589,373 +1614,37 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
       
         
           
-            <hr>
-<h2 id="title：-React-effect理解"><a href="#title：-React-effect理解" class="headerlink" title="title： React effect理解"></a>title： React effect理解</h2><h3 id="加入依赖是在做什么"><a href="#加入依赖是在做什么" class="headerlink" title="加入依赖是在做什么"></a>加入依赖是在做什么</h3><p>useEffect本身是组件每次渲染都会执行的，加入effect是为了减少其执行的次数</p>
-<p>加入空数组代表只执行一次</p>
-<p>加入其他变量，表示在其改变的时候执行</p>
-<p>当你调用 useEffect时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。</p>
-<p>useEffect是在dom更新完成后做的事情。</p>
-<p>一般来说，函数退出后，变量会销毁，而state中的变量会被react保留</p>
-<p>const [count, setCount] = useState(0);</p>
-<p>我们声明了一个叫count的state变量，然后把它设置为0。React会在重新渲染时记住它当前的值，并提供最新的值给我们的函数。</p>
-<p>之所以叫做useState而不是createState，就是我们并不是每次都create这个state变量，而是只在组件第一次渲染的时候创建。</p>
-<p>当用户点击后，我们传递一个新的值给setCount。React会重新渲染Example组件，并把最新的count传给它。</p>
-<p>如果我们想使用多个state变量，它允许我们给不同的state变量取不同的名称。</p>
-<p>我们可以单独更新每一个state。（理解： 我们单独更新一个state, react会重新渲染函数组件，并用每个state的最新值去渲染，我们更新的那个state状态，得到更新，而那些没有setState的变量，之前的值就是最新的）</p>
-<p>当我们的state变量是一个复杂的对象或者数组时，不同于class的this.setState，更新state变量总是替换而不是合并。（理解： clss组件中的setState是合并式的更新，因此我们得以单独的跟新state中的某一个值）</p>
-<h4 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h4><p>数据获取、设置订阅以及手动更改react组件中的dom都属于副作用。</p>
-<p>1、无需清除的副作用</p>
-<p>有时候，我们只想在react更新dom之后运行一些额外的代码。比如发送网络请求</p>
-<p>，手动更新dom，记录日志等。</p>
-<p>在class组件中，render函数是不应该有任何副作用的。</p>
-<p>我们基本都希望在react更新dom之后才执行我们的操作。</p>
-<p>这就是为什么我们把副作用操作放在componentDidMount 和</p>
-<p>componentDidUpdate函数中。</p>
-<p>useEffect(() =&gt; {<br>    document.title = <code>you clicked ${count} times</code><br>})</p>
-<p>通过这个hook,你可以告诉react组件需要在渲染后执行某些操作。</p>
-<p>React会保存你传递的函数（我们将它称之为effect，重点理解：effect是我们</p>
-<p>传递的函数！！！而不是useEffect这个hooks api），并且在执行dom更新</p>
-<p>之后调用它。（理解：在useEffect中我们给它传递的是一个回调函数，将我们</p>
-<p>需要的操作放在回调函数中，react会在每次更改dom后执行我们的回调函数）</p>
-<p>理解： 因为我们传递的是一个函数，而函数是一个引用数据类型的数组，</p>
-<p>所以传递给useEffect的函数在每次渲染中都会不一样，每次渲染都会有自己的</p>
-<p>回调函数（内存地址不同，不是同一个函数对象），这是刻意为之。这正是</p>
-<p>我们可以在effect中获取最新的count的值，而不用担心其过期的原因。</p>
-<p>每次我们重新渲染，都会生成新的effect，替换掉之前的（effect是我们写在useEffect中的回调函数！！）</p>
-<p>某种意义上讲effect更像是渲染结果的一部分——每个effect 属于一次特定的渲染。</p>
-<p>不理解的地方：提示<br>与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。大多数情况下，effect 不需要同步地执行。在个别情况下（例如测量布局），有单独的 useLayoutEffect Hook 供你使用，其 API 与 useEffect 相同。</p>
-<p>是什么意思？</p>
-<p>解惑： useLayoutEffect 的函数签名与useEffect相同，但是它会在所有的DOM变更之后同步调用effect。可以使用它来读取DOM布局并同步触发重渲染。在浏览器执行绘制之前，</p>
-<p>useLayoutEffect内部的更新计划将被同步刷新。尽可能的使用标准的useEffect以避免阻塞视觉更新。</p>
-<p>useLayoutEffect与componentDidMount componentDidUpdate 的调用阶段是一样的。</p>
-<p>理解： 就是说类似vue中的nextTick componentDidMount componentDidUpdate useLayoutEffect, 会在dom更新完毕，浏览器执行绘制（肉眼看到新的页面）之前执行，如果在这里面做复杂的计算就会阻塞页面的渲染。而useEffect会在页面渲染完毕之后执行，所以不会阻塞页面的绘制渲染。</p>
-<p><a href="http://www.soolco.com/post/73226_1_1.html。" target="_blank" rel="noopener">http://www.soolco.com/post/73226_1_1.html。</a>  // 这篇文章说的很清楚</p>
-<p>2、需要清除的effect</p>
-<p>如果你的effect返回一个函数，react将会在执行清除操作时调用它（理解：写在这里的回调函数会在react卸载的时候执行，你可以在这块空间做任何自己的操作，同样我们也是return一个函数定义给react，react会在销毁的时机去调用它）</p>
-<p>忘记正确地处理componentDidUpdate是React应用中常见的bug来源。</p>
-<p>useEffect默认就会处理，它会在调用一个新的effect之前对前一个effect进行清理。</p>
-<p>如果某些特定值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用，只要传递数组作为useEffect的第二个参数即可。理解：所以我们传递第二个参数是为了减少effecta执行的次数。</p>
-<p>自定义hook是一个函数，函数内部可以调用其他的hook<br>与React组件不同的是，自定义hook不需要具有特殊的标识。我们可以自由的决定它的参数是什么，以及它应该返回的是什么（理解： 自定义hook不必须返回 一个值和一个set值的函数，换句话说，不非要成对出现，可以自由定义返回的东西，根据需求来）</p>
-<p>在多个hook之间传递信息：</p>
-<p>由于hook本身是函数，因此我们可以在他们之间传递信息。就像下面这样：</p>
-<p>const [recipentID, setRecipentID] = useState(1);</p>
-<p>const isRecipentOnline = useFriendStatus(recipientID);</p>
-<p>当我们通过select调用setRecipentID ，改变了recipentID后，useFriendStatus也会用最新的recipientID来执行。</p>
-<p>惰性初始state</p>
-<p>initialState参数只会在组件的初始化渲染中起作用，后续渲染时会被忽略。如果初始state需要通过复杂计算获得，则可以传入一个函数，在函数中计算并返回初始的state,此函数只在初始渲染的时候被调用：</p>
-<p>const [state, setState] = useState(() =&gt; {<br>    const initialState = someExpensiveComputation(props);<br>return initialState<br>})</p>
-<p>调用state    hook的更新函数并传入当前的state时，react会跳过子组件的渲染以及effect的执行，react使用Object.is比较算法来比较state.</p>
-<p>useCallback</p>
-<p>const memoizedCallback = useCallback(() =&gt; {<br>    doSomething(a, b);<br>}, [a, b]),</p>
-<p>返回一个memoized的回调函数。</p>
-<p>把内联回调函数及依赖项数组作为参数传入useCallback,</p>
-<p>它将返回该回调函数的memoized版本，该回调函数仅仅在</p>
-<p>某个依赖项改变时才会更新。</p>
-<p>当把回调函数传递给经过优化的并使用引用相等性去避免非必要</p>
-<p>渲染的子组件时，它将非常有用。比如（shouldComponentUpdate）</p>
-<p>useCallback(fn, deps)相当于useMemo(() =&gt; fn, deps).</p>
-<p>useMemo</p>
-<p>返回一个memoized值。</p>
-<p>把创建函数和依赖项数组作为参数传入useMemo,它仅会在某个依赖改</p>
-<p>变时才会重新计算memoized值。这种优化有助于避免每次渲染时</p>
-<p>都进行高开销的计算。</p>
-<p>传入useMemo的函数会在渲染期间执行。不要在这个函数中执行与</p>
-<p>渲染无关的操作。</p>
-<p>可以把useMemo作为性能优化的手段，但不要把它作为语义上的保证。</p>
-<p>应该先编写在没有useMemo的情况下也可以执行的代码—之后再在代码中</p>
-<p>添加useMemo，以达到性能优化的目的。</p>
+            <h1 id="arttempalte"><a href="#arttempalte" class="headerlink" title="arttempalte"></a>arttempalte</h1><h2 id="循环语法"><a href="#循环语法" class="headerlink" title="循环语法"></a>循环语法</h2><h3 id="1-标准语法"><a href="#1-标准语法" class="headerlink" title="1 标准语法"></a>1 标准语法</h3><pre><code>{{each target}}
+    {{$indext}} {{$value}}
+{{/each}}</code></pre><h3 id="2-原始语法"><a href="#2-原始语法" class="headerlink" title="2 原始语法"></a>2 原始语法</h3><pre><code>    &lt;% for (var i=0;i&lt;target.length;i++){ %&gt;
+            &lt;%=i%&gt;    &lt;%=target[i]%&gt;
+    &lt;%}%&gt;
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/12/20/let's talk about functional programming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/12/20/let's talk about functional programming/" itemprop="url">一些函数式编程的思考🤔</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-20T11:23:21+08:00">
-                2020-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="let’s-talk-about-functional-programming"><a href="#let’s-talk-about-functional-programming" class="headerlink" title="let’s talk about functional programming"></a>let’s talk about functional programming</h3><p>原本我以为自己对于函数式编程是有一定的认知的，或者说自己对于这个概念的掌控是足够的，然而前段时间做的一个需求中遇到了大量的前辈大佬的“真函数式编程代码”还是被教育重新做人了🙄️于是特地从家中翻出从二手市场上淘来的《javaScriptES6函数式编程入门经典》细细研究起来，有所收获记录于此📝</p>
-<p><strong>函数的第一条原则是要小，函数的第二条原则是要更小</strong>            –鲁迅</p>
-<h3 id="什么是函数式编程，为何它重要"><a href="#什么是函数式编程，为何它重要" class="headerlink" title="什么是函数式编程，为何它重要"></a>什么是函数式编程，为何它重要</h3><p>首先看一个数学中的函数</p>
-<pre><code>f(x) = y;</code></pre><p>该语句可以解读为： ‘一个函数f，以x作为参数，并返回输出y’</p>
-<p>该定义包含了以下几个关键点：</p>
-<ul>
-<li>函数总是接受一个参数</li>
-<li>函数总是返回一个值</li>
-<li>函数应该根据接受到的参数而不是外部环境运行</li>
-<li>对于一个给定的x只会输出一个唯一的y</li>
+target支持array与object的迭代，默认值是$data.
+$value与$index可以自定义：    {{each target val key}}</code></pre><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="标准语法"><a href="#标准语法" class="headerlink" title="标准语法"></a>标准语法</h3><pre><code>{{set temp = data.sub.content}}</code></pre><h3 id="原始语法"><a href="#原始语法" class="headerlink" title="原始语法"></a>原始语法</h3><pre><code>&lt;% var temp = data.sub.content; %&gt;</code></pre><h2 id="模板继承"><a href="#模板继承" class="headerlink" title="模板继承"></a>模板继承</h2><h3 id="标准语法-1"><a href="#标准语法-1" class="headerlink" title="标准语法"></a>标准语法</h3><pre><code>{{extend './layout.art'}}
+{{block 'head'}}...{{/block}}</code></pre><h3 id="原始语法-1"><a href="#原始语法-1" class="headerlink" title="原始语法"></a>原始语法</h3><pre><code>&lt;% extend(&apos;./layout.art&apos;) %&gt;
+&lt;% block(&apos;head&apos;, function(){ %&gt;
+    ...
+&lt;% }) %&gt;</code></pre><p>模板继承允许我们构建一个包含站点中共同元素的基本模板骨架</p>
+<h2 id="子模板"><a href="#子模板" class="headerlink" title="子模板"></a>子模板</h2><h3 id="标准语法-2"><a href="#标准语法-2" class="headerlink" title="标准语法"></a>标准语法</h3><pre><code>{{include './header.art'}}
+{{include './header.art' data}}</code></pre><h3 id="原始语法-2"><a href="#原始语法-2" class="headerlink" title="原始语法"></a>原始语法</h3><pre><code>&lt;% include(&apos;./header.art&apos;) %&gt;
+&lt;% include(&apos;./header.art&apos;, data)%&gt;</code></pre><h2 id="内置变量清单"><a href="#内置变量清单" class="headerlink" title="内置变量清单"></a>内置变量清单</h2><ul>
+<li>$data 传入模板的数据</li>
+<li>$imports 外部导入的变量以及全局变量</li>
+<li>print 字符串输出函数</li>
+<li>include 子模板载入函数</li>
+<li>extend 模板继承模板导入函数</li>
+<li>block 模板块声明函数</li>
 </ul>
-<p>函数式编程技术主要就是基于数学函数和它的思想</p>
-<p>来看一个简单的计税函数</p>
-<pre><code>let percentValue = 5;
-let calculateTax = (value) =&gt; {
-    return value/100 * (100 + percentValue)
-}                    </code></pre><p>这个函数准确的实现了我们的想法，但是从数学的定义上分析，就会发现calculateTax依赖了全局变量percentValue，因此在数学上它不能被称之为一个真正的函数。修复方法很简单，我们只需要移动percentValue，把它作为函数的参数。</p>
-<pre><code>let calculateTax = (value, percentValue) =&gt; {
-    return value/100 * (100 + percentValue)
-}</code></pre><p>现在calculateTax函数可以被称为一个真正的函数了。</p>
-<p><strong>移除一个函数内部对全局变量的访问会使得该函数的测试更加容易</strong></p>
-<p>函数式编程是一种范式，我们能够以此创建仅依赖输入就可以完成自身逻辑的函数。这保证了当函数被多次调用时仍然返回相同的结果。函数不会改变任何外部环境的变量，这将产生可缓存的、可测试的代码库。</p>
-<h3 id="引用透明性"><a href="#引用透明性" class="headerlink" title="引用透明性"></a>引用透明性</h3><p>所有的函数对于相同的输入都将返回相同的值，函数的这一特性被称为<strong>引用透明性</strong></p>
-<p>看一个例子</p>
-<pre><code>let identity = (i) =&gt; {return i}</code></pre><p>定义一个简单的函数identity，无论传入什么作为输入，该函数都会把它返回，在函数内部没有全局引用，我们的函数只根据传入的参数i进行操作，该函数满足引用透明性条件。</p>
-<pre><code>sum(4,5) + identity(1)</code></pre><p>根据引用透明性的定义，可以把上面的语句转换为：</p>
-<pre><code>sum(4,5) + 1</code></pre><p>该过程称为<strong>替换模型</strong>因为我们可以直接替换函数的结果（因为函数的逻辑不依赖其他全局变量）这一特性使得并发代码和缓存成为可能。</p>
-<h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>引用透明性使得我们可以轻松地采用多线程来运行代码，根本不需要同步。为什么呢？因为同步的问题在于线程在并发运行的的时候不应该依赖全局变量。而遵循引用透明性的函数只依赖来自参数的输入，不会对全局产生任何依赖，这里没有任何“锁”🔒的概念，所以线程可以自由的运行（虽然js引擎是单线程…）</p>
-<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>由于函数会为给定饿输入返回相同的值，实际上我们就可以缓存它。假设函数factorial用来计算给定数组的阶乘，其接受输入作为参数以计算其阶乘，5的阶乘是120，如果用户第二次用5来调用factorial，如果factorial遵循引用透明性，我们就可以直接返回缓存的值120而不用再重新计算一遍。</p>
-<h3 id="命令式、函数式、抽象"><a href="#命令式、函数式、抽象" class="headerlink" title="命令式、函数式、抽象"></a>命令式、函数式、抽象</h3><p><strong>函数式编程主张声明式编程和编写抽象的代码</strong></p>
-<p>以遍历一个数组为例子：命令式编程方法遍历如下：</p>
-<pre><code>let array = [1,2,3]
-for (i=0;i&lt;array.length;i++){
-    console.log(array[i])
-}</code></pre><p>采用声明式编程方法遍历：</p>
-<pre><code>let array = [1,2,3]
-array.forEach((element) =&gt; console.log(element))</code></pre><p>理解体会：移除“如何”做的部分，使用一个函数来处理“如何”做的部分，将关注点放在手头的问题（做什么上）</p>
+<h2 id="解析规则"><a href="#解析规则" class="headerlink" title="解析规则"></a>解析规则</h2><p>template.defaults.rules<br>art-template可以自定义模板解析规则，默认配置了原始语法与标准语法</p>
+<h3 id="修改界定符"><a href="#修改界定符" class="headerlink" title="修改界定符"></a>修改界定符</h3><pre><code>//原始语法的界定符规则
+template.defaults.rules[0].test = /&lt;%(#?)((?:==|=#|[=-])?)[ \t]*([\w\W]*?)[ \t]*(-?)%&gt;/;
+template.defaults.rules[1].test = /{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}/;</code></pre><p>下面是一个正则表达式，我们只是改变了界定符，</p>
+<pre><code>将&lt;% %&gt; 修改为&lt;??&gt;
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/10/10/项目结构梳理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/10/项目结构梳理/" itemprop="url">项目结构梳理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-10T00:00:00+08:00">
-                2020-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="项目结构梳理"><a href="#项目结构梳理" class="headerlink" title="项目结构梳理"></a>项目结构梳理</h3><pre><code>--backup📂 // 应该是不用了
---common-satic📂
---compile📂  // 下面的bat文件是干嘛用的？
-    --build.bat
-    --build.sh
-    --watch.bat
---css📂      //存放编译好的css文件
---data📂         //里面都是json数据
---demo📂        //各种布局的demo
---html📂        //都是HTML页面
---img📂        //存放的都是图片
---js📂            //存放打包出来的js文件（vue中的图片）
---jsdev📂        //开发目录的js（全都是js文件）
---less📂        //开发目录的less样式文件夹
---mockup📂    //一张小狗图片以及各种json文件
---nodemodules📂
---vue📂</code></pre>
+var rule = template.defaults.rules[0];
+rule.test = new RegExp(rule.test.source.replace(&apos;%&apos;,&apos;&lt;\\\?&apos;))</code></pre><h2 id="压缩页面"><a href="#压缩页面" class="headerlink" title="压缩页面"></a>压缩页面</h2><p>template.defaults.minimize<br>art-template内建的压缩器可以压缩html js css 它在编译阶段运行，因此完全不影响渲染速度，并且能够加快网络传输。</p>
+<h3 id="开启压缩"><a href="#开启压缩" class="headerlink" title="开启压缩"></a>开启压缩</h3><pre><code>template.defaults.minimize = true;</code></pre>
           
         
       
@@ -2040,7 +1729,7 @@ array.forEach((element) =&gt; console.log(element))</code></pre><p>理解体会�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

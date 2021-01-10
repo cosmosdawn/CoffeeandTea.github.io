@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/VueSSR/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/17/文件系统跳转/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/VueSSR/" itemprop="url">VueSSR</a></h1>
+                <a class="post-title-link" href="/2019/08/17/文件系统跳转/" itemprop="url">文件系统跳转</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T00:00:00+08:00">
+                2019-08-17
               </time>
             
 
@@ -300,44 +300,514 @@
       
         
           
-            <h3 id="VueSSR"><a href="#VueSSR" class="headerlink" title="VueSSR"></a>VueSSR</h3><pre><code>runlnNewContext false</code></pre><h3 id="什么是ssr"><a href="#什么是ssr" class="headerlink" title="什么是ssr?"></a>什么是ssr?</h3><p>默认情况下vue是构建客户端应用程序的框架，可以在浏览器中输出Vue组件，进行生成Dom的操作，然而，也可以将同一个组件渲染为服务器端的html字符串，将他们直接发送到浏览器，最后将静态标记‘混合’为客户端上完全交互的应用程序。</p>
-<p>服务器渲染的 Vue.js 应用程序也可以被认为是”同构”或”通用”，因为应用程序的大部分代码都可以在服务器和客户端上运行。</p>
-<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul>
-<li><p>更好的seo Google 和 Bing可以很好的对同步javascript应用程序进行索引。同步是关键，如果你的应用程序初始展示菊花图，然后通过ajax获取内容，抓取工具不会等到异步完成后再行抓取页面内容。也就是说，如果 SEO 对你的站点至关重要，而你的页面又是异步获取内容，则你可能需要服务器端渲染(SSR)解决此问题。</p>
-</li>
-<li><p>更快的内容到达时间。（time-to-content）对于那些「内容到达时间(time-to-content)与转化率直接相关」的应用程序而言，服务器端渲染(SSR)至关重要。<br>需要权衡的地方：</p>
-</li>
-<li><p>开发条件所限制，浏览器特定的代码，只能在特定的生命周期中使用；一些外部扩展库(external library)可能需要特殊处理，才能在服务器渲染应用程序中运行。</p>
-</li>
-<li><p>涉及构建及部署的更多要求。与可以部署在任何静态文件服务器上的完全静态单页面应用程序(SPA)不同，服务器渲染应用程序，需要处于 Node.js server 运行环境。</p>
-</li>
-<li><p>更多的服务端负载。在 Node.js 中渲染完整的应用程序，显然会比仅仅提供静态文件的 server 更加大量占用 CPU 资源(CPU-intensive - CPU 密集)，因此如果你预料在高流量环境(high traffic)下使用，请准备相应的服务器负载，并明智地采用缓存策略。</p>
-</li>
+            <p><strong>pwd</strong> 打印当前工作目录</p>
+<pre><code>wangxiaoyudeMacBook-Pro:~ wangxiaoyu$ pwd
+/Users/wangxiaoyu</code></pre><p>当我们首次登录系统时，当前工作目录是我们的家目录。每个用户都有他自己的家目录，当用户以普通用户的身份登录操作系统的时候，家目录是唯一允许用户写入文件的地方。</p>
+<h3 id="几个快捷键"><a href="#几个快捷键" class="headerlink" title="几个快捷键"></a>几个快捷键</h3><pre><code>cd 更改工作目录到你的家目录
+
+cd - 更改工作目录到先前的工作目录
+
+cd ~user_name  更改工作目录到用户家目录。例如cd ~bob 会更改工作目录到用户bob的家目录</code></pre><h3 id="文件名的重要规则"><a href="#文件名的重要规则" class="headerlink" title="文件名的重要规则"></a>文件名的重要规则</h3><ul>
+<li>以 .字符开头的文件名是隐藏文件，ls命令不能列出来，用ls -a命令就可以了。当你创建了账号后，几个配置账号的隐藏文件被放置在你的家目录。</li>
+<li>文件名和命令是大小写敏感的</li>
+<li>Linux没有‘文件扩展名’的概念。</li>
+<li>虽然Linux支持长文件名，文件名可能包含空格、标点符号，但是标点符号仅限使用 . - _ 很重要的一点是，不要在文件名中使用空格。</li>
 </ul>
-<p> 还有可能会用到预渲染</p>
-<p>模版插值</p>
-<p>在纯客户端应用程序中，每个用户会在他们各自的浏览器中使用新的应用程序实例，对于服务器端渲染，我们希望也是如此：每个请求都是全新的，独立的应用程序示例，以便不会有交叉请求造成的状态污染。</p>
-<p>禁用响应式数据</p>
-<p>生命周期钩子函数：   只会用到beforeCreate 和 created 会用到。</p>
-<p>这就是说任何其他生命周期钩子函数中的代码（例如 beforeMount 或 mounted），只会在客户端执行。</p>
-<p>此外还需要注意的是，你应该避免在 beforeCreate 和 created 生命周期时产生全局副作用的代码，例如在其中使用 setInterval 设置 timer。在纯客户端(client-side only)的代码中，我们可以设置一个 timer，然后在 beforeDestroy 或 destroyed 生命周期时将其销毁。但是，由于在 SSR 期间并不会调用销毁钩子函数，所以 timer 将永远保留下来。为了避免这种情况，请将副作用代码移动到 beforeMount 或 mounted 生命周期中。</p>
-<p>通用代码不可接受特定平台的 API，因此如果你的代码中，直接使用了像 window 或 document，这种仅浏览器可用的全局变量，则会在 Node.js 中执行时抛出错误，反之也是如此。</p>
-<p>对于共享于服务器和客户端，但用于不同平台 API 的任务(task)，建议将平台特定实现包含在通用 API 中，或者使用为你执行此操作的 library。例如，axios 是一个 HTTP 客户端，可以向服务器和客户端都暴露相同的 API。</p>
-<p>对于仅浏览器可用的 API，通常方式是，在「纯客户端(client-only)」的生命周期钩子函数中惰性访问(lazily access)它们。</p>
-<p>请注意，考虑到如果第三方 library 不是以上面的通用用法编写，则将其集成到服务器渲染的应用程序中，可能会很棘手。你可能要通过模拟(mock)一些全局变量来使其正常运行，但这只是 hack 的做法，并且可能会干扰到其他 library 的环境检测代码。</p>
-<p>避免状态单例</p>
-<p>需要提前知道哪些组件有ajax请求，等把这些请求都返回了数据之后，才开始组件的渲染。</p>
-<p>是否必须使用vueX是的，当预先获取到ajax的数据后，Vue组件还没开始渲染，所以，我们得把数据先存在某个地方。</p>
-<p>当Vue组件开始渲染的时候，还得把数据拿出来，正确的传递到各个组件中。</p>
-<p>在浏览器渲染的时候，需要正确解析window.INITIAL_STATE,并传递到各个组件中。</p>
-<p>因此我们需要有这么一个独立于视图以外的地方，来存储 管理和传递数据。这就是VueX存在的理由。</p>
-<p>后端已经把ajax数据转换成html数据了，为什么还需要把ajax数据通过window.INITIAL_STATE传递到前端？因为前端渲染的时候仍然需要知道这些数据。举个例子，一个组件，给他绑定一个点击事件，点击的时候，打印this.msg.现在后端是把组件html渲染出来了，但是事件的绑定肯定还是得有浏览器来完成，如果浏览器拿不到跟服务器端相同的数据，在触发点击事件的时候，这个msg字段去哪里找呢？</p>
-<h3 id="反向代理的作用"><a href="#反向代理的作用" class="headerlink" title="反向代理的作用"></a>反向代理的作用</h3><ul>
-<li>保护网站的安全</li>
-<li>通过配置缓存功能加速web请求</li>
-<li>实现负载均衡</li>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/15/javascript语言精粹/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/15/javascript语言精粹/" itemprop="url">javascript语言精粹</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T00:00:00+08:00">
+                2019-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="javascript语言精粹"><a href="#javascript语言精粹" class="headerlink" title="javascript语言精粹"></a>javascript语言精粹</h3><h4 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h4><h5 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h5><p>在web浏览器中每个 </p>
+<pre><code>&lt;script&gt; </code></pre><p>标签提供一个被编译且立即执行的编译单元，JavaScript把它们一起抛到一个公共的全局名字空间中。<br>switch、while、for和do语句允许有一个可选的前置标签label。它配合break语句来使用。<br>for-in循环用于枚举一个对象的所有属性名。在每次循环中object的下一个属性名字符串被赋值给variale。通常需要使用object.hasOwnProperty(variable)这个方法来确定一个属性是否是该对象的成员，还是来自于原型链。</p>
+<pre><code>for(myvar in obj){
+    if(obj.hasOwnProperty(myvar)){
+        //do something
+    }
+}</code></pre><p>do语句就像while语句，唯一的区别是它在代码执行之后而不是之前检测表达式的值，这就意味着代码块至少执行一次。<br>try语句执行一个代码块，并捕获该代码块抛出的任何异常。catch从句定义了一个新的变量variable来接受抛出的异常对象。<br>throw语句抛出一个异常，如果throw语句在一个try代码块中，那么控制流就会跳转到catch从句中。如果throw语句在函数中，则该函数调用被放弃，控制流跳转到调用该函数的try语句的catch从句中。throw语句中的表达式通常是一个对象字面量，包含一个name属性和一个message属性。异常捕获器可以使用这些信息去决定该做什么。return语句会导致从函数中提前返回，它也可以指定要被返回的值，如果没有指定返回的表达式，那么返回值就是undefined。JavaScript不允许在return关键字和表达式之间换行。</p>
+<h4 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h4><p>对象字面量是一种可以方便的按照指定规格创建新对象的表示法，属性名可以是标示符或者字符串，这些名字被当做字面量而不是变量名来对待，所以对象的属性名在编译时才能知道。属性的值就是表达式。</p>
+<h3 id="第三章-对象"><a href="#第三章-对象" class="headerlink" title="第三章 对象"></a>第三章 对象</h3><p>JavaScript的简单数据类型包括数字 字符串 布尔值 null值和undefined值。其他所有值都是对象。数字字符串和布尔值‘貌似’对象，因为它们有方法，但是它们是不可变的。JavaScript中的对象是可变的键控集合。在JavaScript中数组是对象，函数是对象正则表达式是对象。对象是属性的容器，其中每个属性都拥有名字和值，属性的名字可以是包括空字符串在内的任意字符串。属性值可以是除了undefined值之外的任何值。<br>JavaScript包含一种原型链的特性，允许对象继承另一个对象的属性。正确的使用它能减少对象初始化时消耗的时间和内存。</p>
+<h4 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h4><p>要检索对象里包含的值，可以采用在[]后缀中括住一个字符串表达式的方式。如果字符串表达式是一个字符串字面量，而且是一个合法的JavaScript标识符不是保留字，那么也可以使用.表示法来代替，优先考虑使用.</p>
+<p>||  运算符可以用来填充默认值；</p>
+<pre><code>var middle = stooge[&apos;middle-name&apos;] || &apos;none&apos;,
+var status = flight.status || &apos;unknow&apos;</code></pre><p>尝试从undefined的成员属性中取值将会导致TypeError异常。这时可以使用&amp;&amp;运算符来避免错误。</p>
+<pre><code>flight.e     // undefined
+flight.e.f   // throw &quot;TypeError&quot;
+flight.e &amp;&amp; flight.e.f // undefined</code></pre><h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>对象里的值可以通过赋值语句来更新，如果属性名已经存在在对象里了，哪儿这个属性的值就会被替换，如果对象之前没有那个属性名，那么该属性就会被扩充到对象中。</p>
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>每个对象都链接到一个原型对象，并且可以从中继承属性。所有通过对象字面量创建的对象都连接到Object.prototype，他是一个JavaScript中的标配对象。原型链在更新时是不起作用<code>的</code>，当我们对某个对象做出改变时，不会触及该对象的原型。原型链关系是一中动态的关系，如果我们添加一个新的属性到原型中，那么这个属性会立即对所有基于该原型的对象可见。</p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>delete运算符可以用来删除对象的属性，如果对象包含该属性，那么该属性就会被移除。它不会触及原型链中的任何对象。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数对象链接到Function.proptotype。（Function.proptotype再链接到Object.proptotype）每个函数在创建时候会附加两个隐藏属性：1函数的上下文和实现函数行为的代码。每个函数在创建时也随配有一个prototype属性。它的值是一个拥有constructor属性且值为该函数的对象，这个和隐藏链接到Function.prototype完全不同。<br>函数字面量可以出现在任何允许表达式出现的地方。函数也可以被定义在其他函数中，一个内部函数除了可以访问自己的参数和变量，同时它也可以自由访问把它嵌套在其中的父函数的参数和变量。通过函数字面量创建的函数对象包含一个链接到外部上下文的链接。这被称为闭包。他是JavaScript强大表现力的来源。<br>JavaScript创建一个函数的时候，会给该对象设置一个‘调用’属性，当JavaScript调用一个函数时，可以理解为调用此函数的调用属性。</p>
+<h3 id="函数字面量"><a href="#函数字面量" class="headerlink" title="函数字面量"></a>函数字面量</h3><p>//创建一个名为add的变量，并用来把两个数字相加的函数赋值给它。</p>
+<pre><code>var add = function(a,b){
+    return a + b
+}</code></pre><p>函数字面量包括四个部分：第一个部分是保留字function第二个部分是函数名（可以被省略），函数可以通过函数名来递归的调用自己。第三部分是包围在圆括号中的一组参数。多个参数用逗号隔开。第四部分是包围在花括号中的一组语句。这些语句是函数的主体，在函数被调用的时候执行。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/30/js中defer和async的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/30/js中defer和async的区别/" itemprop="url">js中defer和async的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T00:00:00+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="js中defer和async的区别"><a href="#js中defer和async的区别" class="headerlink" title="js中defer和async的区别"></a>js中defer和async的区别</h2><pre><code>//最原始的情况
+ &lt;script src=&apos;script.js&apos;&gt;&lt;/script&gt;
+ 没有defer或者async，浏览器会立即加载并执行指定的脚本，‘立即’的意思是指在渲染*script*标签之后的文档元素之前，也就是不等待后续载入的文档元素，读到就加载并执行。
+ //async的情况
+ &lt;script asycn src=&apos;script.js&apos;&gt;&lt;/script&gt;
+ 有了async,加载和渲染后续文档元素的过程将和script.js的加载与执行并行进行（异步）。
+ //defer的情况
+ &lt;script defer src=&apos;script.js&apos;&gt;&lt;/script&gt;
+ 有defer,加载后续文档元素的过程将和script.js并行进行（异步），但是script.js的执行要在所有元素解析完成之后，也就是DOMContentLoaded事件触发之前完成。是的，是之前。</code></pre><p>下面是一张三种加载方式的对比图<br><img src="http://segmentfault.com/img/bVcQV0" alt="Aaron Swartz"></p>
+<p>async和defer一样，不会阻塞当前文档的解析，他会异步下载脚本，但是和defer不同的是，asnync会在脚本下载完成后立即执行，如果项目中脚本之间存在依赖关系，不推荐使用async</p>
+<h3 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h3><p>DOMContentLoaded与OnLoad事件，前者：页面document已经解析完成，页面中的dom元素已经可用，但是页面中引用的图片、subframe可能还没加载完。后者Onload：页面中的所有资源都加载完毕，包括图片。浏览器的载入进度在这时才会停止。这两个时间点将页面加载的timeline分成了三个阶段。</p>
+<h3 id="defer-属性声明"><a href="#defer-属性声明" class="headerlink" title="defer 属性声明"></a>defer 属性声明</h3><p>其实浏览器默认加载js文件是同步阻塞的就是因为怕js文件中会有比如document.write()或者类似的dom修改，而声明了defer属性的script标签，其实就是表明，这个脚本中不会有document.write或者其他dom修改。</p>
+<h3 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h3><p>什么是延迟加载？    </p>
+<p>延迟加载: 有些js代码并不是页面初始化的时候就立刻需要的，而稍后的某些情况才需要的。延迟加载就是一开始并不加载这些暂时用不到的js,而是在需要的时候或者稍后再通过js的控制来异步加载。也就是将js切分成很多模块，页面初始化时只加载需要立即执行的js，然后其他js的加载延迟到第一次需要用到的时候再加载。特别是页面有大量不同的模块组成，很多可能暂时不用或者根本就没用到。就像<em>图片的延迟加载</em>在图片出现在可视区域时，才加载显示图片。</p>
+<h3 id="script的两个阶段：-加载和执行"><a href="#script的两个阶段：-加载和执行" class="headerlink" title="script的两个阶段： 加载和执行"></a>script的两个阶段： 加载和执行</h3><p>js的加载其实是由两个阶段组成： <em>下载内容（download bytes）</em> 和<em>执行（parse and execute）</em> 浏览器在下载完js的内容后就会立即对其解释执行，不管是同步的还是异步的。下载后都会立即执行，而浏览器在解析执行js阶段是阻塞任何操作的，这时候的浏览器处于无响应状态。我们都知道通过网络下载script需要明显的时间，单容易忽略第二阶段，解析和执行也是需要时间的，script的解析和执行所花的时间比我们想象中的要多。延迟执行的原理: 将js先异步下载缓存起来，但是不立即执行，而是在第一次需要的时候执行一次。利用特殊的技巧可以做到下载和执行的分离。比如将js的内容作为Image或者object对象加载缓存起来，这样就不会立即执行了，然后在第一次需要的时候再执行。</p>
+<h3 id="script标签使用的历史"><a href="#script标签使用的历史" class="headerlink" title="script标签使用的历史"></a>script标签使用的历史</h3><p>1script放在head中</p>
+<pre><code>&lt;head&gt;
+    &lt;script src=&apos;..&apos;&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre><p>阻止了后续的下载，在IE6-7中script是顺序下载的，而不是现在的并行下载、顺序执行的方式，在下载和执行阶组织渲染，这就是页面卡的根源！</p>
+<p>2 script放在页面底部</p>
+<pre><code>&lt;script src=&apos;..&apos;&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre><p>不阻止其他下载（底部/body前）<br>在IE6-7中script是顺序下载的；在下载和解析执行阶段阻止渲染</p>
+<p>3 异步加载script</p>
+<pre><code>var se = document.createElement(&apos;script&apos;)
+se.src = &apos;http://script.js&apos;
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(se)</code></pre><p>在所有浏览器中script都是并行下载，只在解析执行阶段阻止渲染</p>
+<p>4 异步下载 + 按需执行（图片预加载）</p>
+<pre><code>var se = new Image()
+se.onload = registerScript()
+se.src = &apos;http://anydomain.com/a.js&apos;</code></pre><p>将下载js和解析执行js分离出来。不阻止其他下载，在所有浏览器中script都是并行下载不阻止渲染直到真正需要时。</p>
+<h3 id="异步加载的问题"><a href="#异步加载的问题" class="headerlink" title="异步加载的问题"></a>异步加载的问题</h3><p>在异步加载的时候，无法使用document.write输出文档内容<br>在同步模式下，document.write是在当前script所在位置输出文档的。而在异步模式下，浏览器继续处理后续页面的内容，根本无法确定document.write应该输出到什么位置，所以异步模式下document.write不可行。而到了页面已经onload之后，再执行document.wrire将导致当前页面的内容被清空，因为它会自动触发document.open方法。实际上docuemnt.write的名声并不好，最好少用。</p>
+<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p>常用于跨域请求数据的JSONP，也可以理解为一种脚本的同步加载：我们在本站声明一个回调函数，然后向外站用src请求一个js文件，文件中的代码是用外站的数据对本站函数进行调用，就实现了使用外站数据的目的。虽然函数是本站声明的，数据是外站的，外站调用本站函数，但是把它理解为同步加载和执行就简单了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/24/ci:cd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/24/ci:cd/" itemprop="url">前端部署发展史</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T00:00:00+08:00">
+                2019-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>带着两个问题去思考： </p>
+<p>1 缓存： 前端中的http的response header是由谁来配置？</p>
+<p>2 跨域： /api的代理配置由谁来配置？在开发环境前端可以开个小服务，启用webpack-dev-server配置跨域，那在生产环境呢？</p>
+<h3 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h3><p>跳板机：跳板机属于内控堡垒机范畴，是一种用于单点登陆的主机应用系统。2000年左右，高端行业用户为了对运维人员的远程登录进行集中管理，会在机房里部署跳板机。跳板机就是一台服务器，维护人员在维护过程中，首先要统一登录到这台服务器上，然后从这台服务器再登录到目标设备进行维护。但跳板机并没有实现对运维人员操作行为的控制和审计，使用跳板机过程中还是会有误操作、违规操作导致的操作事故，一旦出现操作事故很难快速定位原因和责任人。此外，跳板机存在严重的安全风险，一旦跳板机系统被攻入，则将后端资源风险完全暴露无遗。同时，对于个别资源（如telnet）可以通过跳板机来完成一定的内控，但是对于更多更特殊的资源（ftp、rdp等）来讲就显得力不从心了。</p>
+<p>运维堡垒机： 人们逐渐认识到跳板机的不足，需要更新、更好的安全技术理念来实现运维操作管理，需要一种能满足角色管理与授权审批、信息资源访问控制、操作记录和审计、系统变更和维护控制要求，并生成一些统计报表配合管理规范来不断提升IT内控的合规性的产品。在这些理念的指导下，2005年前后，运维堡垒机开始以一个独立的产品形态被广泛部署，有效地降低了运维操作风险，使得运维操作管理变得更简单、更安全。</p>
+<p>现在堡垒机产品已成熟，各家产品功能基本一致。早几年这还是个比较有前景的行业，但后来越来越多的人看到了这个机会，很多优秀的工程师也出来创业做类似的堡垒机产品。但主流的总是那么几家，如：思福迪、帕拉迪、尚思卓越、科友、齐治（微医线上用的就是齐治）、极地等，这些都是目前行业里做的专业且受到企业用户好评的厂商，但每家厂商的产品所关注的侧重又有所差别。各企业在选购的时候，除了仔细研究产品技术指标是否可以满足自己的需求外，还应该着重考虑产品的交互性、易用性、性价比、维护成本低、产品自身安全性等等。堡垒机作为单点故障点，自身安全性很重要。对于大数据量的企业，还应该考虑产品可扩展性，毕竟大数据中心的信息系统会越来越复杂。</p>
+<pre><code>server {
+    listen 80;
+    server_name xiaoyu.work;
+}
+# 避免非root路径404
+location / {
+    try_files $uri $uri/ /index.html;
+}
+# 解决跨域
+location /api {
+    proxy_pass http://api.xiaoyu.work;
+}
+# 为带有hash值的文件配置永久缓存（js/css静态资源）
+location ~* \.(?:css|js)$ {
+    try_files $uri = 404;
+    expires 1y;
+    add_header Cache-Control &quot;public&quot;;
+}
+
+location ~ ^.+\..+$ {
+    try_files &amp;uri =404;
+}</code></pre><p>问题： 脚本经常跑不起来 运维抱怨着前端的部署脚本没有标好 node 版本，前端嚷嚷着测试环境没问题。 but why? 为什么会跑不起来？</p>
+<h3 id="使用docker构建镜像（引入docker）"><a href="#使用docker构建镜像（引入docker）" class="headerlink" title="使用docker构建镜像（引入docker）"></a>使用docker构建镜像（引入docker）</h3><pre><code>https://juejin.im/book/5b7ba116e51d4556f30b476c/section/5b83817ae51d4538b406d852#heading-5</code></pre><p>docker知识待整理…</p>
+<p>dockerfile就是部署脚本，部署脚本就是dockfile 很大程度上缓解了前端运维的摩擦，至少部署脚本没问题了( 为什么？)</p>
+<p>这时候，前端不再是提供静态资源了，而是提供一个http服务。 （服务？）</p>
+<p>此时： 缓存开始交由前端控制（但是镜像中的http-server不太适合做这件事情）</p>
+<p>跨域： 仍然在运维nginx中配置</p>
+<p>CI/CD 与gitlab</p>
+<p>解放运维的ci/cd</p>
+<p>ci: Continuous Integration: 持续集成</p>
+<p>cd: Continuous Delivery: 持续交付</p>
+<p>重要的不是ci/cd是什么，重要的是现在运维不用跟着业务上线走了，不需要一直盯着前端部署了，这些都是ci/cd的事情了。</p>
+<p>.gitlab-ci.yml是gitlab的ci配置文件。</p>
+<pre><code>deploy: 
+    stage: deploy
+    only:
+        - master
+    script:
+        - docker-compose up --build -d
+
+    tags: 
+        -shell</code></pre><p>ci/cd不仅仅更加解放了业务项目的部署，也在交付之前大大加强了业务代码的质量，它可以用来lint test package 安全检查，甚至</p>
+<p>多特性多环境部署。</p>
+<p>如果你有一台个人服务器的话，如果希望结合github做ci cd 可以试一试github + github action,或者drone.ci</p>
+<h3 id="使用k8s"><a href="#使用k8s" class="headerlink" title="使用k8s"></a>使用k8s</h3><p>k8s 知识待整理…</p>
+<p>随着业务越来越大，镜像越来越多，docker-compose已经不太能应付，kubernetes应时而出，此时一台服务器从一台变成了多台，多台</p>
+<p>服务器就会有多台服务器的分布式问题。</p>
+<p>一个重要的角色</p>
+<p>SRE： site reliability engineer 网站可靠性工程师，是软件工程师和系统管理员的结合，一个sre工程师基本上需要掌握很多知识</p>
+<p>算法、数据结构、编程能力、网络编程、分布式系统、可扩展架构、故障排除。</p>
+<p>SRE起源于国外大型互联网公司，直接掌管着互联网公司的机器和服务，保证网站不宕机是他们的使命。SRE基本是从软件研发工程师转型，有很强</p>
+<p>的编程算法能力，同时具备系统管理员的技能，熟悉网络架构等，是一个要求非常高的职业。 [1] </p>
+<p>大部分人理解SRE等于传统运维工程师(OP)或者系统管理员(SA)，实则不然，这两类角色离一名合格的SRE还有太大的差距，完全无法匹配得上这</p>
+<p>个称号。</p>
+<p>在国内，只有少数几家顶尖互联网公司才会出现真正的SRE。</p>
+<p>nginx： 作为http服务器接受来自internet的请求，并将请求按配置的规则转发给对应的端口</p>
+<p>nodejs： 在云主机上提供js的运行环境</p>
+<p>pm2: node应用进程管理器</p>
+<p>git： 将git仓库的代码拉取到云主机上</p>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>前后端分离中的一个要点就是发布分离，如果你的前端发布还在依赖后端发布，那就没法聊了。</p>
+<h3 id="先让它跑起来"><a href="#先让它跑起来" class="headerlink" title="先让它跑起来"></a>先让它跑起来</h3><ul>
+<li>npm install 安装依赖</li>
+<li>npm run build 编译、打包、生成静态资源</li>
+<li>服务化静态资源</li>
 </ul>
-<p>非阻塞、高并发连接：官方测试能够支撑5万并发得益于Nginx使用了最新的epoll模型。</p>
+<p>（需要学习docker）</p>
+<p>每次ci部署的流程</p>
+<ul>
+<li>在构建服务器构建镜像</li>
+<li>把镜像推至镜像仓库服务器</li>
+<li>在生产服务器拉取镜像，启动容器</li>
+</ul>
+<p>显而易见，镜像体积过大造成传输效率低下，增加了每次部署的延时。</p>
+<p>堡垒机为访问集群限定一个入口，方便了权限的控制和监控</p>
+<p>在传统的it环境中，安全边界是非常明确的，我们可以利用传统的堡垒机、防火墙来对服务等应用系统进行严格的</p>
+<p>访问控制，在业务迁入云环境之后，传统堡垒机已经不再适用。</p>
+<p>在分布式部署中使用容器技术是一个方向，Docker是这个方向上跑得最快也最完美的运动员。</p>
 
           
         
@@ -386,7 +856,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/artTemplate高效的秘密/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/19/Git2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -405,7 +875,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/artTemplate高效的秘密/" itemprop="url">artTemplate高效的秘密</a></h1>
+                <a class="post-title-link" href="/2019/07/19/Git2/" itemprop="url">git</a></h1>
         
 
         <div class="post-meta">
@@ -417,458 +887,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="artTemplate高效的秘密"><a href="#artTemplate高效的秘密" class="headerlink" title="artTemplate高效的秘密"></a>artTemplate高效的秘密</h2><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p>arttemplate的编译赋值过程是在渲染之前完成的，这种方式称之为‘预编译’。artTemplate模板编译器会根据一些简单的规则提取好所有模板变量，声明在渲染函数头部，这个函数类似下面这样：    </p>
-<pre><code>var render = function($data){
-    var content = $data.content,
-    $out = &apos;&apos;;
-    $out += &apos;&lt;h3&gt;&apos;;
-    if(typeof content === &apos;string&apos;){
-            $out += content;
-    }
-    $out += &apos;&lt;h3&gt;&apos;;
-    return $out;
-}</code></pre><p>这个自动生成的函数就如同一个手工编写的JavaScript函数一样，同等的执行次数下无论CPU还是内存占用有有显著减少，性能近乎极限。</p>
-<h3 id="更快的字符串相加方式"><a href="#更快的字符串相加方式" class="headerlink" title="更快的字符串相加方式"></a>更快的字符串相加方式</h3><p>很多人误以为数组 push 方法拼接字符串会比 += 快，要知道这仅仅是 IE6-8 的浏览器下。实测表明现代浏览器使用 += 会比数组 push 方法快，而在 v8 引擎中，使用 += 方式比数组拼接快 4.7 倍。所以 artTemplate 根据 javascript 引擎特性采用了两种不同的字符串拼接方式。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/PropTypes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/PropTypes/" itemprop="url">PropTypes</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a>PropTypes</h3><p>在React15.5版本之后，React的校验工作转移到了一个单独的库。<br>使用的时候安装prop-types库，它会导出一系列的验证器，用于确保收到的数据是有效的。</p>
-<p>有如下不同的验证器：</p>
-<pre><code>import PropTypes from &apos;prop-types&apos;;
-
-MyComponents.propTypes = {
-// 你可以指定某一个prop是一个特定的js类型，默认情况下这些都是可选的
-  optionalArray: PropTypes.array,
-  optionalBool: PropTypes.bool,
-  optionalFunc: PropTypes.func,
-  optionalNumber: PropTypes.number,
-  optionalObject: PropTypes.object,
-  optionalString: PropTypes.string,
-  optionalSymbol: PropTypes.symbol,
-
-  optionalNode: PropTypes.node, // 该类型的prop代表的是一个节点
-  optionalElement: PropTypes.element,  // 代表一个React element 
-  optionalMessage: PropTypes.instanceOf(Message), // 声明这是一个类的实例
-
-  optionalEnum: PropTypes.oneOf([&apos;News&apos;, &apos;Photos&apos;]), // 保证值在某一个确定的范围内
-
-optionalUnion: PropTypes.oneOfType([
-PropTypes.string,
-PropTypes.number,
-PropTypes.instanceOf(Message)
-  ]),                     // 保证是其中的一种类型的一个对象
-  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),  // 某种特定类型的数组
-      optionalObjectOf: PropTypes.objectOf(PropTypes.number),// 具有某种特定类型属性的对象
-      optionalObjectWithShape: PropTypes.shape({
-color: PropTypes.string,
-fontSize: PropTypes.number
-  }),      // 直接指定长成什么样子的对象
- requiredFunc: PropTypes.func.isRequired,    // 可以在后面追加isRequired 来确保提供指定类型的prop（如果没有指定就会发出警告）
- requiredAny: PropTypes.any.isRequired,    // 代表任意类型的数据（但是必须要有）
-
- // 下面是一个自定义验证器
- customProp: function(props, propName, componentName) {
-if (!/matchme/.test(props[propName])) {
-  return new Error(
-    &apos;Invalid prop `&apos; + propName + &apos;` supplied to&apos; +
-    &apos; `&apos; + componentName + &apos;`. Validation failed.&apos;
-  );
-}
-  },
-      customArrayProp: PropTypes.arrayOf(function(propValue, key, componentName, location, propFullName) {
-    if (!/matchme/.test(propValue[key])) {
-      return new Error(
-        &apos;Invalid prop `&apos; + propFullName + &apos;` supplied to&apos; +
-        &apos; `&apos; + componentName + &apos;`. Validation failed.&apos;
-      );
-    }
-  })
-};
-}</code></pre><h3 id="可以指定默认的属性"><a href="#可以指定默认的属性" class="headerlink" title="可以指定默认的属性"></a>可以指定默认的属性</h3><pre><code>class Greeting extends React.Component {
-  render() {
-    return (
-      &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;
-    );
-  }
-}
-
-    // Specifies the default values for props:
-Greeting.defaultProps = {
-  name: &apos;Stranger&apos;
-};
-
-// Renders &quot;Hello, Stranger&quot;:
-ReactDOM.render(
-  &lt;Greeting /&gt;,
-  document.getElementById(&apos;example&apos;)
-);
-
-
-默认属性可以保证当组件不能从父组件获取属性的时候，可以有一个默认的属性，然后我们配置的属性验证器照样会对默认属性做检查。</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/Swiper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/Swiper/" itemprop="url">swiper</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Swiper"><a href="#Swiper" class="headerlink" title="Swiper"></a>Swiper</h2><h3 id="initialSlide"><a href="#initialSlide" class="headerlink" title="initialSlide"></a>initialSlide</h3><p>设定初始化时候slide的索引<br>默认0</p>
-<pre><code>&lt;script&gt;
-    var ms = new Swiper(&apos;.sc&apos;,{
-        initialSlide: 2,
-    })
-&lt;/script&gt;</code></pre><h3 id="autoplay"><a href="#autoplay" class="headerlink" title="autoplay"></a>autoplay</h3><p>自动切换的时间间隔</p>
-<h3 id="autoplayDisableOnInteraction"><a href="#autoplayDisableOnInteraction" class="headerlink" title="autoplayDisableOnInteraction"></a>autoplayDisableOnInteraction</h3><p>用户操作swiper之后，是否禁止autoplay。默认为true：停止。</p>
-<h3 id="autoplayStopOnLast"><a href="#autoplayStopOnLast" class="headerlink" title="autoplayStopOnLast"></a>autoplayStopOnLast</h3><p>如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。</p>
-<h3 id="hashnav"><a href="#hashnav" class="headerlink" title="hashnav"></a>hashnav</h3><p>如需为每个slide增加散列导航（有点像锚链接）。将hashnav设置为true，并在每个slide处增加data-hash属性。<br>这样当你的swiper切换时你的页面url就会加上这个属性的值了，你也可以通过进入页面时修改页面url让swiper在初始化时切换到指定的slide。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/Git2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/Git2/" itemprop="url">git</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T00:00:00+08:00">
+                2019-07-19
               </time>
             
 
@@ -968,7 +988,7 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/PPPoe/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/18/前端知识大杂烩/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -987,7 +1007,7 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/PPPoe/" itemprop="url">PPPoE</a></h1>
+                <a class="post-title-link" href="/2019/07/18/前端知识大杂烩/" itemprop="url">前端知识大杂烩</a></h1>
         
 
         <div class="post-meta">
@@ -999,8 +1019,8 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T00:00:00+08:00">
+                2019-07-18
               </time>
             
 
@@ -1039,9 +1059,31 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
       
         
           
-            <h3 id="PPPoe"><a href="#PPPoe" class="headerlink" title="PPPoe"></a>PPPoe</h3><p>Point to Point Protocol over Ethernet,以太网上的点对点协议，是将点对点协议封装在以太网框架中的一种网络隧道协议。由于协议中集成了PPP协议，所以实现出传统以太网不能提供的身份验证、加密、以及压缩等功能，也可以用于缆线调制解调器和数字用户线路等以太协议向用户提供接入服务的协议体系。</p>
-<h3 id="以太"><a href="#以太" class="headerlink" title="以太"></a>以太</h3><p>以太是古希腊哲学家亚里士多德所设想的一种物质，19世纪的物理学家，曾经认为它是一种假想的电磁波的传播媒介。</p>
-<h3 id="点对点协议"><a href="#点对点协议" class="headerlink" title="点对点协议"></a>点对点协议</h3><p>缩写PPP工作在数据链路层。通常用在两节点之间创建直接的链接，并可以提供认证、传输加密、以及压缩。</p>
+            <h1 id="前端知识大杂烩"><a href="#前端知识大杂烩" class="headerlink" title="前端知识大杂烩"></a>前端知识大杂烩</h1><h3 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h3><p>1 判断是否来自微信浏览器</p>
+<pre><code>function isFromWeiXin() {
+    var ua = navigator.userAgent.toLowerCase()
+    if(ua.match(/MicroMessager/i) == &apos;micromessager&apos;){
+    return true
+    }
+    return false
+}</code></pre><p>2 判断手机的类型</p>
+<pre><code>var user = &apos;&apos;;
+if(/android/i.test(navigator.userAgent)){
+    user = &apos;1&apos;
+}
+if(/ipad|iphone|mac/i.test(navigator.userAgent)){
+    user = &apos;0&apos;
+}</code></pre><h3 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h3><p>搜索引擎的工作原理是什么？关键字网页内查询吗？为什么可以达到如此之快的速度？<br>答：  原理通俗来讲就是搜索引擎先在网上找来所有信息，这个过程将永远不停息的进行下去，然后建立一个数据库，然后对这些信息创建一个索引，当用户来搜索的时候，直接用自己归纳编排好的索引，找自己数据库里的信息反馈给用户。</p>
+<h3 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h3><p>互联网上的信息存储在无数个服务器上，任何搜索引擎想要回答用户的搜索，首先要把网页存储在自己本地的服务器上，这靠的就是网络爬虫。它不停的向各种网络发起请求，将所得到的网页存储起来。如何高效的爬取数据是一个很大的挑战，比如需要有成千上万个爬虫程序同时爬取数据，高效的将数据存储起来以便之后分析等。出于安全等因素考虑，很多网络服务器都有反恶意爬虫的功能。尽管他们所采用的策略各不相同，但是是共同点是他们的目标就是尽量只响应真人用户的请求，但是搜索引擎爬虫通常不需要担心这一点，因为大部分网站都希望提高自己的搜索排名，欢迎爬虫的到访。通常谷歌等搜索引擎和网站之间有约定，比如在网页上加一个特殊的标签，告诉爬虫这个网页是什么类型的，包含什么信息等，以便帮助爬虫更好的获取该网页的内容。</p>
+<h3 id="分数、权重"><a href="#分数、权重" class="headerlink" title="分数、权重"></a>分数、权重</h3><p>。。。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>搜索引擎是各种高深的算法和复杂的系统实现的完美结合，每一部分都在系统里起到关键作用。</p>
+<h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><p>确认URL以后，浏览器首先要查询域名，对应服务器的IP地址，一般需要20-120毫秒时间，浏览器缓存–&gt;本地host查询–&gt;dns服务器。dns查询完成之前，浏览器无法识别服务器IP，因此不下载任何数据。基于性能考虑，ISP运营商、局域网路由、操作系统、客户端（浏览器）都会有相应的dns缓存机制。</p>
+<ul>
+<li>IE 缓存 30 分钟，可以通过注册表中 DnsCacheTimeout 项设置；</li>
+<li>Firefox 混存 1 分钟，通过 network.dnsCacheExpiration 配置；</li>
+<li>Chrome - &gt; 设置 - &gt; 选项 - &gt; 高级选项 - &gt; 去勾 “用预提取 DNS 提高网页载入速度”</li>
+</ul>
+<h3 id="Favicon-ico"><a href="#Favicon-ico" class="headerlink" title="Favicon.ico"></a>Favicon.ico</h3><p>中文名称是网站头像。可以显示在网站的浏览器标签、地址栏左边和收藏夹，是展示网站个性的缩略logo标志，也可以说是网站头像，如果要让网站看起来更专业、更美、更有个性。Favicon.ico是必不可少的。</p>
 
           
         
@@ -1090,7 +1132,7 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/Functional Components/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/08/source map/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1109,7 +1151,7 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/Functional Components/" itemprop="url">事件</a></h1>
+                <a class="post-title-link" href="/2019/07/08/source map/" itemprop="url">source map</a></h1>
         
 
         <div class="post-meta">
@@ -1121,8 +1163,139 @@ stash@{0}:WIP on dev:6224937 add merge</code></pre><p>工作现场还在，git�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T00:00:00+08:00">
+                2019-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="从源码转换开始说起"><a href="#从源码转换开始说起" class="headerlink" title="从源码转换开始说起"></a>从源码转换开始说起</h3><p>js脚本现在变得越来越复杂，大部分源码（尤其是各种函数可和框架）都要经过转换，才能投入生产环境。常见的源码转换，主要有以下三种：</p>
+<ul>
+<li>压缩减少体积。比如jquery 1.9的源码，压缩前是252KB，压缩后是32KB。</li>
+<li>多个文件合并，减少http请求数。</li>
+<li>其他语言编译成javascript。最常见的例子就是CoffeeScript(还有各大框架的CommonJS源码)。</li>
+</ul>
+<p>这三种情况都使得实际运行的代码不同于开发代码，debug变得困难重重。</p>
+<p>通常js解释器会告诉你第几行第几列出错了，但是这对于转换后的代码毫无用处，因为所有的变量都改了名字。你看到报错信息，毫无头绪，根本不知道他所在的位置。这，就是source map想要解决的问题。</p>
+<h3 id="什么是sourcemap"><a href="#什么是sourcemap" class="headerlink" title="什么是sourcemap"></a>什么是sourcemap</h3><p>source map是一个信息文件，里面存储着位置信息，也即是说，转换后的代码的每一个位置，所对应的转换前的位置。有了它，出错的时候，debug工具将直接显示原始源代码，而不是转换后的代码。目前，暂时只有Chrome浏览器支持这个功能。在Developer Tools的Setting设置中，确认选择“Enable source maps”</p>
+<h3 id="如何启用source-map"><a href="#如何启用source-map" class="headerlink" title="如何启用source map"></a>如何启用source map</h3><p>只要在转换后的代码尾部，加上一行就行了</p>
+<p>//@ sourceMappingURL=/path/to/sourcemapfile</p>
+<p>map文件可以放在网络上，也可以放在本地文件系统</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/06/17/Functional Components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/17/Functional Components/" itemprop="url">事件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-17T00:00:00+08:00">
+                2019-06-17
               </time>
             
 
@@ -1325,7 +1498,7 @@ var newPlayer = Object.assign({},player,{score:2});
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/EventLoop/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/06/17/使用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1344,7 +1517,7 @@ var newPlayer = Object.assign({},player,{score:2});
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/EventLoop/" itemprop="url">EventLoop</a></h1>
+                <a class="post-title-link" href="/2019/06/17/使用命令/" itemprop="url">使用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1356,8 +1529,8 @@ var newPlayer = Object.assign({},player,{score:2});
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-17T00:00:00+08:00">
+                2019-06-17
               </time>
             
 
@@ -1396,155 +1569,13 @@ var newPlayer = Object.assign({},player,{score:2});
       
         
           
-            <p>js是单线程的编程语言，单线程的运行环境，它有且只有一个调用栈，它每次只能够做一件事，这是单线程的意思，程序每次只可以运行一段代码</p>
-<p>调用栈是一个记录当前程序所在位置的数据结构，如果当前进入了某个函数，这个函数就会被放入栈里面，如果当前离开了某个函数，这个函数就会被弹出栈外，这是栈所做的事。</p>
-<pre><code>function foo() {
-    throw new Error(&apos;Oops!&apos;);
-}
-
-function bar() {
-    foo();
-}
-
-function baz() {
-    bar();
-}
-
-baz();</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/DNS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王晓宇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋夜已凉 02">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/10/DNS/" itemprop="url">DNS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="浏览器发起请求的几个重要步骤"><a href="#浏览器发起请求的几个重要步骤" class="headerlink" title="浏览器发起请求的几个重要步骤"></a>浏览器发起请求的几个重要步骤</h3><ul>
-<li>DNS解析</li>
-<li>TCP链接</li>
-<li>发送http请求</li>
-<li>服务器处理请求并返回http报文</li>
-<li>浏览器解析渲染页面</li>
-<li>连接结束</li>
-</ul>
-<p>DNS缓存，减少浏览器访问dns服务器的时间</p>
-<p>部署CDN：CDN的域名不要和主站的域名一样，这样就会防止访问CDN时还携带着主站cookies的问题。</p>
-<p>浏览器端缓存</p>
-<p>服务端渲染ssr</p>
-<p>HTTP是不保存状态的协议，即无状态协议，协议本身对于请求或响应之间的通信状态不进行保存，因此连接双方不能知晓对方当前的身份和状态。这也是Cookie技术产生的重要原因之一：客户端的状态管理。浏览器会根据从服务器端发送的响应报文内 Set-Cookie 首部字段信息自动保持 Cookie。而每次客户端发送 HTTP 请求，都会在请求报文中携带 Cookie，作为服务端识别客户端身份状态的标识。</p>
-<h3 id="TCP-IP四层网络模型"><a href="#TCP-IP四层网络模型" class="headerlink" title="TCP/IP四层网络模型"></a>TCP/IP四层网络模型</h3><p>应用层<br>传输层<br>网际层<br>链路层</p>
-<p>持久连接采用队头阻塞模式，下次请求必须等到上次响应返回后才能发起，如果上次的请求还没有返回响应内容，下次请求就必须只能等着，就是常说的队头阻塞。（解决方案，管道化）</p>
-<p>需要注意，如果使用反向代理，则在axios配置的时候，请求baseURL必须设置为字符串‘/’，否则proxy会匹配不到’/api’导致代理失败。</p>
+            <h3 id="什么是命令"><a href="#什么是命令" class="headerlink" title="什么是命令"></a>什么是命令</h3><p>命令可以是以下四种形式之一：</p>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>当谈及到网络系统层面，几乎任何东西都能有Linux来实现，Linux被用来创建各式各样的网络系统和装置，包括防火墙、路由器、名称服务器，网络连接式存储设备等。</p>
+<p>ftp命令是“经典”程序之一，它的名字来源于其所使用的协议，就是文件传输协议。FTP被广发地用来从因特网上下载文件。大多数，网络浏览器都支持FTP，经常可以看到它们的uri以协议ftp://开头。在出现网络浏览器之前，ftp程序已经存在了.ftp程序可用来于FTP服务器进行通信，ftp服务器就是存储文件的计算机，这些文件能够通过网络下载和上传。</p>
+<h3 id="于远程主机安全通信"><a href="#于远程主机安全通信" class="headerlink" title="于远程主机安全通信"></a>于远程主机安全通信</h3><p>通过网络来远程操控类Unix的操作系统已经有很多年了。早些年，在因特网普遍推广之前，有一些受欢迎的程序被用来登录远程主机。它们是rlogin 和 telnet程序。然而这些程序，拥有和ftp程序一样的致命缺点；它们以明码形式来传输所有的交流信息（包括登录命令和密码）。这使得它们完全不适合在因特网时代使用。</p>
+<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p>为了解决这个问题，开发了一个新的协议，叫做ssh （secure shell）。ssh 解决了这两个基本的和远端的主机安全交流的问题。首先，他要认证远端的主机是否是为它所知的那台主机（这样就阻止了所谓的中间人攻击），其次，它加密了本地于远程主机之间所有的通讯信息。</p>
+<p>ssh 由两部分组成，ssh服务器运行在远端主机上，在端口22上监听收到的外部链接，而ssh客户端用在本地系统中，用来和远端服务器通信。</p>
+<p>大多数 Linux 发行版自带一个提供 SSH 功能的软件包，叫做 OpenSSH，来自于 BSD 项目。一些发行版 默认包含客户端和服务端两个软件包（例如 Red Hat），而另一些（比方说 Ubuntu）则只提供客户端。 为了能让系统接受远端的连接，它必须安装 OpenSSH-server 软件包，配置，运行它， 并且（如果系统正在运行，或者系统在防火墙之后）它必须允许在 TCP 端口 22 上接收网络连接</p>
 
           
         
@@ -1593,7 +1624,7 @@ baz();</code></pre>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/Canvas/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/06/15/简写的箭头函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -1612,7 +1643,7 @@ baz();</code></pre>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/01/10/Canvas/" itemprop="url">Canvas</a></h1>
+                <a class="post-title-link" href="/2019/06/15/简写的箭头函数/" itemprop="url">ES6 new Feature</a></h1>
         
 
         <div class="post-meta">
@@ -1624,8 +1655,8 @@ baz();</code></pre>
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T12:46:03+08:00">
-                2021-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-15T00:00:00+08:00">
+                2019-06-15
               </time>
             
 
@@ -1664,34 +1695,231 @@ baz();</code></pre>
       
         
           
-            <h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><h3 id="栅格"><a href="#栅格" class="headerlink" title="栅格"></a>栅格</h3><p>在开始画图之前，需要了解下画布栅格和坐标空间。canvas元素默认被网格所覆盖。通常来说网格中的一个单元相当于canvas元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。</p>
-<h3 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h3><p>不同于SVG，HTML中的元素canvas只支持一种原生的图形绘制：矩形。<br>三种方式绘制矩形：        </p>
-<pre><code>fillRect(x, y, width, height)  //绘制一个填充的矩形
-strokeRect(x, y, width, height)  //绘制一个矩形的边框
-clearRect(x, y, width, height)  //清除指定矩形区域，让清除部分完全透明。</code></pre><p>上述方法中，x y分别指定了在canvas画布上所绘制矩形的左上角的坐标。<br>width和height设置了矩形的尺寸。<br>以上的三个函数绘制之后会马上显现在canvas上，即时生效。    </p>
-<h3 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h3><ul>
-<li>首先需要创建路径起始点</li>
-<li>然后使用画图命令画出路径</li>
-<li>闭合路径</li>
-<li>一旦路径生成就可以通过描边或者填充路径区域来渲染图形</li>
+            <h3 id="属性的简洁表示"><a href="#属性的简洁表示" class="headerlink" title="属性的简洁表示"></a>属性的简洁表示</h3><p>使用场景：一个我们声明的对象中包含若干属性，其属性值由变量表示，且变量名和属性名一样。</p>
+<pre><code>// es5的写法
+var  listenters = []
+function listen() {}
+var events = {
+    listtenters: listtenters,
+    listen: listen
+}    </code></pre><p>上面es5的写法中产生了重复代码，可以使用ES6中的属性简洁写法如下</p>
+<pre><code>var listeners = []
+function listen() {}
+var events = {listeners, listen}</code></pre><p>语义更加清晰，代码可读性强，可维护性提升。</p>
+<h3 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a>gulp</h3><p>gulp.src(globs,[,options])</p>
+<p>options.read   类型boolean，默认值true，如果设置为false，那么file.contents会返回空值，也即是不会去读取文件。</p>
+<h3 id="es6"><a href="#es6" class="headerlink" title="es6"></a>es6</h3><p>es6为一些已有的功能提供了非破坏性更新，这类更新中的大部分可以理解为语法糖，称之为语法糖，意味着，这类新的语法能做的事情其实用es5也可以做，只是会稍微复杂一些。</p>
+<h3 id="可以计算的属性名"><a href="#可以计算的属性名" class="headerlink" title="可以计算的属性名"></a>可以计算的属性名</h3><p>对象字面量的另一个重要更新是允许使用可计算的属性名，在es5中也可以给对象添加属性名为变量的属性，一般的做法是</p>
+<pre><code>var expertise = &apos;xiaoyu&apos;
+var person = {
+    name: &apos;wang&apos;,
+    age: 24
+}
+person[expertise] = {
+    years: 5,
+    interests: [&apos;a&apos;,&apos;b&apos;]
+}</code></pre><p>也就是先声明一个名为expertise的变量，然后通过person[expertise]这种形式将变量添加到对象person的属性；在es6中对象字面量可以使用计算属性了，将任何表达式放在中括号中，表达式的计算结果将会是对应的属性名，上面的代码用es6来写如下：</p>
+<pre><code>var expertise = &apos;journalism&apos;
+var person = {
+    name: &apos;wang&apos;,
+    age: 27,
+    [expertise]: {
+        interests: [&apos;a&apos;,&apos;b&apos;]
+    }
+}</code></pre><h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>简写属性和计算属性不可以同时写，因为简写属性是一种在编译阶段就会生效的语法糖，而计算属性名是在运行时候才生效，如果将二者混合使用，代码会报错。</p>
+<pre><code>var expertise = &apos;journalism&apos;
+var journalism = {
+  years: 5,
+  interests: [&apos;international&apos;, &apos;politics&apos;, &apos;internet&apos;]
+}
+var person = {
+  name: &apos;Sharon&apos;,
+  age: 27,
+  [expertise] // 这里会报语法错误
+}
+不能既用简写属性又用计算属性。</code></pre><h3 id="方法定义"><a href="#方法定义" class="headerlink" title="方法定义"></a>方法定义</h3><pre><code>es6的对象字面量方法简写允许我们省略对象方法的function关键字以及之后的冒号。如下：
+
+        var emitter = {
+  events: {},
+  on(type, fn) {
+    if (this.events[type] === undefined) {
+      this.events[type] = []
+    }
+    this.events[type].push(fn)
+  },
+  emit(type, event) {
+    if (this.events[type] === undefined) {
+      return
+    }
+    this.events[type].forEach(function (fn) {
+      fn(event)
+    })
+  }
+}</code></pre><h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>js中声明的普通函数，一般有函数名，一系列参数和函数体，如下：</p>
+<pre><code>function name(parameters){
+    function body
+}</code></pre><p>普通匿名函数则没有函数名，匿名函数通常会被赋值给一个变量/属性，有时候还会被直接调用：</p>
+<pre><code>var example = function (parameters){
+    // function body
+}</code></pre><p>es6为我们提供了一种写匿名函数的新方法，就是箭头函数。箭头函数不要使用function关键字，其参数和函数体之间以=&gt; 相连接：</p>
+<pre><code>var example = (parameters) =&gt; {
+    // function body
+}</code></pre><p>箭头函数与传统的匿名函数之间的区别：</p>
+<ul>
+<li>箭头函数不能被直接的命名，但是可以赋值给一个变量</li>
+<li>箭头函数不能用作构造函数，不能对箭头函数使用new关键字</li>
+<li>箭头函数没有prototype属性</li>
+<li>箭头函数绑定了词法作用域，不会修改this的指向</li>
 </ul>
-<h2 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h2><p>为了简化代码和提高性能，path2的对象已经可以在较新的浏览器中使用，用来缓存或者记录绘制命令，这样就可以快速的回顾路径。</p>
-<pre><code>Path2D()</code></pre><p>函数，将会返回一个新初始化的Path2D对象（可将一个路径作为变量–创建一个他的副本，或者将一个包含svg path数据的字符串作为变量）</p>
-<pre><code>new Path2D();   //空的Path对象
-new Path2D(path) // 克隆Path对象
-new Path2D(d);     //从svg建立Path对象</code></pre><p>所有的路径方法比如 moveTo, rect, arc 或 quadraticCurveTo等，如我们前面见过的，都可以在Path2D中使用。</p>
-<p>Path2D API 添加了 addPath作为将path结合起来的方法。当你想要从几个元素中来创建对象时，这将会很实用。比如</p>
-<pre><code>Path2D.addPath(path [, transform])</code></pre><p>添加一条路径到当前路径（可能添加了一个变换矩阵）</p>
-<h2 id="使用svg-paths"><a href="#使用svg-paths" class="headerlink" title="使用svg paths"></a>使用svg paths</h2><p>新的path2d api有另一个强大的特点，就是使用svg path data来初始化canvas上的路径。这将使你获取路径时可以以SVG或canvas的方式来重用它们。</p>
-<pre><code>var p = new Path2D(&quot;M10 10 h 80 v 80 h -80 z&quot;)</code></pre><p>上面一段svg路径的意思是： 现将路径移动到点(M10 10),然后再水平移动80个单位(h 80),然后下移80个单位(v 80),接着左移80个单位(h -80),再回到起点处(z)</p>
-<h2 id="色彩Colors"><a href="#色彩Colors" class="headerlink" title="色彩Colors"></a>色彩Colors</h2><h3 id="fillStyle-color-设置图形的填充颜色"><a href="#fillStyle-color-设置图形的填充颜色" class="headerlink" title="fillStyle = color     设置图形的填充颜色"></a>fillStyle = color     设置图形的填充颜色</h3><h3 id="strokeStyle-color-设置图形轮廓的颜色"><a href="#strokeStyle-color-设置图形轮廓的颜色" class="headerlink" title="strokeStyle = color  设置图形轮廓的颜色"></a>strokeStyle = color  设置图形轮廓的颜色</h3><p>color 可以是表示 CSS 颜色值的字符串，渐变对象或者图案对象。我们迟些再回头探讨渐变和图案对象。默认情况下，线条和填充颜色都是黑色（CSS 颜色值 #000000）。</p>
-<p>注意：  一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值。</p>
-<p>您输入的应该是符合 CSS3 颜色值标准 的有效字符串。下面的例子都表示同一种颜色。</p>
-<pre><code>// 这些 fillStyle 的值均为 &apos;橙色&apos;
-ctx.fillStyle = &quot;orange&quot;;
-ctx.fillStyle = &quot;#FFA500&quot;;
-ctx.fillStyle = &quot;rgb(255,165,0)&quot;;
-ctx.fillStyle = &quot;rgba(255,165,0,1)&quot;;</code></pre>
+<h3 id="词法作用域："><a href="#词法作用域：" class="headerlink" title="词法作用域："></a>词法作用域：</h3><p>箭头函数的函数体内使用的this,arguments,super等都是指向包含箭头函数的上下文，箭头函数本身不产生新的上下文。</p>
+<h3 id="关于arguments"><a href="#关于arguments" class="headerlink" title="关于arguments"></a>关于arguments</h3><pre><code>//es5
+    function puzzle() {
+  return function () {
+    console.log(arguments)
+  }
+}
+puzzle(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)(1, 2, 3) 
+输出的是1 2 3因为对常规的匿名函数而言，arguments指向的是匿名函数本身。
+//es6
+
+    function puzzle() {
+  return ()=&gt;{
+    console.log(arguments)
+  }
+}
+puzzle(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)(1, 2, 3)
+输出a b c 
+因为箭头函数的特殊性决定其本身没有arguments对象，这里的arguments其实是父函数的参数。</code></pre><h2 id="简写的箭头函数"><a href="#简写的箭头函数" class="headerlink" title="简写的箭头函数"></a>简写的箭头函数</h2><p>完整的箭头函数是这样的</p>
+<pre><code>var example = (para) =&gt; {
+    function body
+}</code></pre><p>简写1:<br>当只有一个参数时，可以省略参数的括号</p>
+<pre><code>var single = value =&gt; {
+        return value * 2
+    }</code></pre><p>简写2：<br>对于只有单行表达式并且表达式的值为return返回值的箭头函数来说，可以将函数体的大括号和return关键字省略，会静默返回该单一表达式的值</p>
+<pre><code>var double = (value) =&gt; value * 2</code></pre><p>简写3：<br>上述两种形式可以合并使用，而得到更加简洁的形式</p>
+<pre><code>var double = value =&gt; value * 2</code></pre><h3 id="简写箭头函数带来的问题"><a href="#简写箭头函数带来的问题" class="headerlink" title="简写箭头函数带来的问题"></a>简写箭头函数带来的问题</h3><p>当你的简写箭头函数返回值是一个对象时，需要用小括号将返回的对象括起来，否则，浏览器会将对象的{}解析为箭头函数的函数体的开始结束标记</p>
+<pre><code>var obje = () =&gt; ({modular: &apos;es6&apos;})</code></pre><h3 id="什么时候使用箭头函数"><a href="#什么时候使用箭头函数" class="headerlink" title="什么时候使用箭头函数"></a>什么时候使用箭头函数</h3><p>不应该盲目的在一切地方使用，比如说一个行数很多的复杂函数，使用=&gt;代替function关键字带来的简洁性并不明显。不过对于非常简单的函数，箭头函数确实可以让代码更简洁，所以应该将箭头函数用在简单函数中。</p>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>某种程度上解构可以看做是变量赋值的语法糖，可以应用于对象，数组甚至函数的参数。</p>
+<h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><p>例子，有如下一个对象（蝙蝠侠）</p>
+<pre><code>    var character = {
+  name: &apos;Bruce&apos;,
+  pseudonym: &apos;Batman&apos;,
+  metadata: {
+    age: 34,
+    gender: &apos;male&apos;
+  },
+  batarang: [&apos;gas pellet&apos;, &apos;bat-mobile control&apos;, &apos;bat-cuffs&apos;]
+}</code></pre><p>如果现在有一个变量pseudonym，想让他的值指向character.pseudonym，使用es5我们需要这样做</p>
+<pre><code>var pseudonym = character.pseudonym</code></pre><p>es6可以这样实现</p>
+<pre><code>var {pseudonym} = character</code></pre><p>也可以在一行中同时声明多个变量</p>
+<pre><code>var {pseudonym,name} = character</code></pre><p>还可以混用解构赋值和常规的自定义变量</p>
+<pre><code>var {pseudonym} = charcter, two = 2</code></pre><p>解构赋值的规律就是你要设置的变量的名字和你要指向的对象中的变量名相同，从而可以直接用解构赋值来简写，但是如果不一样怎么办呢？解构赋值允许我们使用别名alias,比如我们想把charater.pseudonym赋值给变量xiaoyu,可以按下面的语句这样做</p>
+<pre><code>var {pseudonym: xiaoyu} = character</code></pre><p>这样做就可以达到目的了。<br>解构其实就是一种语法糖</p>
+<p>解构也可以添加默认值，如果右侧不存在对应的值，默认值就会生效，添加的默认值可以是数值，字符串，函数，对象，也可以是某一个已经存在的变量。</p>
+<pre><code>var {boots = {size: 10}} = character
+console.log(boots) // {size: 10}</code></pre><p>这样boots变量就会首先从character对象中取对应的boots字段，如果有就使用，如果没有则，设置的默认值生效。</p>
+<h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><p>数组解构的语法和对象解构是类似的，区别在于，数组解构我们使用中括号而不是花括号。</p>
+<pre><code>var coor = [12,7]
+var [x,y] = coor
+console.log(x) // 12</code></pre><p>数组解构也允许跳过不想用的值，在对应的地方留白即可</p>
+<pre><code>var names = [&apos;xiaoyu&apos;,&apos;wang&apos;,&apos;yujia&apos;]
+var [firname,,lastname] = names</code></pre><p>在es5中，当我们需要交换两个变量的值的时候，需要借助第三个变量</p>
+<pre><code>var left = 5, right = 7
+var aux = left //先把left的值给aux
+left = righg   //把right的值给left
+right = aux    //最后把aux的值给right就完成了互换</code></pre><p>使用解构，一切变得简单</p>
+<pre><code>var left = 5, right = 7
+
+[left,right] = [right] = [left]</code></pre><h3 id="函数解构"><a href="#函数解构" class="headerlink" title="函数解构"></a>函数解构</h3><p>可以给函数的参数添加默认值</p>
+<pre><code>function test(a,b=2){
+    return Math.pow(a,b)
+}</code></pre><p>箭头函数同样支持使用默认值，需要注意的是，如果使用默认值，即使只有一个参数也一定要使用小括号括起来。</p>
+<h3 id="Temporal-Dead-Zone-（死区）"><a href="#Temporal-Dead-Zone-（死区）" class="headerlink" title="Temporal Dead Zone （死区）"></a>Temporal Dead Zone （死区）</h3><pre><code>简单说就是如果你的代码在某个作用域内，在let声明之前调用了let声明的变量，就会报错。
+
+    {
+        console.log(name)
+        let name = &apos;xiaoyu&apos;
+    }</code></pre><p>需要注意的是，let声明的变量同样存在变量提升，这意味着，变量会在我们进入块作用域时候就去创建，TDZ也是在这时候创建的，他保证该变量不该被访问，只有在代码运行到let声明所在的位置时，TDZ才会消失，访问限制才会取消，变量才可以被访问。</p>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>const声明也具有类似let的块作用域，同样具有TDZ机制。实际上TDZ是因为const才被创建，随后才被应用到let声明中。</p>
+<h4 id="const-和-let-的主要区别"><a href="#const-和-let-的主要区别" class="headerlink" title="const 和 let 的主要区别"></a>const 和 let 的主要区别</h4><ul>
+<li>const声明的变量在声明时候必须赋值，否则会报错</li>
+<li>被const声明的变量不能再被赋予别的值。</li>
+<li>注意，const声明的变量并非意味着其对应的值是不可以变的，真正不能变的是对该值的引用。</li>
+</ul>
+<h3 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h3><p>从commonjs谈起，因为在网页端没有模块化编程只是页面JavaScript逻辑复杂，但是也可以工作，但是在服务器端却一定要有模块，所以虽然JavaScript在web端发展这么多年，第一个流行的模块化规范却由服务器端的JavaScript应用带来的，commonJS规范是由nodejs发扬光大，这标志这JavaScript模块化编程正式登上舞台。</p>
+<h3 id="定义模块"><a href="#定义模块" class="headerlink" title="定义模块"></a>定义模块</h3><p>根据CommonJS规范，一个单独的文件就是一个模块，每一个模块都是一个单独的作用域，也即是说在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</p>
+<h3 id="模块输出"><a href="#模块输出" class="headerlink" title="模块输出"></a>模块输出</h3><p>模块只有一个出口，module.exports对象，我们需要把模块希望输出的内容放入该对象。</p>
+<h3 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h3><p>加载模块使用require方法，该方法读取一个文件并执行，返回文件内部的module.exports对象<br>举个栗子🌰</p>
+<pre><code>//模块定义 myModel.js
+
+var name = &apos;xiaoyu&apos;
+
+function sayName() {
+    console.log(name)
+}
+
+function sayFullName(firstName) {
+    cnosole.log(firstName + name)
+}
+
+module.exports = {
+    sayName: sayName,
+    sayFullName: sayFullName
+}
+
+//在另一个模块中加载上一个模块
+
+var nameModule = require(&apos;./myModel.js&apos;)
+
+nameModule.sayFullName();</code></pre><p>不同的实现对require时的路径有不同要求，一般情况下可以省略js扩展名，可以使用相对路径，也可以使用绝对路径，甚至可以省略路径直接使用模块名（前提是模块是内置的模块）</p>
+<h3 id="尴尬的浏览器"><a href="#尴尬的浏览器" class="headerlink" title="尴尬的浏览器"></a>尴尬的浏览器</h3><p>仔细看上面的代码，会发现require是同步的，模块系统需要同步读取模块内容，并编译模块接口,这在服务器端实现很简单，也很自然，然而想在浏览器端实现问题却很多。浏览器端加载JavaScript最佳、最容易的方式是在document中插入script标签，但是脚本标签天生异步，传统CommonJS模块在浏览器环境中无法正常加载。解决思路之一是，开发一个服务器端组件，对模块代码做静态分析，将模块与它的依赖列表一起返回给浏览器端，这很好使，但是需要服务器安装额外的组件，并因此要调整一系列底层架构。另一种解决思路是，用一套标准模板来封装模块定义，但是对于模块应该怎么定义和加载，又产生的分歧：</p>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h4><p>amd就是asynchronous module definition,中文名字是异步模块定义的意思。他是一个在浏览器端模块化开发的规范，由于不是JavaScript原生支持，使用AMD规范进行页面开发需要用到对应的库函数，也就是大名鼎鼎的requirejs实际上AMD是requirejs在推广过程中对模块定义的规范的产出。<br>requirejs主要解决两个问题</p>
+<ul>
+<li><p>多个js文件可能有依赖关系，被依赖的文件需要早于依赖它的文件加载到浏览器</p>
+</li>
+<li><p>js加载的时候浏览器会停止页面渲染，加载文件越多，页面失去响应时间越长。</p>
+<h3 id="应该把script标签放在哪里？"><a href="#应该把script标签放在哪里？" class="headerlink" title="应该把script标签放在哪里？"></a>应该把script标签放在哪里？</h3><p>平时最常使用的是同步加载的方式：</p>
+  <script src="http://yourdomain.com/scritp.js"></script>
+
+</li>
+</ul>
+<p>同步模式，又称为阻塞模式，会阻塞浏览器的后续处理，停止了后续的解析，因此停止了后续文件的加载（比如图像）、渲染、代码执行。<br>js之所以要同步执行，是因为js中可能有输出document内容、修改dom、重定向等行为，所以要默认同步执行才是安全的。以前的一般建议是把scritp放在页面末尾/body之前，这样尽可能减少阻塞行为，而先让页面展示出来。简单说：同步加载的网络timeline是瀑布模型，而异步加载的timeline是并发模型。</p>
+<h3 id="应该吧把script标签放在底部哪里？"><a href="#应该吧把script标签放在底部哪里？" class="headerlink" title="应该吧把script标签放在底部哪里？"></a>应该吧把script标签放在底部哪里？</h3><p>许多人以为只要放在底部就可以了，不论是body标签闭合之前还是body标签闭合之后，其实这还是有区别的。从HTML2.0开始起，放在body标签闭合之后就是不合标准的，之所以浏览器没有报错是，是因为如果在body标签闭合之后再出现script或者任何元素的开始标签，都是parse error浏览器会忽略之前的,即视作仍然在body内，所以实际效果跟放在body标签闭合之前是没有区别的。所以，只要是让浏览器做了多余的事情都是不好的，虽然差别细微，但是还是应该按照标准来，放在body标签闭合之前。</p>
+<h3 id="jQuery中ready和load事件的区别"><a href="#jQuery中ready和load事件的区别" class="headerlink" title="jQuery中ready和load事件的区别"></a>jQuery中ready和load事件的区别</h3><h4 id="哪个先执行"><a href="#哪个先执行" class="headerlink" title="哪个先执行"></a>哪个先执行</h4><p>答案：  ready先执行，load后执行</p>
+<h4 id="dom文档加载的步骤"><a href="#dom文档加载的步骤" class="headerlink" title="dom文档加载的步骤"></a>dom文档加载的步骤</h4><ul>
+<li>解析HTML解构</li>
+<li>加载外部脚本和样式表文件</li>
+<li>解析并执行脚本代码</li>
+<li>构造HTML dom模型     //ready</li>
+<li>加载图片等外部文件</li>
+<li>页面加载完毕      //load</li>
+</ul>
+<p>从上面的描述中可以了解到，ready在第四部就执行了，但是load要在第六步完成之后才执行。</p>
+<h4 id="ready事件"><a href="#ready事件" class="headerlink" title="ready事件"></a>ready事件</h4><p>ready事件在dom结构绘制完成之后就会执行，这样就能确保就算有大量的媒体文件没有加载出来，js代码一样可以执行。</p>
+<h3 id="常见的异步加载"><a href="#常见的异步加载" class="headerlink" title="常见的异步加载"></a>常见的异步加载</h3><pre><code>（function() {
+    var s = document.createElement(&apos;script&apos;);
+    s.type = &apos;text/javascript&apos;
+    s.async = true
+    s.src = &apos;http://yourdomain.com/script.js&apos;
+    var x = document.getElementsByTagName(&apos;script&apos;)[0]
+    x.parentNode.insertBefore(s.x);
+}）()</code></pre><p>异步加载又叫非阻塞，浏览器在下载执行js同时，还会继续进行后续页面的处理。这种方法是在页面中script标签内，用js创建一个script元素并插入到document中，这样就做到了非阻塞的下载js代码。此方法被称为<strong>script dom element法</strong>，不要求js同源。将js代码包裹在匿名函数中并立即执行的方式是为了保护变量名不会外泄到外面。这是很常见的方式，尤其是在js库中被普遍使用。但是这种加载方式会在加载完成之前阻止onload事件的触发。</p>
+<h4 id="onload时的异步加载"><a href="#onload时的异步加载" class="headerlink" title="onload时的异步加载"></a>onload时的异步加载</h4><pre><code>（function() {
+    function async_load(){
+        var s = document.createElement(&apos;script&apos;);
+    s.type = &apos;text/javascript&apos;
+    s.async = true
+    s.src = &apos;http://yourdomain.com/script.js&apos;
+    var x = document.getElementsByTagName(&apos;script&apos;)[0]
+    x.parentNode.insertBefore(s.x);
+    }
+    if(window.attachEvent){
+        window.attachEvent(&apos;onload&apos;,async_load)
+    }else{
+        window.addEventListener(&apos;load&apos;,async_load,false)
+    }
+}）()</code></pre><p>和前面的方式差不多，但关键是它不是立即开始异步加载js，而是在onload时才开始异步加载。这样就解决了阻塞onload事件触发的问题。</p>
+
           
         
       
@@ -1776,7 +2004,7 @@ ctx.fillStyle = &quot;rgba(255,165,0,1)&quot;;</code></pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

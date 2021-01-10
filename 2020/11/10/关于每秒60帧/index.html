@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于每秒60帧看了一些介绍FPS和浏览器刷新率的科普文章，直接抛结论： 目前大部分电脑的屏幕刷新率是60Hz即每秒钟页面会刷新60次，也即是60帧的画面。这是显示器硬件层面的，浏览器的刷新频率一般与屏幕的刷新率保持一致或者略低于屏幕的刷新率,基本也是60Hz,所以平均每一帧的耗时是1000/60 = 16.67ms. (浏览器的fps高于显示器的fps是无意义的性能浪费，因为即使你绘制的贼快，屏幕">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于每秒60帧">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/11/10/关于每秒60帧/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="关于每秒60帧看了一些介绍FPS和浏览器刷新率的科普文章，直接抛结论： 目前大部分电脑的屏幕刷新率是60Hz即每秒钟页面会刷新60次，也即是60帧的画面。这是显示器硬件层面的，浏览器的刷新频率一般与屏幕的刷新率保持一致或者略低于屏幕的刷新率,基本也是60Hz,所以平均每一帧的耗时是1000/60 = 16.67ms. (浏览器的fps高于显示器的fps是无意义的性能浪费，因为即使你绘制的贼快，屏幕">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg">
+<meta property="og:image" content="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg">
+<meta property="og:image" content="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout.jpg">
+<meta property="og:image" content="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout-paint.jpg">
+<meta property="og:updated_time" content="2021-01-10T07:39:28.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于每秒60帧">
+<meta name="twitter:description" content="关于每秒60帧看了一些介绍FPS和浏览器刷新率的科普文章，直接抛结论： 目前大部分电脑的屏幕刷新率是60Hz即每秒钟页面会刷新60次，也即是60帧的画面。这是显示器硬件层面的，浏览器的刷新频率一般与屏幕的刷新率保持一致或者略低于屏幕的刷新率,基本也是60Hz,所以平均每一帧的耗时是1000/60 = 16.67ms. (浏览器的fps高于显示器的fps是无意义的性能浪费，因为即使你绘制的贼快，屏幕">
+<meta name="twitter:image" content="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/11/10/关于每秒60帧/">
+
+
+
+
+
+  <title>关于每秒60帧 | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/11/10/关于每秒60帧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于每秒60帧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-10T00:00:00+08:00">
+                2020-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="关于每秒60帧"><a href="#关于每秒60帧" class="headerlink" title="关于每秒60帧"></a>关于每秒60帧</h3><p>看了一些介绍FPS和浏览器刷新率的科普文章，直接抛结论：</p>
+<p>目前大部分电脑的屏幕刷新率是60Hz即每秒钟页面会刷新60次，也即是60帧的画面。这是显示器硬件层面的，浏览器的刷新频率一般与屏幕的刷新率保持一致或者略低于屏幕的刷新率,基本也是60Hz,所以平均每一帧的耗时是1000/60 = 16.67ms. (浏览器的fps高于显示器的fps是无意义的性能浪费，因为即使你绘制的贼快，屏幕不刷新依旧看不出来变化～)</p>
+<p>不同帧率给人的直观感受： </p>
+<ul>
+<li>帧率能够达到 50 ～ 60 FPS 的动画将会相当流畅，让人倍感舒适；</li>
+<li>帧率在 30 ～ 50 FPS 之间的动画，因各人敏感程度不同，舒适度因人而异；</li>
+<li>帧率在 30 FPS 以下的动画，让人感觉到明显的卡顿和不适感；</li>
+<li>帧率波动很大的动画，亦会使人感觉到卡顿</li>
+</ul>
+<p>要想页面给用户丝滑顺畅的感受，就要努力完成每秒60帧的目标💪，具体到每一帧就要控制在16.67ms之内，因为浏览器内部通常还会有不同的线程之间调度的工作，所以通常留给我们的V8的时间只有10ms，我们应该尽量保证在10ms的时间内完成js的执行。。。</p>
+<h4 id="用像素管道的方式来看前端优化问题"><a href="#用像素管道的方式来看前端优化问题" class="headerlink" title="用像素管道的方式来看前端优化问题"></a>用像素管道的方式来看前端优化问题</h4><p><strong>像素管道</strong></p>
+<p>浏览器将像素绘制到页面一般要经过以下几个过程：</p>
+<p> JS / CSS -&gt; style -&gt; layout -&gt; paint -&gt; composite</p>
+<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg" alt></p>
+<p>1、 js: 一般我们使用js来实现一个视觉变化的效果。</p>
+<p>2、 style: 样式计算,根据匹配选择器计算出哪些元素应用哪些css规则的过程</p>
+<p>3、 layout: 布局，在知道对一个元素应用哪些规则之后，浏览器即可开始计算它要占据的空间大小及其在屏幕的位置</p>
+<p>4、 paint: 绘制，有时候也叫栅格化是一个fill像素点的过程</p>
+<p>5、 composite: 合成，用于处理不同的层级之间的关系，比如谁盖在谁的上面</p>
+<p>一个帧内要做这么多事情。。。。如果js执行时间过长超过16.67ms，就会block住，那么就会丢掉一帧的绘制。</p>
+<p>那么如何着手优化它呢？</p>
+<p>JS，Style 和 Composite 是不可避免的，因为需要 JS 来引发样式的改变，Style 来计算更改后最终的样式，Composite 来合成各个层最终进行显示。Layout 和 Paint 这两个步骤不一定会被触发，所以在优化的过程中，如果是需要频繁触发的改变，我们应该尽可能避免 Layout 和 Paint。</p>
+<p>1、最耗费性能之重排！</p>
+<p>管道运行方式<br>JS/CSS —&gt; Style —&gt; Layout —&gt; Paint —&gt; Composite</p>
+<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg" alt><br>此过程就是我们常说的浏览器重排，也就是改变了元素的几何属性（例如宽度、高度、左侧或顶部位置等），那么浏览器将必须检查所有其他元素，然后“自动重排”页面。任何受影响的部分都需要重新绘制，而且最终绘制的元素需进行合成，重排进行了管道的每一步，性能受到较大影响。</p>
+<p>2、稍好之重绘<br>管道运行方式<br>JS/CSS —&gt; Style —&gt; Paint —&gt; Composite</p>
+<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout.jpg" alt><br>重绘，也就是修改“paint only”属性（例如背景图片、文字颜色或阴影等），即不会影响页面布局的属性，则浏览器会跳过布局，但仍将执行绘制。</p>
+<p>3、性能最好之不重拍也不重绘<br>管道运行方式<br>JS/CSS —&gt; Style —&gt; Composite</p>
+<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout-paint.jpg" alt><br>此过程不会重排重绘，仅仅是进行合成，也就是修改 transform 和 opacity 属性更改来实现动画，性能得到较大提升，最适合于应用生命周期中的高压力点，例如动画或滚动。</p>
+<h4 id="尽量使用-transform-和-opacity-属性更改来实现动画"><a href="#尽量使用-transform-和-opacity-属性更改来实现动画" class="headerlink" title="尽量使用 transform 和 opacity 属性更改来实现动画"></a>尽量使用 transform 和 opacity 属性更改来实现动画</h4><p><strong>性能最佳的像素管道版本会避免 Layout 和 Paint</strong></p>
+<p>为了实现此目标，需要坚持更改可以由合成器单独处理的属性。常用的两个属性符合条件：transform 和 opacity。</p>
+<p>另外：想知道每种 CSS 属性的更改是否会触发 Layout，Paint，Composite，可以通过 <a href="https://csstriggers.com/" target="_blank" rel="noopener">csstriggers.com</a> 查看。</p>
+<p>有一种能有效减小 Layout 和 Paint 的方法是将元素提升，像 Photoshop 中层的概念一样，样式也有层的概念，不同的层根据不同顺序叠加起来，通过 Composite 最终显</p>
+<p>示出来。在每个层中对这个层进行 Layout 或者 Paint 是不会影响其他层的，一般会根据整个页面的语义将页面分为几个层。</p>
+<p>提升元素还有一个好处就是会将动画从 CPU 转移到 GPU 来完成，来实现硬件加速。</p>
+<h4 id="尽量避免-Layout"><a href="#尽量避免-Layout" class="headerlink" title="尽量避免 Layout"></a>尽量避免 Layout</h4><p>让 DOM 脱离文档流再对其进行操作，所有操作完成后添加进文档流，这样可以将重排及重绘的次数降低到一次或两次（脱离文档流及回归文档流的时</p>
+<p>候），以下方法可以让元素脱离文档流：</p>
+<ul>
+<li>隐藏元素 —— display: none;（事实上 display：none 不会让元素出现在 layout tree 中）。</li>
+<li>使用 DocumentFragment（推荐，只有一次 re-flow）。</li>
+<li>将原始元素拷贝到一个脱离文档的节点中，修改这个副本，完成后再替换掉原始元素。</li>
+</ul>
+<h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>利用事件冒泡的机制来处理子元素事件的绑定，将子元素的 DOM 事件，交由它们的父元素来进行处理，可以有效降低页面的开销 —— 由于事件的冒泡</p>
+<p>特性，只需要给父组件添加一个监听事件，就能够捕获到冒泡自子元素的事件，再通过 e.target 来获取真正被操作的子元素。</p>
+<h4 id="使用-requestAnimationFrame"><a href="#使用-requestAnimationFrame" class="headerlink" title="使用 requestAnimationFrame"></a>使用 requestAnimationFrame</h4><p>在某个单个帧中，有可能发生这种情况，在某一帧中会被多次触发某个事件（比如 scroll），这个事件又会频繁的触发样式的修改，导致可能需要多次 </p>
+<p>Layout 或者 Paint，这是一种浪费，过于频繁的 Layout 和 Paint 会造成卡顿，而且实际上一帧中并不需要重复 Layout 或者 Paint 那么多次。</p>
+<p>这个时候就可以用到 rAF 了，先放上一段 MDN 上对 rAF 的解释：</p>
+<p>window.requestAnimationFrame() 方法告诉浏览器您希望执行动画并请求浏览器在下一次重绘之前调用指定的函数来更新动画。该方法使用一个回调</p>
+<p>函数作为参数，这个回调函数会在浏览器重绘之前调用。</p>
+<p>在下一次重绘之前调用，理解： 重点不在于“重绘之前” 而是“下一次” 是下一次！不是本次！</p>
+<p>简单来说，rAF的作用就是将传给rAF的回调函数，安排在下一帧的一开始执行。这样就能保证这个回调函数最先执行，并且因为</p>
+<p>绝大多数浏览器都是60fps，所以rAF自带截流效果。</p>
+<p>在浏览器的一轮事件循环中，会有 task -&gt; microtask -&gt; UI render，这么的一个循序，rAF 将回调函数放在下一帧的</p>
+<p>开头，就是已经让其所在的那一轮的 UI 先 render，然后再在下一帧的最开始去执行.</p>
+<p>理解： 开头，就是已经让其所在的那一轮的 UI 先 render，然后再在下一帧的最开始去执行。<br>在调用 rAF 时，有一点切记：不要在 rAF 的回调函数中先修改样式，再查询样式，这样就失去了 rAF 的作用。可以将对样式的查询提前到回调函数中或者 rAF 中尽量靠前的位置。</p>
+<p>参考链接🔗：</p>
+<p><a href="https://www.sohu.com/a/224846336_374283" target="_blank" rel="noopener">30帧、60帧、120帧对画面影响有多大？ </a><br><a href="http://www.soolco.com/post/73226_1_1.html" target="_blank" rel="noopener">useEffect的执行时机</a><br><a href="https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/" target="_blank" rel="noopener">how to write fast memory-officient js</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/20/关于EventLoop/" rel="next" title="关于EventLoop">
+                <i class="fa fa-chevron-left"></i> 关于EventLoop
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/19/React effect理解/" rel="prev" title="Reacteffect理解">
+                Reacteffect理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于每秒60帧"><span class="nav-number">1.</span> <span class="nav-text">关于每秒60帧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用像素管道的方式来看前端优化问题"><span class="nav-number">1.1.</span> <span class="nav-text">用像素管道的方式来看前端优化问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尽量使用-transform-和-opacity-属性更改来实现动画"><span class="nav-number">1.2.</span> <span class="nav-text">尽量使用 transform 和 opacity 属性更改来实现动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尽量避免-Layout"><span class="nav-number">1.3.</span> <span class="nav-text">尽量避免 Layout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件委托"><span class="nav-number">1.4.</span> <span class="nav-text">事件委托</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-requestAnimationFrame"><span class="nav-number">1.5.</span> <span class="nav-text">使用 requestAnimationFrame</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

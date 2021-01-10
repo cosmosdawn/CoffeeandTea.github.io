@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="samba、打包📦、模块化">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/05/19/一些杂项/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-10T07:21:41.308Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="samba、打包📦、模块化">
+<meta name="twitter:description" content="Samba简介： 一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。 代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。 Babel编译后的es5代码都是在严格模式下的es5代码。 箭头函">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/05/19/一些杂项/">
+
+
+
+
+
+  <title>samba、打包📦、模块化 | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/05/19/一些杂项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">samba、打包📦、模块化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-19T00:00:00+08:00">
+                2020-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Samba简介：</p>
+<p>一言以蔽之。Samba其实就是一个能像共享windows文件一样共享类Unix系统上的文件的服务器软件。</p>
+<p>代理就相当于一个中介，http请求都先过代理，然后再到服务器。以前的代理都放在浏览器的内网这一端，后来出现了放在服务器集群端的代理，为了区分，浏览器内网端的称之为正向代理，服务器集群端的代理就称之为反向代理。</p>
+<p>Babel编译后的es5代码都是在严格模式下的es5代码。</p>
+<p>箭头函数虽然称为函数，但是其并不存在属于自己的独立的this和arguments也就是说其使的是外部作用域中的this和arguments，这在es6中被称之为词法作用域this和词法作用域arguments.</p>
+<p>⁨iCloud 云盘⁩ ▸ ⁨桌面⁩ ▸ ⁨working zone⁩ ▸ ⁨小册⁩</p>
+<p>使用单个全局变量来把所有的代码都包含在一个函数内，由此来创建私有的命名空间和闭包作用域。</p>
+<p>文件引入的依赖关系非常重要。</p>
+<p>比如： 要使用backbone就必须先引入backbone的源文件，但是backbone又依赖underscore.js所以backbone的引入需要在</p>
+<p>underscore之后。</p>
+<p>粗俗来讲，模块打包就是将一小块一小块的代码粘成一大块。</p>
+<p>因为所有的模块都需要通过script标签引入到html中。然后用户访问你的页面的时候才能正常的显示和工作。</p>
+<p>每个独立的script意味着他们要被浏览器分别一个一个的加载。</p>
+<p>这就有可能导致页面载入时间过长。</p>
+<p>为了解决这个问题，就需要进行模块打包，把所有的模块合并到一个或者几个文件中，以此来减少http请求数。也就是从开发到</p>
+<p>上线前的构建环节。</p>
+<p>还有一种提升加载速度的方式就是代码压缩，就是在不影响代码正常工作的情况下压缩其体积。</p>
+<p>更小的文件体积意味着更短的加载时间。</p>
+<p>gulp和grunt一类的构建工具可以很方便的解决上述的问题，在开发的时候通过模块来阻止代码，上线时再合并</p>
+<p>压缩提供给浏览器。</p>
+<p>如果你的代码是通过非commonjs或者amd或者es6这类浏览器不支持的模块模式来组织的，那么合并压缩其实</p>
+<p>只是把一些原生的js代码合并在一起而已。</p>
+<p>但是如果你使用的是一些浏览器原生不支持的模块系统，你就需要使用一些专门的构建工具来把他们转化成浏览器支持的代码。这类工具就是我们最近经常听过的brosserify requirejs, webpack等等，模块化构建工具。</p>
+<p>为了实现模块化构建或者载入的功能，这类工具提供许多比如说你在改动了源代码之后自动重新构建的功能。</p>
+<p>打包CommonJS</p>
+<p>模块化构建工具Browserify是一个专门用来打包CommonJs模块以便在浏览器里运行的构建工具。</p>
+<p>browserify首先会通过抽象语法树来解析代码中的每一个require语句，在分析完所有的模块的依赖和结构之后，就会把所有的代码合并到一个文件中。然后你的html文件里引入一个bundle.js就好了。</p>
+<p>假如你使用的是amd，你会需要一些例如requirejs或者curl的amd加载器。模块价值工具可以在你的应用中按需加载模块代码。</p>
+<p>amd和commonjs最主要的区别是amd是异步加载模块的，也就是我们不必把所有的代码都打包到一个文件里面，模块加载不影响后续语句的执行，逐步加载的模块也不会导致页面阻塞无法响应。</p>
+<p>不过在实际的应用中，为了避免用户过多的请求对服务器造成压力。大多数的的开发者还是选择用r.js等一类的构建工具来合并压缩amd的模块。</p>
+<p>总的来说，amd和commonjs在构建中最大的区别是，在开发过程中，采用amd的应用直到正式上线发布之前都不需要构建。</p>
+<p>webpack是新推出的构建工具里最受欢迎的，它兼容commonjs amd es6等各类规范。</p>
+<p>webpack很重要的一个功能，提供了诸如code splitting （代码分割）的有用功能，它可以把你的代码分割成一个个的chunk然后按需加载优化性能。</p>
+<p>es6的与众不同： 体现在当你载入一个模块时，载入的操作实际是在编译时执行的，也即是在代码执行之前。</p>
+<p>让es6模块于冗余代码消除不同的是一种叫做tree shaking的技术。tree shaking 其实恰好是冗余代码消除的反向操作。它只加载你需要调用的代码，而不是删除不会被执行的代码。</p>
+<p>构建es6模块。</p>
+<p>让es6模块能在浏览器中运行的常用方法有以下几种。</p>
+<p>1 使用语法编译器，来把es6语法的代码编译成es5或者commonjs，amd, umd等其他形式。然后再通过browserify或者webpack一类的构建工具来进行构建。</p>
+<p>2 使用rollup.js. rollup.js打包出来的体积会更小.</p>
+<h3 id="关于Web-APIs"><a href="#关于Web-APIs" class="headerlink" title="关于Web APIs"></a>关于Web APIs</h3><p>我们都知道 JavaScript 的执行是单线程的，但是浏览器并不是单线程的，Web APIs 就是一些额外的线程，它们通常由 C++ 来实现，用来处理非同步事件比如 DOM 事件，http 请</p>
+<p>求，setTimeout 等。他们是浏览器实现并发的入口，对于 Node.JavaScript 来说，就是一些 C++ 的 APIs。</p>
+<p>try {<br>  setTimeout(() =&gt; {<br>    throw new Error(“Error - from try statement”);<br>  }, 0);<br>} catch (e) {<br>  console.error(e);<br>}</p>
+<p>整个过程是这样的：执行到 setTimeout 时先同步地将回调函数注册给 Web APIs 的 timer，要清楚此时 setTimeout 的回调函数此时根本没有入调用栈甚至连 task queue 都没有进入，所以 try 的这个代码块就执行结束了，没有抛出任何 error，catch 也被直接跳过，同步执行完毕。<br>等到 timer 的计时到了（要注意并不一定是下一个 event loop，因为 setTimeout 在每个浏览器中的最短时间是不确定的，在 Chrome 中执行几次也会发现每次时间都不同，0 ms ~ 2 ms 都有），会将 setTimeout 中的回调放入 task queue 中，此时 event loop 中的 current task 为 null，就将这个回调函数设为 current task 并开始同步执行，此时调用栈中只有一个全局上下文，try catch 已经结束了，就会直接将这个 error 丢出。</p>
+<p>大概意思就是，当错误抛出的时候，已经没有了try catch的上下文了，</p>
+<p>就捕获不到抛出的错误了</p>
+<p>终于明白了： try catch无法捕获setTimeout异步任务中的错误的原因。</p>
+<p>能捕获到的异常，必须是线程执行已经进入try catch，并且try catch未执行</p>
+<p>完的时候抛出来的。</p>
+<p>代码报错的时候，线程已经执行完try catch ，这种不能捕获到异常</p>
+<p>setTimeout 里面报错，实际上是100ms之后执行的代码报错，此时代码</p>
+<p>块try catch 已经执行完成了，所以无法捕获异常。</p>
+<p>总结： 能被 try catch 捕捉到的异常，必须是在报错的时候，线程执行已经进入 try catch 代码块，且处在 try catch 里面，这个时候才能被捕捉到。</p>
+<p>如果是在之前，或者之后，都无法捕捉异常。</p>
+<p>另外promise没有异常：</p>
+<p>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获，不管是同步还是异步。</p>
+<p>核心原因是因为 Promise 在执行回调中都用 try catch 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常。</p>
+<p>敲黑板了： 不要用 try catch 包裹 Promise , Promise 很强大，不用担心异常会往上抛！我们只需要给 Promise 增加 Promise#catch 就 OK 了</p>
+<p>js是单线程，当脚步抛出了未捕获的异常会使得这个脚本挂起，后面的代码无法执行。</p>
+<p>要将用户的修改thunk起来，然后只修改一次dom，所以需要使用microTask</p>
+<p>在UI更新渲染前执行，就算有多次修改，也会只修改一次dom，然后进行渲染</p>
+<p>（更新一下，现在 Vue 的 nextTick 实现移除了 MutationObserver 的方式（兼容性原因），取而代之的是使用 MessageChannel。）</p>
+<p>其实用什么具体的api不是最关键的，重要的是使用microTask在UI render</p>
+<p>之前进行thunk.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/19/操作文件和目录/" rel="next" title="操作文件和目录">
+                <i class="fa fa-chevron-left"></i> 操作文件和目录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/19/tcp:ip/" rel="prev" title="tcp/ip工作">
+                tcp/ip工作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Web-APIs"><span class="nav-number">1.</span> <span class="nav-text">关于Web APIs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

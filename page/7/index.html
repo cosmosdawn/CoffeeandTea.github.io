@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/11/tcp:ip/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/10/25/Canvas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/11/tcp:ip/" itemprop="url">tcp/ip工作</a></h1>
+                <a class="post-title-link" href="/2018/10/25/Canvas/" itemprop="url">Canvas</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T22:38:45+08:00">
-                2019-08-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T00:00:00+08:00">
+                2018-10-25
               </time>
             
 
@@ -300,11 +300,282 @@
       
         
           
-            <h3 id="如何保证页面文件能被完整的送达浏览器"><a href="#如何保证页面文件能被完整的送达浏览器" class="headerlink" title="如何保证页面文件能被完整的送达浏览器"></a>如何保证页面文件能被完整的送达浏览器</h3><p>互联网是一套理念和协议组成的体系结构</p>
-<p>IP： 把数据包送达目的主机</p>
-<p>如果要想把一个数据包从主机 A 发送给主机 B，那么在传输之</p>
-<p>udp</p>
-<p>很多网站第二次大开很快，是因为很多资源都已经缓存在了本地。</p>
+            <h2 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h2><h3 id="栅格"><a href="#栅格" class="headerlink" title="栅格"></a>栅格</h3><p>在开始画图之前，需要了解下画布栅格和坐标空间。canvas元素默认被网格所覆盖。通常来说网格中的一个单元相当于canvas元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。</p>
+<h3 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h3><p>不同于SVG，HTML中的元素canvas只支持一种原生的图形绘制：矩形。<br>三种方式绘制矩形：        </p>
+<pre><code>fillRect(x, y, width, height)  //绘制一个填充的矩形
+strokeRect(x, y, width, height)  //绘制一个矩形的边框
+clearRect(x, y, width, height)  //清除指定矩形区域，让清除部分完全透明。</code></pre><p>上述方法中，x y分别指定了在canvas画布上所绘制矩形的左上角的坐标。<br>width和height设置了矩形的尺寸。<br>以上的三个函数绘制之后会马上显现在canvas上，即时生效。    </p>
+<h3 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h3><ul>
+<li>首先需要创建路径起始点</li>
+<li>然后使用画图命令画出路径</li>
+<li>闭合路径</li>
+<li>一旦路径生成就可以通过描边或者填充路径区域来渲染图形</li>
+</ul>
+<h2 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h2><p>为了简化代码和提高性能，path2的对象已经可以在较新的浏览器中使用，用来缓存或者记录绘制命令，这样就可以快速的回顾路径。</p>
+<pre><code>Path2D()</code></pre><p>函数，将会返回一个新初始化的Path2D对象（可将一个路径作为变量–创建一个他的副本，或者将一个包含svg path数据的字符串作为变量）</p>
+<pre><code>new Path2D();   //空的Path对象
+new Path2D(path) // 克隆Path对象
+new Path2D(d);     //从svg建立Path对象</code></pre><p>所有的路径方法比如 moveTo, rect, arc 或 quadraticCurveTo等，如我们前面见过的，都可以在Path2D中使用。</p>
+<p>Path2D API 添加了 addPath作为将path结合起来的方法。当你想要从几个元素中来创建对象时，这将会很实用。比如</p>
+<pre><code>Path2D.addPath(path [, transform])</code></pre><p>添加一条路径到当前路径（可能添加了一个变换矩阵）</p>
+<h2 id="使用svg-paths"><a href="#使用svg-paths" class="headerlink" title="使用svg paths"></a>使用svg paths</h2><p>新的path2d api有另一个强大的特点，就是使用svg path data来初始化canvas上的路径。这将使你获取路径时可以以SVG或canvas的方式来重用它们。</p>
+<pre><code>var p = new Path2D(&quot;M10 10 h 80 v 80 h -80 z&quot;)</code></pre><p>上面一段svg路径的意思是： 现将路径移动到点(M10 10),然后再水平移动80个单位(h 80),然后下移80个单位(v 80),接着左移80个单位(h -80),再回到起点处(z)</p>
+<h2 id="色彩Colors"><a href="#色彩Colors" class="headerlink" title="色彩Colors"></a>色彩Colors</h2><h3 id="fillStyle-color-设置图形的填充颜色"><a href="#fillStyle-color-设置图形的填充颜色" class="headerlink" title="fillStyle = color     设置图形的填充颜色"></a>fillStyle = color     设置图形的填充颜色</h3><h3 id="strokeStyle-color-设置图形轮廓的颜色"><a href="#strokeStyle-color-设置图形轮廓的颜色" class="headerlink" title="strokeStyle = color  设置图形轮廓的颜色"></a>strokeStyle = color  设置图形轮廓的颜色</h3><p>color 可以是表示 CSS 颜色值的字符串，渐变对象或者图案对象。我们迟些再回头探讨渐变和图案对象。默认情况下，线条和填充颜色都是黑色（CSS 颜色值 #000000）。</p>
+<p>注意：  一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值。</p>
+<p>您输入的应该是符合 CSS3 颜色值标准 的有效字符串。下面的例子都表示同一种颜色。</p>
+<pre><code>// 这些 fillStyle 的值均为 &apos;橙色&apos;
+ctx.fillStyle = &quot;orange&quot;;
+ctx.fillStyle = &quot;#FFA500&quot;;
+ctx.fillStyle = &quot;rgb(255,165,0)&quot;;
+ctx.fillStyle = &quot;rgba(255,165,0,1)&quot;;</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/10/08/seajs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/08/seajs/" itemprop="url">sea.js</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-08T00:00:00+08:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="seajs"><a href="#seajs" class="headerlink" title="seajs"></a>seajs</h3><p>在seajs中，所有的JavaScript模块都遵循CMD模块定义规范，该规范明确了模块的基本书写格式和基本交互规则。在CMD规范中一个模块就是一个文件。代码的书写格式如下：</p>
+<pre><code>define(factory);</code></pre><h4 id="define-Function"><a href="#define-Function" class="headerlink" title="define Function"></a>define Function</h4><p>define是一个全局函数，用来定义模块。<br>define接受factory参数，factory可以是一个函数，也可以是一个对象或者字符串。factory为对象、字符串时，表示模块的接口就是该对象、字符串。比如可以如下定义一个json数据模块：</p>
+<pre><code>define（{“foo”：“bar”}）;</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/09/20/Swiper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/20/Swiper/" itemprop="url">swiper</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T00:00:00+08:00">
+                2018-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Swiper"><a href="#Swiper" class="headerlink" title="Swiper"></a>Swiper</h2><h3 id="initialSlide"><a href="#initialSlide" class="headerlink" title="initialSlide"></a>initialSlide</h3><p>设定初始化时候slide的索引<br>默认0</p>
+<pre><code>&lt;script&gt;
+    var ms = new Swiper(&apos;.sc&apos;,{
+        initialSlide: 2,
+    })
+&lt;/script&gt;</code></pre><h3 id="autoplay"><a href="#autoplay" class="headerlink" title="autoplay"></a>autoplay</h3><p>自动切换的时间间隔</p>
+<h3 id="autoplayDisableOnInteraction"><a href="#autoplayDisableOnInteraction" class="headerlink" title="autoplayDisableOnInteraction"></a>autoplayDisableOnInteraction</h3><p>用户操作swiper之后，是否禁止autoplay。默认为true：停止。</p>
+<h3 id="autoplayStopOnLast"><a href="#autoplayStopOnLast" class="headerlink" title="autoplayStopOnLast"></a>autoplayStopOnLast</h3><p>如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。</p>
+<h3 id="hashnav"><a href="#hashnav" class="headerlink" title="hashnav"></a>hashnav</h3><p>如需为每个slide增加散列导航（有点像锚链接）。将hashnav设置为true，并在每个slide处增加data-hash属性。<br>这样当你的swiper切换时你的页面url就会加上这个属性的值了，你也可以通过进入页面时修改页面url让swiper在初始化时切换到指定的slide。</p>
 
           
         
@@ -353,7 +624,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/08/03/关于同源策略/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/09/15/前端框架/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -372,7 +643,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/03/关于同源策略/" itemprop="url">同源策略再理解</a></h1>
+                <a class="post-title-link" href="/2018/09/15/前端框架/" itemprop="url">框架</a></h1>
         
 
         <div class="post-meta">
@@ -384,8 +655,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T18:33:56+08:00">
-                2019-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-15T00:00:00+08:00">
+                2018-09-15
               </time>
             
 
@@ -424,14 +695,7 @@
       
         
           
-            <h3 id="关于同源策略"><a href="#关于同源策略" class="headerlink" title="关于同源策略"></a>关于同源策略</h3><p>同源策略是一种约定，它是浏览器最核心也最基础的安全功能，如果缺少了同源策略，则浏览器的正常功能都会受到影响，可以说web是建立在同源策略之上的，浏览器只是对同源策略的一种实现。</p>
-<p>以上是同源策略的百度百科定义。查阅有关同源策略的文章、资讯、或者书籍大多也都会看到类似的解释，如何理解呢？</p>
-<p>先来看如果没有了同源策略会是什么样子。</p>
-<p>假设没有同源限制，A网站的API可以被任何来源的AJAX请求访问，包括获取用户的隐私信息，只看用户有没有登录，现在有个坏人做了一个网站B，坏人在B网页中用AJAX访问A网站的API，如果一个用户访问B之前已经登录了A，那这个请求包含A网站的cookie信息，也就会被A网站认为用户已经登录，这样用户在A网站的隐私信息就泄露给了控制B网站的坏人。</p>
-<p>其实同源策略就是说一个网站的api接口定义，只允许自己网站的网页来请求访问。比如说淘宝网的一个接口比如长这个样子：<a href="http://taobao.com/api/shoppingCart/list" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list</a><br>请求这个接口就可以获得你的购物车中的商品，按照正常的操作流程，你自己登陆你自己的淘宝账号，点击右上角购物车的图标，网页发送这个接口请求到淘宝的后台然后网站在新的页面返回你的购物车中的商品，于是你看到了你自己的购物车中都有些什么。此时你想：这个接口是开放的，任何人都知道淘宝查看购物车商品的接口是<a href="http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list，如果没有同源策略会怎样？</a><br>假如我是一个黑客，我做了一个网页运行在xiaoyu.com上，在这个网站上我写好了请求脚本去请求<a href="http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。" target="_blank" rel="noopener">http://taobao.com/api/shoppingCart/list这个接口，然后我‘诱骗’你在登陆过自己的淘宝之后打开我的网站xiaoyu.com此时在你的浏览器中就会运行我的请求脚本了，因为我发送的请求是http://taobao.com/api/shoppingCart/list，而你之前有登陆过淘宝，而且**浏览器的cookie机制导致它在请求接口的时候会带上来自这个域下的cookies**所以你看到了么，这是一个完美的请求，该有的都有，接口地址正确，请求头中带的cookies也没问题，淘宝的服务器看到这个请求不会发现有任何哪里不对，它就会按正常的流程返回购物车中的商品信息，然后我在请求的成功回调里就可以做任何我想做的事情了。这只是拿一个购物车商品的接口举例子，如果是其他更加重要的接口（比如说删除或者购买商品的操作接口）那造成的影响就大了。</a></p>
-<p>所以其实是同源策略也是基于：1、浏览器向一个域发送请求的时候会带上这个域的cookies（而不管当前页面是否运行在哪个域）。2服务器端受到请求校验cookies通过后就理所当然的认为这是自家的程序员开发的网页发出的合法请求于是就乖乖返回了结果或者执行了操作。这两点‘简单’的设计让浏览器发送请求更加方便也让服务器处理请求更加方便但是却有着巨大的安全漏洞，那就是我们无法保证发送请求的脚本是运行在该运行的网站上，我在家写一个attack.html的页面在里面请求淘宝接口，只要我拿到了你淘宝的cookies我把网页用浏览器本地打开执行，攻击就完成了，这太简答了！所以浏览器才会有同源策略，不是运行在taobao.com的页面请求taobao的接口是跨域的，不能给你通过。</p>
-<p>另外，同源策略只是阻止你读取ajax返回的内容，实际上请求依然发送到了服务器。</p>
-<p>有疑问？下篇讲一讲跨域就懂了</p>
+            <h3 id="框架解决的问题"><a href="#框架解决的问题" class="headerlink" title="框架解决的问题"></a>框架解决的问题</h3><p>框架出现的目的并不是为了提升性能，而是为了可维护性、为了便于团队开发。但是天下没有白吃的午餐，你为了程序的可维护性，出让了一部分性能作为妥协，毕竟什么框架都没有手动原生操作性能高，因为框架要具有适普性，要能处理各种各样的场景.</p>
 
           
         
@@ -480,7 +744,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/22/缓存代理/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/07/20/css预处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -499,7 +763,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/22/缓存代理/" itemprop="url">缓存代理</a></h1>
+                <a class="post-title-link" href="/2018/07/20/css预处理/" itemprop="url">不同样式风格的输出方式</a></h1>
         
 
         <div class="post-meta">
@@ -511,8 +775,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-22T09:58:08+08:00">
-                2019-07-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T00:00:00+08:00">
+                2018-07-20
               </time>
             
 
@@ -551,20 +815,25 @@
       
         
           
-            <h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存 + 代理 = ‘缓存代理’</p>
-<p>针对“读多写少’的数据，例如突发的热点新闻、爆款商品的详情页，一秒钟内可能有成千上万次的请求，即使仅仅只缓存几秒钟，也能</p>
-<p>够把巨大的访问流量挡在外面，让RPS（request pre second）降低好几个数量级，减轻应用服务器的并发压力，对性能的改善是非常显著的。</p>
-<p>加入缓存后，代理服务器收到源服务器发来的响应数据后需要做两件事。</p>
-<ul>
-<li>第一个当然是把报文转发给客户</li>
-<li>第二就是把报文存入自己的Cache里</li>
+            <h2 id="不同样式风格的输出方式"><a href="#不同样式风格的输出方式" class="headerlink" title="不同样式风格的输出方式"></a>不同样式风格的输出方式</h2><ul>
+<li>嵌套输出 nested</li>
+<li>展开输出 expanded</li>
+<li>紧凑输出    compact</li>
+<li>压缩输出    compressed</li>
 </ul>
-<p>下次再有相同的请求的时候，代理服务器就可以直接发送304或者缓存数据，不必再从源服务器那里获取。</p>
-<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>为了区分客户端上的缓存和代理上的缓存。</p>
-<ul>
-<li>private: 表示缓存只能再客户端保存，是用户私有的，不能放在代理上与别人共享</li>
-<li>public: 表示缓存完全是</li>
+<h3 id="如何在编译sass的时候指定输出风格"><a href="#如何在编译sass的时候指定输出风格" class="headerlink" title="如何在编译sass的时候指定输出风格"></a>如何在编译sass的时候指定输出风格</h3><ul>
+<li>命令行编译：  sass –watch style.scss:style.css –style compressed</li>
 </ul>
+<p>其实就是在原来编译指令的后面加上–style输出风格，所以只要依据需求，把compact compressed这样的参数写在–style后面就行。</p>
+<ul>
+<li><p>gulpfile.js代码</p>
+<p>  var gulp = require(‘gulp’);<br>  var sass = require(‘gulp-sass’)</p>
+<p>  gulp.task(‘sass’,function(){</p>
+<pre><code>return gulp.src(&apos;./sass/**/*.scss&apos;)
+.pipe(sass({outputStyle: &apos;nested&apos;}).on(&apos;error&apos;,sass.logError)).pipe(gulp.dest(&apos;./css&apos;));</code></pre><p>  });</p>
+</li>
+</ul>
+<p>就是在原来sass()中加一个outputStyle：编译风格就好了，tips： 在不指定风格的情况下，默认是嵌套输出。</p>
 
           
         
@@ -613,7 +882,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2019/07/21/代理t/">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/05/20/freemarker标签/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王晓宇">
@@ -632,7 +901,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/07/21/代理t/" itemprop="url">代理</a></h1>
+                <a class="post-title-link" href="/2018/05/20/freemarker标签/" itemprop="url">freemarker</a></h1>
         
 
         <div class="post-meta">
@@ -644,8 +913,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T12:47:36+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T00:00:00+08:00">
+                2018-05-20
               </time>
             
 
@@ -684,21 +953,128 @@
       
         
           
-            <h3 id="代理服务器"><a href="#代理服务器" class="headerlink" title="代理服务器"></a>代理服务器</h3><p>服务本身不产生内容，而是处于中间位置，转发上下游的请求和响应，具有双重身份。当面向下游的用户的时候，表现为服务器，代表源服务器响应客户端的请求；而面向上游的源服务器的时候，又表现为客户端，代表客户端发送请求。</p>
-<h3 id="为什么要有代理？代理能干什么、带来什么好处？"><a href="#为什么要有代理？代理能干什么、带来什么好处？" class="headerlink" title="为什么要有代理？代理能干什么、带来什么好处？"></a>为什么要有代理？代理能干什么、带来什么好处？</h3><p>“计算机领域里的任何问题，都可以引入一个中间层来解决” TCP/IP协议栈是这样，代理也是这样。<br>代理处在HTTP通信的中间位置，对上屏蔽真实的客户端，对下屏蔽真实的服务器—–<strong><strong>欺上瞒下</strong></strong><br>在这个中间的<strong>小天地</strong>里，可以做很多有趣的事情。</p>
-<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>代理最基本的一个功能就是<strong>负载均衡</strong>，因为在面向客户端时屏蔽了源服务器，客户端看到的只是代理服务器，源服务器究竟有多少台、是哪些ip地址都不知道，于是代理服务器就可以掌握请求分发的大权，决定由后面的哪台服务器来响应请求。</p>
-<p><strong>轮询、一致性哈希</strong>等代理中常用的负载均衡算法的目标都是尽量把外部的流量合理的分散到多台源服务器<br>，提高系统的整体资源利用率和性能。</p>
-<p>除了负载均衡，代理服务器还可以执行更多的功能：</p>
-<ul>
-<li>健康检查； 使用<em>心跳</em>机制监控后端服务器，发现有故障就及时<em>踢出</em>集群，保证服务高可用</li>
-<li>安全防护： 保护被代理的后端服务器，限制ip地址或流量，抵御网络攻击和过载</li>
-<li>加密卸载： 对外网使用ssl/tls加密通信认证，而在安全的内网不加密，消除加解密成本</li>
-<li>数据过滤： 拦截上下行的数据，任意指定策略修改请求或者响应</li>
-<li>内容缓存： 暂存、复用服务器响应</li>
-</ul>
-<h4 id="一个可能的缺点"><a href="#一个可能的缺点" class="headerlink" title="一个可能的缺点"></a>一个可能的缺点</h4><p>代理有很多的好处，但是它<strong>欺上瞒下</strong>的特点，隐藏了真实的客户端和服务器，如果双方希望获取<br>到这些“真实”的原始信息该怎么办呢？</p>
-<p>首先，代理服务器需要使用字段<strong>Via</strong>标明代理的身份。</p>
-<p>Via是一个通用的字段，请求头或响应头里都可以出现。每当报文经过一个代理节点，代理服务器就会把<br>自身的信息追加到字段的末尾，就像是经手人盖了一个章。如果通信线路中有很多中间代理，就会在<br>Via里形成一个链表，这样就可以知道报文究竟走过了多少个代理。</p>
+            <p>##freemarker<br>    ${…}freemarker将会输出真实的值来替换大括号内的表达式；这样的表达式被称为插值</p>
+<h3 id="freemarker标签"><a href="#freemarker标签" class="headerlink" title="freemarker标签"></a>freemarker标签</h3><p>标签以#开头。用户自定义的标签使用@来代替#<br>注释，跟HTML的注释方式相同，但是不会出现在输出中<br>其他任何不是ftl标签，插值或者注释的内容将会被视为静态文本，这些东西不会被freemarker解析，会被按照原样输出出来。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2018/04/19/css手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/19/css手册/" itemprop="url">css手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T00:00:00+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="css手册"><a href="#css手册" class="headerlink" title="css手册"></a>css手册</h2><h3 id="position"><a href="#position" class="headerlink" title="position"></a>position</h3><p>sticky: css3中新增的定位属性。就像是relative和fixed的合体，当在屏幕中时按照常规流排版，当卷到屏幕外时则表现如fixed。该属性的表现就是现实中见到的吸附效果。</p>
 
           
         
@@ -784,7 +1160,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

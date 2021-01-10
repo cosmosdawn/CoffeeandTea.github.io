@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于EventLoop不知道有没有人跟我我一样产生过这样的疑问 1、浏览器的一次事件循环♻️的时间是多久？是16.67ms吗？ 2、我当前的这行代码执行的时候处于当前循环的什么位置？ 是循环的开始？还是中间位置，还是循环马上要结束了？ 我大概知道产生这样疑问，说明对对浏览器内部event loop的心智模型是不对的，但是很长一段时间以来，无论是在看vue中的nextTick还是一些文章中介绍的“下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于EventLoop">
+<meta property="og:url" content="https://coffeeandtea.github.io/2020/10/20/关于EventLoop/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="关于EventLoop不知道有没有人跟我我一样产生过这样的疑问 1、浏览器的一次事件循环♻️的时间是多久？是16.67ms吗？ 2、我当前的这行代码执行的时候处于当前循环的什么位置？ 是循环的开始？还是中间位置，还是循环马上要结束了？ 我大概知道产生这样疑问，说明对对浏览器内部event loop的心智模型是不对的，但是很长一段时间以来，无论是在看vue中的nextTick还是一些文章中介绍的“下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-10T07:38:02.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于EventLoop">
+<meta name="twitter:description" content="关于EventLoop不知道有没有人跟我我一样产生过这样的疑问 1、浏览器的一次事件循环♻️的时间是多久？是16.67ms吗？ 2、我当前的这行代码执行的时候处于当前循环的什么位置？ 是循环的开始？还是中间位置，还是循环马上要结束了？ 我大概知道产生这样疑问，说明对对浏览器内部event loop的心智模型是不对的，但是很长一段时间以来，无论是在看vue中的nextTick还是一些文章中介绍的“下">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2020/10/20/关于EventLoop/">
+
+
+
+
+
+  <title>关于EventLoop | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2020/10/20/关于EventLoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于EventLoop</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-20T00:00:00+08:00">
+                2020-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="关于EventLoop"><a href="#关于EventLoop" class="headerlink" title="关于EventLoop"></a>关于EventLoop</h3><p>不知道有没有人跟我我一样产生过这样的疑问</p>
+<p>1、浏览器的一次事件循环♻️的时间是多久？是16.67ms吗？</p>
+<p>2、我当前的这行代码执行的时候处于当前循环的什么位置？ 是循环的开始？还是中间位置，还是循环马上要结束了？</p>
+<p>我大概知道产生这样疑问，说明对对浏览器内部event loop的心智模型是不对的，但是很长一段时间以来，无论是在看vue中的nextTick还是一些文章中介绍的“下次dom更新。。“这样的字眼时心中总是感觉有一层不甚明确的概念，What exactly is a event loop tick?</p>
+<p>现在理解如下：</p>
+<p>当浏览器解析到一个script开始标签时，整个这个标签整体可以看作是对应一次Tick</p>
+<pre><code>&lt;script&gt;
+    // Tick开始
+    console.log(&apos;同步代码&apos;)
+    ...
+    setTimeout(() =&gt; {
+        console.log(&apos;宏任务队列代码&apos;)
+    })
+    ...
+    Promise.then(() =&gt; {
+        console.log(&apos;微任务队列代码&apos;)
+    })
+    requestAnimationFrame(() =&gt; {
+        console.log(&apos;本次微任务之后下次宏任务之前的代码。。&apos;)
+    })
+    ...
+    // Tick结束
+&lt;/script&gt;</code></pre><p>浏览器在执行这段代码的时候，浏览器会为其开辟一块儿内存空间作为程序的执行栈，整块代码会作为一个main调用最先进入执行栈开始执行，可以认为此时开启了一个宏任务，浏览器会依次执行该栈中的函数，遇到同步代码就执行，遇到setTimeout这样的Webapi调用，会将其压入宏任务队列中下次Tick再执行，遇到Promise.then这样的代码，它属于是本次Tick运行中产生的微任务代码，会将其放入微任务队列，在本次Tick结束之前（即所有的同步代码都执行完毕）会对其进行调用。也即是浏览器的每一个Tick会执行一个宏任务以及在该宏任务执行期间产生微任务。（自己产生的微任务，自己执行掉，不会留到下一个Tick去执行）</p>
+<p>而requestAnimationFrame是个比较特殊的调用，它根本不在event loop的生命周期里，这个api也并不属于JS运行时，而是浏览器宿主环境提供的，它属于另一个主题——渲染。</p>
+<p>浏览器作为一个复杂的应用是多线程工作的，除了运行JS的线程外，还有渲染线程，定时器触发线程，HTTP 请求线程等等。JS线程可以读取并且修改DOM而渲染线程也需要读取DOM，这是一个典型的多线程竞争临界资源的问题。 所以浏览器就把这两个线程设计成互斥的，即同时只能有一个线程在执行。</p>
+<p>渲染原本就不应该出现在event loop相关的知识体系里。因为event loop显然是在讨论JS如何运行的问题，而渲染则是浏览器另外一个线程的工作。但是requestAnimationFrame的出现却把这两件事情给关联起来不在V8环境里，只是浏览器又开放的一个在渲染之前发生的新的hook。所以它对应的animation callback queue的处理方式也是不一样的。<br>通过调用requestAnimationFrame我们可以在下次渲染之前执行回调函数。那下次渲染具体是哪个时间点呢？渲染和event loop有什么关系呢？简单来说，就是在每一次event loop的末尾，判断当前页面是否处于渲染时机，是就重新渲染。而渲染时机又是个啥，查阅资料发现有点“玄学”～ 有屏幕的硬件限制，跟机器性能有关联，跟js执行是否超时有关联，总之要不要渲染是一个多方面因素条件综合下来浏览器判断的结果。有点React中shouldComponentUpdate内味儿～但无论如何requestAnimationFrame保证的就是在浏览器下次渲染之前一定会被调用。</p>
+<h4 id="关于执行上下文"><a href="#关于执行上下文" class="headerlink" title="关于执行上下文"></a>关于执行上下文</h4><p>函数调用栈，其实就是执行上下文栈，每当调用一个函数</p>
+<p>时就会产生一个新的执行上下文，同时新产生的这个执行</p>
+<p>上下文就会被压入执行上下文栈中。</p>
+<p>全局上下文最先入栈，并且在离开页面时才会出栈，js引擎</p>
+<p>不断的执行上下文栈中栈定的那个执行上下文，在它执行完毕后</p>
+<p>将它出栈，直到整个执行栈为空。</p>
+<p>关于执行栈有5点注意：</p>
+<ul>
+<li>单线程</li>
+<li>同步执行</li>
+<li>只有一个全局上下文</li>
+<li>可以有无数个函数上下文（理论是函数上下文没有限制，但是太多了会爆栈）</li>
+<li>每个函数调用都会创建一个新的执行上下文</li>
+</ul>
+<p>明确一个概念： 函数上下文执行栈是与js引擎相关的概念，</p>
+<p>而异步/回调是与运行环境相关的概念。</p>
+<p>如果执行栈与异步机制完全无关，我们写了无数遍的点击触发回调是如何做到的呢？是运行环境（浏览器/Node）来完成的， 在浏览器中，异步机制是借助 event loop 来实现的，</p>
+<p>event loop 是异步的一种实现机制。JavaScript 引擎只是“傻傻”的一直执行栈顶的函数，而运行环境负责管理在什么时候压入执行上下文栈什么函数来让引擎执行</p>
+<p>JavaScript 引擎本身并没有时间的概念，只是一个按需执行 JavaScript 任意代码片段的环境。“事件”（ JavaScript 代码执行）调度总是由包含它的环境进行。</p>
+<p>另外，从一个侧面可以反应出执行上下文栈与异步无关的 —— 执行上下文栈是写在 ECMA-262 的规范中，需要遵守它的是浏览器的 JavaScript 引擎，比如 V8、Quantum 等。</p>
+<p>event loop 的是写在 HTML 的规范中，需要遵守它的是各个浏览器，比如 Chrome、Firefox 等。</p>
+<p>浏览器和浏览器的js引擎是两码事。</p>
+<p>一个页面有一个event loop ，但是一个event loop 可以有多个</p>
+<p>task queues.</p>
+<p>每个来自相同 task source 并由相同 event loop（比如，Document 的计时器产生的回调函数，Document 的鼠标移动产生的事件，Document 的解析器产生的 tasks） 管理</p>
+<p>的 task 都必须加入到同一个 task queue 中，可是来自不同 task sources 的 tasks 可能会被排入到不同的 task queues 中。</p>
+<p>来自相同的 task source 的 task 将会被排入相同的 task queue，但是规范说来自不同 task sources 的 tasks 可能会被排入到不同的 task queues 中，也就是说一个 task queue 中</p>
+<p>可能排列着来自不同 task sources 的 tasks，但是具体什么 task source 对应什么 task queue，规范并没有具体说明。</p>
+<p>一般我们看个各个文章中对于 task queue 的描述都是只有一个，不论是网络，用户时间内还是计时器都会被 Web APIs 排入到用一个 task queue 中，但事实上规范中明确表示了是</p>
+<p>有多个 task queues，并举例说明了这样设计的意义：</p>
+<p>举例来说，一个用户代理可以有一个处理键盘鼠标事件的 task queue（来自 user interaction task source)，还有一个 task queue 来处理所有其他的。用户代理可以以 75% 的几率</p>
+<p>先处理鼠标和键盘的事件，这样既不会彻底不执行其他 task queues 的前提下保证用户界面的响应， 而且不会让来自同一个 task source 的事件顺序错乱</p>
+<p>当用户代理将要排入任务时，必须将任务排入相关的event loop 的task queues;</p>
+<p>这句话很关键，是用户代理来控制任务的调度.</p>
+<p>参考链接🔗：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/101374817" target="_blank" rel="noopener">理解event loop的n重境界</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/10/let's talk about functional programming/" rel="next" title="一些函数式编程的思考🤔">
+                <i class="fa fa-chevron-left"></i> 一些函数式编程的思考🤔
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/10/关于每秒60帧/" rel="prev" title="关于每秒60帧">
+                关于每秒60帧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于EventLoop"><span class="nav-number">1.</span> <span class="nav-text">关于EventLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于执行上下文"><span class="nav-number">1.1.</span> <span class="nav-text">关于执行上下文</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
