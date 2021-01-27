@@ -547,10 +547,10 @@ xs.slice(0,3); // 返回 [1,2,3];
 <p>另一方面，使用纯函数的形式，函数自己就能做到自给自足，并且随时都可以放心大胆将其“打包带走”📦</p>
 <p>函数式编程让我想到了之前在网上看到的两种关于线缆艺术的图片：</p>
 <p>非函数式编程就行下图：</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.jpeg" alt></p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/lingluan.jpeg" alt></p>
 <p>每个函数从哪里来到哪里去，因为有依赖全局变量的可能因素存在，同时函数本身也可能会改变其他函数所依赖的外部变量，所以让人看上去就比较乱，不敢轻举妄动。</p>
 <p>函数式编程就好很多：</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/images.jpeg?e=1609135970&token=T5lShVWgYrnGva4f5ljCfxSx1tt65eFTpYguVm5r:KhdOwWBDJ3sxCaQc71w-jfCKrII=" alt></p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/20090726_3e09b0e7a42880ca22a2qd0Po4k6w3je.jpg" alt></p>
 <p>函数式编程因为做到了“字给自足”我需要的东西都在我自己内部，不依赖外部变量，同时你放心我很单纯我也不会去改变外面的什么，所以给人的感觉就是看上去比较清爽，数据清晰的感觉。</p>
 <p>本来下面接着的内容该是柯里化、compose函数组合、管道啥的，但是对于柯里化看了一段时间感觉还是没有一个让自己“豁然开朗”的点，先留着，转而说说React</p>
 <h3 id="函数式编程与React…"><a href="#函数式编程与React…" class="headerlink" title="函数式编程与React…"></a>函数式编程与React…</h3><p>关于react有一个很形象的公式 UI = F(state)  可以说是总结的非常到位了！</p>
@@ -1044,7 +1044,7 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
 <h4 id="用像素管道的方式来看前端优化问题"><a href="#用像素管道的方式来看前端优化问题" class="headerlink" title="用像素管道的方式来看前端优化问题"></a>用像素管道的方式来看前端优化问题</h4><p><strong>像素管道</strong></p>
 <p>浏览器将像素绘制到页面一般要经过以下几个过程：</p>
 <p> JS / CSS -&gt; style -&gt; layout -&gt; paint -&gt; composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg" alt></p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/frame-full.jpg" alt></p>
 <p>1、 js: 一般我们使用js来实现一个视觉变化的效果。</p>
 <p>2、 style: 样式计算,根据匹配选择器计算出哪些元素应用哪些css规则的过程</p>
 <p>3、 layout: 布局，在知道对一个元素应用哪些规则之后，浏览器即可开始计算它要占据的空间大小及其在屏幕的位置</p>
@@ -1055,11 +1055,11 @@ useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“ho
 <p>JS，Style 和 Composite 是不可避免的，因为需要 JS 来引发样式的改变，Style 来计算更改后最终的样式，Composite 来合成各个层最终进行显示。Layout 和 Paint 这两个步骤不一定会被触发，所以在优化的过程中，如果是需要频繁触发的改变，我们应该尽可能避免 Layout 和 Paint。</p>
 <p>1、最耗费性能之重排！</p>
 <p>管道运行方式<br>JS/CSS —&gt; Style —&gt; Layout —&gt; Paint —&gt; Composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-full.jpg" alt><br>此过程就是我们常说的浏览器重排，也就是改变了元素的几何属性（例如宽度、高度、左侧或顶部位置等），那么浏览器将必须检查所有其他元素，然后“自动重排”页面。任何受影响的部分都需要重新绘制，而且最终绘制的元素需进行合成，重排进行了管道的每一步，性能受到较大影响。</p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/frame-full.jpg" alt><br>此过程就是我们常说的浏览器重排，也就是改变了元素的几何属性（例如宽度、高度、左侧或顶部位置等），那么浏览器将必须检查所有其他元素，然后“自动重排”页面。任何受影响的部分都需要重新绘制，而且最终绘制的元素需进行合成，重排进行了管道的每一步，性能受到较大影响。</p>
 <p>2、稍好之重绘<br>管道运行方式<br>JS/CSS —&gt; Style —&gt; Paint —&gt; Composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout.jpg" alt><br>重绘，也就是修改“paint only”属性（例如背景图片、文字颜色或阴影等），即不会影响页面布局的属性，则浏览器会跳过布局，但仍将执行绘制。</p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/frame-no-layout.jpg" alt><br>重绘，也就是修改“paint only”属性（例如背景图片、文字颜色或阴影等），即不会影响页面布局的属性，则浏览器会跳过布局，但仍将执行绘制。</p>
 <p>3、性能最好之不重拍也不重绘<br>管道运行方式<br>JS/CSS —&gt; Style —&gt; Composite</p>
-<p><img src="http://qm194ton6.hd-bkt.clouddn.com/frame-no-layout-paint.jpg" alt><br>此过程不会重排重绘，仅仅是进行合成，也就是修改 transform 和 opacity 属性更改来实现动画，性能得到较大提升，最适合于应用生命周期中的高压力点，例如动画或滚动。</p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/frame-no-layout-paint.jpg" alt><br>此过程不会重排重绘，仅仅是进行合成，也就是修改 transform 和 opacity 属性更改来实现动画，性能得到较大提升，最适合于应用生命周期中的高压力点，例如动画或滚动。</p>
 <h4 id="尽量使用-transform-和-opacity-属性更改来实现动画"><a href="#尽量使用-transform-和-opacity-属性更改来实现动画" class="headerlink" title="尽量使用 transform 和 opacity 属性更改来实现动画"></a>尽量使用 transform 和 opacity 属性更改来实现动画</h4><p><strong>性能最佳的像素管道版本会避免 Layout 和 Paint</strong></p>
 <p>为了实现此目标，需要坚持更改可以由合成器单独处理的属性。常用的两个属性符合条件：transform 和 opacity。</p>
 <p>另外：想知道每种 CSS 属性的更改是否会触发 Layout，Paint，Composite，可以通过 <a href="https://csstriggers.com/" target="_blank" rel="noopener">csstriggers.com</a> 查看。</p>
