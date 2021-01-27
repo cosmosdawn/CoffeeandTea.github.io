@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="函数式编程写React几个月了，接触到的，听到的较多的一个词“functional programming”函数式编程。在工作中也遇到了不少之前的大佬写的函数式代码，总结记录一些有关函数式的东西。 函数式？函数式编程？1、函数式是一个数学概念：  f(x) = y;函数式本身是很纯粹的一个概念，表达的就是函数定义域到值域之间一种特定的映射关系。（定义域中的一个值经过计算有且仅有一个值与之对应，也即">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程理念📝">
+<meta property="og:url" content="https://coffeeandtea.github.io/2021/01/10/最近在看的一些东西记录/index.html">
+<meta property="og:site_name" content="秋夜已凉 02">
+<meta property="og:description" content="函数式编程写React几个月了，接触到的，听到的较多的一个词“functional programming”函数式编程。在工作中也遇到了不少之前的大佬写的函数式代码，总结记录一些有关函数式的东西。 函数式？函数式编程？1、函数式是一个数学概念：  f(x) = y;函数式本身是很纯粹的一个概念，表达的就是函数定义域到值域之间一种特定的映射关系。（定义域中的一个值经过计算有且仅有一个值与之对应，也即">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://qnl2b17if.hn-bkt.clouddn.com/lingluan.jpeg">
+<meta property="og:image" content="http://qnl2b17if.hn-bkt.clouddn.com/20090726_3e09b0e7a42880ca22a2qd0Po4k6w3je.jpg">
+<meta property="og:updated_time" content="2021-01-27T08:22:30.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数式编程理念📝">
+<meta name="twitter:description" content="函数式编程写React几个月了，接触到的，听到的较多的一个词“functional programming”函数式编程。在工作中也遇到了不少之前的大佬写的函数式代码，总结记录一些有关函数式的东西。 函数式？函数式编程？1、函数式是一个数学概念：  f(x) = y;函数式本身是很纯粹的一个概念，表达的就是函数定义域到值域之间一种特定的映射关系。（定义域中的一个值经过计算有且仅有一个值与之对应，也即">
+<meta name="twitter:image" content="http://qnl2b17if.hn-bkt.clouddn.com/lingluan.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://coffeeandtea.github.io/2021/01/10/最近在看的一些东西记录/">
+
+
+
+
+
+  <title>函数式编程理念📝 | 秋夜已凉 02</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋夜已凉 02</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客年久失修还是来点音乐吧～～ 去 <a href="http://music.xiaoyu.work" target="_blank">http://music.xiaoyu.work</a> 都是你爱听的🎵～</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coffeeandtea.github.io/2021/01/10/最近在看的一些东西记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王晓宇">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋夜已凉 02">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">函数式编程理念📝</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-10T00:00:00+08:00">
+                2021-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>写React几个月了，接触到的，听到的较多的一个词“functional programming”函数式编程。在工作中也遇到了不少之前的大佬写的函数式代码，总结记录一些有关函数式的东西。</p>
+<h4 id="函数式？函数式编程？"><a href="#函数式？函数式编程？" class="headerlink" title="函数式？函数式编程？"></a>函数式？函数式编程？</h4><p>1、函数式是一个数学概念： </p>
+<pre><code>f(x) = y;</code></pre><p>函数式本身是很纯粹的一个概念，表达的就是函数定义域到值域之间一种特定的映射关系。（定义域中的一个值经过计算<strong><strong>有且仅有</strong></strong>一个值与之对应，也即只能得到一个确定的结果）。</p>
+<pre><code>f(x) = y;</code></pre><p>这个数学函数式表达了以下几层意思：</p>
+<ul>
+<li>函数总是接受一个参数—x</li>
+<li>函数总是返回一个值—y</li>
+<li>函数应该根据接受的参数而不是外部环境运行</li>
+<li>对于一个给定的x只会输出一个唯一的y</li>
+</ul>
+<p>2、函数式编程技术主要就是基于数学函数和它的思想。</p>
+<p>比如有一个简单的计税函数如下：</p>
+<pre><code>let percentValue = 5;
+let calculateTax = (value) =&gt; {
+    return value/100 * (100 + percentValue)
+}            </code></pre><p>这个函数准确的实现了我们的想法，但是从数学的定义上分析，就会发现calculateTax依赖了全局变量percentValue，因此在数学上它不能被称之为一个真正的函数。修复方法很简单，我们只需要移动percentValue，把它作为函数的参数。</p>
+<pre><code>let calculateTax = (value, percentValue) =&gt; {
+return value/100 * (100 + percentValue)
+}        </code></pre><p>现在calculateTax函数可以被称为一个真正的函数了。</p>
+<p><strong>移除一个函数内部对全局变量的访问会使得该函数的测试更加容易</strong></p>
+<h4 id="函数式编程的特性"><a href="#函数式编程的特性" class="headerlink" title="函数式编程的特性"></a>函数式编程的特性</h4><p>1、引用透明性</p>
+<p>定义：所有的函数对于相同的输入都将返回相同的值，函数的这一特性被称为<strong>引用透明性</strong></p>
+<p>🌰例：</p>
+<pre><code>let identity = (i) = {return i}</code></pre><p>定义一个简单的函数identity，无论传入什么作为输入，该函数都会把它返回，在函数内部没有全局引用，我们的函数只根据传入的参数i进行操作，该函数满足引用透明性条件。</p>
+<pre><code>sum(4,5) + identity(1)</code></pre><p>根据引用透明性的定义，可以把上面的语句转换为：</p>
+<pre><code>sum(4,5) + 1; // 直接用结果替换函数的计算过程</code></pre><p>该过程称为<strong>替换模型</strong>，因为我们可以直接替换函数的结果（因为函数的逻辑不依赖其他全局变量）而正是这一特性使得代码和缓存成为可能！</p>
+<p>2、 并发？</p>
+<p>引用透明性使得我们可以轻松地采用多线程来运行代码，根本不需要同步。为什么呢？因为同步的问题在于线程在并发运行的的时候不应该依赖全局变量。而遵循引用透明性的函数只依赖来自参数的输入，不会对全局产生任何依赖，这里没有任何“锁”🔒的概念，所以线程可以自由的运行（虽然js引擎是单线程…）</p>
+<p>3、 缓存？</p>
+<p>由于函数会为给定饿输入返回相同的值，实际上我们就可以缓存它。假设函数factorial用来计算给定数组的阶乘，其接受输入作为参数以计算其阶乘，5的阶乘是120，如果用户第二次用5来调用factorial，如果factorial遵循引用透明性，我们就可以直接返回缓存的值120而不用再重新计算一遍。</p>
+<p>函数式编程对比命令式编程主张移除“如何”做的部分，使用一个函数来处理“如何”做的部分，将关注点放在手头的工作上即”做什么“。</p>
+<h4 id="为什么函数式好？"><a href="#为什么函数式好？" class="headerlink" title="为什么函数式好？"></a>为什么函数式好？</h4><p>slice和splice两个函数在做数据处理的时候很类似，但是实现的方式却大不相同。</p>
+<pre><code>let xs = [1,2,3,4,5];
+
+xs.slice(0,3); // 返回 [1,2,3];
+xs.slice(0,3); // 返回 [1,2,3];
+xs.slice(0,3); // 返回 [1,2,3];
+.
+.
+. // 无论调用多少次它都能保证相同的输出。</code></pre><p>而splice却会嚼烂调用它的那个数组，然后再吐出来🤮，这就产生了副作用，即这个数组永久的改变了🤷‍♂️</p>
+<p>函数式编程讨厌这种会改变数据的函数，追求的是那种更加”可靠“的每次都能返回同样结果的函数。</p>
+<p>就像上面的那个计税函数中，非函数式（即纯函数）的版本中，其计算结果依赖了全局变量percentValue，这是令人沮丧的🤦‍♂️，因为引入外部变量，增加了我们对函数的认知负荷和心理负担。程序中到处充斥着的这些不纯的函数，往往是产生BUG的罪魁祸首！</p>
+<p>另一方面，使用纯函数的形式，函数自己就能做到自给自足，并且随时都可以放心大胆将其“打包带走”📦</p>
+<p>函数式编程让我想到了之前在网上看到的两种关于线缆艺术的图片：</p>
+<p>非函数式编程就行下图：</p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/lingluan.jpeg" alt></p>
+<p>每个函数从哪里来到哪里去，因为有依赖全局变量的可能因素存在，同时函数本身也可能会改变其他函数所依赖的外部变量，所以让人看上去就比较乱，不敢轻举妄动。</p>
+<p>函数式编程就好很多：</p>
+<p><img src="http://qnl2b17if.hn-bkt.clouddn.com/20090726_3e09b0e7a42880ca22a2qd0Po4k6w3je.jpg" alt></p>
+<p>函数式编程因为做到了“字给自足”我需要的东西都在我自己内部，不依赖外部变量，同时你放心我很单纯我也不会去改变外面的什么，所以给人的感觉就是看上去比较清爽，数据清晰的感觉。</p>
+<p>本来下面接着的内容该是柯里化、compose函数组合、管道啥的，但是对于柯里化看了一段时间感觉还是没有一个让自己“豁然开朗”的点，先留着，转而说说React</p>
+<h3 id="函数式编程与React…"><a href="#函数式编程与React…" class="headerlink" title="函数式编程与React…"></a>函数式编程与React…</h3><p>关于react有一个很形象的公式 UI = F(state)  可以说是总结的非常到位了！</p>
+<p>React强调数据的不可变性，把每一确定时刻的UI状态当作是电影🎬中的某一个确定的帧，长什么样子是确定的是由确定的state状态确定的，要让我渲染UI的另外一种状态，麻烦用另一个state来驱动，这给我一种“死板且靠谱”的感受～</p>
+<p>Vue信奉数据可变哲学🙆，React则选择数据不可变哲学🙅‍♂️</p>
+<h4 id="作用-副作用？"><a href="#作用-副作用？" class="headerlink" title="作用? 副作用？"></a>作用? 副作用？</h4><p>作用：可以理解为一切除了计算结果之外发生的事情。</p>
+<p>副作用：是在计算结果的过程中，系统状态的一种变化，或者与外部世界进行的任何可观察的交互。</p>
+<p>具体到前端开发中，副作用包括但不限于：</p>
+<ul>
+<li>更改文件系统</li>
+<li>往数据库插入记录</li>
+<li>发送一个 http 请求</li>
+<li>可变数据</li>
+<li>打印/log</li>
+<li>获取用户输入</li>
+<li>DOM 查询</li>
+<li>访问系统状态</li>
+<li>…</li>
+</ul>
+<p>函数式编程的哲学里认为副作用是造成问题的主要原因。这一假定不无道理，在只有我和你的世界里，我不会出问题，然而问题产生了，那么肯定是你出了问题…<br>React主张的即是函数式的编程，但是我们做业务开发不是写静态页面，我们是用页面来承载我们的业务。从这个角度看，我有一种“业务都是通过副作用完成的”感觉～</p>
+<p>那React是怎么平衡纯函数与副作用的呢？</p>
+<h4 id="effect-hooks"><a href="#effect-hooks" class="headerlink" title="effect? hooks?"></a>effect? hooks?</h4><p>React16.8引入了hooks API.对其中的useEffect感触比较多.在类组件中render函数就是个纯函数，负责实现UI = F(state)而业务操作多放在componentDidMount、updated、willUnmounted…等生命周期钩子中，其实单单就从组件生命周期的心智模型来理解，这样就挺好的。</p>
+<p>1、但是生命周期是咋来的？ </p>
+<p>2、how do you think about componentDidMount?  </p>
+<p>3、useEffect(() =&gt; {doSomething}, []) === componentDidMount           really???</p>
+<p>在看React的hooks介绍文档的时候，在介绍到effect的执行时机的时候看到有这么一句话：</p>
+<pre><code>与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。</code></pre><p>what??😺  就是说componentDidMount会阻塞浏览器更新屏幕咯？<br>答案： 是的。componentDidMount指的是组件在内存上中已经完成“挂载”一切已成定数，只等浏览器的GUI线程对页面进行渲染了，只有浏览器的GUI线程对页面进行了绘制操作，我们的肉眼才能看到屏幕上的内容。所以如果一个组件定义如下：</p>
+<pre><code>class Demo extends Compponent({
+    componentDidMount() {
+        console.log(&apos;now you see me!&apos;)
+    }
+    render() {
+        return (
+            &lt;div&gt;You can see me with your naked eye&lt;/div&gt;
+        )
+    }
+})</code></pre><p>我们会先在控制台看到log的打印输出，然后才看到屏幕上渲染的内容。所以说componentDidMount会阻塞浏览器更新屏幕，指的就是componentDidMount中的内容属于当前Tick任务周期内的工作，浏览器会等到V8将这一工作做完，才让GUI线程执行绘制操作。</p>
+<p>useEffect与componentDidMount的不同点在与useEffect中的effect操作会等到浏览器render完成之后（是真正意义上的render，肉眼看见的那种，不是内存中的挂载。）才会执行副作用操作，所以其不会阻塞浏览器的渲染。真正跟componentDidMount一致的是useLayoutEffect。它会排在浏览器GUI线程对页面进行渲染之前执行。<br>React建议一开始先使用useEffect,只有当它出问题时候再尝试使用useLayoutEffect。</p>
+<p>另外：关于“用了hooks的函数式组件每次渲染都有属于每次自己的、单独的effect，每次的effect都是全新的，而不是上次的。。。<br>”此类的说法。理解： effect是传给useEffect()这个API的回调函数，而不是useEffect这个api(听起来好像是废话～)</p>
+<pre><code>const effect = () =&gt; {
+    console.log(&apos;i am effect&apos;)
+}
+
+useEffect(effect, [])</code></pre><p>useEffect是一个API，react内部会“hold住它～” 而传递进去的函数才是每次都不一样的effect.</p>
+<p>生命周期函数也叫生命周期钩子函数 life cycle hooks function,其中也有一个单词’hook’,回过头来看，似乎又有一种“大一统”的感觉。</p>
+<p>其实都是业务模型的抽象，我们在写componentDidMount或者其他任何生命周期钩子函数的时候并不是在写componentDidMount或者什么，而是在写“我希望在这个时候做点什么事情。。。“的业务需求模型</p>
+<p>hooks用函数式的方式优化更新了这种业务模型，使之看起来似乎更加合理，编写起来更加清爽方便。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/31/关于每秒60帧/" rel="next" title="关于每秒60帧">
+                <i class="fa fa-chevron-left"></i> 关于每秒60帧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/17/ci:cd/" rel="prev" title="前端部署发展史">
+                前端部署发展史 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王晓宇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式编程"><span class="nav-number">1.</span> <span class="nav-text">函数式编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式？函数式编程？"><span class="nav-number">1.1.</span> <span class="nav-text">函数式？函数式编程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式编程的特性"><span class="nav-number">1.2.</span> <span class="nav-text">函数式编程的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么函数式好？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么函数式好？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式编程与React…"><span class="nav-number">2.</span> <span class="nav-text">函数式编程与React…</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作用-副作用？"><span class="nav-number">2.1.</span> <span class="nav-text">作用? 副作用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#effect-hooks"><span class="nav-number">2.2.</span> <span class="nav-text">effect? hooks?</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王晓宇</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
